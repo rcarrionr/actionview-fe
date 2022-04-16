@@ -239,7 +239,7 @@ export default class DetailBar extends Component {
       const { field = '', file = {} } = res.data;
       addFile(field, file); 
     } else {
-      notify.show('文档上传失败。', 'error', 2000);
+      notify.show('Document upload failed.', 'error', 2000);
     }
   }
 
@@ -249,7 +249,7 @@ export default class DetailBar extends Component {
       this.state.previewShow[fieldkey] = true;
       this.setState({ previewShow: this.state.previewShow, photoIndex: index });
     } else {
-      notify.show('权限不足。', 'error', 2000);
+      notify.show('Insufficient permissions.', 'error', 2000);
     }
   }
 
@@ -261,7 +261,7 @@ export default class DetailBar extends Component {
     if (ecode === 0) {
       this.setState({ previewModalShow: true });
     } else {
-      notify.show('预览失败。', 'error', 2000);
+      notify.show('Preview failed.', 'error', 2000);
     }
   }
 
@@ -270,9 +270,9 @@ export default class DetailBar extends Component {
     const { setAssignee, data } = this.props;
     const ecode = await setAssignee(data.id, { assignee: 'me' });
     if (ecode === 0) {
-      notify.show('已分配给我。', 'success', 2000);
+      notify.show('I have been assigned to me.', 'success', 2000);
     } else {
-      notify.show('问题分配失败。', 'error', 2000);
+      notify.show('Problem allocation failed.', 'error', 2000);
     }
     // fix me
     //if (ecode === 0) {
@@ -289,9 +289,9 @@ export default class DetailBar extends Component {
     const ecode = await setAssignee(data.id, { assignee: this.state.newAssignee });
     if (ecode === 0) {
       this.setState({ editAssignee: false, newAssignee: null });
-      notify.show('问题已分配。', 'success', 2000);
+      notify.show('The problem has been assigned.', 'success', 2000);
     } else {
-      notify.show('问题分配失败。', 'error', 2000);
+      notify.show('Problem allocation failed.', 'error', 2000);
     }
   }
 
@@ -308,9 +308,9 @@ export default class DetailBar extends Component {
       editingItems[key] = false;
       newItemValues[key] = '';
       this.setState({ editingItems, newItemValues });
-      notify.show('已更新。', 'success', 2000);
+      notify.show('updated.', 'success', 2000);
     } else {
-      notify.show('更新失败。', 'error', 2000);
+      notify.show('Update failed.', 'error', 2000);
     }
   }
 
@@ -350,7 +350,7 @@ export default class DetailBar extends Component {
       if (ecode === 0) {
         record();
       } else {
-        notify.show('问题信息获取失败。', 'error', 2000);
+        notify.show('Problem information failed.', 'error', 2000);
       }
     }
   }
@@ -363,7 +363,7 @@ export default class DetailBar extends Component {
       if (ecode === 0) {
         record();
       } else {
-        notify.show('问题信息获取失败。', 'error', 2000);
+        notify.show('Problem information failed.', 'error', 2000);
       }
     }
   }
@@ -420,15 +420,15 @@ export default class DetailBar extends Component {
     const ecode = await watch(id, flag);
     if (ecode === 0) {
       if (flag) {
-        notify.show('关注成功。', 'success', 2000);
+        notify.show('Subscribed.', 'success', 2000);
       } else {
-        notify.show('已取消关注。', 'success', 2000);
+        notify.show('Caled concern.', 'success', 2000);
       }
     } else {
       if (flag) {
-        notify.show('关注失败。', 'error', 2000);
+        notify.show('Focus on failure.', 'error', 2000);
       } else {
-        notify.show('取消失败。', 'error', 2000);
+        notify.show('Cancel failed.', 'error', 2000);
       }
     }
   }
@@ -443,7 +443,7 @@ export default class DetailBar extends Component {
     if (ecode === 0) {
       record();
     } else {
-      notify.show('问题信息获取失败。', 'error', 2000);
+      notify.show('Problem information failed.', 'error', 2000);
     }
   }
 
@@ -460,9 +460,9 @@ export default class DetailBar extends Component {
     } else {
       const ecode = await doAction(data.id, data.entry_id, { action_id });
       if (ecode === 0) {
-        notify.show('提交完成。', 'success', 2000);
+        notify.show('Submitted.', 'success', 2000);
       } else {
-        notify.show('提交失败。', 'error', 2000);
+        notify.show('Submission Failed.', 'error', 2000);
       }
     }
   }
@@ -475,9 +475,9 @@ export default class DetailBar extends Component {
     } else {
       const ecode = await doAction(data.id, data.entry_id, { action_id: eventKey });
       if (ecode === 0) {
-        notify.show('提交完成。', 'success', 2000);
+        notify.show('Submitted.', 'success', 2000);
       } else {
-        notify.show('提交失败。', 'error', 2000);
+        notify.show('Submission Failed.', 'error', 2000);
       }
     }
   }
@@ -486,7 +486,7 @@ export default class DetailBar extends Component {
     const { options } = this.props;
 
     if (!this.isAllowable('download_file')) {
-      notify.show('权限不足。', 'error', 2000);
+      notify.show('Insufficient permissions.', 'error', 2000);
       return;
     }
 
@@ -532,7 +532,7 @@ export default class DetailBar extends Component {
         nextSrc={ API_BASENAME + '/project/' + project.key + '/file/' + imgFiles[(photoIndex + 1) % imgFiles.length].id }
         prevSrc={ API_BASENAME + '/project/' + project.key + '/file/' + imgFiles[(photoIndex + imgFiles.length - 1) % imgFiles.length].id }
         imageTitle={ imgFiles[photoIndex].name }
-        imageCaption={ imgFiles[photoIndex].uploader.name + ' 上传于 ' + imgFiles[photoIndex].created_at }
+        imageCaption={ imgFiles[photoIndex].uploader.name + ' upload to ' + imgFiles[photoIndex].created_at }
         onCloseRequest={ () => { this.state.previewShow[field_key] = false; this.setState({ previewShow: this.state.previewShow }) } }
         onMovePrevRequest={ () => this.setState({ photoIndex: (photoIndex + imgFiles.length - 1) % imgFiles.length }) }
         onMoveNextRequest={ () => this.setState({ photoIndex: (photoIndex + 1) % imgFiles.length }) } /> );
@@ -548,7 +548,7 @@ export default class DetailBar extends Component {
           <MultiRowsTextEditor
             id={ 'field-textarea-' + fieldKey }
             value={ txt || '' }
-            placeholder={ '输入' + fieldName + (maxLength && maxLength > 0 ? ('(字数' + maxLength + '字之内)') : '') }
+            placeholder={ 'enter' + fieldName + (maxLength && maxLength > 0 ? ('(Word number' + maxLength + 'Within the word)') : '') }
             uploadUrl={ API_BASENAME + '/project/' + project.key + '/file' }
             onChange={ (newValue) => { newItemValues[fieldKey] = newValue; this.setState({ newItemValues: this.state.newItemValues }) } }/>
           <div className='edit-button-group'>
@@ -577,7 +577,7 @@ export default class DetailBar extends Component {
           <RichTextEditor
             id={ 'field-richeditor-' + fieldKey }
             value={ txt || '' }
-            placeholder={ '输入' + fieldName + (maxLength && maxLength > 0 ? ('(字数' + maxLength + '字之内)') : '') }
+            placeholder={ 'enter' + fieldName + (maxLength && maxLength > 0 ? ('(Word number' + maxLength + 'Within the word)') : '') }
             uploadUrl={ API_BASENAME + '/project/' + project.key + '/file' }
             onChange={ (newValue) => { newItemValues[fieldKey] = newValue; this.setState({ newItemValues: this.state.newItemValues }) } }/> 
           <div className='edit-button-group'>
@@ -754,17 +754,17 @@ export default class DetailBar extends Component {
 
     const commentsTab = (
       <div>
-        <span style={ { paddingRight: '6px' } }>评论{ !itemLoading && '(' + (data.comments_num > 99 ? '99+' : (data.comments_num || 0)) + ')' }</span>
+        <span style={ { paddingRight: '6px' } }>Comment{ !itemLoading && '(' + (data.comments_num > 99 ? '99+' : (data.comments_num || 0)) + ')' }</span>
       </div>);
 
     const worklogTab = (
       <div>
-        <span style={ { paddingRight: '6px' } }>工作日志{ !itemLoading && '(' + (data.worklogs_num > 99 ? '99+' : (data.worklogs_num || 0)) + ')' }</span>
+        <span style={ { paddingRight: '6px' } }>Work log{ !itemLoading && '(' + (data.worklogs_num > 99 ? '99+' : (data.worklogs_num || 0)) + ')' }</span>
       </div>);
 
     const gitTab = (
       <div>
-        <span style={ { paddingRight: '6px' } }>Git提交{ !itemLoading && '(' + (data.gitcommits_num > 99 ? '99+' : (data.gitcommits_num || 0)) + ')' }</span>
+        <span style={ { paddingRight: '6px' } }>Gitsubmit{ !itemLoading && '(' + (data.gitcommits_num > 99 ? '99+' : (data.gitcommits_num || 0)) + ')' }</span>
       </div>);
 
     const width = _.min([ _.max([ layout.containerWidth / 2, 660 ]), 1000 ]) + 'px';
@@ -775,38 +775,38 @@ export default class DetailBar extends Component {
         style={ { width } } 
         onClick={ (e) => { e.stopPropagation(); } }
         onMouseUp={ (e) => { e.stopPropagation(); } }>
-        <Button className='close' onClick={ close } title='关闭'>
+        <Button className='close' onClick={ close } title='closure'>
           <i className='fa fa-close'></i>
         </Button>
-        <Button className={ curInd < 0 || curInd >= issueCollection.length - 1 ? 'angle-disable' : 'angle' } onClick={ this.next.bind(this, curInd) } disabled={ curInd < 0 || curInd >= issueCollection.length - 1 } title='下一个'>
+        <Button className={ curInd < 0 || curInd >= issueCollection.length - 1 ? 'angle-disable' : 'angle' } onClick={ this.next.bind(this, curInd) } disabled={ curInd < 0 || curInd >= issueCollection.length - 1 } title='Next'>
           <i className='fa fa-angle-down'></i>
         </Button>
-        <Button className={ curInd <= 0 ? 'angle-disable' : 'angle' } onClick={ this.previous.bind(this, curInd) } disabled={ curInd <= 0 } title='上一个'>
+        <Button className={ curInd <= 0 ? 'angle-disable' : 'angle' } onClick={ this.previous.bind(this, curInd) } disabled={ curInd <= 0 } title='Previous'>
           <i className='fa fa-angle-up'></i>
         </Button>
-        <Button className={ visitedIndex < 0 || visitedIndex >= visitedCollection.length - 1 ? 'angle-disable' : 'angle' } onClick={ this.forward.bind(this, 1) } disabled={ visitedIndex < 0 || visitedIndex >= visitedCollection.length - 1 } title='前进'>
+        <Button className={ visitedIndex < 0 || visitedIndex >= visitedCollection.length - 1 ? 'angle-disable' : 'angle' } onClick={ this.forward.bind(this, 1) } disabled={ visitedIndex < 0 || visitedIndex >= visitedCollection.length - 1 } title='go ahead'>
           <i className='fa fa-angle-right'></i>
         </Button>
-        <Button className={ visitedIndex <= 0 ? 'angle-disable' : 'angle' } onClick={ this.forward.bind(this, -1) } disabled={ visitedIndex <= 0 } title='后退'>
+        <Button className={ visitedIndex <= 0 ? 'angle-disable' : 'angle' } onClick={ this.forward.bind(this, -1) } disabled={ visitedIndex <= 0 } title='Retreat'>
           <i className='fa fa-angle-left'></i>
         </Button>
-        <Button className='angle' title={ data.watching ? '点击取消关注' : '点击关注' } onClick={ () => { this.watch(data.id, !data.watching) } }>
+        <Button className='angle' title={ data.watching ? 'Click to cancel attention' : 'Click to follow' } onClick={ () => { this.watch(data.id, !data.watching) } }>
           { data.watching ? <i className='fa fa-eye-slash'></i> : <i className='fa fa-eye'></i> }
         </Button>
         <div className='panel panel-default' style={ panelStyle }>
           <Tabs activeKey={ this.state.tabKey } onSelect={ this.handleTabSelect.bind(this) } id='issue-detail-tab'>
-            <Tab eventKey={ 1 } title='基本'>
+            <Tab eventKey={ 1 } title='Basic'>
               <div className='detail-view-blanket' style={ { display: (itemLoading || !data.no) ? 'block' : 'none' } }>
                 { itemLoading ?
                   <img src={ img } className='loading detail-loading'/>
                   :
                   <div className='detail-error'>
-                    问题信息获取失败。
+                    Problem information failed.
                   </div> }
               </div>
               <Form horizontal className={ (itemLoading || !data.no) && 'hide' } style={ { marginRight: '15px', marginBottom: '40px', marginLeft: '15px' } }>
                 <ButtonToolbar style={ { margin: '15px 0px 15px -5px' } }>
-                  { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <Button onClick={ () => { this.setState({ editModalShow: true }) } }><i className='fa fa-edit'></i> 编辑</Button> }
+                  { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <Button onClick={ () => { this.setState({ editModalShow: true }) } }><i className='fa fa-edit'></i> edit</Button> }
                   { this.isAllowable('exec_workflow') && (
                     data.wfactions && data.wfactions.length <= 4 ?
                     <ButtonGroup style={ { marginLeft: '10px' } }>
@@ -816,39 +816,39 @@ export default class DetailBar extends Component {
                     </ButtonGroup>
                     :
                     <div style={ { float: 'left', marginLeft: '10px' } }>
-                      <DropdownButton title='动作' onSelect={ this.actionSelect.bind(this) }>
+                      <DropdownButton title='action' onSelect={ this.actionSelect.bind(this) }>
                       { _.map(data.wfactions || [], (v, i) => {
                         return ( <MenuItem eventKey={ v.id }>{ v.name }</MenuItem> ); 
                       }) }
                       </DropdownButton>
                     </div> ) }
                   <div style={ { float: 'right' } }>
-                    <DropdownButton pullRight title='更多' onSelect={ this.operateSelect.bind(this) }>
-                      <MenuItem eventKey='refresh'>刷新</MenuItem>
-                      { this.isAllowable('assign_issue') && <MenuItem eventKey='assign'>分配</MenuItem> }
-                      { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='setLabels'>设置标签</MenuItem> }
+                    <DropdownButton pullRight title='More' onSelect={ this.operateSelect.bind(this) }>
+                      <MenuItem eventKey='refresh'>Refresh</MenuItem>
+                      { this.isAllowable('assign_issue') && <MenuItem eventKey='assign'>distribute</MenuItem> }
+                      { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='setLabels'>Set label</MenuItem> }
                       <MenuItem divider/>
-                      <MenuItem eventKey='watch'>{ data.watching ? '取消关注' : '关注' }</MenuItem>
-                      <MenuItem eventKey='watchers' disabled={ !data.watchers || data.watchers.length <= 0 }><span>查看关注者 <span className='badge-number'>{ data.watchers && data.watchers.length }</span></span></MenuItem>
-                      <MenuItem eventKey='share'>分享链接</MenuItem>
+                      <MenuItem eventKey='watch'>{ data.watching ? 'unsubscribe' : 'focus on' }</MenuItem>
+                      <MenuItem eventKey='watchers' disabled={ !data.watchers || data.watchers.length <= 0 }><span>View Follower <span className='badge-number'>{ data.watchers && data.watchers.length }</span></span></MenuItem>
+                      <MenuItem eventKey='share'>Share link</MenuItem>
                       { !data.parent_id && subtaskTypeOptions.length > 0 && (((this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && !data.hasSubtasks) || this.isAllowable('create_issue')) && <MenuItem divider/> }
-                      { !data.parent_id && subtaskTypeOptions.length > 0 && this.isAllowable('create_issue') && <MenuItem eventKey='createSubtask'>创建子问题</MenuItem> }
-                      { !data.hasSubtasks && !data.parent_id && subtaskTypeOptions.length > 0 && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='convert2Subtask'>转换为子问题</MenuItem> }
+                      { !data.parent_id && subtaskTypeOptions.length > 0 && this.isAllowable('create_issue') && <MenuItem eventKey='createSubtask'>Create sub-problem</MenuItem> }
+                      { !data.hasSubtasks && !data.parent_id && subtaskTypeOptions.length > 0 && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='convert2Subtask'>Convert to a child problem</MenuItem> }
                       { data.parent_id && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem divider/> }
-                      { data.parent_id && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='convert2Standard'>转换为标准问题</MenuItem> }
+                      { data.parent_id && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='convert2Standard'>Convert to standard problems</MenuItem> }
                       { options.permissions && (_.intersection(options.permissions, ['link_issue', 'create_issue']).length > 0 || (options.permissions.indexOf('move_issue') !== -1 && data.parent_id)) && <MenuItem divider/> }
-                      { this.isAllowable('move_issue') && data.parent_id && <MenuItem eventKey='move'>移动</MenuItem> }
-                      { this.isAllowable('link_issue') && <MenuItem eventKey='link'>链接</MenuItem> }
-                      { this.isAllowable('create_issue') && <MenuItem eventKey='copy'>复制</MenuItem> }
+                      { this.isAllowable('move_issue') && data.parent_id && <MenuItem eventKey='move'>move</MenuItem> }
+                      { this.isAllowable('link_issue') && <MenuItem eventKey='link'>Link</MenuItem> }
+                      { this.isAllowable('create_issue') && <MenuItem eventKey='copy'>copy</MenuItem> }
                       { (this.isAllowable('reset_issue') || this.isAllowable('delete_issue') || this.isAllowable('delete_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem divider/> }
-                      { this.isAllowable('reset_issue') && <MenuItem eventKey='reset'>重置状态</MenuItem> }
-                      { (this.isAllowable('delete_issue') || this.isAllowable('delete_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='del'>删除</MenuItem> }
+                      { this.isAllowable('reset_issue') && <MenuItem eventKey='reset'>Reset state</MenuItem> }
+                      { (this.isAllowable('delete_issue') || this.isAllowable('delete_self_issue', data.reporter && data.reporter.id || '')) && <MenuItem eventKey='del'>delete</MenuItem> }
                     </DropdownButton>
                   </div>
                 </ButtonToolbar>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    主题/NO 
+                    theme/NO 
                   </Col>
                   <Col sm={ 9 }>
                     <div style={ { marginTop: '7px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' } }>
@@ -862,7 +862,7 @@ export default class DetailBar extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    类型 
+                    type 
                   </Col>
                   <Col sm={ 3 }>
                     <div style={ { marginTop: '7px' } }>
@@ -873,27 +873,27 @@ export default class DetailBar extends Component {
                     </div>
                   </Col>
                   <Col sm={ 2 } componentClass={ ControlLabel }>
-                    状态
+                    state
                   </Col>
                   <Col sm={ 4 }>
                     <div style={ { marginTop: '7px' } }>
                       { stateInd !== -1 ? <span className={ stateClassName }>{ options.states[stateInd].name }</span> : '-' } 
-                      { !wfLoading ? <a href='#' onClick={ this.viewWorkflow.bind(this) }><span style={ { marginLeft: '5px' } }>(查看)</span></a> : <img src={ img } className='small-loading'/> }
+                      { !wfLoading ? <a href='#' onClick={ this.viewWorkflow.bind(this) }><span style={ { marginLeft: '5px' } }>(Check)</span></a> : <img src={ img } className='small-loading'/> }
                     </div>
                   </Col>
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    优先级
+                    priority
                   </Col>
                   <Col sm={ 3 }>
                     <div style={ { marginTop: '7px' } }>
                       { priorityInd !== -1 && <div className='circle' style={ priorityStyle }/> }
-                      { priorityInd !== -1 ? options.priorities[priorityInd].name : <span className='issue-contents-nosetting'>未设置</span> }
+                      { priorityInd !== -1 ? options.priorities[priorityInd].name : <span className='issue-contents-nosetting'>Not set</span> }
                     </div>
                   </Col>
                   <Col sm={ 2 } componentClass={ ControlLabel }>
-                    解决结果
+                    Solution
                   </Col>
                   <Col sm={ 4 }>
                     <div style={ { marginTop: '7px' } }>
@@ -903,7 +903,7 @@ export default class DetailBar extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    负责人
+                    principal
                   </Col>
                   <Col sm={ editAssignee ? 7 : 3 }>
                     { !editAssignee ?
@@ -922,7 +922,7 @@ export default class DetailBar extends Component {
                         <span>{ data['assignee'] && data['assignee'].name || '-' }</span>
                       </div> }
                       { (!data['assignee'] || data['assignee'].id !== user.id) && this.isAllowable('assigned_issue') &&
-                      <span style={ { float: 'left', marginLeft: '5px' } }><a href='#' onClick={ this.assignToMe.bind(this) }>分配给我</a></span> }
+                      <span style={ { float: 'left', marginLeft: '5px' } }><a href='#' onClick={ this.assignToMe.bind(this) }>Assign it to me</a></span> }
                     </div>
                     :
                     <div style={ { marginTop: '0px' } }>
@@ -932,7 +932,7 @@ export default class DetailBar extends Component {
                         options={ assigneeOptions } 
                         value={ newAssignee || data['assignee'].id } 
                         onChange={ this.handleAssigneeSelectChange.bind(this) } 
-                        placeholder='选择负责人'/>
+                        placeholder='Chose person in charge'/>
                       <div className='edit-button-group'>
                         <Button className='edit-ok-button' onClick={ this.setAssignee.bind(this) }><i className='fa fa-check'></i></Button>
                         <Button className='edit-cancel-button' onClick={ this.cancelSetAssignee.bind(this) }><i className='fa fa-close'></i></Button>
@@ -942,17 +942,17 @@ export default class DetailBar extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    描述
+                    describe
                   </Col>
                   <Col sm={ 9 }>
                     <div style={ { marginTop: '7px' } }>
-                      { this.getRichTextItemContents(data.descriptions, 'descriptions', '描述', descRequired) }
+                      { this.getRichTextItemContents(data.descriptions, 'descriptions', 'describe', descRequired) }
                     </div>
                   </Col>
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    标签 
+                    Label 
                   </Col>
                   <Col sm={ 9 }>
                     <div style={ { marginTop: '7px' } }>
@@ -964,7 +964,7 @@ export default class DetailBar extends Component {
                         </span>
                       </Link> ) 
                       :
-                      <span className='issue-contents-nosetting'>未设置</span>
+                      <span className='issue-contents-nosetting'>Not set</span>
                     }
                     </div>
                   </Col>
@@ -973,11 +973,11 @@ export default class DetailBar extends Component {
                 { data.resolve_version && _.findIndex(schema, { key: 'resolve_version' }) === -1 && 
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    解决版本 
+                    Solution 
                   </Col>
                   <Col sm={ 9 }>
                     <div style={ { marginTop: '7px' } }>
-                     { _.find(options.versions, { id: data.resolve_version }) ? _.find(options.versions, { id: data.resolve_version }).name : <span className='issue-contents-nosetting'>未设置</span> }
+                     { _.find(options.versions, { id: data.resolve_version }) ? _.find(options.versions, { id: data.resolve_version }).name : <span className='issue-contents-nosetting'>Not set</span> }
                     </div>
                   </Col>
                 </FormGroup> }
@@ -998,7 +998,7 @@ export default class DetailBar extends Component {
                         </Col>
                         <Col sm={ 9 }>
                           <div style={ { marginTop: '7px' } }>
-                            <span style={ { color: '#909090' } }>未设置</span>
+                            <span style={ { color: '#909090' } }>Not set</span>
                           </div>
                         </Col>
                       </FormGroup>
@@ -1035,13 +1035,13 @@ export default class DetailBar extends Component {
                     const djsConfig = {
                       parallelUploads: 1,
                       addRemoveLinks: false,
-                      dictDefaultMessage: '点击或拖拽文件至此',
+                      dictDefaultMessage: 'Click or drag and drop files',
                       paramName: field.key
                     };
                     const eventHandlers = {
                       init: dz => this.dropzone = dz,
                       success: (localfile, response) => { this.uploadSuccess(localfile, response); this.dropzone.removeFile(localfile); },
-                      error: (localfile) => { notify.show('文档上传失败。', 'error', 2000); this.dropzone.removeFile(localfile); }
+                      error: (localfile) => { notify.show('Document upload failed.', 'error', 2000); this.dropzone.removeFile(localfile); }
                     };
 
                     const imgFiles = _.filter(data[field.key], (f) => { return _.indexOf([ 'image/jpeg', 'image/jpg', 'image/png', 'image/gif' ], f.type) !== -1 });
@@ -1118,7 +1118,7 @@ export default class DetailBar extends Component {
 
                 <div className='issue-contents-diviver'>
                   <span className='issue-contents-diviver-title'>
-                    迭代  
+                    Iteration  
                   </span>
                 </div>
                 <FormGroup>
@@ -1134,7 +1134,7 @@ export default class DetailBar extends Component {
                           </span>
                         </Link>
                         :
-                        <span className='issue-contents-nosetting'>未设置</span> }
+                        <span className='issue-contents-nosetting'>Not set</span> }
                     </div>
                   </Col>
                 </FormGroup>
@@ -1147,44 +1147,44 @@ export default class DetailBar extends Component {
                       { data.sprints && data.sprints.length > 0 ? 
                         _.map(data.sprints, (v) => { return _.find(options.sprints, { no: v }).name }).join(', ')
                         :
-                       <span className='issue-contents-nosetting'>未设置</span> }
+                       <span className='issue-contents-nosetting'>Not set</span> }
                     </div>
                   </Col>
                 </FormGroup>
 
                 <div className='issue-contents-diviver'>
                   <span className='issue-contents-diviver-title'>
-                    周期进度
+                    Cycle progress
                   </span>
                   { this.isAllowable('edit_issue') &&
                   <span 
                     className='comments-button issue-block-edit-button'
-                    title='设置' 
+                    title='set up' 
                     onClick={ () => { this.setState({ periodModalShow: true }); } }>
                     <i className='fa fa-edit'></i>
                   </span> }
                 </div>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    计划开始时间
+                    Plan start time
                   </Col>
                   <Col sm={ 2 }>
                     <div style={ { marginTop: '7px' } }>
-                      { data.expect_start_time ? moment.unix(data.expect_start_time).format('YYYY/MM/DD') : <span className='issue-contents-nosetting'>未设置</span> }
+                      { data.expect_start_time ? moment.unix(data.expect_start_time).format('YYYY/MM/DD') : <span className='issue-contents-nosetting'>Not set</span> }
                     </div>
                   </Col>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    计划完成时间
+                    Plan completion time
                   </Col>
                   <Col sm={ 2 }>
                     <div style={ { marginTop: '7px' } }>
-                      { data.expect_complete_time ? moment.unix(data.expect_complete_time).format('YYYY/MM/DD') : <span className='issue-contents-nosetting'>未设置</span> }
+                      { data.expect_complete_time ? moment.unix(data.expect_complete_time).format('YYYY/MM/DD') : <span className='issue-contents-nosetting'>Not set</span> }
                     </div>
                   </Col>
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    进度
+                    schedule
                   </Col>
                   <Col sm={ 3 }>
                     { !editingItems['progress'] ?
@@ -1192,7 +1192,7 @@ export default class DetailBar extends Component {
                       { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', data.reporter && data.reporter.id || '')) ?
                       <div className='editable-list-field' style={ { display: 'table', width: '100%' } }>
                         <div style={ { display: 'inline-block', float: 'left', margin: '5px 0px 3px 5px' } }>
-                          { _.isNumber(data.progress) ? data.progress + '%' : <span className='issue-contents-nosetting'>未设置</span> }
+                          { _.isNumber(data.progress) ? data.progress + '%' : <span className='issue-contents-nosetting'>Not set</span> }
                         </div>
                         <span 
                           className='edit-icon-zone edit-icon' 
@@ -1202,7 +1202,7 @@ export default class DetailBar extends Component {
                       </div> 
                       : 
                       <div style={ { marginTop: '7px' } }>
-                        { _.isNumber(data.progress) ? data.progress + '%' : <span className='issue-contents-nosetting'>未设置</span> }
+                        { _.isNumber(data.progress) ? data.progress + '%' : <span className='issue-contents-nosetting'>Not set</span> }
                       </div> }
                     </div>
                     :
@@ -1212,7 +1212,7 @@ export default class DetailBar extends Component {
                         min='0'
                         value={ newItemValues['progress'] || '' } 
                         onChange={ (e) => { newItemValues['progress'] = e.target.value; this.setState({ newItemValues }) } }
-                        placeholder='进度值'/>
+                        placeholder='Progress value'/>
                       <div className='edit-button-group'>
                         <Button className='edit-ok-button' disabled={ newItemValues['progress'] == (data['progress'] + '') || parseFloat(newItemValues['progress']) > 100 || parseFloat(newItemValues['progress']) < 0 } onClick={ this.setItemValue.bind(this, 'progress', newItemValues['progress'] === '' ? '' : newItemValues['progress'] - 0) }><i className='fa fa-check'></i></Button>
                         <Button className='edit-cancel-button' onClick={ this.cancelSetItem.bind(this, 'progress') }><i className='fa fa-close'></i></Button>
@@ -1223,12 +1223,12 @@ export default class DetailBar extends Component {
 
                 <div className='issue-contents-diviver'>
                   <span className='issue-contents-diviver-title'>
-                    人员时间 
+                    Staff time 
                   </span>
                 </div>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    创建者
+                    creator
                   </Col>
                   <Col sm={ 3 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1236,7 +1236,7 @@ export default class DetailBar extends Component {
                     </div>
                   </Col>
                   <Col sm={ 2 } componentClass={ ControlLabel }>
-                    创建时间
+                    Create time
                   </Col>
                   <Col sm={ 4 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1246,7 +1246,7 @@ export default class DetailBar extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    更新者
+                    updater
                   </Col>
                   <Col sm={ 3 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1254,7 +1254,7 @@ export default class DetailBar extends Component {
                     </div>
                   </Col>
                   <Col sm={ 2 } componentClass={ ControlLabel }>
-                    更新时间
+                    Update time
                   </Col>
                   <Col sm={ 4 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1264,7 +1264,7 @@ export default class DetailBar extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    解决者
+                    Solve
                   </Col>
                   <Col sm={ 3 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1272,7 +1272,7 @@ export default class DetailBar extends Component {
                     </div>
                   </Col>
                   <Col sm={ 2 } componentClass={ ControlLabel }>
-                    解决时间
+                    Resolution time
                   </Col>
                   <Col sm={ 4 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1282,7 +1282,7 @@ export default class DetailBar extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    关闭者
+                    Shuttle
                   </Col>
                   <Col sm={ 3 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1290,7 +1290,7 @@ export default class DetailBar extends Component {
                     </div>
                   </Col>
                   <Col sm={ 2 } componentClass={ ControlLabel }>
-                    关闭时间
+                    Closing time
                   </Col>
                   <Col sm={ 4 }>
                     <div style={ { marginTop: '7px' } }>
@@ -1302,32 +1302,32 @@ export default class DetailBar extends Component {
                 { !data.parent_id &&
                 <div className='issue-contents-diviver'>
                   <div className='issue-contents-diviver-title'>
-                    子问题 
+                    Child problem 
                   </div>
                   { subtaskTypeOptions.length > 0 && this.isAllowable('create_issue') &&
                   <span
                     className='comments-button issue-block-edit-button'
-                    title='创建子问题'
+                    title='Create sub-problem'
                     onClick={ () => { this.setState({ createSubtaskModalShow: true }); } }>
                     <i className='fa fa-plus'></i>
                   </span> }
                 </div> }
                 { !data.parent_id && (!data.subtasks || data.subtasks.length <= 0) && 
                 <div className='issue-block-emtpy'>
-                  暂无子问题
+                  No problem
                 </div> }
                 { !data.parent_id && data.subtasks && data.subtasks.length > 0 &&
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    子问题 
+                    Child problem 
                   </Col>
                   <Col sm={ 9 }>
                     { data.subtasks.length > 5 &&
                     <div style={ { marginTop: '7px' } }>
-                      共{ data.subtasks.length }个子问题
+                      common{ data.subtasks.length }Child problem
                       <span style={ { marginLeft: '5px' } }> 
                         <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ subtaskShow: !this.state.subtaskShow }) } }>
-                          { this.state.subtaskShow ? '收起' : '展开' } 
+                          { this.state.subtaskShow ? 'Put away' : 'Unfold' } 
                         </a>
                       </span>
                     </div> }
@@ -1360,32 +1360,32 @@ export default class DetailBar extends Component {
 
                 <div className='issue-contents-diviver'>
                   <span className='issue-contents-diviver-title'>
-                    链接问题 
+                    Link problem 
                   </span>
                   { this.isAllowable('link_issue') &&
                   <span
                     className='comments-button issue-block-edit-button'
-                    title='创建链接'
+                    title='Create a link'
                     onClick={ () => { this.setState({ linkIssueModalShow: true }); } }>
                     <i className='fa fa-plus'></i>
                   </span> }
                 </div>
                 { (!data.links || data.links.length <= 0) &&
                 <div className='issue-block-emtpy'>
-                  暂无链接问题
+                  No link problem
                 </div> }
                 { data.links && data.links.length > 0 &&
                 <FormGroup>
                   <Col sm={ 3 } componentClass={ ControlLabel }>
-                    链接问题 
+                    Link problem 
                   </Col>
                   <Col sm={ 9 }>
                     { data.links.length > 5 &&
                     <div style={ { marginTop: '7px' } }>
-                      共{ data.links.length }个问题
+                      common{ data.links.length }Problem
                       <span style={ { marginLeft: '5px' } }> 
                         <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ linkShow: !this.state.linkShow }) } }>
-                          { this.state.linkShow ? '收起' : '展开' } 
+                          { this.state.linkShow ? 'Put away' : 'Unfold' } 
                         </a>
                       </span>
                     </div> }
@@ -1444,7 +1444,7 @@ export default class DetailBar extends Component {
                 </FormGroup> }
               </Form>
             </Tab>
-            <Tab eventKey={ 3 } title='改动记录'>
+            <Tab eventKey={ 3 } title='Change record'>
               <History
                 issue_id={ data.id }
                 currentTime={ options.current_time || 0 }

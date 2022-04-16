@@ -15,19 +15,19 @@ export default class AddWorklogModal extends Component {
     const errors = {};
     if (data.id) {
       if (!data.started_at) {
-        errors.started_at = '必填';
+        errors.started_at = 'Be required';
       }
       if (!data.spend) {
-        errors.spend = '必填';
+        errors.spend = 'Be required';
       }
       if (data.adjust_type == '3' && (!data.leave_estimate || _.trim(data.leave_estimate) == '')) {
-        errors.leave_estimate = '必填';
+        errors.leave_estimate = 'Be required';
       } else if (data.adjust_type == '4' && !data.cut) {
-        errors.cut = '必填';
+        errors.cut = 'Be required';
       }
     } else {
-      // errors.started_at = '必填';
-      errors.spend = '必填';
+      // errors.started_at = 'Be required';
+      errors.spend = 'Be required';
     }
 
     const values = {};
@@ -83,7 +83,7 @@ export default class AddWorklogModal extends Component {
       this.setState({ ecode });
       if (ecode === 0) {
         close();
-        notify.show('日志已更新。', 'success', 2000);
+        notify.show('The log has been updated.', 'success', 2000);
       }
     } else {
       const newValues = _.clone(this.state.values);
@@ -92,7 +92,7 @@ export default class AddWorklogModal extends Component {
       this.setState({ ecode });
       if (ecode === 0) {
         close();
-        notify.show('已添加日志。', 'success', 2000);
+        notify.show('The log has been added.', 'success', 2000);
       }
     }
   }
@@ -118,10 +118,10 @@ export default class AddWorklogModal extends Component {
 
   changeTT(e, field) {
     if (!e.target.value) {
-      this.state.errors[field] = '必填'
+      this.state.errors[field] = 'Be required'
     } else {
       if (!this.ttTest(e.target.value)) {
-        this.state.errors[field] = '格式有误';
+        this.state.errors[field] = 'Format is incorrect';
       } else {
         delete this.state.errors[field];
       }
@@ -132,10 +132,10 @@ export default class AddWorklogModal extends Component {
 
   changeStartedAt(newValue) {
     if (!newValue) {
-      this.state.errors.started_at = '必填'
+      this.state.errors.started_at = 'Be required'
     } else {
       if (!moment(newValue).isValid()) {
-        this.state.errors.started_at = '格式有误';
+        this.state.errors.started_at = 'Format is incorrect';
       } else {
         delete this.state.errors.started_at;
       }
@@ -157,9 +157,9 @@ export default class AddWorklogModal extends Component {
     delete this.state.errors.cut;
 
     if (val == '3') {
-      this.state.errors.leave_estimate = '必填';
+      this.state.errors.leave_estimate = 'Be required';
     } else if (val == '4') {
-      this.state.errors.cut = '必填';
+      this.state.errors.cut = 'Be required';
     }
 
     this.setState({ values: this.state.values, errors: this.state.errors, touched: this.state.touched });
@@ -178,13 +178,13 @@ export default class AddWorklogModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ data.id ? '编辑工作日志' : ('添加工作日志' + (issue.no ? (' - ' + issue.no) : '')) }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ data.id ? 'Edit work log' : ('Add a work log' + (issue.no ? (' - ' + issue.no) : '')) }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form horizontal style={ { marginTop: '15px' } }>
             <FormGroup validationState={ this.state.touched.started_at && this.state.errors.started_at ? 'error' : null }>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                <span className='txt-impt'>*</span> 开始时间 
+                <span className='txt-impt'>*</span> Starting time 
               </Col>
               <Col sm={ 6 }>
                 <DateTime
@@ -202,7 +202,7 @@ export default class AddWorklogModal extends Component {
             </FormGroup>
             <FormGroup controlId='formControlsLabel' validationState={ this.state.touched.spend && this.state.errors.spend ? 'error' : null }>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                <span className='txt-impt'>*</span> 耗费时间
+                <span className='txt-impt'>*</span> waste time
               </Col>
               <Col sm={ 5 }>
                 <FormControl
@@ -210,7 +210,7 @@ export default class AddWorklogModal extends Component {
                   value={ this.state.values.spend } 
                   onChange={ (e) => { this.changeTT(e, 'spend') } }
                   onBlur={ (e) => { this.state.touched.spend = true; this.setState({ touched: this.state.touched }); } }
-                  placeholder={ '例如：3w 4d 5h' } />
+                  placeholder={ 'E.g:3w 4d 5h' } />
               </Col>
               <Col sm={ 2 } componentClass={ ControlLabel } style={ { textAlign: 'left' } }>
                  { this.state.touched.spend && (this.state.errors.spend || '') }
@@ -218,7 +218,7 @@ export default class AddWorklogModal extends Component {
             </FormGroup>
             <FormGroup controlId='formControlsLabel'>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                剩余时间
+                Time left
               </Col>
               <Col sm={ 9 }>
                 <RadioGroup
@@ -227,16 +227,16 @@ export default class AddWorklogModal extends Component {
                   onChange={ (val) => { this.changeType(val) } }
                   name='adjust_type'>
                   <ul className='list-unstyled clearfix' style={ { lineHeight: '40px' } }>
-                    <li><Radio value='1'/> 自动调整</li>
-                    <li><Radio value='2'/> 现有剩余预估时间不变</li>
+                    <li><Radio value='1'/> auto-adjust</li>
+                    <li><Radio value='2'/> Existing remaining estimated time constant</li>
                     <li>
                       <Radio value='3'/>
-                      <span> 设置为 </span>
+                      <span> Set as </span>
                       <FormControl 
                         type='text' 
                         value={ this.state.values.leave_estimate } 
                         disabled={ this.state.values.adjust_type != '3' }
-                        placeholder={ '例如：3w 4d 5h' } 
+                        placeholder={ 'E.g:3w 4d 5h' } 
                         style={ this.state.touched.leave_estimate && this.state.errors.leave_estimate ? err_styles : styles } 
                         onBlur={ (e) => { this.state.touched.leave_estimate = true; this.setState({ touched: this.state.touched }); } }
                         onChange={ (e) => { this.changeTT(e, 'leave_estimate') } }/>
@@ -244,14 +244,14 @@ export default class AddWorklogModal extends Component {
                     </li>
                     <li>
                       <Radio value='4'/>
-                      <span> 缩减 </span>
+                      <span> reduce </span>
                       <FormControl 
                         type='text' 
                         disabled={ this.state.values.adjust_type != '4' }
                         value={ this.state.values.cut } 
                         onBlur={ (e) => { this.state.touched.cut = true; this.setState({ touched: this.state.touched }); } }
                         onChange={ (e) => { this.changeTT(e, 'cut') } }
-                        placeholder={ '例如：3w 4d 5h' } 
+                        placeholder={ 'E.g:3w 4d 5h' } 
                         style={ { display: 'inline-block', width: '40%' } }/>
                       <span style={ { marginLeft: '10px', color: '#a94442', fontWeight: 'bold' } }>{ this.state.touched.cut && (this.state.errors.cut || '') }</span>
                     </li>
@@ -261,7 +261,7 @@ export default class AddWorklogModal extends Component {
             </FormGroup>
             <FormGroup controlId='formControlsLabel'>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                备注
+                Remark
               </Col>
               <Col sm={ 8 }>
                 <FormControl
@@ -276,8 +276,8 @@ export default class AddWorklogModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ _.isEqual(this.state.oldValues, this.state.values) || loading || !_.isEmpty(this.state.errors) } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ _.isEqual(this.state.oldValues, this.state.values) || loading || !_.isEmpty(this.state.errors) } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

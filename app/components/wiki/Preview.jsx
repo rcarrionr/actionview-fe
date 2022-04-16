@@ -74,7 +74,7 @@ export default class Preview extends Component {
     const { show, wid } = this.props;
     const ecode = await show(wid);
     if (ecode !== 0) {
-      notify.show('文档信息获取失败。', 'error', 2000);
+      notify.show('Document information has failed.', 'error', 2000);
     }
   }
 
@@ -83,7 +83,7 @@ export default class Preview extends Component {
     if (nextProps.wid !== wid) {
       const ecode = await show(nextProps.wid);
       if (ecode !== 0) {
-        notify.show('文档信息获取失败。', 'error', 2000);
+        notify.show('Document information has failed.', 'error', 2000);
       }
     }
   }
@@ -93,9 +93,9 @@ export default class Preview extends Component {
     const { show, wid } = this.props;
     const ecode = await show(wid);
     if (ecode !== 0) {
-      notify.show('文档信息获取失败。', 'error', 2000);
+      notify.show('Document information has failed.', 'error', 2000);
     } else {
-      notify.show('已完成。', 'success', 2000);
+      notify.show('completed.', 'success', 2000);
     }
   }
 
@@ -108,9 +108,9 @@ export default class Preview extends Component {
     } else {
       const ecode = await checkout(item.id);
       if (ecode !== 0) {
-        notify.show('文档解锁失败。', 'error', 2000);
+        notify.show('Document unlock failed.', 'error', 2000);
       } else {
-        notify.show('已解锁。', 'success', 2000);
+        notify.show('Unlocked.', 'success', 2000);
       }
     }
   }
@@ -120,9 +120,9 @@ export default class Preview extends Component {
     const { checkin, wid } = this.props;
     const ecode = await checkin(wid);
     if (ecode !== 0) {
-      notify.show('文档加锁失败。', 'error', 2000);
+      notify.show('Document lock failed.', 'error', 2000);
     } else {
-      notify.show('已加锁。', 'success', 2000);
+      notify.show('Unlocked.', 'success', 2000);
     }
   }
 
@@ -131,9 +131,9 @@ export default class Preview extends Component {
     const { show, wid } = this.props;
     const ecode = await show(wid, v);
     if (ecode !== 0) {
-      notify.show('文档信息获取失败。', 'error', 2000);
+      notify.show('Document information has failed.', 'error', 2000);
     } else {
-      notify.show('已完成。', 'success', 2000);
+      notify.show('completed.', 'success', 2000);
     }
   }
 
@@ -166,7 +166,7 @@ export default class Preview extends Component {
     if (res.ecode === 0 && res.data) {
       addAttachment(res.data);
     } else {
-      notify.show('文档上传失败。', 'error', 2000);
+      notify.show('Document upload failed.', 'error', 2000);
     }
   }
 
@@ -186,15 +186,15 @@ export default class Preview extends Component {
     const ecode = await favorite(item.id, !item.favorited);
     if (ecode === 0) {
       if (item.favorited) {
-        notify.show('已收藏。', 'success', 2000);
+        notify.show('collected.', 'success', 2000);
       } else {
-        notify.show('已取消收藏。', 'success', 2000);
+        notify.show('Has been canceled.', 'success', 2000);
       }
     } else {
       if (item.favorited) {
-        notify.show('收藏失败。', 'error', 2000);
+        notify.show('Failure to collect.', 'error', 2000);
       } else {
-        notify.show('取消失败。', 'error', 2000);
+        notify.show('Cancel failed.', 'error', 2000);
       }
     }
   }
@@ -279,13 +279,13 @@ export default class Preview extends Component {
       postUrl: API_BASENAME + '/project/' + project.key + '/wiki/' + item.id + '/upload'
     };
     const djsConfig = {
-      dictDefaultMessage: '点击或拖拽文件至此',
+      dictDefaultMessage: 'Click or drag and drop files',
       addRemoveLinks: true
     };
     const eventHandlers = {
       init: dz => this.dropzone = dz,
       success: (localfile, response) => { this.uploadSuccess(localfile, response); this.dropzone.removeFile(localfile); },
-      error: (localfile) => { notify.show('文档上传失败。', 'error', 2000); this.dropzone.removeFile(localfile); }
+      error: (localfile) => { notify.show('Document upload failed.', 'error', 2000); this.dropzone.removeFile(localfile); }
     }
 
     marked.setOptions({ breaks: true });
@@ -316,7 +316,7 @@ export default class Preview extends Component {
             <Breadcrumb style={ { marginBottom: '0px', backgroundColor: '#fff', paddingLeft: '5px', marginTop: '0px' } }>
             { _.map(options.path || [], (v, i) => {
               if (i === 0) {
-                return (<Breadcrumb.Item key={ i } disabled={ itemLoading }><Link to={ '/project/' + project.key + '/wiki' }>根目录</Link></Breadcrumb.Item>);
+                return (<Breadcrumb.Item key={ i } disabled={ itemLoading }><Link to={ '/project/' + project.key + '/wiki' }>Root directory</Link></Breadcrumb.Item>);
               } else {
                 return (<Breadcrumb.Item key={ i } disabled={ itemLoading }><Link to={ '/project/' + project.key + '/wiki/' + v.id }>{ v.name }</Link></Breadcrumb.Item>);
               }
@@ -325,14 +325,14 @@ export default class Preview extends Component {
           </span>
           { !_.isEmpty(item.attachments) &&
           <a href='#attachmentlist'>
-            <span style={ { paddingTop: '8px', float: 'left' } } title={ item.attachments.length + '个附件' }>
+            <span style={ { paddingTop: '8px', float: 'left' } } title={ item.attachments.length + 'Annex' }>
               <i className='fa fa-paperclip fa-rotate-90'></i>
             </span>
           </a> }
           { (!isCheckin || (isCheckin && item.checkin.user.id === user.id)) && !(this.state.operate === 'delete' && itemLoading) && project.status == 'active' &&
           <span style={ { float: 'right' } }>
-            <Button style={ { marginRight: '5px' } } disabled={ itemLoading } onClick={ this.edit.bind(this) }><i className='fa fa-edit'></i> 编辑</Button>
-            <Button bsStyle='link' style={ { fontSize: '14px', marginRight: '5px' } } disabled={ itemLoading } onClick={ () => { this.setState({ operate: 'delete', delNotifyShow: true }); } }>删除</Button>
+            <Button style={ { marginRight: '5px' } } disabled={ itemLoading } onClick={ this.edit.bind(this) }><i className='fa fa-edit'></i> edit</Button>
+            <Button bsStyle='link' style={ { fontSize: '14px', marginRight: '5px' } } disabled={ itemLoading } onClick={ () => { this.setState({ operate: 'delete', delNotifyShow: true }); } }>delete</Button>
           </span> }
           { this.state.operate === 'delete' && itemLoading &&
           <span style={ { float: 'right', marginRight: '10px' } }>
@@ -340,7 +340,7 @@ export default class Preview extends Component {
           </span> }
           <span style={ { float: 'right', marginRight: '5px' } }>
             <Link to={ '/project/' + project.key + '/wiki' + (item.parent != '0' ? ('/' + item.parent) : '') }>
-              <Button style={ { marginRight: '5px' } }><i className='fa fa-reply'></i> 返回目录</Button>
+              <Button style={ { marginRight: '5px' } }><i className='fa fa-reply'></i> Back to Contents</Button>
             </Link>
           </span>
         </div> }
@@ -350,17 +350,17 @@ export default class Preview extends Component {
         </div> }
         { item.id &&
         <div style={ { lineHeight: 2, borderBottom: '1px solid #e6ebf1', paddingLeft: '5px', paddingBottom: '10px', fontSize: '12px' } }>
-          <span>创建者：{ item.creator && item.creator.name || '' }，</span>
+          <span>creator:{ item.creator && item.creator.name || '' }，</span>
           { isNewestVer ? 
-          <span style={ { color: '#707070' } }>该版本为最新版，{ item.editor && item.editor.name ? item.editor.name : (item.creator && item.creator.name || '') }于 { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(item.created_at).format('YYYY/MM/DD HH:mm') } 编辑。</span>
+          <span style={ { color: '#707070' } }>This version is the latest version,{ item.editor && item.editor.name ? item.editor.name : (item.creator && item.creator.name || '') }At { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(item.created_at).format('YYYY/MM/DD HH:mm') } edit.</span>
           :
-          <span style={ { color: '#707070' } }>当前版本 - { item.version }，{ item.editor && item.editor.name || '' }于 { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : '' } 编辑。</span> }
+          <span style={ { color: '#707070' } }>current version - { item.version }，{ item.editor && item.editor.name || '' }At { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : '' } edit.</span> }
 
           { item.versions && item.versions.length > 1 &&
-          <span style={ { color: '#707070' } }>共 <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ versionViewShow: true }); } }>{ item.versions.length }</a> 个版本。</span> }
+          <span style={ { color: '#707070' } }>common <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ versionViewShow: true }); } }>{ item.versions.length }</a> Version.</span> }
 
           { item.checkin && !_.isEmpty(item.checkin) && 
-          <span style={ { marginLeft: '8px', color: '#f0ad4e' } }><i className='fa fa-lock'></i> 该文档被{ item.checkin.user ? (item.checkin.user.id == user.id ? '我' : (item.checkin.user.name || '')) : '' }于 { item.checkin.at ? moment.unix(item.checkin.at).format('YYYY/MM/DD HH:mm') : '' } 锁定。</span> }
+          <span style={ { marginLeft: '8px', color: '#f0ad4e' } }><i className='fa fa-lock'></i> This document is{ item.checkin.user ? (item.checkin.user.id == user.id ? 'I' : (item.checkin.user.name || '')) : '' }At { item.checkin.at ? moment.unix(item.checkin.at).format('YYYY/MM/DD HH:mm') : '' } locking.</span> }
 
           { itemLoading && (this.state.operate == 'checkin' || this.state.operate == 'checkout') ? 
           <span>
@@ -369,16 +369,16 @@ export default class Preview extends Component {
           :
           <span>
             { !_.isEmpty(item.checkin) && ((item.checkin.user && item.checkin.user.id === user.id) || (options.permissions && options.permissions.indexOf('manage_project') !== -1)) &&
-            <span style={ { marginLeft: '8px' } }><a href='#' title='解锁' onClick={ (e) => { e.preventDefault(); this.checkout(); } }><i className='fa fa-unlock'></i></a></span> } 
+            <span style={ { marginLeft: '8px' } }><a href='#' title='Unlock' onClick={ (e) => { e.preventDefault(); this.checkout(); } }><i className='fa fa-unlock'></i></a></span> } 
             { _.isEmpty(item.checkin) && 
-            <span style={ { marginLeft: '8px' } }><a href='#' title='锁定' onClick={ (e) => { e.preventDefault(); this.checkin(); } }><i className='fa fa-lock'></i></a></span> }
+            <span style={ { marginLeft: '8px' } }><a href='#' title='locking' onClick={ (e) => { e.preventDefault(); this.checkin(); } }><i className='fa fa-lock'></i></a></span> }
 
-            <span style={ { marginLeft: '8px' } }><a href='#' onClick={ (e) => { e.preventDefault(); this.refresh(); } } title={ isNewestVer ? '刷新' : '最新版' }><i className='fa fa-refresh'></i></a></span>
+            <span style={ { marginLeft: '8px' } }><a href='#' onClick={ (e) => { e.preventDefault(); this.refresh(); } } title={ isNewestVer ? 'Refresh' : 'new' }><i className='fa fa-refresh'></i></a></span>
           </span> }
           { item.favorited ?
-            <span style={ { marginLeft: '10px', cursor: 'pointer', color: '#FFD300' } } title='点击取消收藏' onClick={ this.favorite.bind(this) }><i className='fa fa-star'></i></span>
+            <span style={ { marginLeft: '10px', cursor: 'pointer', color: '#FFD300' } } title='Click to cancel collection' onClick={ this.favorite.bind(this) }><i className='fa fa-star'></i></span>
             :
-            <span style={ { marginLeft: '10px', cursor: 'pointer' } } title='点击收藏' onClick={ this.favorite.bind(this) }><i className='fa fa-star-o'></i></span> }
+            <span style={ { marginLeft: '10px', cursor: 'pointer' } } title='Click to Favorites' onClick={ this.favorite.bind(this) }><i className='fa fa-star-o'></i></span> }
         </div> }
         <div style={ { marginTop: '15px', marginBottom: '20px', paddingLeft: '5px' } }>
           { item.id && html && 
@@ -386,12 +386,12 @@ export default class Preview extends Component {
           { this.state.inlinePreviewShow && this.createLightbox(imgFileUrls, this.state.photoIndex) }
           { item.id && !html && 
             <div style={ { height: '200px', textAlign: 'center' } }>
-              <div style={ { paddingTop: '80px', color: '#999' } }>暂无内容</div> 
+              <div style={ { paddingTop: '80px', color: '#999' } }>no content yet</div> 
             </div> }
         </div>
         { item.id && item.attachments && item.attachments.length > 0 &&
         <div style={ { marginBottom: '5px' } }>
-          <div style={ { marginLeft: '2px', marginBottom: '5px', fontWeight: 600 } }>附件：</div>
+          <div style={ { marginLeft: '2px', marginBottom: '5px', fontWeight: 600 } }>appendix:</div>
           <Table id='attachmentlist' condensed hover responsive style={ { borderBottom: '1px solid #ddd' } }>
             <tbody>
             { _.map(item.attachments, (f, i) =>
@@ -420,7 +420,7 @@ export default class Preview extends Component {
         { item.attachments && item.attachments.length > 1 &&
         <div style={ { marginLeft: '5px', marginTop: '10px' } }>
           <i className='fa fa-download'></i>
-          <a href='#' onClick={ (e) => { e.preventDefault(); this.downloadAll(); } }>下载全部</a>
+          <a href='#' onClick={ (e) => { e.preventDefault(); this.downloadAll(); } }>Download all</a>
         </div> }
         <div style={ { marginBottom: '40px' } }/>
         { this.state.delNotifyShow &&

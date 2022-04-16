@@ -220,15 +220,15 @@ export default class List extends Component {
     const ecode = await watch(id, flag);
     if (ecode === 0) {
       if (flag) {
-        notify.show('关注成功。', 'success', 2000);
+        notify.show('Subscribed.', 'success', 2000);
       } else {
-        notify.show('已取消关注。', 'success', 2000);
+        notify.show('Caled concern.', 'success', 2000);
       }
     } else {
       if (flag) {
-        notify.show('关注失败。', 'error', 2000);
+        notify.show('Focus on failure.', 'error', 2000);
       } else {
-        notify.show('取消失败。', 'error', 2000);
+        notify.show('Cancel failed.', 'error', 2000);
       }
     }
   }
@@ -301,7 +301,7 @@ export default class List extends Component {
     if (ecode == 0) {
       record();
     } else {
-      notify.show('问题信息获取失败。', 'error', 2000);
+      notify.show('Problem information failed.', 'error', 2000);
     }
   }
 
@@ -510,7 +510,7 @@ export default class List extends Component {
             { item.title ? item.title : '-' }
           </a>
           { item.watching &&
-            <span title='点击取消关注' style={ { marginLeft: '8px', color: '#FF9900', cursor: 'pointer' } } onClick={ () => { this.watch(item.id, false) } }><i className='fa fa-eye'></i></span> }
+            <span title='Click to cancel attention' style={ { marginLeft: '8px', color: '#FF9900', cursor: 'pointer' } } onClick={ () => { this.watch(item.id, false) } }><i className='fa fa-eye'></i></span> }
           <span className='table-td-issue-desc'>
             { item.reporter &&
               <span style={ { marginRight: '7px', marginTop: '2px', float: 'left' } }>
@@ -536,26 +536,26 @@ export default class List extends Component {
               style={ { textDecoration: 'blink' ,color: '#000' } }
               title={ node }
               onSelect={ this.operateSelect.bind(this) }>
-              {/* <MenuItem eventKey='view'>查看</MenuItem> */}
-              { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='edit'>编辑</MenuItem> }
-              { this.isAllowable('assign_issue') && <MenuItem eventKey='assign'>分配</MenuItem> }
-              { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='setLabels'>设置标签</MenuItem> }
+              {/* <MenuItem eventKey='view'>Check</MenuItem> */}
+              { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='edit'>edit</MenuItem> }
+              { this.isAllowable('assign_issue') && <MenuItem eventKey='assign'>distribute</MenuItem> }
+              { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='setLabels'>Set label</MenuItem> }
               { (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '') || this.isAllowable('assign_issue')) && <MenuItem divider/> }
-              <MenuItem eventKey='watch'>{ item.watching ? '取消关注' : '关注' }</MenuItem>
-              <MenuItem eventKey='share'>分享链接</MenuItem>
+              <MenuItem eventKey='watch'>{ item.watching ? 'unsubscribe' : 'focus on' }</MenuItem>
+              <MenuItem eventKey='share'>Share link</MenuItem>
               <MenuItem divider/>
-              <MenuItem eventKey='worklog'>添加工作日志</MenuItem>
+              <MenuItem eventKey='worklog'>Add a work log</MenuItem>
               { !item.parent_id && subtaskTypeOptions.length > 0 && (this.isAllowable('create_issue') || (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && !item.hasSubtasks) && <MenuItem divider/> }
-              { !item.parent_id && subtaskTypeOptions.length > 0 && this.isAllowable('create_issue') && <MenuItem eventKey='createSubtask'>创建子问题</MenuItem> }
-              { !item.hasSubtasks && !item.parent_id && subtaskTypeOptions.length > 0 && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='convert2Subtask'>转换为子问题</MenuItem> }
+              { !item.parent_id && subtaskTypeOptions.length > 0 && this.isAllowable('create_issue') && <MenuItem eventKey='createSubtask'>Create sub-problem</MenuItem> }
+              { !item.hasSubtasks && !item.parent_id && subtaskTypeOptions.length > 0 && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='convert2Subtask'>Convert to a child problem</MenuItem> }
               { item.parent_id && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem divider/> }
-              { item.parent_id && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='convert2Standard'>转换为标准问题</MenuItem> }
+              { item.parent_id && (this.isAllowable('edit_issue') || this.isAllowable('edit_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='convert2Standard'>Convert to standard problems</MenuItem> }
               { (this.isAllowable('create_issue') || (this.isAllowable('move_issue') && item.parent_id)) && <MenuItem divider/> }
-              { this.isAllowable('move_issue') && item.parent_id && <MenuItem eventKey='move'>移动</MenuItem> }
-              { this.isAllowable('create_issue') && <MenuItem eventKey='copy'>复制</MenuItem> }
+              { this.isAllowable('move_issue') && item.parent_id && <MenuItem eventKey='move'>move</MenuItem> }
+              { this.isAllowable('create_issue') && <MenuItem eventKey='copy'>copy</MenuItem> }
               { (this.isAllowable('reset_issue') || this.isAllowable('delete_issue') || this.isAllowable('delete_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem divider/> }
-              { this.isAllowable('reset_issue') && <MenuItem eventKey='reset'>重置状态</MenuItem> }
-              { (this.isAllowable('delete_issue') || this.isAllowable('delete_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='del'>删除</MenuItem> }
+              { this.isAllowable('reset_issue') && <MenuItem eventKey='reset'>Reset state</MenuItem> }
+              { (this.isAllowable('delete_issue') || this.isAllowable('delete_self_issue', item.reporter && item.reporter.id || '')) && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
           </div> );
 
@@ -621,7 +621,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -640,8 +640,8 @@ export default class List extends Component {
           headerStyle={ { overflow: 'unset' } }>
           <TableHeaderColumn dataField='id' hidden isKey>ID</TableHeaderColumn>
           <TableHeaderColumn width='50' dataField='type'> 
-            <span className='table-header' onClick={ this.orderBy.bind(this, 'type') } title='类型'>
-              <span style={ { marginRight: '3px' } }>类型</span>
+            <span className='table-header' onClick={ this.orderBy.bind(this, 'type') } title='type'>
+              <span style={ { marginRight: '3px' } }>type</span>
               { mainOrder.field === 'type' && 
                 (mainOrder.order === 'desc' ? <i className='fa fa-caret-down'></i> : <i className='fa fa-caret-up'></i>) }
             </span>
@@ -654,8 +654,8 @@ export default class List extends Component {
             </span>
           </TableHeaderColumn>
           <TableHeaderColumn dataField='title'>
-            <span className='table-header' onClick={ this.orderBy.bind(this, 'title') } title='主题'>
-              <span style={ { marginRight: '3px' } }>主题</span>
+            <span className='table-header' onClick={ this.orderBy.bind(this, 'title') } title='theme'>
+              <span style={ { marginRight: '3px' } }>theme</span>
               { mainOrder.field === 'title' && 
                 (mainOrder.order === 'desc' ? <i className='fa fa-caret-down'></i> : <i className='fa fa-caret-up'></i>) }
             </span>

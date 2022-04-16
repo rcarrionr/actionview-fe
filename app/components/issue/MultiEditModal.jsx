@@ -112,7 +112,7 @@ export default class MultiEditModal extends Component {
     this.setState({ ecode: ecode });
     if (ecode === 0) {
       close();
-      notify.show('问题已更新。', 'success', 2000);
+      notify.show('The problem has been updated.', 'success', 2000);
       index(query);
     }
   }
@@ -152,33 +152,33 @@ export default class MultiEditModal extends Component {
 
     if ([ 'Text', 'TextArea', 'RichTextEditor' ].indexOf(field.type) !== -1) {
       if (newValue && field.maxLength && _.trim(newValue).length > field.maxLength) {
-        this.state.errors[field.key] = '字数必须在' + field.maxLength + '之内';
+        this.state.errors[field.key] = 'The number of words must be' + field.maxLength + 'within';
         this.setState({ values: this.state.values });
         return;
       }
     } else if ('Number' == field.type || 'Integer' == field.type) {
       if (newValue || newValue === 0) {
         if (isNaN(newValue) || (field.type === 'Integer' && !/^-?\d+$/.test(newValue))) {
-          this.state.errors[field.key] = '格式有误';
+          this.state.errors[field.key] = 'Format is incorrect';
           this.setState({ values: this.state.values });
           return;
         }
 
         if ((field.minValue || field.minValue === 0) && (field.maxValue || field.maxValue === 0)) {
           if (parseFloat(newValue) > parseFloat(field.maxValue) || parseFloat(field.minValue) > parseFloat(newValue)) {
-            this.state.errors[field.key] = '输入值必须在' + field.minValue + '~' + field.maxValue + '之间';
+            this.state.errors[field.key] = 'The input value must be' + field.minValue + '~' + field.maxValue + 'between';
             this.setState({ values: this.state.values });
             return;
           }
         } else if (field.minValue || field.minValue === 0) {
           if (parseFloat(field.minValue) > parseFloat(newValue)) {
-            this.state.errors[field.key] = '输入值不能小于' + field.minValue;
+            this.state.errors[field.key] = 'The input value cannot be less than' + field.minValue;
             this.setState({ values: this.state.values });
             return;
           }
         } else if (field.maxValue || field.maxValue === 0) {
           if (parseFloat(newValue) > parseFloat(field.maxValue)) {
-            this.state.errors[field.key] = '输入值不能大于' + field.maxValue;
+            this.state.errors[field.key] = 'The input value cannot be greater than' + field.maxValue;
             this.setState({ values: this.state.values });
             return;
           }
@@ -186,13 +186,13 @@ export default class MultiEditModal extends Component {
       }
     } else if (field.type === 'DatePicker' || field.type === 'DateTimePicker') {
       if (newValue && !moment(newValue).isValid()) {
-        this.state.errors[field.key] = '格式有误';
+        this.state.errors[field.key] = 'Format is incorrect';
         this.setState({ values: this.state.values });
         return;
       }
     } else if (field.type === 'TimeTracking') {
       if (newValue && !this.ttTest(newValue)) {
-        this.state.errors[field.key] = '格式有误';
+        this.state.errors[field.key] = 'Format is incorrect';
         this.setState({ values: this.state.values });
         return;
       }
@@ -203,18 +203,18 @@ export default class MultiEditModal extends Component {
   }
 
   getPlaceholder(field) {
-    let placeHolder = '输入' + field.name;
+    let placeHolder = 'enter' + field.name;
     if (field.type == 'Text' || field.type == 'TextArea' || field.type == 'RichTextEditor') {
       if (field.maxLength) {
-        placeHolder += '(字数' + field.maxLength + '字之内)';
+        placeHolder += '(Word number' + field.maxLength + 'Within the word)';
       }
     } else if (field.type == 'Number' || field.type == 'Integer') {
       if ((field.minValue || field.minValue === 0) && (field.maxValue || field.maxValue === 0)) {
-        placeHolder = '输入' + field.minValue + '~' + field.maxValue + '之间' + (field.type == 'Integer' ? '整数' : '数值');
+        placeHolder = 'enter' + field.minValue + '~' + field.maxValue + 'between' + (field.type == 'Integer' ? 'Integer' : 'Numerical value');
       } else if (field.minValue || field.minValue === 0) {
-        placeHolder = '输入大于' + field.minValue + (field.type == 'Integer' ? '整数' : '数值');
+        placeHolder = 'Input greater than' + field.minValue + (field.type == 'Integer' ? 'Integer' : 'Numerical value');
       } else if (field.maxValue || field.maxValue === 0) {
-        placeHolder = '输入小于' + field.minValue + (field.type == 'Integer' ? '整数' : '数值');
+        placeHolder = 'Enter less than' + field.minValue + (field.type == 'Integer' ? 'Integer' : 'Numerical value');
       }
     }
     return placeHolder;
@@ -278,11 +278,11 @@ export default class MultiEditModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' bsSize='large' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>批量编辑问题</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Batch editing problem</Modal.Title>
         </Modal.Header>
         { this.state.step == 1 ?
         <Modal.Body style={ { height: '580px', overflow: 'auto' } }>
-          <div>请选择要编辑字段：</div>
+          <div>Please select your edit field:</div>
           <div style={ { padding: '5px 0px 0px 5px' } }>
             <CheckboxGroup name='field' value={ this.state.fields } onChange={ this.fieldsChanged.bind(this) }>
               <ui className='list-unstyled clearfix'>
@@ -293,7 +293,7 @@ export default class MultiEditModal extends Component {
         </Modal.Body>
         :
         <Modal.Body style={ { height: '580px', overflow: 'auto' } }>
-          <div style={ { margin: '5px 0px 15px 10px' } }>注：1、若选择字段的值不输入或不选择，该字段的值将被置为空；2、该操作可能会造成数据的不完整，请谨慎操作。</div>
+          <div style={ { margin: '5px 0px 15px 10px' } }>Note:1If the value of the selection field is not input or not selected, the value of the field will be set off;2This action may cause incomplete data, please take carefully.</div>
           <Form horizontal>
             { _.map(editFields, (v) => { 
               if (v.type === 'Text' || v.type === 'Url') {
@@ -390,7 +390,7 @@ export default class MultiEditModal extends Component {
                         clearable={ true }
                         onChange={ newValue => { this.setState({ values: { ...this.state.values, [v.key]: newValue } }) } }
                         options={ _.map(options.labels || [], (val) => { return { label: val.name, value: val.name } } ) }
-                        placeholder='选择或输入标签'/>
+                        placeholder='Select or enter labels'/>
                     </Col>
                   </FormGroup> )
               } else if ([ 'Select', 'MultiSelect', 'SingleVersion', 'MultiVersion', 'SingleUser', 'MultiUser', 'CheckboxGroup', 'RadioGroup' ].indexOf(v.type) !== -1) {
@@ -408,7 +408,7 @@ export default class MultiEditModal extends Component {
                         disabled={ loading }
                         multi={ [ 'MultiSelect', 'MultiVersion', 'MultiUser', 'CheckboxGroup' ].indexOf(v.type) !== -1 }
                         onChange={ newValue => { this.setState({ values: { ...this.state.values, [v.key]: newValue } }) } }
-                        placeholder={ '选择' + v.name } />
+                        placeholder={ 'choose' + v.name } />
                     </Col>
                   </FormGroup> )
               } else if (v.type === 'DatePicker' || v.type === 'DateTimePicker') {
@@ -424,7 +424,7 @@ export default class MultiEditModal extends Component {
                         dateFormat={ 'YYYY/MM/DD' }
                         timeFormat={ v.type === 'DateTimePicker' ?  'HH:mm' : false }
                         closeOnSelect={ v.type === 'DatePicker' }
-                        inputProps={ { placeholder: '选择' + (v.type === 'DatePicker' ? '日期' : '时间') } }
+                        inputProps={ { placeholder: 'choose' + (v.type === 'DatePicker' ? 'date' : 'time') } }
                         value={ this.state.values[v.key] }
                         onChange={ newValue => { this.onChange(newValue, v); } }
                         onBlur={ (e) => { this.state.touched[v.key] = true; this.setState({ touched: this.state.touched }); } } />
@@ -446,7 +446,7 @@ export default class MultiEditModal extends Component {
                         value={ this.state.values[v.key] || '' }
                         onChange={ (e) => { this.onChange(e.target.value, v); } }
                         onBlur={ (e) => { this.state.touched[v.key] = true; this.setState({ touched: this.state.touched }); } }
-                        placeholder='例如：3w 4d 12h 30m' />
+                        placeholder='E.g:3w 4d 12h 30m' />
                     </Col>
                     <Col sm={ 6 } componentClass={ ControlLabel } style={ { textAlign: 'left' } }>
                       { this.state.touched[v.key] && this.state.errors[v.key] || '' }
@@ -457,12 +457,12 @@ export default class MultiEditModal extends Component {
           </Form>
         </Modal.Body> }
         <Modal.Footer>
-          <div style={ { float: 'left' } }>共选择问题 <b>{ issueIds.length }</b> 个。</div>
+          <div style={ { float: 'left' } }>A total of choice <b>{ issueIds.length }</b> indivual.</div>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button onClick={ this.goStep } disabled={ this.state.fields.length <= 0 || loading }>{ this.state.step == 2 ? '< 上一步' : '下一步 >' }</Button>
-          { this.state.step == 2 && <Button onClick={ this.confirm } style={ { marginLeft: '10px' } } disabled={ loading || !_.isEmpty(this.state.errors) }>确 定</Button> }
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.goStep } disabled={ this.state.fields.length <= 0 || loading }>{ this.state.step == 2 ? '< Previous' : 'Next step >' }</Button>
+          { this.state.step == 2 && <Button onClick={ this.confirm } style={ { marginLeft: '10px' } } disabled={ loading || !_.isEmpty(this.state.errors) }>Indeed Certainly</Button> }
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

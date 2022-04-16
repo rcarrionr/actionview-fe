@@ -8,7 +8,7 @@
     "prod": "babel-node ./server/index",
     "build": "rm -rf dist/* && babel-node ./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --ext .js,.jsx app server shared"
+    "lint": "eslint --fix --ext .js,.jsx app server shared"
   },
   "repository": {
     "type": "git",

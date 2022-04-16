@@ -128,17 +128,17 @@ export default class Header extends Component {
     const { createFolderShow, searchShow } = this.state;
 
     const uploadedat_options = [
-      { value: '1w', label: '1周内' },
-      { value: '2w', label: '2周内' },
-      { value: '1m', label: '1个月内' },
-      { value: '2m', label: '2个月内' }
+      { value: '1w', label: '1Internal' },
+      { value: '2w', label: '2Internal' },
+      { value: '1m', label: '1Month' },
+      { value: '2m', label: '2Month' }
     ];
 
     const sortOptions = [
-      { value: 'create_time_asc', label: '创建时间 ↑' },
-      { value: 'create_time_desc', label: '创建时间 ↓' },
-      { value: 'name_asc', label: '名称 ↑' },
-      { value: 'name_desc', label: '名称 ↓' }
+      { value: 'create_time_asc', label: 'Create time ↑' },
+      { value: 'create_time_desc', label: 'Create time ↓' },
+      { value: 'name_asc', label: 'name ↑' },
+      { value: 'name_desc', label: 'name ↓' }
     ];
 
     return (
@@ -149,9 +149,9 @@ export default class Header extends Component {
             <Breadcrumb style={ { marginBottom: '0px', backgroundColor: '#fff', paddingLeft: '5px', marginTop: '0px' } }>
               { _.map(options.path || [], (v, i) => {
                 if (i === options.path.length - 1) {
-                  return (<Breadcrumb.Item active key={ i }>{ i === 0 ? '根目录' : v.name }</Breadcrumb.Item>);
+                  return (<Breadcrumb.Item active key={ i }>{ i === 0 ? 'Root directory' : v.name }</Breadcrumb.Item>);
                 } else if (i === 0) {
-                  return (<Breadcrumb.Item key={ i } disabled={ indexLoading }><Link to={ '/project/' + project.key + '/document' }>根目录</Link></Breadcrumb.Item>);
+                  return (<Breadcrumb.Item key={ i } disabled={ indexLoading }><Link to={ '/project/' + project.key + '/document' }>Root directory</Link></Breadcrumb.Item>);
                 } else {
                   return (<Breadcrumb.Item key={ i } disabled={ indexLoading }><Link to={ '/project/' + project.key + '/document/' + v.id }>{ v.name }</Link></Breadcrumb.Item>);
                 }
@@ -165,7 +165,7 @@ export default class Header extends Component {
             <span style={ { float: 'right', marginRight: '10px' } }>
               <DropdownButton
                 pullRight
-                title='排序'
+                title='Sort'
                 id='basic-nav-dropdown-project'
                 onSelect={ this.sortChange.bind(this) }>
                   { _.map(sortOptions, (v, i) =>
@@ -178,12 +178,12 @@ export default class Header extends Component {
               </DropdownButton>
             </span>
             <span style={ { float: 'right', marginRight: '10px' } }>
-              <Button onClick={ ()=>{ this.setState({ searchShow: !this.state.searchShow }) } }><i className='fa fa-search'></i> 检索{ !_.isEmpty(query) && !searchShow ? '...' : '' }</Button>
+              <Button onClick={ ()=>{ this.setState({ searchShow: !this.state.searchShow }) } }><i className='fa fa-search'></i> Retrieve{ !_.isEmpty(query) && !searchShow ? '...' : '' }</Button>
             </span>
             { options.permissions && options.permissions.indexOf('manage_project') !== -1 &&
             <span style={ { float: 'right', marginRight: '10px' } }>
               <Button onClick={ () => { showCreateFolder(); } } disabled={ indexLoading || itemLoading || !_.isEmpty(query) }>
-                <i className='fa fa-plus'></i>&nbsp;新建目录
+                <i className='fa fa-plus'></i>&nbsp;New directory
               </Button>
             </span> }
           </span>
@@ -196,7 +196,7 @@ export default class Header extends Component {
                 checked={ this.state.myfavorite == '1' }
                 onClick={ () => { this.state.myfavorite = (this.state.myfavorite == '1' ? '' : '1'); this.refresh(); } }
                 style={ { display: 'inline-block' } }>
-                我收藏的
+                I collect it
               </Checkbox>
             </span>
             <span style={ { float: 'right', width: '150px', marginRight: '10px' } }>
@@ -206,12 +206,12 @@ export default class Header extends Component {
                 value={ this.state.name }
                 onChange={ (e) => { this.setState({ name: e.target.value }) } }
                 onKeyDown={ (e) => { if (e.keyCode == '13') { this.refresh(); } } } 
-                placeholder={ '文档名称查询...' } />
+                placeholder={ 'Document name query...' } />
             </span>
             <span style={ { float: 'right', width: '110px', marginRight: '10px' } }>
               <Select
                 simpleValue
-                placeholder='上传时间'
+                placeholder='Upload time'
                 value={ this.state.uploaded_at }
                 onChange={ this.uploadedAtChange.bind(this) }
                 options={ uploadedat_options }/>
@@ -219,10 +219,10 @@ export default class Header extends Component {
             <span style={ { float: 'right', width: '150px', marginRight: '10px' } }>
               <Select
                 simpleValue
-                placeholder='上传者'
+                placeholder='Uploaded by'
                 value={ this.state.uploader_id }
                 onChange={ this.uploaderChange.bind(this) }
-                options={ _.union([ { value: 'me', label: '当前用户' } ], _.map(options.uploader || [], (v) => { return { value: v.id, label: v.name } })) }/>
+                options={ _.union([ { value: 'me', label: 'Current user' } ], _.map(options.uploader || [], (v) => { return { value: v.id, label: v.name } })) }/>
             </span>
           </span>
         </FormGroup> }

@@ -37,9 +37,9 @@ export default class DelNotify extends Component {
     if (ecode === 0) {
       close();
       if (model === 'column') {
-        notify.show('看板列已删除。', 'success', 2000);
+        notify.show('The board is deleted.', 'success', 2000);
       } else if (model === 'filter') {
-        notify.show('过滤器已删除。', 'success', 2000);
+        notify.show('The filter has been deleted.', 'success', 2000);
       }
     }
   }
@@ -56,18 +56,18 @@ export default class DelNotify extends Component {
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-la'>
-            { model === 'column' && ('删除列 - ' + (_.find(config.columns, { no }) && _.find(config.columns, { no }).name || '')) } 
-            { model === 'filter' && ('删除过滤器 - ' +  (_.find(config.filters, { no }) && _.find(config.filters, { no }).name || '')) }
+            { model === 'column' && ('Delete columns - ' + (_.find(config.columns, { no }) && _.find(config.columns, { no }).name || '')) } 
+            { model === 'filter' && ('Delete filter - ' +  (_.find(config.filters, { no }) && _.find(config.filters, { no }).name || '')) }
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要删除此{ model === 'column' && '列' }{ model === 'filter' && '过滤器' }? <br/>
+          Confirm that you want to delete this{ model === 'column' && 'List' }{ model === 'filter' && 'filter' }? <br/>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

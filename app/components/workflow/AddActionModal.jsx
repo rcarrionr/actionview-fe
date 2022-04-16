@@ -30,10 +30,10 @@ const POST_FUNCTIONS = {
 const validate = (values) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
   if (!values.destStep) {
-    errors.destStep = '必选';
+    errors.destStep = 'required';
   }
   //if (!values.screen) {
   //  errors.name = 'Required';
@@ -257,11 +257,11 @@ export default class AddActionModal extends Component {
     const stepOptions = _.map(_.filter(steps, (o) => { return stepData.id !== o.id }), (val) => { return { label: val.name, value: val.id } });
 
     const screenOptions = _.map(options.screens, (val) => { return { label: val.name, value: val.id } });
-    //screenOptions.unshift( { label: '流程备注页面', value: 'comments' } );;
+    //screenOptions.unshift( { label: 'Process Note Page', value: 'comments' } );;
 
-    const relationOptions = [{ label: '全部满足', value: 'and' }, { label: '满足任何一个即可', value: 'or' }];
-    const someOptions = [ { id: 'assignee', name: '负责人' }, { id: 'reporter', name: '报告人' }, { id: 'principal', name: '项目负责人' } ];
-    const assigneeOptions = [ { id: 'me', name: '当前用户' }, { id: 'reporter', name: '报告人' }, { id: 'principal', name: '项目负责人' } ];
+    const relationOptions = [{ label: 'All satisfied', value: 'and' }, { label: 'Make any one', value: 'or' }];
+    const someOptions = [ { id: 'assignee', name: 'principal' }, { id: 'reporter', name: 'reporter' }, { id: 'principal', name: 'Project manager' } ];
+    const assigneeOptions = [ { id: 'me', name: 'Current user' }, { id: 'reporter', name: 'reporter' }, { id: 'principal', name: 'Project manager' } ];
 
     const userOptions = (options.users || []).sort(function(a, b) { return a.email.localeCompare(b.email); });
 
@@ -280,7 +280,7 @@ export default class AddActionModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ data.id ? ('编辑查看动作 - ' + data.name) : '添加动作' } </Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ data.id ? ('Edit View Action - ' + data.name) : 'Add action' } </Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body style={ { height: '480px', overflow: 'auto' } }>
@@ -288,50 +288,50 @@ export default class AddActionModal extends Component {
           <Tabs
             activeKey={ this.state.activeKey }
             onChange={ this.onTabChange.bind(this) } >
-            <TabPane tab='基本' key='1'>
+            <TabPane tab='Basic' key='1'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup>
-                  <ControlLabel>起始步骤</ControlLabel>
+                  <ControlLabel>Start steps</ControlLabel>
                   <FormControl type='text' value={ stepData.name } disabled={ true }/>
                 </FormGroup>
                 <FormGroup validationState={ name.touched && name.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>动作名</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...name } placeholder='动作名'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Action name</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...name } placeholder='Action name'/>
                   { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup>
-                  <ControlLabel><span className='txt-impt'>*</span>目标步骤</ControlLabel>
+                  <ControlLabel><span className='txt-impt'>*</span>Target step</ControlLabel>
                   <Select 
                     disabled={ submitting } 
                     options={ stepOptions } 
                     simpleValue 
                     value={ destStep.value } 
                     onChange={ newValue => { destStep.onChange(newValue) } } 
-                    placeholder='请选择目标步骤' 
+                    placeholder='Please select the target steps' 
                     clearable={ false } 
                     searchable={ false }/>
                 </FormGroup>
                 <FormGroup>
-                  <ControlLabel>动作界面</ControlLabel>
+                  <ControlLabel>Action interface</ControlLabel>
                   <Select 
                     disabled={ submitting } 
                     options={ screenOptions } 
                     simpleValue 
                     value={ screen.value || null } 
                     onChange={ newValue => { screen.onChange(newValue) } } 
-                    placeholder='无界面' 
+                    placeholder='No interface' 
                     searchable={ false }/>
                 </FormGroup>
               </div>
             </TabPane>
-            <TabPane tab='触发条件' key='2'>
+            <TabPane tab='Triggering conditions' key='2'>
               <div style={ { paddingTop: '15px', paddingBottom: '20px', paddingLeft: '5px' } }>
                 <Select 
                   options={ relationOptions } 
                   simpleValue 
                   value={ this.state.relation } 
                   onChange={ newValue => { this.setState({ relation: newValue }) } } 
-                  placeholder='条件关系' 
+                  placeholder='Conditional relationship' 
                   clearable={ false } 
                   searchable={ false }/>
               </div>
@@ -339,99 +339,99 @@ export default class AddActionModal extends Component {
                 <ui className='list-unstyled clearfix cond-list'>
                   <li>
                     <Checkbox disabled={ submitting } value='isSome'/>
-                    <span>只有</span>
+                    <span>only</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.someParam }
                       onChange={ (e) => this.setState({ someParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.conditions, 'isSome') !== -1 && !submitting) ? false : true } 
                       style={ _.indexOf(this.state.conditions, 'isSome') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择用户</option>
+                      <option value='' key=''>Please select a user</option>
                       { someOptions.map( someOption => <option value={ someOption.id } key={ someOption.id }>{ someOption.name }</option> ) }
                     </FormControl>
-                    <span>才能执行此动作</span>
+                    <span>Can implement this action</span>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='isTheUser'/>
-                    <span>只有用户</span>
+                    <span>Only user</span>
                     <FormControl 
                       componentClass='select'
                       value={ this.state.userParam }
                       onChange={ (e) => this.setState({ userParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.conditions, 'isTheUser') !== -1 && !submitting) ? false : true } 
                       style={ _.indexOf(this.state.conditions, 'isTheUser') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择用户</option>
+                      <option value='' key=''>Please select a user</option>
                       { userOptions.map( userOption => <option value={ userOption.id } key={ userOption.id }>{ userOption.name + '(' + userOption.email + ')' }</option> ) }
                     </FormControl>
-                    <span>才能执行此动作</span>
+                    <span>Can implement this action</span>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='checkSubTasksState'/>
-                    <span>根据子问题状态</span>
+                    <span>According to sub-problem status</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.stateParam }
                       onChange={ (e) => this.setState({ stateParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.conditions, 'checkSubTasksState') !== -1 && !submitting) ? false : true } 
                       style={ _.indexOf(this.state.conditions, 'checkSubTasksState') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择状态</option>
+                      <option value='' key=''>Please select a status</option>
                       { stateOptions.map( stateOption => <option value={ stateOption.id } key={ stateOption.id }>{ stateOption.name }</option> ) }
                     </FormControl>
-                    <span>限制父任务动作</span>
+                    <span>Limit the parent task action</span>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='hasPermission'/>
-                    <span>只有具有权限</span>
+                    <span>Only with permissions</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.permissionParam }
                       onChange={ (e) => this.setState({ permissionParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.conditions, 'hasPermission') !== -1 && !submitting) ? false : true }
                       style={ _.indexOf(this.state.conditions, 'hasPermission') !== -1 ? selectEnableStyles : selectDisabledStyles }>
-                      <option value='' key=''>请选择权限</option>
+                      <option value='' key=''>Please select permissions</option>
                       { permissionOptions.map( permissionOption => <option value={ permissionOption.id } key={ permissionOption.id }>{ permissionOption.name }</option> ) }
                     </FormControl>
-                    <span>的用户才能执行此动作</span>
+                    <span>Users can do this action</span>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='belongsToRole'/>
-                    <span>只有属于项目角色</span>
+                    <span>Only belonging to the project role</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.roleParam }
                       onChange={ (e) => this.setState({ roleParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.conditions, 'belongsToRole') !== -1 && !submitting) ? false : true }
                       style={ _.indexOf(this.state.conditions, 'belongsToRole') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择角色</option>
+                      <option value='' key=''>Please select a role</option>
                       { roleOptions.map( roleOption => <option value={ roleOption.id } key={ roleOption.id }>{ roleOption.name }</option> ) }
                     </FormControl>
-                    <span>的成员才能执行此动作</span>
+                    <span>Members can do this action</span>
                   </li>
                 </ui>
               </CheckboxGroup>
             </TabPane>
-            <TabPane tab='结果处理' key='3'>
+            <TabPane tab='Resultive' key='3'>
               <div style={ { paddingTop: '15px', paddingBottom: '20px', paddingLeft: '10px' } }>
-                <span><b>状态发生转变后以下被选择的动作将被执行</b></span>
+                <span><b>The selected action will be executed after the state changes</b></span>
               </div>
               <CheckboxGroup name='postFunctions' value={ this.state.postFunctions } onChange={ this.postFunctionsChanged.bind(this) }>
                 <ui className='list-unstyled clearfix cond-list'>
                   <li>
                     <Checkbox disabled={ submitting } value='setResolution'/>
-                    <span>问题的</span><b>解决结果</b><span>将被设置为</span>
+                    <span>questionable</span><b>Solution</b><span>Will be set to</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.resolutionParam }
                       onChange={ (e) => this.setState({ resolutionParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.postFunctions, 'setResolution') !== -1 && !submitting) ? false : true }
                       style={ _.indexOf(this.state.postFunctions, 'setResolution') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择结果值</option>
+                      <option value='' key=''>Please select the result value</option>
                       { resolutionOptions.map( resolutionOption => <option value={ resolutionOption.id } key={ resolutionOption.id }>{ resolutionOption.name }</option> ) }
                     </FormControl>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='setProgress'/>
-                    <span>问题的</span><b>进度</b><span>将被设置为</span>
+                    <span>questionable</span><b>schedule</b><span>Will be set to</span>
                     <FormControl
                       type='number'
                       min={ 0 }
@@ -443,51 +443,51 @@ export default class AddActionModal extends Component {
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='assignIssue'/>
-                    <span>将问题分配给</span>
+                    <span>Assign problems to</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.assigneeParam }
                       onChange={ (e) => this.setState({ assigneeParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.postFunctions, 'assignIssue') !== -1 && !submitting) ? false : true }
                       style={ _.indexOf(this.state.postFunctions, 'assignIssue') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择负责人</option>
+                      <option value='' key=''>Please select the person in charge</option>
                       { assigneeOptions.map( assigneeOption => <option value={ assigneeOption.id } key={ assigneeOption.id }>{ assigneeOption.name }</option> ) }
                     </FormControl>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='assignIssueToUser'/>
-                    <span>将问题分配给指定用户</span>
+                    <span>Assign questions to the specified user</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.assignedUserParam }
                       onChange={ (e) => this.setState({ assignedUserParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.postFunctions, 'assignIssueToUser') !== -1 && !submitting) ? false : true }
                       style={ _.indexOf(this.state.postFunctions, 'assignIssueToUser') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
-                      <option value='' key=''>请选择用户</option>
+                      <option value='' key=''>Please select a user</option>
                       { userOptions.map( userOption => <option value={ userOption.id } key={ userOption.id }>{ userOption.name + '(' + userOption.email + ')' }</option> ) }
                     </FormControl>
                   </li>
                   <li>
                     <Checkbox value='setState'/>
-                    <span>将状态设置为目标步骤链接的状态</span>
+                    <span>Set the status as the status of the target step link</span>
                   </li>
                   <li>
                     <Checkbox disabled={ submitting } value='addComments'/>
-                    <span>如果用户输入了备注，将备注添加到问题评论中</span>
+                    <span>If the user enters a note, the note is added to the problem comment.</span>
                   </li>
                   <li style={ { display: 'none' } }>
                     <Checkbox disabled={ submitting } value='updIssue'/>
-                    <span>更新问题属性</span>
+                    <span>Update problem properties</span>
                   </li>
                   {/*
                   <li>
                     <Checkbox disabled={ submitting } value='updateHistory'/>
-                    <span>更新问题的变动历史记录</span>
+                    <span>Change history of updating problems</span>
                   </li>
                   */}
                   <li>
                     <Checkbox value='triggerEvent' disabled={ _.indexOf(this.state.postFunctions, 'triggerEvent') !== -1 }/>
-                    <span>过程结束后触发</span>
+                    <span>Trigger after the process</span>
                     <FormControl
                       componentClass='select'
                       value={ this.state.eventParam }
@@ -496,7 +496,7 @@ export default class AddActionModal extends Component {
                       style={ _.indexOf(this.state.postFunctions, 'triggerEvent') !== -1 ? selectEnableStyles : selectDisabledStyles }> 
                       { eventOptions.map( eventOption => <option value={ eventOption.id } key={ eventOption.id }>{ eventOption.name }</option> ) }
                     </FormControl>
-                    <span>通知事件</span>
+                    <span>Notice event</span>
                   </li>
                 </ui>
               </CheckboxGroup>
@@ -504,8 +504,8 @@ export default class AddActionModal extends Component {
           </Tabs>
         </Modal.Body>
         <Modal.Footer>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

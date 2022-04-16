@@ -34,7 +34,7 @@ export default class ConfigSetModal extends Component {
     }));
     if (ecode === 0) {
       close();
-      notify.show('配置完成。', 'success', 2000);
+      notify.show('The configuration is complete.', 'success', 2000);
     }
     this.setState({ ecode: ecode });
   }
@@ -53,13 +53,13 @@ export default class ConfigSetModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>配置日历</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Configuration calendar</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form horizontal style={ { marginTop: '10px' } }>
             <FormGroup>
               <Col sm={ 2 } componentClass={ ControlLabel }>
-                时间段
+                period
               </Col>
               <Col sm={ 10 }>
                 <div style={ { display: 'inline-block', width: '45%' } }>
@@ -87,7 +87,7 @@ export default class ConfigSetModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 2 } componentClass={ ControlLabel }>
-                操作 
+                operate 
               </Col>
               <Col sm={ 10 }>
                 <div style={ { display: 'inline-block' } }>
@@ -96,24 +96,24 @@ export default class ConfigSetModal extends Component {
                     name='swap' 
                     onClick={ () => { this.setState({ mode : 'set' }) } }
                     checked={ this.state.mode === 'set' }> 
-                    修改日历为 
+                    Modify the calendar 
                   </Radio>
                   <div style={ { width: '200px', margin: '5px 5px 10px 18px' } }>
                     <Select
                       simpleValue
                       clearable={ false }
                       disabled={ this.state.mode !== 'set' }
-                      options={ [ { value: 'holiday', label: '假期' }, { value: 'workday', label: '工作日' } ] }
+                      options={ [ { value: 'holiday', label: 'Holiday' }, { value: 'workday', label: 'Working day' } ] }
                       value={ this.state.type }
                       onChange={ (newValue) => { this.setState({ type: newValue }) } }
-                      placeholder='选择类型'/>
+                      placeholder='Choose a type'/>
                   </div>
                   <Radio 
                     inline
                     name='remove' 
                     onClick={ () => { this.setState({ mode : 'cancel' }) } }
                     checked={ this.state.mode === 'cancel' }> 
-                    移除配置
+                    Remove configuration
                   </Radio>
                 </div>
               </Col>
@@ -126,9 +126,9 @@ export default class ConfigSetModal extends Component {
           <Button 
             onClick={ this.confirm } 
             disabled={ loading || (this.state.mode === 'set' && !this.state.type) || !moment(this.state.start_time).isValid() || !moment(this.state.end_time).isValid() || moment(this.state.start_time) > moment(this.state.end_time) }>
-            确定
+            Sure
           </Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

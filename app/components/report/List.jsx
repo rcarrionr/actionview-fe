@@ -50,7 +50,7 @@ export default class List extends Component {
     let classifiedData = [ 
       <tr>
         <td>
-          该模块过滤器已被删除，请点击<a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ selectedBlock: mode, resetShow: true }) } }>重置</a>。
+          The module filter has been deleted, please click<a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ selectedBlock: mode, resetShow: true }) } }>Reset</a>。
         </td>
       </tr> 
     ];
@@ -78,12 +78,12 @@ export default class List extends Component {
     const { i18n, project, filters, loading, saveLoading, edit, reset } = this.props;
 
     const blockTitles = { 
-      issues: '问题分布图',
-      trend: '问题趋势图',
-      worklog: '人员工作日志报告',
-      timetracks: '时间跟踪报告',
-      regressions: '问题解决回归分布',
-      others: '其它报表'
+      issues: 'Distribution map',
+      trend: 'Trend map',
+      worklog: 'Person work log report',
+      timetracks: 'Time tracking report',
+      regressions: 'Problem solving regression distribution',
+      others: 'Other reports'
     };
 
     const blockIcons = { 
@@ -106,13 +106,13 @@ export default class List extends Component {
           <span
             className='report-button report-edit-button'
             onClick={ () => { this.setState({ selectedBlock: v, searchConfigShow: true }) } }
-            title='编辑顺序'>
+            title='Editing order'>
             <i className='fa fa-edit'></i>
           </span> }
           <span
             className='report-button report-edit-button'
             onClick={ () => { this.setState({ selectedBlock: v, resetShow: true }) } }
-            title='重置'>
+            title='Reset'>
             <i className='fa fa-undo'></i>
           </span>
         </div>
@@ -173,7 +173,7 @@ export default class List extends Component {
         { this.state.searchConfigShow &&
           <FilterConfigModal
             show
-            title={ blockTitles[this.state.selectedBlock] + ' - 过滤器管理' }
+            title={ blockTitles[this.state.selectedBlock] + ' - Filter management' }
             close={ () => { this.setState({ searchConfigShow: false }) } }
             filters={ filters[this.state.selectedBlock] }
             config={ this.edit.bind(this) }

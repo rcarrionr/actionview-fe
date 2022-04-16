@@ -10,10 +10,10 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (values.login_mail_domain && !/^[\w-]+([.][\w-]+)+$/.test(values.login_mail_domain)) {
-    errors.login_mail_domain = '格式有误';
+    errors.login_mail_domain = 'Format is incorrect';
   }
   //if (values.enable_login_protection && !/^[1-9][0-9]*$/.test(values.enable_login_protection)) {
-  //  errors.enable_login_protection = '必须输入正整数';
+  //  errors.enable_login_protection = 'Must enter positive integers';
   //}
   return errors;
 };
@@ -56,7 +56,7 @@ export default class PropertiesModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -109,59 +109,59 @@ export default class PropertiesModal extends Component {
     ];
 
     const logsSaveOptions = [
-      { value: '0d', label: '不保存' },
-      { value: '3m', label: '3个月' },
-      { value: '6m', label: '6个月' },
-      { value: '1y', label: '1年' },
-      { value: '2y', label: '2年' }
+      { value: '0d', label: 'do not save' },
+      { value: '3m', label: '3Month' },
+      { value: '6m', label: '6Month' },
+      { value: '1y', label: '1year' },
+      { value: '2y', label: '2year' }
     ];
 
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>通用设置</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>General setting</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ login_mail_domain.touched && login_mail_domain.error ? 'error' : null }>
-            <ControlLabel>默认登陆邮箱域名</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...login_mail_domain } placeholder='邮箱域名'/>
+            <ControlLabel>Default login email domain name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...login_mail_domain } placeholder='Mailbox domain name'/>
             { login_mail_domain.touched && login_mail_domain.error && <HelpBlock style={ { float: 'right' } }>{ login_mail_domain.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ http_host.touched && http_host.error ? 'error' : null }>
-            <ControlLabel>系统域名</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...http_host } placeholder='如:https://actionview.cn'/>
+            <ControlLabel>System domain name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...http_host } placeholder='Such as:https://actionview.cn'/>
             { http_host.touched && http_host.error && <HelpBlock style={ { float: 'right' } }>{ http_host.error }</HelpBlock> }
           </FormGroup>
           <div>
             <FormGroup controlId='formControlsText' style={ { width: '45%', display: 'inline-block' } }>
-              <ControlLabel>是否允许用户创建项目</ControlLabel>
+              <ControlLabel>Whether to allow users to create projects</ControlLabel>
               <Select
                 simpleValue
                 disabled={ submitting }
                 clearable={ false }
                 searchable={ false }
-                options={ [ { value: 1, label: '是' }, { value: 0, label: '否' } ] }
+                options={ [ { value: 1, label: 'Yes' }, { value: 0, label: 'no' } ] }
                 value={ allow_create_project.value || 0 }
                 onChange={ newValue => { allow_create_project.onChange(newValue) } }
-                placeholder='请选择'/>
+                placeholder='please choose'/>
             </FormGroup>
             <FormGroup controlId='formControlsText' style={ { width: '45%', display: 'inline-block', float: 'right' } }>
-              <ControlLabel>启用安全登录保护</ControlLabel>
+              <ControlLabel>Enable secure login protection</ControlLabel>
               <Select
                 simpleValue
                 disabled={ submitting }
                 clearable={ false }
                 searchable={ false }
-                options={ [ { value: 1, label: '是' }, { value: 0, label: '否' } ] }
+                options={ [ { value: 1, label: 'Yes' }, { value: 0, label: 'no' } ] }
                 value={ enable_login_protection.value || 0 }
                 onChange={ newValue => { enable_login_protection.onChange(newValue) } }
-                placeholder='请选择'/>
+                placeholder='please choose'/>
             </FormGroup>
           </div>
           <div>
             <FormGroup style={ { width: '45%', display: 'inline-block' } }>
-              <ControlLabel>每周有效工作日(天)</ControlLabel>
+              <ControlLabel>Weekly effective working day(sky)</ControlLabel>
               <Select
                 simpleValue
                 disabled={ submitting }
@@ -170,10 +170,10 @@ export default class PropertiesModal extends Component {
                 options={ dayOptions }
                 value={ week2day.value }
                 onChange={ newValue => { week2day.onChange(newValue) } }
-                placeholder='请选择'/>
+                placeholder='please choose'/>
             </FormGroup>
             <FormGroup style={ { width: '45%', display: 'inline-block', float: 'right' } }>
-              <ControlLabel>每天有效工作时间(小时)</ControlLabel>
+              <ControlLabel>Effective working hours every day(Hour)</ControlLabel>
               <Select
                 simpleValue
                 disabled={ submitting }
@@ -182,12 +182,12 @@ export default class PropertiesModal extends Component {
                 options={ hourOptions }
                 value={ day2hour.value }
                 onChange={ newValue => { day2hour.onChange(newValue) } }
-                placeholder='请选择'/>
+                placeholder='please choose'/>
             </FormGroup>
           </div>
           <div>
             <FormGroup style={ { width: '45%', display: 'inline-block' } }>
-              <ControlLabel>日志保存</ControlLabel>
+              <ControlLabel>Log save</ControlLabel>
               <Select
                 simpleValue
                 disabled={ submitting }
@@ -196,15 +196,15 @@ export default class PropertiesModal extends Component {
                 options={ logsSaveOptions }
                 value={ logs_save_duration.value || '6m' }
                 onChange={ newValue => { logs_save_duration.onChange(newValue) } }
-                placeholder='请选择'/>
+                placeholder='please choose'/>
             </FormGroup>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

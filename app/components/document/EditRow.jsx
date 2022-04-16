@@ -31,7 +31,7 @@ export default class EditRow extends Component {
 
     const reg = /^[^@\/\'\\\"#$%&\^\*]+$/;
     if (!reg.test(this.state.name)) {
-      notify.show('名称中有特殊字符。', 'error', 2000);
+      notify.show('There are special characters in the name.', 'error', 2000);
       $('#input_nm').select();
       return;
     }
@@ -43,7 +43,7 @@ export default class EditRow extends Component {
       repeatChk = _.findIndex(_.reject(collection, { d: 1 }), { name: this.state.ext ? (this.state.name + '.' + this.state.ext) : this.state.name }) !== -1;
     }
     if (repeatChk) {
-      notify.show('名称重复。', 'error', 2000);
+      notify.show('Repeat.', 'error', 2000);
       $('#input_nm').select();
       return;
     }
@@ -52,19 +52,19 @@ export default class EditRow extends Component {
     if (mode === 'createFolder') {
       ecode = await createFolder({ name: this.state.name });
       if (ecode === 0) {
-        notify.show('创建完成。', 'success', 2000);
+        notify.show('Create.', 'success', 2000);
         cancel();
       } else {
-        notify.show(errMsg[ecode] + '，创建失败。', 'error', 2000);
+        notify.show(errMsg[ecode] + 'Create a failure.', 'error', 2000);
         $('#input_nm').select();
       }
     } else {
       ecode = await edit(data.id, { name: this.state.ext ? (this.state.name + '.' + this.state.ext) : this.state.name })
       if (ecode === 0) {
-        notify.show('编辑完成。', 'success', 2000);
+        notify.show('Editing is completed.', 'success', 2000);
         cancel();
       } else {
-        notify.show(errMsg[ecode] + '，更新失败。', 'error', 2000);
+        notify.show(errMsg[ecode] + 'Update failed.', 'error', 2000);
         $('#input_nm').select();
       }
     }
@@ -110,9 +110,9 @@ export default class EditRow extends Component {
           onChange={ (e) => { this.setState({ name: _.trim(e.target.value) }) } }
           style={ { height: '30px', width: '250px', display: 'inline-block' } }/>
         { !loading &&
-        <Button disabled={ this.state.name === this.state.oldname || !this.state.name } style={ { marginLeft: '10px', padding: '4px 10px' } } onClick={ this.confirm }>确定</Button> }
+        <Button disabled={ this.state.name === this.state.oldname || !this.state.name } style={ { marginLeft: '10px', padding: '4px 10px' } } onClick={ this.confirm }>Sure</Button> }
         { !loading &&
-        <Button style={ { padding: '4px 10px' } } bsStyle='link' onClick={ () => { this.cancel() } }>取消</Button> }
+        <Button style={ { padding: '4px 10px' } } bsStyle='link' onClick={ () => { this.cancel() } }>Cancel</Button> }
         <img src={ img } className={ loading ? 'loading' : 'hide' }/>
       </div>
     );

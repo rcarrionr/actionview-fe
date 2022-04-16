@@ -71,11 +71,11 @@ export default class List extends Component {
     const { updNotify } = this.props;
     const ecode = await updNotify(values);
     if (ecode === 0) {
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       const { notifications } = this.props;
       this.setState({ notifications });
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
     return ecode;
   }
@@ -158,14 +158,14 @@ export default class List extends Component {
       id: 'avatar',
       title: (
         <div>
-          <span className='table-td-title'>头像</span>
-          <span className='table-td-issue-desc'>选择一张个人正面照片作为头像，让其他成员更容易认识你。</span>
+          <span className='table-td-title'>avatar</span>
+          <span className='table-td-issue-desc'>Choose a personal photo as an avatar, so that other members easier to know you.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <img src={ accounts.avatar ? API_BASENAME + '/getavatar?fid=' + accounts.avatar : no_avatar } className='big-avatar'/>
-          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ avatarEditModalShow: true }) } }>设置头像</Button>
+          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ avatarEditModalShow: true }) } }>Set Avatar</Button>
         </div>
       )
     });
@@ -174,17 +174,17 @@ export default class List extends Component {
       id: 'basic',
       title: (
         <div>
-          <span className='table-td-title'>个人资料</span>
+          <span className='table-td-title'>personal information</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0 } }>
-            <li>姓名：{ accounts.first_name || '-' }</li>
-            <li>部门：{ accounts.department || '-' }</li>
-            <li>职位：{ accounts.position || '-' }</li>
+            <li>Name:{ accounts.first_name || '-' }</li>
+            <li>department:{ accounts.department || '-' }</li>
+            <li>Position:{ accounts.position || '-' }</li>
           </ul>
-          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ editModalShow: true }) } }>编辑资料</Button>
+          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ editModalShow: true }) } }>edit information</Button>
         </div>
       )
     });
@@ -193,13 +193,13 @@ export default class List extends Component {
       id: 'email',
       title: (
         <div>
-          <span className='table-td-title'>邮箱地址</span>
-          <span className='table-td-issue-desc'>该账号绑定的邮箱地址不能改变。</span>
+          <span className='table-td-title'>email address</span>
+          <span className='table-td-issue-desc'>The mailbox address that the account binding cannot be changed.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
-          当前邮箱地址为：{ accounts.email || '-' }
+          The current mailbox address is:{ accounts.email || '-' }
         </div>
       )
     });
@@ -208,13 +208,13 @@ export default class List extends Component {
       id: 'password',
       title: (
         <div>
-          <span className='table-td-title'>登录密码</span>
-          <span className='table-td-issue-desc'>修改密码时需要输入当前密码；建议您定期更换密码，确保帐号安全。</span>
+          <span className='table-td-title'>login password</span>
+          <span className='table-td-issue-desc'>You need to enter the current password when you change your password; it is recommended that you regularly replace your password to make sure your account is secure.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
-          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ resetPwdModalShow: true }) } }>修改密码</Button>
+          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ resetPwdModalShow: true }) } }>change Password</Button>
         </div>
       )
     });
@@ -223,15 +223,15 @@ export default class List extends Component {
       id: 'phone',
       title: (
         <div>
-          <span className='table-td-title'>绑定手机号</span>
-          <span className='table-td-issue-desc'>修改手机时 ActionView 会发送短信到新的手机号，请按照短信中的验证码修改你的手机号码。</span>
+          <span className='table-td-title'>Binding mobile phone number</span>
+          <span className='table-td-issue-desc'>Modify the phone ActionView Will send text messages to new mobile phone numbers, modify your mobile number by modifying your mobile number in accordance with the verification code in the text message.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
-          <div>当前手机号为：{ accounts.phone || '未设置' }</div>
+          <div>The current mobile phone number is:{ accounts.phone || 'Not set' }</div>
           <div style={ { marginTop: '10px' } }>
-            <Button style={ { marginLeft: '15px' } } onClick={ () => { notify.show('暂不支持此功能。', 'warning', 2000); } }>{ accounts.phone && '修改' }绑定手机号</Button>
+            <Button style={ { marginLeft: '15px' } } onClick={ () => { notify.show('This feature is not supported yet.', 'warning', 2000); } }>{ accounts.phone && 'Revise' }Binding mobile phone number</Button>
           </div>
         </div>
       )
@@ -242,13 +242,13 @@ export default class List extends Component {
       id: 'language',
       title: (
         <div>
-          <span className='table-td-title'>语言设置</span>
-          <span className='table-td-issue-desc'>请选择您喜欢的语言(暂不支持此功能)</span>
+          <span className='table-td-title'>language settings</span>
+          <span className='table-td-issue-desc'>Please select your favorite language(This feature is not supported)</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
-          <div style={ { margin: '3px' } }>中文</div>
+          <div style={ { margin: '3px' } }>Chinese</div>
         </div>
       )
     });
@@ -258,19 +258,19 @@ export default class List extends Component {
       id: 'mail_notify',
       title: (
         <div>
-          <span className='table-td-title'>邮件通知</span>
-          <span className='table-td-issue-desc'>当问题有重要操作时，会根据相应的通知方案配置，发送提醒邮件给你。</span>
+          <span className='table-td-title'>E-mail notification</span>
+          <span className='table-td-issue-desc'>When the problem is important, send a reminder message to you according to the corresponding notification scheme.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <CheckboxGroup name='mail_notify' value={ notifications.mail_notify ? [ 'mail_notify' ] : [] } onChange={ this.mailNotifyChange.bind(this) }>
             <Checkbox disabled={ notifyLoading } value='mail_notify'/>
-            <span> 开启邮件通知</span><br/>
+            <span> Open email notification</span><br/>
             { notifications.mail_notify ?
-            <span style={ startStyles }>已开启</span>
+            <span style={ startStyles }>activated</span>
             :
-            <span style={ closeStyles }>已关闭</span> }
+            <span style={ closeStyles }>closed</span> }
           </CheckboxGroup>
         </div>
       )
@@ -280,19 +280,19 @@ export default class List extends Component {
       id: 'mobile_notify',
       title: (
         <div>
-          <span className='table-td-title'>移动端通知</span>
-          <span className='table-td-issue-desc'>当问题有重要操作时，会根据相应的通知方案配置，自动将消息推送到 ActionView 移动客户端</span>
+          <span className='table-td-title'>Mobile notification</span>
+          <span className='table-td-issue-desc'>When the problem has important operation, it will be pushed according to the corresponding notification scheme. ActionView mobile client</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <CheckboxGroup name='mobile_notify' value={ notifications.mobile_notify ? [ 'mobile_notify' ] : [] } onChange={ this.mobileNotifyChange.bind(this) }> 
             <Checkbox disabled={ notifyLoading } value='mobile_notify'/>
-            <span> 开启移动端通知</span><br/>
+            <span> Turn on the mobile notification</span><br/>
             { notifications.mobile_notify ? 
-            <span style={ startStyles }>已开启</span>
+            <span style={ startStyles }>activated</span>
             :
-            <span style={ closeStyles }>已关闭</span> }
+            <span style={ closeStyles }>closed</span> }
           </CheckboxGroup>
         </div>
       )
@@ -302,19 +302,19 @@ export default class List extends Component {
       id: 'daily_notify',
       title: (
         <div>
-          <span className='table-td-title'>每日提醒</span>
-          <span className='table-td-issue-desc'>每天向你发送一封包含当日工作内容的邮件。</span>
+          <span className='table-td-title'>Daily reminder</span>
+          <span className='table-td-issue-desc'>Send you an email that contains work content on the day every day.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <CheckboxGroup name='daily_notify' value={ notifications.daily_notify ? [ 'daily_notify' ] : [] } onChange={ this.dailyNotifyChange.bind(this) }>
             <Checkbox disabled={ notifyLoading } value='daily_notify'/>
-            <span> 接收每日邮件提醒</span><br/>
+            <span> Receive daily email reminder</span><br/>
             { notifications.daily_notify ?
-            <span style={ startStyles }>已开启</span>
+            <span style={ startStyles }>activated</span>
             :
-            <span style={ closeStyles }>已关闭</span> }
+            <span style={ closeStyles }>closed</span> }
           </CheckboxGroup>
         </div>
       )
@@ -324,19 +324,19 @@ export default class List extends Component {
       id: 'weekly_notify',
       title: (
         <div>
-          <span className='table-td-title'>每周提醒</span>
-          <span className='table-td-issue-desc'>每周向你发送一封本周工作内容的邮件。</span>
+          <span className='table-td-title'>Weekly reminder</span>
+          <span className='table-td-issue-desc'>Send you a message of work content this week every week.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <CheckboxGroup name='weekly_notify' value={ notifications.weekly_notify ? [ 'weekly_notify' ] : [] } onChange={ this.weeklyNotifyChange.bind(this) }>
             <Checkbox disabled={ notifyLoading } value='weekly_notify'/>
-            <span> 接收每周邮件提醒</span><br/>
+            <span> Receive a weekly email reminder</span><br/>
             { notifications.weekly_notify ? 
-            <span style={ startStyles }>已开启</span>
+            <span style={ startStyles }>activated</span>
             :
-            <span style={ closeStyles }>已关闭</span> }
+            <span style={ closeStyles }>closed</span> }
           </CheckboxGroup>
         </div>
       )
@@ -362,10 +362,10 @@ export default class List extends Component {
           style={ { marginTop: '10px', float: 'left', lineHeight: '1.0' } } 
           activeKey={ this.state.tabKey } 
           onSelect={ this.handleTabSelect.bind(this) }>
-          <NavItem eventKey='account' href='#'>账号资料</NavItem>
-          <NavItem eventKey='favorite' href='#'>个人偏好</NavItem>
-          <NavItem eventKey='notification' href='#'>消息提醒</NavItem>
-          {/*<NavItem eventKey='record' href='#'>登录日志</NavItem>*/}
+          <NavItem eventKey='account' href='#'>Account information</NavItem>
+          <NavItem eventKey='favorite' href='#'>Personal preference</NavItem>
+          <NavItem eventKey='notification' href='#'>message notification</NavItem>
+          {/*<NavItem eventKey='record' href='#'>Login log</NavItem>*/}
         </Nav>
         <BootstrapTable data={ data } bordered={ false } hover trClassName='tr-top'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>

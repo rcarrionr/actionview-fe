@@ -12,10 +12,10 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.parent_id) {
-    errors.parent_id = '必填';
+    errors.parent_id = 'Be required';
   }
   if (!values.type) {
-    errors.type = '必填';
+    errors.type = 'Be required';
   }
   return errors;
 };
@@ -53,7 +53,7 @@ export default class ConvertType2Modal extends Component {
     this.setState({ ecode });
     if (ecode === 0) {
       close();
-      notify.show('问题已转换。', 'success', 2000);
+      notify.show('The problem has been converted.', 'success', 2000);
     }
   }
 
@@ -104,12 +104,12 @@ export default class ConvertType2Modal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '转换类型 - ' + issue.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Conversion type - ' + issue.no }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>移动到父任务</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>Move to parent tasks</ControlLabel>
             <Select.Async 
               clearable={ false } 
               disabled={ submitting } 
@@ -119,11 +119,11 @@ export default class ConvertType2Modal extends Component {
               valueKey='id' 
               labelKey='name' 
               loadOptions={ this.searchIssue.bind(this) } 
-              placeholder='输入问题号或名称'/>
+              placeholder='Enter the problem number or name'/>
             { parent_id.touched && parent_id.error && <HelpBlock style={ { float: 'right' } }>{ parent_id.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>子问题类型</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>Sub problem type</ControlLabel>
             <Select 
               disabled={ submitting } 
               options={ typeOptions } 
@@ -131,15 +131,15 @@ export default class ConvertType2Modal extends Component {
               clearable={ false } 
               value={ type.value } 
               onChange={ newValue => { type.onChange(newValue) } } 
-              placeholder='选择问题类型'/>
+              placeholder='Select the problem type'/>
             { type.touched && type.error && <HelpBlock style={ { float: 'right' } }>{ type.error }</HelpBlock> }
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

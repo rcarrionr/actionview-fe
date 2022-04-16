@@ -196,8 +196,8 @@ export default class List extends Component {
 
     const node = ( <span><i className='fa fa-cog'></i></span> );
 
-    const scopeOptions = { '1': '公开', '2': '私有', '3': '成员可见' };
-    const scaleOptions = [ { value: 'myprincipal', label: '我负责的' }, { value: 'myjoin', label: '我参与的' } ];
+    const scopeOptions = { '1': 'public', '2': 'private', '3': 'Member visible' };
+    const scaleOptions = [ { value: 'myprincipal', label: 'I am responsible' }, { value: 'myjoin', label: 'I am involved' } ];
 
     const groups = [];
     const groupNum = collection.length;
@@ -210,16 +210,16 @@ export default class List extends Component {
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div> ),
         count: collection[i].users && collection[i].users.length > 0 ? <a href='#' onClick={ (e) => { e.preventDefault(); this.viewUsers(); } }>{ collection[i].users.length }</a> : 0,
-        principal: collection[i].principal && collection[i].principal.name || '系统管理员', 
-        public_scope: collection[i].public_scope && scopeOptions[collection[i].public_scope] || '公开', 
+        principal: collection[i].principal && collection[i].principal.name || 'System administrator', 
+        public_scope: collection[i].public_scope && scopeOptions[collection[i].public_scope] || 'public', 
         operation: (
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading &&
             <DropdownButton pullRight bsStyle='link' style={ { textDecoration: 'blink' ,color: '#000' } } key={ i } title={ node } onSelect={ this.operateSelect.bind(this) }>
-              { collection[i].principal && collection[i].principal.id == user.id && <MenuItem eventKey='config'>成员配置</MenuItem> }
-              { collection[i].principal && collection[i].principal.id == user.id && <MenuItem eventKey='edit'>编辑</MenuItem> }
-              <MenuItem eventKey='copy'>复制</MenuItem>
-              { collection[i].principal && collection[i].principal.id == user.id && <MenuItem eventKey='del'>删除</MenuItem> }
+              { collection[i].principal && collection[i].principal.id == user.id && <MenuItem eventKey='config'>Member configuration</MenuItem> }
+              { collection[i].principal && collection[i].principal.id == user.id && <MenuItem eventKey='edit'>edit</MenuItem> }
+              <MenuItem eventKey='copy'>copy</MenuItem>
+              { collection[i].principal && collection[i].principal.id == user.id && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -231,7 +231,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -244,7 +244,7 @@ export default class List extends Component {
             <span style={ { float: 'right', width: '130px' } }>
               <Select
                 simpleValue
-                placeholder='全部'
+                placeholder='all'
                 value={ this.state.scale }
                 onChange={ this.scaleChange.bind(this) }
                 options={ scaleOptions }/>
@@ -256,10 +256,10 @@ export default class List extends Component {
                 style={ { height: '36px' } }
                 value={ this.state.name }
                 onChange={ (e) => { this.setState({ name: e.target.value }) } }
-                placeholder={ '组名查询...' } />
+                placeholder={ 'Group name query...' } />
             </span>
             <span style={ { float: 'left', marginRight: '20px' } }>
-              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;新建组</Button>
+              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;New group</Button>
             </span>
           </FormGroup>
         </div>
@@ -267,15 +267,15 @@ export default class List extends Component {
           <div className='info-col'>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
             <div className='info-content'>
-              公开范围：公开 - 所有人可对其授权；私有 - 仅负责人可对其授权；成员可见 - 仅负责人和组成员可对其授权。 
+              Publication: public - Everyone can authorize it; private - Only the person in charge can be authorized; members can be seen - Lead only personally and group members can authorize them. 
             </div>
           </div>
           <BootstrapTable data={ groups } bordered={ false } hover options={ opts } trClassName='tr-middle'>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>组名</TableHeaderColumn>
-            <TableHeaderColumn dataField='principal'>负责人</TableHeaderColumn>
-            <TableHeaderColumn dataField='count'>成员个数</TableHeaderColumn>
-            <TableHeaderColumn dataField='public_scope'>公开范围</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>group name</TableHeaderColumn>
+            <TableHeaderColumn dataField='principal'>principal</TableHeaderColumn>
+            <TableHeaderColumn dataField='count'>Member number</TableHeaderColumn>
+            <TableHeaderColumn dataField='public_scope'>Disclosure</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { this.state.editModalShow && 

@@ -9,9 +9,9 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } else if (_.findIndex(props.filters || [], { name: values.name }) !== -1) {
-    errors.name = '该名称已存在';
+    errors.name = 'This name already exists';
   }
   return errors;
 };
@@ -51,7 +51,7 @@ export default class SaveFilterModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('保存完成。', 'success', 2000);
+      notify.show('Save completion.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -72,27 +72,27 @@ export default class SaveFilterModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>保存检索</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Save search</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='过滤器名'/>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Filter name'/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup>
-            <ControlLabel>条件</ControlLabel>
+            <ControlLabel>condition</ControlLabel>
             <div className='cond-txt'>
-              { sqlTxt || '全部' }
+              { sqlTxt || 'all' }
             </div>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

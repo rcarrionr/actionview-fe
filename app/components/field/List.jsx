@@ -150,7 +150,7 @@ export default class List extends Component {
         id: collection[i].id,
         name: (
           <div>
-            <span className='table-td-title'>{ collection[i].name }{ isGlobal && <span style={ { fontWeight: 'normal' } }> (全局)</span> }</span>
+            <span className='table-td-title'>{ collection[i].name }{ isGlobal && <span style={ { fontWeight: 'normal' } }> (Global)</span> }</span>
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div>
         ),
@@ -171,12 +171,12 @@ export default class List extends Component {
                 key={ i } 
                 id={ `dropdown-basic-${i}` } 
                 onSelect={ this.operateSelect.bind(this) }>
-                { [ 'Select', 'MultiSelect', 'RadioGroup', 'CheckboxGroup' ].indexOf(collection[i].type) !== -1 && <MenuItem eventKey='4'>可选值配置</MenuItem> }
-                { (collection[i].type === 'Select.Async' || collection[i].type === 'MultiSelect.Async') && <MenuItem eventKey='5'>数据源配置</MenuItem> }
-                { [ 'File', 'SingleVersion', 'MultiVersion', 'SingleUser', 'MultiUser', 'TimeTracking', 'DateTimePicker' ].indexOf(collection[i].type) === -1 && <MenuItem eventKey='3'>属性配置</MenuItem> }
-                <MenuItem eventKey='1'>编辑</MenuItem>
-                { periodFields.indexOf(collection[i].key) === -1 && pkey === '$_sys_$' && <MenuItem eventKey='6'>查看项目应用</MenuItem> }
-                { periodFields.indexOf(collection[i].key) === -1 && !collection[i].is_used && <MenuItem eventKey='2'>删除</MenuItem> }
+                { [ 'Select', 'MultiSelect', 'RadioGroup', 'CheckboxGroup' ].indexOf(collection[i].type) !== -1 && <MenuItem eventKey='4'>Optional value configuration</MenuItem> }
+                { (collection[i].type === 'Select.Async' || collection[i].type === 'MultiSelect.Async') && <MenuItem eventKey='5'>Data source configuration</MenuItem> }
+                { [ 'File', 'SingleVersion', 'MultiVersion', 'SingleUser', 'MultiUser', 'TimeTracking', 'DateTimePicker' ].indexOf(collection[i].type) === -1 && <MenuItem eventKey='3'>Property configuration</MenuItem> }
+                <MenuItem eventKey='1'>edit</MenuItem>
+                { periodFields.indexOf(collection[i].key) === -1 && pkey === '$_sys_$' && <MenuItem eventKey='6'>View project application</MenuItem> }
+                { periodFields.indexOf(collection[i].key) === -1 && !collection[i].is_used && <MenuItem eventKey='2'>delete</MenuItem> }
               </DropdownButton>
             }
             <img src={ img } className={ itemLoading && selectedItem.id === collection[i].id ? 'loading' : 'hide' }/>
@@ -189,7 +189,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -200,10 +200,10 @@ export default class List extends Component {
         <BackTop />
         <BootstrapTable data={ fields } bordered={ false } hover options={ opts } trClassName='tr-top'>
           <TableHeaderColumn dataField='id' hidden isKey>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='key'>键值</TableHeaderColumn>
-          <TableHeaderColumn dataField='type'>类型</TableHeaderColumn>
-          <TableHeaderColumn dataField='screen'>应用界面</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='key'>Key value</TableHeaderColumn>
+          <TableHeaderColumn dataField='type'>type</TableHeaderColumn>
+          <TableHeaderColumn dataField='screen'>Application interface</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

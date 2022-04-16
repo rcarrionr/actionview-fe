@@ -86,16 +86,16 @@ export default class List extends Component {
       <div style={ { marginTop: '25px', height: '40px' } }>
         { this.state.year &&
         <div style={ { textAlign: 'center', marginBottom: '15px', paddingLeft: '80px' } }>
-          <Button title='上一年' onClick={ () => { this.switch(this.state.year - 1) } }>
+          <Button title='last year' onClick={ () => { this.switch(this.state.year - 1) } }>
             <span style={ { padding: '0px 5px' } }><i className='fa fa-angle-left fa-lg'></i></span>
           </Button>
           <span style={ { margin: '0px 15px', fontWeight: 600 } }>{ this.state.year }</span>
-          <Button title='下一年' onClick={ () => { this.switch(_.add(this.state.year, 1)) } }><span style={ { padding: '0px 5px' } }>
+          <Button title='next year' onClick={ () => { this.switch(_.add(this.state.year, 1)) } }><span style={ { padding: '0px 5px' } }>
             <i className='fa fa-angle-right fa-lg'></i></span>
           </Button>
           { options.year && this.state.year >= options.year && 
           <Button bsStyle='link' style={ { float: 'right' } } onClick={ () => { this.setState({ syncNotifyShow: true }) } }>
-            同步日历 
+            Synchronous calendar 
           </Button> }
         </div> } 
         { indexLoading && 

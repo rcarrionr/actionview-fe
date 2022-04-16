@@ -148,15 +148,15 @@ export default class List extends Component {
     const ecode = await favorite(selectedItem.id, !selectedItem.favorited);
     if (ecode === 0) {
       if (selectedItem.favorited) {
-        notify.show('已收藏。', 'success', 2000);
+        notify.show('collected.', 'success', 2000);
       } else {
-        notify.show('已取消收藏。', 'success', 2000);
+        notify.show('Has been canceled.', 'success', 2000);
       }
     } else {
       if (selectedItem.favorited) {
-        notify.show('收藏失败。', 'error', 2000);
+        notify.show('Failure to collect.', 'error', 2000);
       } else {
-        notify.show('取消失败。', 'error', 2000);
+        notify.show('Cancel failed.', 'error', 2000);
       }
     }
   }
@@ -169,9 +169,9 @@ export default class List extends Component {
     if (eventKey === 'checkin') {
       const ecode = await checkin(hoverRowId);
       if (ecode !== 0) {
-        notify.show('文档加锁失败。', 'error', 2000);
+        notify.show('Document lock failed.', 'error', 2000);
       } else {
-        notify.show('已加锁。', 'success', 2000);
+        notify.show('Unlocked.', 'success', 2000);
       }
     } else if (eventKey === 'checkout') {
       const { selectedItem } = this.props;
@@ -180,9 +180,9 @@ export default class List extends Component {
       } else {
         const ecode = await checkout(hoverRowId);
         if (ecode !== 0) {
-          notify.show('文档解锁失败。', 'error', 2000);
+          notify.show('Document unlock failed.', 'error', 2000);
         } else {
-          notify.show('已解锁。', 'success', 2000);
+          notify.show('Unlocked.', 'success', 2000);
         }
       }
     } else if (eventKey === 'edit') {
@@ -328,19 +328,19 @@ export default class List extends Component {
     } = this.state;
 
     const updatedat_options = [
-      { value: '1w', label: '1周内' },
-      { value: '2w', label: '2周内' },
-      { value: '1m', label: '1个月内' },
-      { value: '2m', label: '2个月内' }
+      { value: '1w', label: '1Internal' },
+      { value: '2w', label: '2Internal' },
+      { value: '1m', label: '1Month' },
+      { value: '2m', label: '2Month' }
     ];
 
     const sortOptions = [
-      { value: 'create_time_asc', label: '创建时间 ↑' },
-      { value: 'create_time_desc', label: '创建时间 ↓' },
-      { value: 'update_time_asc', label: '更新时间 ↑' },
-      { value: 'update_time_desc', label: '更新时间 ↓' },
-      { value: 'name_asc', label: '名称 ↑' },
-      { value: 'name_desc', label: '名称 ↓' }
+      { value: 'create_time_asc', label: 'Create time ↑' },
+      { value: 'create_time_desc', label: 'Create time ↓' },
+      { value: 'update_time_asc', label: 'Update time ↑' },
+      { value: 'update_time_desc', label: 'Update time ↓' },
+      { value: 'name_asc', label: 'name ↑' },
+      { value: 'name_desc', label: 'name ↓' }
     ];
 
     let homehtml = '';
@@ -357,7 +357,7 @@ export default class List extends Component {
         <span style={ { fontWeight: 400, fontSize: '14px' } }>
           <span style={  { float: 'left', backgroundColor: '#777', marginTop: '8px', marginRight: '8px', width: '4px', height: '4px', borderRadius: '8px' } }/>
           <span><Link to={ '/project/' + project.key + '/wiki/root/' + options.home.id }>{ options.home.name }</Link></span>
-          <span style={ { float: 'right', fontWeight: 400, fontSize: '14px' } }>最近修改：{ options.home.editor && options.home.editor.name ? options.home.editor.name : (options.home.creator && options.home.creator.name || '') }于 { options.home.updated_at ? moment.unix(options.home.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(options.home.created_at).format('YYYY/MM/DD HH:mm') }</span>
+          <span style={ { float: 'right', fontWeight: 400, fontSize: '14px' } }>Recently modified:{ options.home.editor && options.home.editor.name ? options.home.editor.name : (options.home.creator && options.home.creator.name || '') }At { options.home.updated_at ? moment.unix(options.home.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(options.home.created_at).format('YYYY/MM/DD HH:mm') }</span>
         </span>);
     }
 
@@ -371,7 +371,7 @@ export default class List extends Component {
         name: (
           <div>
             <span style={ { marginRight: '5px', color: '#FFD300' } }><i className='fa fa-arrow-up'></i></span>
-            <Link to={ '/project/' + project.key + '/wiki' + (parent.id !== '0' ? ( '/' + parent.id ) : '') }>返回上级</Link>
+            <Link to={ '/project/' + project.key + '/wiki' + (parent.id !== '0' ? ( '/' + parent.id ) : '') }>Return to the upper level</Link>
           </div> ),
         operation: (<div/>)
       });
@@ -416,7 +416,7 @@ export default class List extends Component {
             <span style={ { marginRight: '5px', color: '#FFD300' } }><i className='fa fa-folder'></i></span>
             <Link to={ '/project/' + project.key + '/wiki/' + v.id }>{ v.name }</Link>
             { v.favorited &&
-            <span title='点击取消收藏' style={ { float: 'right', color: '#FFD300', cursor: 'pointer', marginRight: '15px' } } onClick={ (e) => { this.favorite(v.id) } }><i className='fa fa-star'></i></span> }
+            <span title='Click to cancel collection' style={ { float: 'right', color: '#FFD300', cursor: 'pointer', marginRight: '15px' } } onClick={ (e) => { this.favorite(v.id) } }><i className='fa fa-star'></i></span> }
           </div> ),
         operation: (
           <div>
@@ -433,10 +433,10 @@ export default class List extends Component {
               id={ `dropdown-basic-${i}` }
               onClick={ this.cancelEditRow }
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='favorite'>{ v.favorited ? '取消收藏' : '收藏' }</MenuItem>
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='rename'>重命名</MenuItem> } 
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='move'>移动</MenuItem> } 
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='del'>删除</MenuItem> }
+              <MenuItem eventKey='favorite'>{ v.favorited ? 'Cancel' : 'collect' }</MenuItem>
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='rename'>Heavy naming</MenuItem> } 
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='move'>move</MenuItem> } 
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === v.id) ? 'loading' : 'hide' }/>
           </div>)
@@ -455,16 +455,16 @@ export default class List extends Component {
               { files[i].name }
             </Link>
             { !_.isEmpty(files[i].attachments) &&
-            <span style={ { marginLeft: '8px' } } title={ files[i].attachments.length + '个附件' }>
+            <span style={ { marginLeft: '8px' } } title={ files[i].attachments.length + 'Annex' }>
               <i className='fa fa-paperclip fa-rotate-90'></i>
             </span> } 
             { !_.isEmpty(files[i].checkin) &&
-            <span style={ { marginLeft: '8px', color: '#f0ad4e' } } title={ '该文档被' + ( files[i].checkin.user ? (files[i].checkin.user.id == user.id ? '我' : (files[i].checkin.user.name || '')) : '' ) + '于 ' + ( files[i].checkin.at ? moment.unix(files[i].checkin.at).format('YYYY/MM/DD HH:mm') : '' ) + ' 锁定。' }><i className='fa fa-lock'></i></span> }
+            <span style={ { marginLeft: '8px', color: '#f0ad4e' } } title={ 'This document is' + ( files[i].checkin.user ? (files[i].checkin.user.id == user.id ? 'I' : (files[i].checkin.user.name || '')) : '' ) + 'At ' + ( files[i].checkin.at ? moment.unix(files[i].checkin.at).format('YYYY/MM/DD HH:mm') : '' ) + ' locking.' }><i className='fa fa-lock'></i></span> }
             <span style={ { float: 'right' } }>
               { files[i].parent != directory && 
-              <Link to={ '/project/' + project.key + '/wiki' + (files[i].parent == '0' ? '' : ('/' + files[i].parent) ) }><span style={ { marginRight: '15px', float: 'left' } }>打开目录</span></Link> }
+              <Link to={ '/project/' + project.key + '/wiki' + (files[i].parent == '0' ? '' : ('/' + files[i].parent) ) }><span style={ { marginRight: '15px', float: 'left' } }>open Directory</span></Link> }
               { files[i].favorited &&
-              <span title='点击取消收藏' style={ { float: 'left', color: '#FFD300', cursor: 'pointer', marginRight: '15px' } } onClick={ (e) => { this.favorite(files[i].id) } }><i className='fa fa-star'></i></span> }
+              <span title='Click to cancel collection' style={ { float: 'left', color: '#FFD300', cursor: 'pointer', marginRight: '15px' } } onClick={ (e) => { this.favorite(files[i].id) } }><i className='fa fa-star'></i></span> }
               { files[i].creator &&
               <span style={ { marginRight: '15px', float: 'left' } }>
                 { files[i].creator.name + '  ' + moment.unix(files[i].created_at).format('YYYY/MM/DD HH:mm') }
@@ -487,13 +487,13 @@ export default class List extends Component {
               id={ `dropdown-basic-${i}` } 
               onClick={ this.cancelEditRow }
               onSelect={ this.operateSelect.bind(this) }>
-              { (_.isEmpty(files[i].checkin) || files[i].checkin.user.id == user.id) && <MenuItem eventKey='edit'>编辑</MenuItem> }
-              <MenuItem eventKey='favorite'>{ files[i].favorited ? '取消收藏' : '收藏' }</MenuItem>
-              { _.isEmpty(files[i].checkin) && <MenuItem eventKey='checkin'>加锁</MenuItem> }
-              { !_.isEmpty(files[i].checkin) && (files[i].checkin.user.id == user.id || (options.permissions && options.permissions.indexOf('manage_project') !== -1)) && <MenuItem eventKey='checkout'>解锁</MenuItem> }
-              <MenuItem eventKey='copy'>复制</MenuItem>
-              { (_.isEmpty(files[i].checkin) || files[i].checkin.user.id == user.id) && <MenuItem eventKey='move'>移动</MenuItem> }
-              { (_.isEmpty(files[i].checkin) || files[i].checkin.user.id == user.id) && <MenuItem eventKey='del'>删除</MenuItem> }
+              { (_.isEmpty(files[i].checkin) || files[i].checkin.user.id == user.id) && <MenuItem eventKey='edit'>edit</MenuItem> }
+              <MenuItem eventKey='favorite'>{ files[i].favorited ? 'Cancel' : 'collect' }</MenuItem>
+              { _.isEmpty(files[i].checkin) && <MenuItem eventKey='checkin'>Lock</MenuItem> }
+              { !_.isEmpty(files[i].checkin) && (files[i].checkin.user.id == user.id || (options.permissions && options.permissions.indexOf('manage_project') !== -1)) && <MenuItem eventKey='checkout'>Unlock</MenuItem> }
+              <MenuItem eventKey='copy'>copy</MenuItem>
+              { (_.isEmpty(files[i].checkin) || files[i].checkin.user.id == user.id) && <MenuItem eventKey='move'>move</MenuItem> }
+              { (_.isEmpty(files[i].checkin) || files[i].checkin.user.id == user.id) && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === files[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -505,7 +505,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -521,9 +521,9 @@ export default class List extends Component {
               <Breadcrumb style={ { marginBottom: '0px', backgroundColor: '#fff', paddingLeft: '5px', marginTop: '0px' } }>
                 { _.map(options.path || [], (v, i) => {
                   if (i === options.path.length - 1) {
-                    return (<Breadcrumb.Item active key={ i }>{ i === 0 ? '根目录' : v.name }</Breadcrumb.Item>);
+                    return (<Breadcrumb.Item active key={ i }>{ i === 0 ? 'Root directory' : v.name }</Breadcrumb.Item>);
                   } else if (i === 0) {
-                    return (<Breadcrumb.Item key={ i } disabled={ indexLoading }><Link to={ '/project/' + project.key + '/wiki' }>根目录</Link></Breadcrumb.Item>);
+                    return (<Breadcrumb.Item key={ i } disabled={ indexLoading }><Link to={ '/project/' + project.key + '/wiki' }>Root directory</Link></Breadcrumb.Item>);
                   } else {
                     return (<Breadcrumb.Item key={ i } disabled={ indexLoading }><Link to={ '/project/' + project.key + '/wiki/' + v.id }>{ v.name }</Link></Breadcrumb.Item>);
                   }
@@ -534,7 +534,7 @@ export default class List extends Component {
               <span style={ { float: 'right' } }>
                 <DropdownButton
                   pullRight
-                  title='排序'
+                  title='Sort'
                   id='basic-nav-dropdown-project'
                   onSelect={ this.sortChange.bind(this) }>
                     { _.map(sortOptions, (v, i) =>
@@ -547,16 +547,16 @@ export default class List extends Component {
                 </DropdownButton>
               </span>
               <span style={ { float: 'right', marginRight: '10px' } }>
-                <Button onClick={ ()=>{ this.setState({ searchShow: !this.state.searchShow }) } }><i className='fa fa-search'></i> 检索{ !_.isEmpty(query) && !searchShow ? '...' : '' }</Button>
+                <Button onClick={ ()=>{ this.setState({ searchShow: !this.state.searchShow }) } }><i className='fa fa-search'></i> Retrieve{ !_.isEmpty(query) && !searchShow ? '...' : '' }</Button>
               </span>
               { project.status == 'active' &&
               <ButtonGroup style={ { float: 'right', marginRight: '10px' } }>
                 <Button onClick={ () => { goto('new'); } } disabled={ indexLoading || itemLoading || loading || !_.isEmpty(query) }>
-                  <i className='fa fa-edit'></i>&nbsp;新建文档
+                  <i className='fa fa-edit'></i>&nbsp;New documentation
                 </Button>
                 { options.permissions && options.permissions.indexOf('manage_project') !== -1 &&
                 <Button onClick={ () => { this.cancelEditRow(); this.setState({ createFolderShow: true }); } } disabled={ indexLoading || itemLoading || loading || !_.isEmpty(query) }>
-                  <i className='fa fa-plus'></i>&nbsp;创建目录
+                  <i className='fa fa-plus'></i>&nbsp;Create a directory
                 </Button> }
               </ButtonGroup> }
             </span>
@@ -569,7 +569,7 @@ export default class List extends Component {
                   checked={ this.state.myfavorite == '1' }
                   onClick={ () => { this.state.myfavorite = (this.state.myfavorite == '1' ? '' : '1'); this.reload(); } }
                   style={ { display: 'inline-block' } }>
-                  我收藏的 
+                  I collect it 
                 </Checkbox>
               </span>
               <span style={ { float: 'right', width: '195px', marginRight: '10px' } }>
@@ -579,7 +579,7 @@ export default class List extends Component {
                   value={ this.state.contents }
                   onChange={ (e) => { this.setState({ contents: e.target.value }) } }
                   onKeyDown={ (e) => { if (e.keyCode == '13') { this.reload(); } } }
-                  placeholder='内容查询...' />
+                  placeholder='Content query...' />
               </span>
               <span style={ { float: 'right', width: '165px', marginRight: '10px' } }>
                 <FormControl
@@ -588,12 +588,12 @@ export default class List extends Component {
                   value={ this.state.name }
                   onChange={ (e) => { this.setState({ name: e.target.value }) } }
                   onKeyDown={ (e) => { if (e.keyCode == '13') { this.reload(); } } } 
-                  placeholder='标题名称查询...' />
+                  placeholder='Title name query...' />
               </span>
               <span style={ { float: 'right', width: '110px', marginRight: '10px' } }>
                 <Select
                   simpleValue
-                  placeholder='更新时间'
+                  placeholder='Update time'
                   value={ this.state.updated_at }
                   onChange={ this.updatedAtChange.bind(this) }
                   options={ updatedat_options }/>
@@ -604,14 +604,14 @@ export default class List extends Component {
         <div>
           <BootstrapTable data={ rows } bordered={ false } hover options={ opts } trClassName='tr-middle'>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { !indexLoading && directory === '0' && _.isEmpty(query) && (!options.home || !options.home.id) && options.permissions && options.permissions.indexOf('manage_project') !== -1 &&
           <div className='info-col'>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
             <div className='info-content'>
-              <span>为了项目成员能更好的理解此项目，建议增加 <a href='#' onClick={ (e) => { e.preventDefault(); goto('new', '', { home: 1 }); } }>Home</a> 页面。</span>
+              <span>In order to better understand this project for project members, it is recommended to increase <a href='#' onClick={ (e) => { e.preventDefault(); goto('new', '', { home: 1 }); } }>Home</a> page.</span>
             </div>
           </div> }
           { !indexLoading && options.home && options.home.id && _.isEmpty(query) &&

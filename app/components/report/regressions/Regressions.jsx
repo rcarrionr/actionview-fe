@@ -105,7 +105,7 @@ export default class Regressions extends Component {
       const stat_dimension = query['stat_dimension'];
       if (stat_dimension) {
         const ind = _.findIndex(stat_dimensions, { key: stat_dimension });
-        sqlTxt = '统计维度: ' + (ind !== -1 ? stat_dimensions[ind].name : '');
+        sqlTxt = 'Statistical dimension: ' + (ind !== -1 ? stat_dimensions[ind].name : '');
       }
 
       const his_resolvers = query['his_resolvers'];
@@ -119,7 +119,7 @@ export default class Regressions extends Component {
           }
         });
         if (resolverNames.length > 0) {
-          sqlTxt = (sqlTxt ? (sqlTxt + ' | ') : '') + '历史解决者: ' + resolverNames.join(',');
+          sqlTxt = (sqlTxt ? (sqlTxt + ' | ') : '') + 'Historical resolution: ' + resolverNames.join(',');
         }
       }
 
@@ -146,8 +146,8 @@ export default class Regressions extends Component {
     } else {
       shape = 'pie';
       if (regressions.length > 0) {
-        data.push({ name: '一次通过', nos: regressions[0].ones, cnt: regressions[0].ones.length });
-        data.push({ name: '大于一次', nos: regressions[0].gt_ones, cnt: regressions[0].gt_ones.length });
+        data.push({ name: 'Once through', nos: regressions[0].ones, cnt: regressions[0].ones.length });
+        data.push({ name: 'Greater than once', nos: regressions[0].gt_ones, cnt: regressions[0].gt_ones.length });
       }
     }
 
@@ -155,32 +155,32 @@ export default class Regressions extends Component {
       <div className='project-report-container'>
         <BackTop />
         <div className='report-title'>
-          问题解决回归分布 
+          Problem solving regression distribution 
           <Link to={ '/project/' + project.key + '/report' }>
-            <Button bsStyle='link'>返回</Button>
+            <Button bsStyle='link'>return</Button>
           </Link>
         </div>
         <Form horizontal className='report-filter-form'>
           <FormGroup>
             <Col sm={ 1 } componentClass={ ControlLabel }>
-              统计维度
+              Statistical dimension
             </Col>
             <Col sm={ 3 }>
               <Select
                 simpleValue
-                placeholder='请选择'
+                placeholder='please choose'
                 value={ this.state.stat_dimension || null }
                 onChange={ (newValue) => { this.state.stat_dimension = newValue; this.search(); } }
                 options={ _.map(stat_dimensions, (v) => { return { value: v.key, label: v.name } }) }/>
             </Col>
             <Col sm={ 2 } componentClass={ ControlLabel }>
-              历史解决者
+              Historical resolution
             </Col>
             <Col sm={ 3 }>
               <Select
                 simpleValue
                 multi
-                placeholder='选择解决者'
+                placeholder='Selection'
                 value={ this.state.his_resolvers }
                 onChange={ (newValue) => { this.state.his_resolvers = newValue; this.search(); } }
                 options={ _.map(users, (v) => { return { value: v.id, label: v.name } }) }/>
@@ -190,7 +190,7 @@ export default class Regressions extends Component {
                 bsStyle='link'
                 onClick={ () => { this.setState({ issueFilterShow: !this.state.issueFilterShow }) } }
                 style={ { float: 'right', marginTop: '0px' } }>
-                更多问题过滤 { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
+                More problem filtration { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </Button>
             </Col>
           </FormGroup>
@@ -205,8 +205,8 @@ export default class Regressions extends Component {
         <div className='report-conds-style'>
           { sqlTxt &&
           <div className='cond-bar' style={ { marginTop: '0px', float: 'left' } }>
-            <div className='cond-contents' title={ sqlTxt }><b>检索条件</b>：{ sqlTxt }</div>
-            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='保存当前检索'><i className='fa fa-save'></i></div>
+            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>：{ sqlTxt }</div>
+            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'><i className='fa fa-save'></i></div>
           </div> }
         </div>
         { regressionsLoading ?
@@ -223,7 +223,7 @@ export default class Regressions extends Component {
               <span style={ { fontSize: '160px', color: '#FFC125' } } >
                 <i className='fa fa-warning'></i>
               </span><br/>
-              <span>抱歉，暂无满足该检索条件的数据。</span>
+              <span>Sorry, there is no data for this search condition.</span>
             </div>
           </div> }
           { shape === 'bar' && data.length > 0 && 
@@ -239,8 +239,8 @@ export default class Regressions extends Component {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey='ones_cnt' name='一次回归' stackId='a' fill='#4572A7' />
-              <Bar dataKey='gt_ones_cnt' name='大于一次' stackId='a' fill='#AA4643' />
+              <Bar dataKey='ones_cnt' name='A time return' stackId='a' fill='#4572A7' />
+              <Bar dataKey='gt_ones_cnt' name='Greater than once' stackId='a' fill='#AA4643' />
             </BarChart>
           </div> }
           { shape === 'pie' && data.length > 0 &&
@@ -264,15 +264,15 @@ export default class Regressions extends Component {
           </div> }
           { data.length > 0 && 
           <div style={ { float: 'left', width: '100%', marginBottom: '30px' } }>
-            <span>注：该图表最多统计满足当前检索条件下的10000条结果。</span>
+            <span>Note: The most statistical statistics of the chart meet the current retrieval conditions.10000Sign.</span>
             { this.state.stat_dimension && 
             <Table responsive bordered={ true }>
               <thead>
                 <tr>
                   <th>{ _.find(stat_dimensions, { key: this.state.stat_dimension }).name }</th>
-                  <th>一次回归</th>
-                  <th>大于一次</th>
-                  <th>一次通过率</th>
+                  <th>A time return</th>
+                  <th>Greater than once</th>
+                  <th>One pass rate</th>
                 </tr>
               </thead>
               <tbody>
@@ -290,9 +290,9 @@ export default class Regressions extends Component {
             <Table responsive bordered={ true }>
               <thead>
                 <tr>
-                  <th>一次回归</th>
-                  <th>大于一次</th>
-                  <th>一次通过率</th>
+                  <th>A time return</th>
+                  <th>Greater than once</th>
+                  <th>One pass rate</th>
                 </tr>
               </thead>
               <tbody>

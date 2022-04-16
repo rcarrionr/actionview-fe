@@ -100,7 +100,7 @@ export default class Issues extends Component {
     const { stat_x, stat_y, shape, sort } = this.state;
 
     const COLORS = [ '#3b7fc4', '#815b3a', '#8eb021', '#d39c3f', '#654982', '#4a6785', '#f79232', '#f15c75', '#ac707a' ];
-    const sortOptions = [ { value: 'default', label: '默认顺序' }, { value: 'total_asc', label: '总数升序' }, { value: 'total_desc', label: '总数降序' } ];
+    const sortOptions = [ { value: 'default', label: 'Default order' }, { value: 'total_asc', label: 'Total ascending order' }, { value: 'total_desc', label: 'Total number descending' } ];
 
     const stat_field_types = [ 'Select', 'MultiSelect', 'CheckboxGroup', 'RadioGroup', 'SingleVersion', 'MultiVersion', 'SingleUser' ];
     const stat_dimensions = _.filter(options.fields || [], (v) => stat_field_types.indexOf(v.type) !== -1);
@@ -110,13 +110,13 @@ export default class Issues extends Component {
       const stat_x = query['stat_x'];
       if (stat_x) {
         const ind = _.findIndex(stat_dimensions, { key: stat_x });
-        sqlTxt = 'X轴: ' + (ind !== -1 ? stat_dimensions[ind].name : '');
+        sqlTxt = 'Xaxis: ' + (ind !== -1 ? stat_dimensions[ind].name : '');
       }
 
       const stat_y = query['stat_y'];
       if (stat_y) {
         const ind = _.findIndex(stat_dimensions, { key: stat_y });
-        sqlTxt += (stat_x ? ' | ' : '') + 'Y轴: ' + (ind !== -1 ? stat_dimensions[ind].name : '');
+        sqlTxt += (stat_x ? ' | ' : '') + 'Yaxis: ' + (ind !== -1 ? stat_dimensions[ind].name : '');
       }
 
       const issueSqlTxt = parseQuery(query, options);
@@ -157,32 +157,32 @@ export default class Issues extends Component {
       <div className='project-report-container'>
         <BackTop />
         <div className='report-title'>
-          问题分布图
+          Distribution map
           <Link to={ '/project/' + project.key + '/report' }>
-            <Button bsStyle='link'>返回</Button>
+            <Button bsStyle='link'>return</Button>
           </Link>
         </div>
         <Form horizontal className='report-filter-form'>
           <FormGroup>
             <Col sm={ 1 } componentClass={ ControlLabel }>
-              X轴
+              Xaxis
             </Col>
             <Col sm={ 3 }>
               <Select
                 simpleValue
-                placeholder='请选择'
+                placeholder='please choose'
                 clearable={ false }
                 value={ stat_x || null }
                 onChange={ (newValue) => { this.state.stat_x = newValue; this.search(); } }
                 options={ _.map(stat_dimensions, (v) => { return { value: v.key, label: v.name } }) }/>
             </Col>
             <Col sm={ 1 } componentClass={ ControlLabel }>
-              Y轴
+              Yaxis
             </Col>
             <Col sm={ 3 }>
               <Select
                 simpleValue
-                placeholder='请选择'
+                placeholder='please choose'
                 value={ this.state.stat_y || null }
                 onChange={ (newValue) => { this.state.stat_y = newValue; this.search(); } }
                 options={ _.map(stat_dimensions, (v) => { return { value: v.key, label: v.name } }) }/>
@@ -192,7 +192,7 @@ export default class Issues extends Component {
                 bsStyle='link'
                 onClick={ () => { this.setState({ issueFilterShow: !this.state.issueFilterShow }) } }
                 style={ { float: 'right', marginTop: '0px' } }>
-                更多问题过滤 { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
+                More problem filtration { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </Button>
             </Col>
           </FormGroup>
@@ -207,21 +207,21 @@ export default class Issues extends Component {
         <div className='report-conds-style'>
           { sqlTxt &&
           <div className='cond-bar' style={ { marginTop: '0px', float: 'left' } }>
-            <div className='cond-contents' title={ sqlTxt }><b>检索条件</b>：{ sqlTxt }</div>
-            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='保存当前检索'><i className='fa fa-save'></i></div>
+            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>：{ sqlTxt }</div>
+            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'><i className='fa fa-save'></i></div>
           </div> }
           <ButtonGroup className='report-shape-buttongroup'>
             { (stat_x === stat_y || !stat_y) &&
-            <Button title='饼状图' style={ { height: '36px', backgroundColor: showShape == 'pie' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'pie' }) } }>饼状图</Button> }
-            <Button title='柱状图' style={ { height: '36px', backgroundColor: showShape == 'bar' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'bar' }) } }>柱状图</Button>
-            <Button title='折线图' style={ { height: '36px', backgroundColor: showShape == 'line' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'line' }) } }>折线图
+            <Button title='pie chart' style={ { height: '36px', backgroundColor: showShape == 'pie' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'pie' }) } }>pie chart</Button> }
+            <Button title='Histogram' style={ { height: '36px', backgroundColor: showShape == 'bar' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'bar' }) } }>Histogram</Button>
+            <Button title='line chart' style={ { height: '36px', backgroundColor: showShape == 'line' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'line' }) } }>line chart
 </Button>
           </ButtonGroup>
           <div className='report-select-sort'>
             <Select
               simpleValue
               clearable={ false }
-              placeholder='选择顺序'
+              placeholder='Select order'
               value={ this.state.sort || 'default' }
               onChange={ (newValue) => { this.setState({ sort: newValue }); } }
               options={ sortOptions }/>
@@ -241,7 +241,7 @@ export default class Issues extends Component {
               <span style={ { fontSize: '160px', color: '#FFC125' } } >
                 <i className='fa fa-warning'></i>
               </span><br/>
-              <span>抱歉，暂无满足该检索条件的数据。</span>
+              <span>Sorry, there is no data for this search condition.</span>
             </div>
           </div> }
           { showShape === 'bar' && data.length > 0 && 
@@ -259,7 +259,7 @@ export default class Issues extends Component {
               { stat_x !== stat_y && stat_y && <Legend /> }
               { stat_x !== stat_y && stat_y ? 
                 _.map(data[0].y || [], (v, i) => <Bar key={ i } dataKey={ 'y_' + i + '_cnt' } stackId='a' name={ v.name } fill={ COLORS[i % COLORS.length] } /> ) : 
-                <Bar dataKey='cnt' name='个数' fill='#3b7fc4' /> }
+                <Bar dataKey='cnt' name='Number' fill='#3b7fc4' /> }
             </BarChart>
           </div> }
           { showShape === 'line' && data.length > 0 &&
@@ -276,7 +276,7 @@ export default class Issues extends Component {
               { stat_x !== stat_y && stat_y && <Legend /> }
               { stat_x !== stat_y && stat_y ? 
                 _.map(data[0].y || [], (v, i) => <Line key={ i } dataKey={ 'y_' + i + '_cnt' } name={ v.name } stroke={ COLORS[i % COLORS.length] } /> ) : 
-                <Line dataKey='cnt' name='个数' stroke='#d04437' /> }
+                <Line dataKey='cnt' name='Number' stroke='#d04437' /> }
             </LineChart>
           </div> }
           { showShape === 'pie' && data.length > 0 &&
@@ -299,13 +299,13 @@ export default class Issues extends Component {
           </div> }
           { data.length > 0 && 
           <div style={ { float: 'left', width: '100%', marginBottom: '30px' } }>
-            <span>注：该图表最多统计满足当前检索条件下的10000条结果。</span>
+            <span>Note: The most statistical statistics of the chart meet the current retrieval conditions.10000Sign.</span>
             { (stat_x == stat_y || !stat_y) ? 
             <Table responsive bordered={ true }>
               <thead>
                 <tr>
                   <th>{ stat_x ? _.find(stat_dimensions, { key: stat_x }).name : '' }</th>
-                  <th>个数</th>
+                  <th>Number</th>
                 </tr>
               </thead>
               <tbody>
@@ -321,9 +321,9 @@ export default class Issues extends Component {
             <Table responsive bordered={ true }>
               <thead>
                 <tr>
-                  <th>维度</th>
+                  <th>Dimension</th>
                   { _.map(data[0].y, (v, i) => <th key={ i }>{ v.name }</th>) }
-                  {/*<th>合计</th>*/}
+                  {/*<th>total</th>*/}
                 </tr>
               </thead>
               <tbody>

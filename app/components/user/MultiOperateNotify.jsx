@@ -36,19 +36,19 @@ export default class MultiOperateNotify extends Component {
     let ecode = 0, msg = '', newIds = [];
     if (operate == 'renew') {
       ecode = await multiRenew(ids);
-      msg = '密码已重置。'; 
+      msg = 'The password has been reset.'; 
     } else if (operate == 'validate') {
       newIds = _.map(_.filter(collection, (v) => (!v.directory || v.directory == 'self') && v.status == 'invalid' && ids.indexOf(v.id) !== -1), (v) => v.id);
       ecode = await multiInvalidate(newIds, 0);
-      msg = '用户已启用。'; 
+      msg = 'The user is enabled.'; 
     } else if (operate == 'invalidate') {
       newIds = _.map(_.filter(collection, (v) => (!v.directory || v.directory == 'self') && v.status == 'active' && ids.indexOf(v.id) !== -1), (v) => v.id);
       ecode = await multiInvalidate(newIds, 1);
-      msg = '用户已禁用。'; 
+      msg = 'The user is disabled.'; 
     } else if (operate == 'del') {
       newIds = _.map(_.filter(collection, (v) => (!v.directory || v.directory == 'self') && ids.indexOf(v.id) !== -1), (v) => v.id);
       ecode = await multiDel(newIds);
-      msg = '用户已删除。'; 
+      msg = 'The user has been deleted.'; 
     }
     if (ecode === 0) {
       close();
@@ -71,13 +71,13 @@ export default class MultiOperateNotify extends Component {
     const { i18n: { errMsg }, operate, loading, collection, ids } = this.props;
     let operateTitle = '';
     if (operate === 'renew') {
-      operateTitle = '密码重置';
+      operateTitle = 'reset Password';
     } else if (operate === 'del') {
-      operateTitle = '用户删除'
+      operateTitle = 'User delete'
     } else if (operate === 'validate') {
-      operateTitle = '用户启用';
+      operateTitle = 'User is enabled';
     } else if (operate === 'invalidate') {
-      operateTitle = '用户禁用';
+      operateTitle = 'User disabled';
     } else {
       return <div/>;
     }
@@ -85,39 +85,39 @@ export default class MultiOperateNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>批处理用户 - { operateTitle }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Batch user - { operateTitle }</Modal.Title>
         </Modal.Header>
         { operate === 'renew' && 
         <Modal.Body>
-          是否重置选中用户的密码？
+          Do you reset the password selected by the user?
         </Modal.Body> }
         { operate === 'invalidate' &&
         <Modal.Body>
-          共选中用户 <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> 个，
-          其中可被禁用用户 <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && v.status == 'active' && ids.indexOf(v.id) !== -1).length }</span> 个。<br/>
-          是否禁用？<br/><br/>
-          注：此操作对从外部用户目录同步过来的用户无效。
+          Collecting users <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> indivual,
+          Can be disabled <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && v.status == 'active' && ids.indexOf(v.id) !== -1).length }</span> indivual.<br/>
+          Is it disabled?<br/><br/>
+          Note: This action is invalid for users who come synchronize from the external user directory.
         </Modal.Body> }
         { operate === 'validate' &&
         <Modal.Body>
-          共选中用户 <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> 个，
-          其中可被启用用户 <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && v.status == 'invalid' && ids.indexOf(v.id) !== -1).length }</span> 个。<br/>
-          是否启用？<br/><br/>
-          注：此操作对从外部用户目录同步过来的用户无效。
+          Collecting users <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> indivual,
+          Among them, users can be enabled <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && v.status == 'invalid' && ids.indexOf(v.id) !== -1).length }</span> indivual.<br/>
+          Whether to enable?<br/><br/>
+          Note: This action is invalid for users who come synchronize from the external user directory.
         </Modal.Body> }
         { operate === 'del' && 
         <Modal.Body>
-          用户被删除后，项目中的用户也同时被删除。<br/>
-          共选中用户 <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> 个，
-          其中可被删除用户 <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && ids.indexOf(v.id) !== -1).length }</span> 个。<br/>
-          是否删除？<br/><br/>
-          注：此操作对从外部用户目录同步过来的用户无效。
+          After the user is deleted, the user in the project is also deleted at the same time.<br/>
+          Collecting users <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> indivual,
+          Among them, it can be deleted <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && ids.indexOf(v.id) !== -1).length }</span> indivual.<br/>
+          delete or not?<br/><br/>
+          Note: This action is invalid for users who come synchronize from the external user directory.
         </Modal.Body> }
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

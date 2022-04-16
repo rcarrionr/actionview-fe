@@ -44,7 +44,7 @@ export default class FilterConfigModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('保存完成。', 'success', 2000);
+      notify.show('Save completion.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -84,11 +84,11 @@ export default class FilterConfigModal extends Component {
     return (
       <Modal show onHide={ this.cancel.bind(this) } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ title ? title : '过滤器管理' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ title ? title : 'Filter management' }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { maxHeight: '420px', overflow: 'auto' } }>
           <Form horizontal>
-          { cards.length > 0 && <div style={ { marginBottom: '8px' } }>通过上下拖拽改变过滤器显示顺序。</div> }
+          { cards.length > 0 && <div style={ { marginBottom: '8px' } }>Change the filter display order by dragging and drop up and down.</div> }
           { cards.length > 0 ?
             cards.map((op, i) => {
               return (
@@ -101,15 +101,15 @@ export default class FilterConfigModal extends Component {
               );
             }) 
             :
-            <p>暂无自定义过滤器。</p>
+            <p>There is no custom filter for the time being.</p>
           }
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading || strCards == JSON.stringify(cards) } onClick={ this.save.bind(this) }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>取消</Button>
+          <Button disabled={ loading || strCards == JSON.stringify(cards) } onClick={ this.save.bind(this) }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

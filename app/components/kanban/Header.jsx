@@ -274,19 +274,19 @@ export default class Header extends Component {
                 <Col sm={ 9 }>{ activeSprint.no || '' }</Col>
               </Row>
               <Row>
-                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>名称</Col>
+                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>name</Col>
                 <Col sm={ 9 }>{ activeSprint.name || '' }</Col>
               </Row>
               <Row>
-                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>开始时间</Col>
+                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>Starting time</Col>
                 <Col sm={ 9 }>{ moment.unix(activeSprint.start_time).format('YYYY/MM/DD') }</Col>
               </Row>
               <Row>
-                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>结束时间</Col>
+                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>End Time</Col>
                 <Col sm={ 9 }>{ moment.unix(activeSprint.complete_time).format('YYYY/MM/DD') }</Col>
               </Row>
               <Row>
-                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>描述</Col>
+                <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>describe</Col>
                 <Col sm={ 9 } style={ { overflowY: 'scroll', maxHeight: '450px' } } dangerouslySetInnerHTML={ { __html: _.escape(activeSprint.description || '-').replace(/(\r\n)|(\n)/g, '<br/>') } }/>
               </Row>
             </Grid>
@@ -301,11 +301,11 @@ export default class Header extends Component {
               <Col sm={ 9 }>{ selectedSprint.no || '' }</Col>
             </Row>
             <Row>
-              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>名称</Col>
+              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>name</Col>
               <Col sm={ 9 }>{ selectedSprint.name || '' }</Col>
             </Row>
             <Row>
-              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>期间</Col>
+              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>period</Col>
               <Col sm={ 9 }>
                 { selectedSprint.start_time && moment.unix(selectedSprint.start_time).format('YYYY/MM/DD') }
                 <span style={ { margin: '0 4px' } }>～</span>
@@ -313,11 +313,11 @@ export default class Header extends Component {
               </Col>
             </Row>
             <Row>
-              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>实际完成时间</Col>
+              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>The actual completion time</Col>
               <Col sm={ 9 }>{ selectedSprint.real_complete_time && moment.unix(selectedSprint.real_complete_time).format('YYYY/MM/DD HH:mm') }</Col>
             </Row>
             <Row>
-              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>描述</Col>
+              <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>describe</Col>
               <Col sm={ 9 } style={ { overflowY: 'scroll', maxHeight: '450px' } } dangerouslySetInnerHTML={ { __html: _.escape(selectedSprint.description || '-').replace(/(\r\n)|(\n)/g, '<br/>') } }/>
             </Row>
           </Grid>
@@ -327,7 +327,7 @@ export default class Header extends Component {
     return (
       <div className='kanban-header'>
         <div style={ { height: '0px', display: this.state.hideHeader ? 'block' : 'none', textAlign: 'right' } }>
-          <span title='展示看板头'>
+          <span title='Show watchboard'>
             <Button onClick={ this.showHeader.bind(this) } style={ { marginTop: '-37px' } }><i className='fa fa-angle-double-down' aria-hidden='true'></i></Button>
           </span>
         </div>
@@ -335,27 +335,27 @@ export default class Header extends Component {
           <div style={ { display: 'inline-block', fontSize: '19px', marginTop: '5px' } }>
             { loading && <img src={ img } className='loading'/> } 
             { !loading && !_.isEmpty(curKanban) && curKanban.name || '' } 
-            { !loading && _.isEmpty(curKanban) && kanbans.length > 0 && <span style={ { fontSize: '14px' } }>该看板不存在，请重试或选择其它看板。</span> } 
+            { !loading && _.isEmpty(curKanban) && kanbans.length > 0 && <span style={ { fontSize: '14px' } }>This board does not exist, please try again or choose other boards.</span> } 
             { !loading && _.isEmpty(curKanban) && kanbans.length <= 0 && 
             <span style={ { fontSize: '14px' } }>
-              该项目暂未定义看板，
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 ? <span>请点击 <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ createKanbanModalShow: true }); } }>创建看板</a>。</span> : '请联系项目管理员创建。' }
+              The project has not been defined by the board.
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 ? <span>Please click <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ createKanbanModalShow: true }); } }>Create a board</a>。</span> : 'Please contact the project administrator to create.' }
             </span> } 
           </div>
           <div style={ { float: 'right', display: 'inline-block' } }>
             { options.permissions && options.permissions.indexOf('create_issue') !== -1 && !_.isEmpty(curKanban) && ((curKanban.type == 'kanban' && mode === 'issue') || mode === 'backlog') &&
-            <Button style={ { marginRight: '10px' } } bsStyle='primary' onClick={ () => { this.setState({ createIssueModalShow: true }); } }><i className='fa fa-plus'></i> 创建问题</Button> }
+            <Button style={ { marginRight: '10px' } } bsStyle='primary' onClick={ () => { this.setState({ createIssueModalShow: true }); } }><i className='fa fa-plus'></i> Create a problem</Button> }
             { !_.isEmpty(curKanban) &&
             <ButtonGroup style={ { marginRight: '10px' } }>
-              { curKanban.type == 'kanban' && <Button style={ { backgroundColor: mode == 'issue' && '#eee' } } onClick={ () => { this.changeModel('issue') } }>看板</Button> }
+              { curKanban.type == 'kanban' && <Button style={ { backgroundColor: mode == 'issue' && '#eee' } } onClick={ () => { this.changeModel('issue') } }>signboard</Button> }
               { curKanban.type == 'scrum' && <Button style={ { backgroundColor: mode == 'epic' && '#eee' } } onClick={ () => { this.changeModel('epic') } }>Epic</Button> }
-              { curKanban.type == 'scrum' && completedSprintNum > 0 && <Button style={ { backgroundColor: mode == 'history' && '#eee' } } onClick={ () => { this.changeModel('history') } }>Sprint 历史</Button> }
+              { curKanban.type == 'scrum' && completedSprintNum > 0 && <Button style={ { backgroundColor: mode == 'history' && '#eee' } } onClick={ () => { this.changeModel('history') } }>Sprint history</Button> }
               { curKanban.type == 'scrum' && <Button style={ { backgroundColor: mode == 'backlog' && '#eee' } } onClick={ () => { this.changeModel('backlog') } }>Backlog</Button> }
-              { curKanban.type == 'scrum' && <Button style={ { backgroundColor: mode == 'issue' && '#eee' } } onClick={ () => { this.changeModel('issue') } }>活动Sprint</Button> }
-              <Button style={ { backgroundColor: mode == 'config' && '#eee' } } onClick={ () => { this.changeModel('config') } }>配置</Button>
+              { curKanban.type == 'scrum' && <Button style={ { backgroundColor: mode == 'issue' && '#eee' } } onClick={ () => { this.changeModel('issue') } }>ActivitySprint</Button> }
+              <Button style={ { backgroundColor: mode == 'config' && '#eee' } } onClick={ () => { this.changeModel('config') } }>Configure</Button>
             </ButtonGroup> }
             { kanbans.length > 0 && 
-            <DropdownButton pullRight title='列表' onSelect={ this.changeKanban.bind(this) }>
+            <DropdownButton pullRight title='List' onSelect={ this.changeKanban.bind(this) }>
             { _.map(kanbans, (v, i) => ( 
               <MenuItem key={ i } eventKey={ v.id }>
                 <div style={ { display: 'inline-block', width: '20px', textAlign: 'left' } }>
@@ -367,7 +367,7 @@ export default class Header extends Component {
             { options.permissions && options.permissions.indexOf('manage_project') !== -1 && 
               <MenuItem eventKey='create'>
                 { kanbans.length > 0 && <div style={ { display: 'inline-block', width: '20px' } }/> }
-                <span>创建看板</span>
+                <span>Create a board</span>
               </MenuItem> }
             </DropdownButton> } 
           </div>
@@ -382,32 +382,32 @@ export default class Header extends Component {
             </div> 
           </OverlayTrigger> }
           <span style={ { float: 'left', marginTop: '7px', marginRight: '5px' } }>
-            过滤器：
+            filter:
           </span>
           <Nav bsStyle='pills' style={ { float: 'left', lineHeight: '1.0' } } activeKey={ selectedFilter } onSelect={ this.handleSelect.bind(this) }>
-            <NavItem eventKey='all' href='#'>全部</NavItem>
+            <NavItem eventKey='all' href='#'>all</NavItem>
             { _.map(curKanban.filters || [], (v, i) => (<NavItem key={ i } eventKey={ i } href='#'>{ v.name }</NavItem>) ) }
           </Nav>
-          <span style={ { float: 'right' } } title='隐藏看板头'>
+          <span style={ { float: 'right' } } title='Hidden view'>
             <Button onClick={ this.hideHeader.bind(this) }><i className='fa fa-angle-double-up' aria-hidden='true'></i></Button>
           </span>
           { curKanban.type == 'scrum' && !_.isEmpty(activeSprint) &&
           <span style={ { float: 'right', marginRight: '10px' } }>
-            <DropdownButton pullRight title='更多' onSelect={ this.moreSelect.bind(this) }>
-              <MenuItem eventKey='burndown'>燃尽图</MenuItem>
+            <DropdownButton pullRight title='More' onSelect={ this.moreSelect.bind(this) }>
+              <MenuItem eventKey='burndown'>Burn out</MenuItem>
               <MenuItem divider/>
-              <MenuItem eventKey='gotoIssue'>跳至问题列表</MenuItem>
-              <MenuItem eventKey='gotoGantt'>跳至甘特图</MenuItem>
+              <MenuItem eventKey='gotoIssue'>Jump to a list of questions</MenuItem>
+              <MenuItem eventKey='gotoGantt'>Jump to Gantu</MenuItem>
             </DropdownButton>
           </span> }
-          <span style={ { float: 'right', marginRight: '10px' } } title='附加过滤'>
-            <Button onClick={ () => { this.setState({ moreFilterModalShow: true }) } }><i className='fa fa-filter' aria-hidden='true'></i> 附加过滤{ !_.isEmpty(this.state.query) ? '...' : '' }</Button>
+          <span style={ { float: 'right', marginRight: '10px' } } title='Additional filtering'>
+            <Button onClick={ () => { this.setState({ moreFilterModalShow: true }) } }><i className='fa fa-filter' aria-hidden='true'></i> Additional filtering{ !_.isEmpty(this.state.query) ? '...' : '' }</Button>
           </span>
         </div> }
         { mode === 'backlog' && !_.isEmpty(curKanban) &&
         <div style={ { height: '45px', borderBottom: '2px solid #f5f5f5', display: this.state.hideHeader ? 'none': 'block' } }>
-          <div className='exchange-icon' style={ { float: 'left', marginTop: '7px' } } onClick={ this.changeFilterMode.bind(this) } title={ '切换至' + (this.state.backlogFilterMode == 'epic' ? '版本' : 'Epic') }><i className='fa fa-retweet'></i></div>
-          <span style={ { float: 'left', marginTop: '7px', marginRight: '5px' } }>{ this.state.backlogFilterMode === 'epic' ? 'Epic' : '版本' }过滤：</span>
+          <div className='exchange-icon' style={ { float: 'left', marginTop: '7px' } } onClick={ this.changeFilterMode.bind(this) } title={ 'Switch to' + (this.state.backlogFilterMode == 'epic' ? 'Version' : 'Epic') }><i className='fa fa-retweet'></i></div>
+          <span style={ { float: 'left', marginTop: '7px', marginRight: '5px' } }>{ this.state.backlogFilterMode === 'epic' ? 'Epic' : 'Version' }filter:</span>
           { this.state.backlogFilterMode === 'epic' ?
           <div style={ { display: 'inline-block', float: 'left', width: '28%' } }>
             <Select
@@ -415,7 +415,7 @@ export default class Header extends Component {
               options={ epicOptions }
               value={ selectedFilter == 'all' ? null : selectedFilter }
               onChange={ (newValue) => { this.handleSelectEV(newValue) } }
-              placeholder='选择Epic'/>
+              placeholder='chooseEpic'/>
           </div>
           :
           <div style={ { display: 'inline-block', float: 'left', width: '28%' } }>
@@ -424,14 +424,14 @@ export default class Header extends Component {
               options={ versionOptions }
               value={ selectedFilter == 'all' ? null : selectedFilter }
               onChange={ (newValue) => { this.handleSelectEV(newValue) } }
-              placeholder='选择版本'/>
+              placeholder='Select version'/>
           </div> }
-          <span style={ { float: 'right' } } title='隐藏看板头'>
+          <span style={ { float: 'right' } } title='Hidden view'>
             <Button onClick={ this.hideHeader.bind(this) }><i className='fa fa-angle-double-up' aria-hidden='true'></i></Button>
           </span>
           { options.permissions && options.permissions.indexOf('manage_project') !== -1 &&
           <div style={ { display: 'inline-block', float: 'right', marginRight: '10px' } }> 
-            <Button bsStyle='primary' onClick={ createSprint }><i className='fa fa-plus' aria-hidden='true'></i> 创建Sprint</Button>
+            <Button bsStyle='primary' onClick={ createSprint }><i className='fa fa-plus' aria-hidden='true'></i> createSprint</Button>
           </div> }
         </div> }
 
@@ -445,7 +445,7 @@ export default class Header extends Component {
               options={ completedSprintOptions }
               value={ selectedFilter == 'all' ? completedSprintNum : selectedFilter }
               onChange={ (newValue) => { this.handleSelectSprint(newValue) } }
-              placeholder='选择Sprint'/>
+              placeholder='chooseSprint'/>
           </div>
           { !_.isEmpty(selectedSprint) &&
           <OverlayTrigger trigger='click' rootClose placement='bottom' overlay={ hisPopoverSprint }>
@@ -453,15 +453,15 @@ export default class Header extends Component {
               <i className='fa fa-info-circle' aria-hidden='true'></i>
             </div>
           </OverlayTrigger> }
-          <span style={ { float: 'right' } } title='隐藏看板头'>
+          <span style={ { float: 'right' } } title='Hidden view'>
             <Button onClick={ this.hideHeader.bind(this) }><i className='fa fa-angle-double-up' aria-hidden='true'></i></Button>
           </span>
-          <span style={ { float: 'right', marginRight: '10px' } } title='燃尽图'>
-            <DropdownButton pullRight title='更多' onSelect={ this.hisMoreSelect.bind(this) }>
-              <MenuItem eventKey='burndown'>燃尽图</MenuItem>
+          <span style={ { float: 'right', marginRight: '10px' } } title='Burn out'>
+            <DropdownButton pullRight title='More' onSelect={ this.hisMoreSelect.bind(this) }>
+              <MenuItem eventKey='burndown'>Burn out</MenuItem>
               <MenuItem divider/>
-              <MenuItem eventKey='gotoIssue'>跳至问题列表</MenuItem>
-              <MenuItem eventKey='gotoGantt'>跳至甘特图</MenuItem>
+              <MenuItem eventKey='gotoIssue'>Jump to a list of questions</MenuItem>
+              <MenuItem eventKey='gotoGantt'>Jump to Gantu</MenuItem>
             </DropdownButton>
           </span>
         </div> }
@@ -470,13 +470,13 @@ export default class Header extends Component {
         <div style={ { height: '45px', display: this.state.hideHeader ? 'none': 'block' } }>
           <div style={ { display: 'inline-block', float: 'left', marginRight: '10px' } }>
             <Button disabled={ indexEpicLoading } onClick={ () => { this.setState({ createEpicModalShow: true }) } }>
-              <i className='fa fa-plus' aria-hidden='true'></i> 新建Epic
+              <i className='fa fa-plus' aria-hidden='true'></i> New constructionEpic
             </Button>
           </div>
           { !indexEpicLoading &&  
           <div style={ { display: 'inline-block', float: 'left', marginRight: '10px' } }>
             <Button onClick={ () => { this.setState({ sortCardsModalShow: true }) } }>
-              <i className='fa fa-edit' aria-hidden='true'></i> 编辑顺序
+              <i className='fa fa-edit' aria-hidden='true'></i> Editing order
             </Button>
           </div> }
         </div> }

@@ -112,9 +112,9 @@ export default class List extends Component {
     select(id);
     const ecode = await reopen(id);
     if (ecode === 0) {
-      notify.show('已取消归档。', 'success', 2000);    
+      notify.show('The archive has been canceled.', 'success', 2000);    
     } else {
-      notify.show('打开失败。', 'error', 2000);    
+      notify.show('Open failed.', 'error', 2000);    
     }
   }
 
@@ -123,9 +123,9 @@ export default class List extends Component {
     select(id);
     const ecode = await createIndex(id);
     if (ecode === 0) {
-      notify.show('索引已创建。', 'success', 2000);
+      notify.show('Index has been created.', 'success', 2000);
     } else {
-      notify.show('创建失败。', 'error', 2000);
+      notify.show('Create a failure.', 'error', 2000);
     }
   }
 
@@ -175,12 +175,12 @@ export default class List extends Component {
       this.state.settingPrincipalPids.splice(settingIndex, 1);
 
       this.setState({ willSetPrincipalPids: this.state.willSetPrincipalPids, settingPrincipalPids: this.state.settingPrincipalPids });
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     }else {
       const settingIndex = _.indexOf(this.state.settingPrincipalPids, pid);
       this.state.settingPrincipalPids.splice(settingIndex, 1);
       this.setState({ settingPrincipalPids: this.state.settingPrincipalPids });
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
   }
 
@@ -264,15 +264,15 @@ export default class List extends Component {
     } = this.state;
 
     const sortOptions = [
-      { value: 'default', label: '默认' },
-      { value: 'activity', label: '活跃度' },
-      { value: 'create_time_asc', label: '创建时间 ↑' },
-      { value: 'create_time_desc', label: '创建时间 ↓' },
-      { value: 'key_asc', label: '健值 ↑' },
-      { value: 'key_desc', label: '健值 ↓' },
-      { value: 'all_issues_cnt', label: '全部问题数' },
-      { value: 'unresolved_issues_cnt', label: '未解决问题数' },
-      { value: 'assigntome_issues_cnt', label: '分配给我问题数' }
+      { value: 'default', label: 'default' },
+      { value: 'activity', label: 'Activity' },
+      { value: 'create_time_asc', label: 'Create time ↑' },
+      { value: 'create_time_desc', label: 'Create time ↓' },
+      { value: 'key_asc', label: 'Valuable value ↑' },
+      { value: 'key_desc', label: 'Valuable value ↓' },
+      { value: 'all_issues_cnt', label: 'All the number' },
+      { value: 'unresolved_issues_cnt', label: 'No solution' },
+      { value: 'assigntome_issues_cnt', label: 'Assign it to me' }
     ];
 
     const node = ( <span><i className='fa fa-cog'></i></span> );
@@ -328,7 +328,7 @@ export default class List extends Component {
                 valueKey='id' 
                 labelKey='nameAndEmail' 
                 loadOptions={ this.searchUsers } 
-                placeholder='请输入用户'/>
+                placeholder='Please enter the user'/>
               <div className={ _.indexOf(settingPrincipalPids, collection[i].id) !== -1 ? 'hide' : 'edit-button-group' }>
                 <Button className='edit-ok-button' onClick={ this.setPrincipal.bind(this, collection[i].id) }>
                   <i className='fa fa-check'></i>
@@ -342,12 +342,12 @@ export default class List extends Component {
           <img src={ loadingImg } style={ { float: 'right' } } className={ _.indexOf(settingPrincipalPids, collection[i].id) !== -1 ? 'loading' : 'hide' }/>
           </div>
         ),
-        status: collection[i].status == 'active' ? <span className='project-inprogress-label'>活动中</span> : <span className='project-close-label'>已归档</span>,
+        status: collection[i].status == 'active' ? <span className='project-inprogress-label'>In the event</span> : <span className='project-close-label'>Filed</span>,
         issues: (
           <ul style={ { marginBottom: '0px', paddingLeft: '0px', listStyle: 'none' } }>
-            <li>所有问题 - <Link to={ '/project/' + collection[i].key + '/issue' }>{ collection[i].stats ? collection[i].stats.all : '' }</Link></li>
-            <li>未解决的 - <Link to={ '/project/' + collection[i].key + '/issue?resolution=Unresolved' }>{ collection[i].stats ? collection[i].stats.unresolved : '' }</Link></li>
-            <li>分配给我的 - <Link to={ '/project/' + collection[i].key + '/issue?resolution=Unresolved&assignee=me' }>{ collection[i].stats ? collection[i].stats.assigntome : '' }</Link></li>
+            <li>All questions - <Link to={ '/project/' + collection[i].key + '/issue' }>{ collection[i].stats ? collection[i].stats.all : '' }</Link></li>
+            <li>have not decide - <Link to={ '/project/' + collection[i].key + '/issue?resolution=Unresolved' }>{ collection[i].stats ? collection[i].stats.unresolved : '' }</Link></li>
+            <li>Allocated to me - <Link to={ '/project/' + collection[i].key + '/issue?resolution=Unresolved&assignee=me' }>{ collection[i].stats ? collection[i].stats.assigntome : '' }</Link></li>
           </ul>
         ),
         operation: (
@@ -365,10 +365,10 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='1'>编辑</MenuItem>
-              <MenuItem eventKey='2'>归档</MenuItem>
-              {/* collection[i].status == 'active' ? <MenuItem eventKey='2'>归档</MenuItem> : <MenuItem eventKey='3'>取消归档</MenuItem> */}
-              {/* collection[i].status == 'active' && <MenuItem eventKey='4'>重建索引</MenuItem> */}
+              <MenuItem eventKey='1'>edit</MenuItem>
+              <MenuItem eventKey='2'>Archive</MenuItem>
+              {/* collection[i].status == 'active' ? <MenuItem eventKey='2'>Archive</MenuItem> : <MenuItem eventKey='3'>Cancel archive</MenuItem> */}
+              {/* collection[i].status == 'active' && <MenuItem eventKey='4'>Reconstruction index</MenuItem> */}
             </DropdownButton> }
             <img src={ loadingImg } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -380,7 +380,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ loadingImg } className='loading'/></div> );
     } else {
-      opts.noDataText = ( <div>暂无数据显示<br/><br/>您可创建项目 或 联系其他项目管理员将您添加到项目成员中</div> ); 
+      opts.noDataText = ( <div>No data display<br/><br/>You can create a project or Contact additional project administrators add you to project members</div> ); 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -391,7 +391,7 @@ export default class List extends Component {
           <FormGroup>
             { options.allow_create_project === 1 && 
             <span style={ { float: 'left', width: '20%' } }>
-              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;新建项目</Button>
+              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;New Project</Button>
             </span> }
             <span style={ { float: 'right' } }>
               <Button onClick={ this.modeChange.bind(this) }><i className={ this.state.mode == 'list' ? 'fa fa-th' : 'fa fa-list' }></i></Button>
@@ -399,7 +399,7 @@ export default class List extends Component {
             <span style={ { float: 'right', marginRight: '10px' } }>
               <DropdownButton
                 pullRight
-                title='排序'
+                title='Sort'
                 onSelect={ this.sortChange.bind(this) }>
                   { _.map(sortOptions, (v, i) =>
                     <MenuItem key={ i } eventKey={ v.value }>
@@ -414,10 +414,10 @@ export default class List extends Component {
               <Select
                 simpleValue
                 clearable={ false }
-                placeholder='项目状态'
+                placeholder='project status'
                 value={ this.state.status }
                 onChange={ this.statusChange.bind(this) }
-                options={ [{ value: 'all', label: '全部' }, { value: 'active', label: '活动中' }, { value: 'archived', label: '已归档' }] }/>
+                options={ [{ value: 'all', label: 'all' }, { value: 'active', label: 'In the event' }, { value: 'archived', label: 'Filed' }] }/>
             </span>
             <span style={ { float: 'right', width: '22%', marginRight: '10px' } }>
               <FormControl
@@ -426,7 +426,7 @@ export default class List extends Component {
                 style={ { height: '36px' } }
                 value={ this.state.name }
                 onChange={ (e) => { this.setState({ name: e.target.value }) } }
-                placeholder={ '名称、键值查询...' } />
+                placeholder={ 'Name, key value query...' } />
             </span>
           </FormGroup>
         </div>
@@ -435,11 +435,11 @@ export default class List extends Component {
             <BootstrapTable data={ projects } bordered={ false } hover options={ opts } trClassName='tr-top'>
               <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
               <TableHeaderColumn width='50' dataField='no'>NO</TableHeaderColumn>
-              <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-              <TableHeaderColumn dataField='key' width='150'>键值</TableHeaderColumn>
-              <TableHeaderColumn dataField='principal' width='280'>责任人</TableHeaderColumn>
-              <TableHeaderColumn dataField='issues' width='170'>问题数</TableHeaderColumn>
-              <TableHeaderColumn dataField='status' width='80'>状态</TableHeaderColumn>
+              <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+              <TableHeaderColumn dataField='key' width='150'>Key value</TableHeaderColumn>
+              <TableHeaderColumn dataField='principal' width='280'>Responsible</TableHeaderColumn>
+              <TableHeaderColumn dataField='issues' width='170'>Count number</TableHeaderColumn>
+              <TableHeaderColumn dataField='status' width='80'>state</TableHeaderColumn>
               <TableHeaderColumn width='60' dataField='operation'/>
             </BootstrapTable> }
           { this.state.mode === 'card' && indexLoading &&
@@ -448,8 +448,8 @@ export default class List extends Component {
             </div> }
           { this.state.mode === 'card' && !indexLoading && collection.length <= 0 &&
             <div style={ { marginTop: '50px', marginBottom: '50px', textAlign: 'center' } }>
-              暂无数据显示<br/><br/>
-              您可创建项目 或 联系其他项目管理员将您添加到项目成员中
+              No data display<br/><br/>
+              You can create a project or Contact additional project administrators add you to project members
             </div> }
           { this.state.mode === 'card' && !indexLoading && collection.length > 0 &&
             collection.map((model, i) => {
@@ -474,21 +474,21 @@ export default class List extends Component {
                       </AreaChart> }
                     <div className='stats-cnt'>
                       <div className='stats-cnt-cell'>
-                        全部<br/>
+                        all<br/>
                         { !model.stats ? 
                           <img style={ { height: '12px', width: '12px' } } src={ loadingImg } className='loading'/> 
                           : 
                           <Link to={ '/project/' + model.key + '/issue' }>{ model.stats.all }</Link> }
                       </div>
                       <div className='stats-cnt-cell'>
-                        未解决<br/>
+                        unsolved<br/>
                         { !model.stats ? 
                           <img style={ { height: '12px', width: '12px' } } src={ loadingImg } className='loading'/> 
                           : 
                           <Link to={ '/project/' + model.key + '/issue?resolution=Unresolved' }>{ model.stats.unresolved }</Link> }
                       </div>
                       <div className='stats-cnt-cell'>
-                        分配给我<br/>
+                        Assign it to me<br/>
                         { !model.stats ? 
                           <img style={ { height: '12px', width: '12px' } } src={ loadingImg } className='loading'/> 
                           : 
@@ -497,18 +497,18 @@ export default class List extends Component {
                     </div>
                   </div>
                   <div className='leader'>
-                    <span>负责人: { model.principal.name }</span>
+                    <span>principal: { model.principal.name }</span>
                   </div>
                   { model.status !== 'active' &&
-                  <div className='statuss'><span className='project-close-label'>已归档</span></div> }
+                  <div className='statuss'><span className='project-close-label'>Filed</span></div> }
                   { model.principal.id === user.id && 
                   <div className='btns'>
                     { model.status == 'active' && 
-                      <span style={ { marginLeft: '5px' } } title='编辑' onClick={ this.edit.bind(this, model.id) } className='comments-button'><i className='fa fa-edit' aria-hidden='true'></i></span> }
+                      <span style={ { marginLeft: '5px' } } title='edit' onClick={ this.edit.bind(this, model.id) } className='comments-button'><i className='fa fa-edit' aria-hidden='true'></i></span> }
                     {/* model.status == 'active' && 
-                      <span style={ { marginLeft: '3px' } } title='重建索引' onClick={ this.createIndex.bind(this, model.id) } className='comments-button'><i className='fa fa-refresh' aria-hidden='true'></i></span> */}
+                      <span style={ { marginLeft: '3px' } } title='Reconstruction index' onClick={ this.createIndex.bind(this, model.id) } className='comments-button'><i className='fa fa-refresh' aria-hidden='true'></i></span> */}
                     { model.status === 'active' && 
-                      <span style={ { marginLeft: '5px' } } title='归档' onClick={ this.archiveNotify.bind(this, model.id) } className='comments-button'><i className='fa fa-archive' aria-hidden='true'></i></span> }
+                      <span style={ { marginLeft: '5px' } } title='Archive' onClick={ this.archiveNotify.bind(this, model.id) } className='comments-button'><i className='fa fa-archive' aria-hidden='true'></i></span> }
                   </div> }
                 </div>
               </div>
@@ -535,7 +535,7 @@ export default class List extends Component {
         </div>
         { increaseCollection.length > 0 && increaseCollection.length % (options.limit || 4) === 0 && 
           <ButtonGroup vertical block style={ { marginTop: '15px' } }>
-            <Button onClick={ this.more.bind(this) }>{ <div><img src={ loadingImg } className={ moreLoading ? 'loading' : 'hide' }/><span>{ moreLoading ? '' : '更多...' }</span></div> }</Button>
+            <Button onClick={ this.more.bind(this) }>{ <div><img src={ loadingImg } className={ moreLoading ? 'loading' : 'hide' }/><span>{ moreLoading ? '' : 'More...' }</span></div> }</Button>
           </ButtonGroup> }
       </div>
     );

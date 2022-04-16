@@ -170,16 +170,16 @@ export default class List extends Component {
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div> ),
         type: collection[i].type || '-',
-        status: collection[i].invalid_flag == 1 ? <Label>无效</Label> : <Label bsStyle='success'>有效</Label>,
+        status: collection[i].invalid_flag == 1 ? <Label>invalid</Label> : <Label bsStyle='success'>efficient</Label>,
         operation: (
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading &&
             <DropdownButton pullRight bsStyle='link' style={ { textDecoration: 'blink' ,color: '#000' } } key={ i } title={ node } id={ `dropdown-basic-${i}` } onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='edit'>编辑查看</MenuItem>
-              <MenuItem eventKey='test'>测试</MenuItem>
-              <MenuItem eventKey='sync'>同步数据</MenuItem>
-              { collection[i].invalid_flag == 1 ? <MenuItem eventKey='validate'>启用</MenuItem> : <MenuItem eventKey='invalidate'>禁用</MenuItem> }
-              <MenuItem eventKey='del'>删除</MenuItem>
+              <MenuItem eventKey='edit'>Edit</MenuItem>
+              <MenuItem eventKey='test'>test</MenuItem>
+              <MenuItem eventKey='sync'>Synchronous Data</MenuItem>
+              { collection[i].invalid_flag == 1 ? <MenuItem eventKey='validate'>Enable</MenuItem> : <MenuItem eventKey='invalidate'>Disable</MenuItem> }
+              <MenuItem eventKey='del'>delete</MenuItem>
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -191,7 +191,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -204,7 +204,7 @@ export default class List extends Component {
               style={ { float: 'left', marginRight: '20px' } } 
               onClick={ () => { this.setState({ addLDAPModalShow: true }); } } 
               disabled={ indexLoading }>
-              <i className='fa fa-plus'></i>&nbsp;添加LDAP
+              <i className='fa fa-plus'></i>&nbsp;Add toLDAP
             </Button>
           </FormGroup>
         </div>
@@ -213,17 +213,17 @@ export default class List extends Component {
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
             <div className='info-content'>
              <span>
-               目前仅支持OpenLDAP目录用户同步；组成员同步仅支持memberOf模式。<br/>
-               禁用目录后，用户将不会自动同步，登录认证也将无效。<br/>
-               首次数据同步需要时间多一点，请耐心等待。
+               Only supportOpenLDAPDirectory user synchronization; group members are only supportedmemberOfmodel.<br/>
+               After disabling the directory, the user will not automatically synchronize, and the login authentication will be invalid.<br/>
+               The first data synchronization takes more time, please be patient.
              </span>
             </div>
           </div>
           <BootstrapTable data={ directories } bordered={ false } hover options={ opts } trClassName='tr-middle'>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>目录名</TableHeaderColumn>
-            <TableHeaderColumn dataField='type'>类型</TableHeaderColumn>
-            <TableHeaderColumn dataField='status'>状态</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>Directory name</TableHeaderColumn>
+            <TableHeaderColumn dataField='type'>type</TableHeaderColumn>
+            <TableHeaderColumn dataField='status'>state</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { this.state.editModalShow && 

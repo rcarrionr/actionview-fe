@@ -46,9 +46,9 @@ export default class List extends Component {
       handle } = this.props;
 
     const statusStyles = { 
-      unused: { style: 'danger', name: '未开通' }, 
-      enabled: { style: 'success', name: '已启用' }, 
-      disabled: { style: 'danger', name: '已禁用' } 
+      unused: { style: 'danger', name: 'nonactivated' }, 
+      enabled: { style: 'success', name: 'activated' }, 
+      disabled: { style: 'danger', name: 'disabled' } 
     };
 
     const users = {
@@ -76,25 +76,25 @@ export default class List extends Component {
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'>
             <span>
-              目前外部用户仅支持：GitHub、GitLab。
+              External users only support:GitHub、GitLab。
             </span>
             <span>
               <br/>
-              <b>提交说明：</b>
+              <b>Submitted:</b>
               <br/>
-              <span style={ { marginLeft: '15px' } }>触发事件请选择：Push Event;</span>
+              <span style={ { marginLeft: '15px' } }>Trigger events Please select:Push Event;</span>
               <br/>
-              <span style={ { marginLeft: '15px' } }>Git提交代码备注形式有两种：git commit -m 'xx-yy dddd' 和 git commit -m 'xx-yy-zz dddd'，后者可改变问题状态。</span>
+              <span style={ { marginLeft: '15px' } }>GitThere are two forms in the form of submitting code:git commit -m 'xx-yy dddd' and git commit -m 'xx-yy-zz dddd'The latter can change the problem.</span>
               <br/>
-              <span style={ { marginLeft: '15px' } }>其中，xx: 项目健值，yy: 问题编号， zz: 动作ID（流程预览图可查看），dddd: 描述文字。</span>
+              <span style={ { marginLeft: '15px' } }>in,xx: Project health,yy: Question number, zz: actionID(The process preview map can be viewed),dddd: Describe the text.</span>
               <br/>
-              <span style={ { marginLeft: '15px' } }>Push代码后，在问题的详细页面将会出现"Git提交"页签，可看到相应的提交记录，其中ActionView侧显示的操作用户是通过代码提交者的Email识别的。</span>
+              <span style={ { marginLeft: '15px' } }>PushAfter the code, the detailed page of the problem will appear"Gitsubmit"Tag, you can see the corresponding submission record, whereActionViewThe operation of the user is displayed by the code submitterEmailIdentify.</span>
             </span>
           </div>
         </div>
         <Panel header={ gitHubHeader } style={ { textAlign: 'center' } }>
           <div>
-            <b>Request Url:</b> { 'http://www.example.com' + API_BASENAME + '/webhook/github/project/' + pkey } { !indexLoading && <Label bsStyle={ statusStyles[github.status] && statusStyles[github.status].style || 'default' }>{ statusStyles[github.status] && statusStyles[github.status].name || '未开通' }</Label> }
+            <b>Request Url:</b> { 'http://www.example.com' + API_BASENAME + '/webhook/github/project/' + pkey } { !indexLoading && <Label bsStyle={ statusStyles[github.status] && statusStyles[github.status].style || 'default' }>{ statusStyles[github.status] && statusStyles[github.status].name || 'nonactivated' }</Label> }
           </div>
           { indexLoading || (itemLoading && this.state.user.key == 'github' && (this.state.mode == 'enable' || this.state.mode == 'disable')) ?
           <div style={ { marginTop: '10px' } }>
@@ -102,15 +102,15 @@ export default class List extends Component {
           </div>
           :
           <div style={ { marginTop: '10px' } }>
-            { (!github.status || github.status === 'unused') && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'use', user: users['github'], pwdModalShow: true }) } }>开通</Button> }
-            { github.status === 'disabled' && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'enable', user: users['github'], enableNotifyShow: true }) } }>启用</Button> }
-            { github.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'resetPwd', user: users['github'], pwdModalShow: true }) } }>重置密码</Button> }
-            { github.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'disable', user: users['github'], enableNotifyShow: true }) } }>禁用</Button> }
+            { (!github.status || github.status === 'unused') && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'use', user: users['github'], pwdModalShow: true }) } }>Open</Button> }
+            { github.status === 'disabled' && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'enable', user: users['github'], enableNotifyShow: true }) } }>Enable</Button> }
+            { github.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'resetPwd', user: users['github'], pwdModalShow: true }) } }>reset Password</Button> }
+            { github.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'disable', user: users['github'], enableNotifyShow: true }) } }>Disable</Button> }
           </div> }
         </Panel>
         <Panel header={ gitLabHeader } style={ { textAlign: 'center' } }>
           <div>
-            <b>Request Url:</b> { 'http://www.example.com' + API_BASENAME + '/webhook/gitlab/project/' + pkey } { !indexLoading && <Label bsStyle={ statusStyles[gitlab.status] && statusStyles[gitlab.status].style || 'default' }>{ statusStyles[gitlab.status] && statusStyles[gitlab.status].name || '未开通' }</Label> }
+            <b>Request Url:</b> { 'http://www.example.com' + API_BASENAME + '/webhook/gitlab/project/' + pkey } { !indexLoading && <Label bsStyle={ statusStyles[gitlab.status] && statusStyles[gitlab.status].style || 'default' }>{ statusStyles[gitlab.status] && statusStyles[gitlab.status].name || 'nonactivated' }</Label> }
           </div>
           { indexLoading || (itemLoading && this.state.user.key == 'gitlab' && (this.state.mode == 'enable' || this.state.mode == 'disable')) ?
           <div style={ { marginTop: '10px' } }>
@@ -118,10 +118,10 @@ export default class List extends Component {
           </div>
           :
           <div style={ { marginTop: '10px' } }>
-            { (!gitlab.status || gitlab.status === 'unused') && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'use', user: users['gitlab'], pwdModalShow: true }) } }>开通</Button> }
-            { gitlab.status === 'disabled' && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'enable', user: users['gitlab'], enableNotifyShow: true }) } }>启用</Button> }
-            { gitlab.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'resetPwd', user: users['gitlab'], pwdModalShow: true }) } }>重置密码</Button> }
-            { gitlab.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'disable', user: users['gitlab'], enableNotifyShow: true }) } }>禁用</Button> }
+            { (!gitlab.status || gitlab.status === 'unused') && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'use', user: users['gitlab'], pwdModalShow: true }) } }>Open</Button> }
+            { gitlab.status === 'disabled' && <Button bsStyle='primary' onClick={ () => { this.setState({ mode: 'enable', user: users['gitlab'], enableNotifyShow: true }) } }>Enable</Button> }
+            { gitlab.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'resetPwd', user: users['gitlab'], pwdModalShow: true }) } }>reset Password</Button> }
+            { gitlab.status === 'enabled' && <Button bsStyle='link' onClick={ () => { this.setState({ mode: 'disable', user: users['gitlab'], enableNotifyShow: true }) } }>Disable</Button> }
           </div> }
         </Panel>
         { this.state.pwdModalShow &&

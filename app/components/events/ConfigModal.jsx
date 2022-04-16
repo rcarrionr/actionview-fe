@@ -85,7 +85,7 @@ export default class ConfigModal extends Component {
     const ecode = await setNotify({ id: data.id, notifications });
     if (ecode === 0) {
       close();
-      notify.show('配置完成。', 'success', 2000);
+      notify.show('The configuration is complete.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -129,26 +129,26 @@ export default class ConfigModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>通知设置 - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Notification setting - { data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { maxHeight: '420px', overflow: 'auto' } }>
           <div>
             <CheckboxGroup name='notifications' value={ this.state.notifications } onChange={ this.notificationsChanged.bind(this) }>
               <ui className='list-unstyled clearfix cond-list'>
                 <li style={ { height: '40px', marginTop: '5px' } }>
-                  请选择以下通知对象：
+                  Please select the following notification object:
                 </li>
                 <li style={ { height: '40px' } }>
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='current_user'/>
-                      <span>当前用户</span>
+                      <span>Current user</span>
                     </label>
                   </div>
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='assignee'/>
-                      <span>当前负责人</span>
+                      <span>Current person in charge</span>
                     </label>
                   </div>
                 </li>
@@ -156,13 +156,13 @@ export default class ConfigModal extends Component {
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='reporter'/>
-                      <span>报告者</span>
+                      <span>Reporter</span>
                     </label>
                   </div>
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='watchers'/>
-                      <span>所有关注者</span>
+                      <span>All paying attention</span>
                     </label>
                   </div>
                 </li>
@@ -170,13 +170,13 @@ export default class ConfigModal extends Component {
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='project_principal'/>
-                      <span>项目负责人</span>
+                      <span>Project manager</span>
                     </label>
                   </div>
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='module_principal'/>
-                      <span>模块负责人</span>
+                      <span>Person in charge of the module</span>
                     </label>
                   </div>
                 </li>
@@ -184,28 +184,28 @@ export default class ConfigModal extends Component {
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='user'/>
-                      <span>单一用户</span>
+                      <span>Single user</span>
                     </label>
                     <select
                       value={ this.state.userParam }
                       onChange={ (e) => this.setState({ userParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.notifications, 'user') !== -1 && !loading) ? false : true }
                       style={ _.indexOf(this.state.notifications, 'user') !== -1 ? selectEnableStyles : selectDisabledStyles }>
-                      <option value='' key=''>选择用户</option>
+                      <option value='' key=''>Select user</option>
                       { userOptions.map( userOption => <option value={ userOption.id } key={ userOption.id }>{ userOption.name + '(' + userOption.email + ')' }</option> ) }
                     </select>
                   </div>
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='role'/>
-                      <span>项目角色</span>
+                      <span>Project role</span>
                     </label>
                     <select
                       value={ this.state.roleParam }
                       onChange={ (e) => this.setState({ roleParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.notifications, 'role') !== -1 && !loading) ? false : true }
                       style={ _.indexOf(this.state.notifications, 'role') !== -1 ? selectEnableStyles : selectDisabledStyles }>
-                      <option value='' key=''>选择角色</option>
+                      <option value='' key=''>Select role</option>
                       { roleOptions.map( roleOption => <option value={ roleOption.id } key={ roleOption.id }>{ roleOption.name }</option> ) }
                     </select>
                   </div>
@@ -214,28 +214,28 @@ export default class ConfigModal extends Component {
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='single_user_field'/>
-                      <span>单一用户字段</span>
+                      <span>Single user field</span>
                     </label>
                     <select
                       value={ this.state.singleUserFieldParam }
                       onChange={ (e) => this.setState({ singleUserFieldParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.notifications, 'single_user_field') !== -1 && !loading) ? false : true }
                       style={ _.indexOf(this.state.notifications, 'single_user_field') !== -1 ? selectEnableStyles : selectDisabledStyles }>
-                      <option value='' key=''>选择用户字段</option>
+                      <option value='' key=''>Select the user field</option>
                       { singleUserFieldOptions.map( fieldOption => <option value={ fieldOption.id } key={ fieldOption.id }>{ fieldOption.name }</option> ) }
                     </select>
                   </div>
                   <div style={ { width: '50%', display: 'inline-block' } }>
                     <label style={ { fontWeight: 400 } }>
                       <Checkbox disabled={ loading } value='multi_user_field'/>
-                      <span>多用户字段</span>
+                      <span>Multi-user field</span>
                     </label>
                     <select
                       value={ this.state.multiUserFieldParam }
                       onChange={ (e) => this.setState({ multiUserFieldParam: e.target.value }) }
                       disabled={ (_.indexOf(this.state.notifications, 'multi_user_field') !== -1 && !loading) ? false : true }
                       style={ _.indexOf(this.state.notifications, 'multi_user_field') !== -1 ? selectEnableStyles : selectDisabledStyles }>
-                      <option value='' key=''>选择用户字段</option>
+                      <option value='' key=''>Select the user field</option>
                       { multiUserFieldOptions.map( fieldOption => <option value={ fieldOption.id } key={ fieldOption.id }>{ fieldOption.name }</option> ) }
                     </select>
                   </div>
@@ -247,8 +247,8 @@ export default class ConfigModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button onClick={ this.confirm } disabled={ !isChanged || loading }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm } disabled={ !isChanged || loading }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

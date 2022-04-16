@@ -10,19 +10,19 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } else if (_.findIndex(props.collection || [], { name: values.name }) !== -1) {
-    errors.name = '该名称已存在';
+    errors.name = 'This name already exists';
   }
 
   if (!values.abb) {
-    errors.abb = '必填';
+    errors.abb = 'Be required';
   } else {
     const pattern = new RegExp(/^[a-zA-Z0-9]/);
     if (!pattern.test(values.abb)) {
-      errors.abb = '格式有误';
+      errors.abb = 'Format is incorrect';
     } else if (_.findIndex(props.collection || [], { abb: values.abb }) !== -1) {
-      errors.abb = '该缩码已存在';
+      errors.abb = 'This zoom is existing';
     }
   }
 
@@ -68,7 +68,7 @@ export default class CreateModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('新建完成。', 'success', 2000);
+      notify.show('Newly created.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -98,27 +98,27 @@ export default class CreateModal extends Component {
     const workflowOptions = _.map(workflows, function(val) {
       return { label: val.name, value: val.id };
     });
-    const typeOptions = [{ label: '标准', value: 'standard' }, { label: '子问题', value: 'subtask' }]; 
+    const typeOptions = [{ label: 'standard', value: 'standard' }, { label: 'Child problem', value: 'subtask' }]; 
 
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>创建问题类型</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Create a problem type</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='问题类型名'/ >
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Problem type name'/ >
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ abb.touched && abb.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>缩码</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...abb } placeholder='缩码(一个字母或数字)'/ >
+            <ControlLabel><span className='txt-impt'>*</span>Zoom</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...abb } placeholder='Zoom(A letter or number)'/ >
             { abb.touched && abb.error && <HelpBlock style={ { float: 'right' } }>{ abb.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel><span className='txt-impt'>*</span>界面</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>interface</ControlLabel>
             <Select 
               disabled={ submitting } 
               options={ screenOptions } 
@@ -126,10 +126,10 @@ export default class CreateModal extends Component {
               clearable={ false } 
               value={ screen_id.value } 
               onChange={ newValue => { screen_id.onChange(newValue) } } 
-              placeholder='请选择一个界面'/>
+              placeholder='Please select an interface'/>
           </FormGroup>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel><span className='txt-impt'>*</span>工作流</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>Workflow</ControlLabel>
             <Select 
               disabled={ submitting } 
               options={ workflowOptions } 
@@ -137,10 +137,10 @@ export default class CreateModal extends Component {
               clearable={ false } 
               value={ workflow_id.value } 
               onChange={ newValue => { workflow_id.onChange(newValue) } } 
-              placeholder='请选择一个工作流'/>
+              placeholder='Please select a workflow'/>
           </FormGroup>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel>类型</ControlLabel>
+            <ControlLabel>type</ControlLabel>
             <Select 
               disabled={ submitting } 
               options={ typeOptions } 
@@ -148,18 +148,18 @@ export default class CreateModal extends Component {
               clearable={ false } 
               value={ type.value || 'standard' } 
               onChange={ newValue => { type.onChange(newValue) } } 
-              placeholder='请选择问题类型'/>
+              placeholder='Please select the problem type'/>
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>描述</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...description } placeholder='描述'/>
+            <ControlLabel>describe</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...description } placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

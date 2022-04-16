@@ -264,8 +264,8 @@ export default class List extends Component {
         name: (
           <span>
             <span style={ { marginRight: '5px' } }>{ collection[i].first_name || '-' }</span>
-            { collection[i].status === 'inactive' &&  <Label>未激活</Label> }
-            { collection[i].status === 'invalid' &&  <Label bsStyle='danger'>已禁用</Label> }
+            { collection[i].status === 'inactive' &&  <Label>inactivated</Label> }
+            { collection[i].status === 'invalid' &&  <Label bsStyle='danger'>disabled</Label> }
           </span>),
         email: collection[i].email || '-',
         phone: collection[i].phone || '-',
@@ -279,11 +279,11 @@ export default class List extends Component {
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading && (!collection[i].directory || collection[i].directory === 'self') &&
             <DropdownButton pullRight bsStyle='link' style={ { textDecoration: 'blink' ,color: '#000' } } key={ i } title={ node } id={ `dropdown-basic-${i}` } onSelect={ this.operateSelect.bind(this) }>
-              { collection[i].status === 'active' && <MenuItem eventKey='edit'>编辑</MenuItem> }
-              { collection[i].status === 'active' && <MenuItem eventKey='invalidate'>禁用</MenuItem> }
-              { collection[i].status === 'invalid' && <MenuItem eventKey='validate'>启用</MenuItem> }
-              <MenuItem eventKey='del'>删除</MenuItem>
-              { collection[i].status === 'active' && <MenuItem eventKey='renew'>重置密码</MenuItem> }
+              { collection[i].status === 'active' && <MenuItem eventKey='edit'>edit</MenuItem> }
+              { collection[i].status === 'active' && <MenuItem eventKey='invalidate'>Disable</MenuItem> }
+              { collection[i].status === 'invalid' && <MenuItem eventKey='validate'>Enable</MenuItem> }
+              <MenuItem eventKey='del'>delete</MenuItem>
+              { collection[i].status === 'active' && <MenuItem eventKey='renew'>reset Password</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -295,7 +295,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -335,15 +335,15 @@ export default class List extends Component {
               <Select
                 simpleValue
                 clearable={ false }
-                placeholder='用户状态'
+                placeholder='user status'
                 value={ this.state.status }
                 onChange={ this.statusChange.bind(this) }
-                options={ [{ value: 'all', label: '全部' }, { value: 'active', label: '有效的' }, { value: 'invalid', label: '已禁用' }] }/>
+                options={ [{ value: 'all', label: 'all' }, { value: 'active', label: 'Effective' }, { value: 'invalid', label: 'disabled' }] }/>
             </span>
             <span style={ { float: 'right', width: '18%', marginRight: '10px' } }>
               <Select
                 simpleValue
-                placeholder='用户目录'
+                placeholder='User directory'
                 value={ this.state.directory }
                 onChange={ this.directoryChange.bind(this) }
                 options={ _.map(options.directories || [], (val) => { return { label: val.name, value: val.id } }) }/>
@@ -351,7 +351,7 @@ export default class List extends Component {
             <span style={ { float: 'right', width: '18%', marginRight: '10px' } }>
               <Select
                 simpleValue
-                placeholder='所属组'
+                placeholder='Group'
                 value={ this.state.group }
                 onChange={ this.groupChange.bind(this) }
                 options={ _.map(options.groups || [], (val) => { return { label: val.name, value: val.id } }) }/>
@@ -363,23 +363,23 @@ export default class List extends Component {
                 style={ { height: '36px' } }
                 value={ this.state.name }
                 onChange={ (e) => { this.setState({ name: e.target.value }) } }
-                placeholder={ '用户姓名、邮箱查询...' } />
+                placeholder={ 'User name, mailbox query...' } />
             </span>
             { this.state.selectedIds.length > 0 &&
             <span style={ { float: 'left', marginRight: '10px' } }>
-              <DropdownButton title='操作' onSelect={ this.multiOperateSelect.bind(this) }>
-                { !multiDelShow && <MenuItem disabled eventKey='null'>无</MenuItem> }
-                { multiDelShow && <MenuItem eventKey='del'>删除</MenuItem> }
-                { multiValidShow && <MenuItem eventKey='validate'>启用</MenuItem> }
-                { multiInvalidateShow && <MenuItem eventKey='invalidate'>禁用</MenuItem> }
-                {/*<MenuItem eventKey='renew'>重置密码</MenuItem>*/}
+              <DropdownButton title='operate' onSelect={ this.multiOperateSelect.bind(this) }>
+                { !multiDelShow && <MenuItem disabled eventKey='null'>none</MenuItem> }
+                { multiDelShow && <MenuItem eventKey='del'>delete</MenuItem> }
+                { multiValidShow && <MenuItem eventKey='validate'>Enable</MenuItem> }
+                { multiInvalidateShow && <MenuItem eventKey='invalidate'>Disable</MenuItem> }
+                {/*<MenuItem eventKey='renew'>reset Password</MenuItem>*/}
               </DropdownButton>
             </span> }
             <span style={ { float: 'left', marginRight: '10px' } }>
-              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;新建用户</Button>
+              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;New user</Button>
             </span>
             <span style={ { float: 'left', width: '20%' } }>
-              <Button onClick={ () => { this.setState({ importModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-upload'></i>&nbsp;批量导入</Button>
+              <Button onClick={ () => { this.setState({ importModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-upload'></i>&nbsp;Batch Import</Button>
             </span>
           </FormGroup>
         </div>
@@ -388,9 +388,9 @@ export default class List extends Component {
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
             <div className='info-content'>
               <span>
-                请使用邮箱登录，若在系统配置里配置了“默认登录邮箱域名”可使用邮箱前缀登录。<br/>
-                新建或批量导入的用户，默认密码是：actionview。从外部用户目录同步过来的用户，密码和用户目录的保持一致。<br/>
-                从外部用户目录同步过来的用户，不能对其做任何操作。
+                Please use the mailbox to log in. If the "default login mailbox domain name" is configured in the system configuration, you can use the mailbox prefix.<br/>
+                Users imported from new or batch, the default password is:actionview.The user, password, and user directory synchronized from the external user directory are consistent.<br/>
+                Users who are synchronized from the external user directory cannot do anything.
               </span>
             </div>
           </div>
@@ -402,10 +402,10 @@ export default class List extends Component {
             trClassName='tr-middle' 
             selectRow={ selectRowProp }>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>姓名</TableHeaderColumn>
-            <TableHeaderColumn dataField='email'>邮箱</TableHeaderColumn>
-            <TableHeaderColumn dataField='groups'>所属组</TableHeaderColumn>
-            <TableHeaderColumn dataField='directory'>目录</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
+            <TableHeaderColumn dataField='email'>Mail</TableHeaderColumn>
+            <TableHeaderColumn dataField='groups'>Group</TableHeaderColumn>
+            <TableHeaderColumn dataField='directory'>content</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { this.state.editModalShow && 

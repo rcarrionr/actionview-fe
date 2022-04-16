@@ -28,7 +28,7 @@ export default class ResetNotify extends Component {
 
     if (ecode === 0) {
       close();
-      notify.show('已重置。', 'success', 2000);
+      notify.show('Reset.', 'success', 2000);
     }
   }
 
@@ -46,16 +46,16 @@ export default class ResetNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>重置过滤器 - { blockTitles[mode] }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Reset filter - { blockTitles[mode] }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要重置此模块的过滤器？
+          Confirm that the filter is required to reset this module?
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -94,7 +94,7 @@ export default class List extends Component {
     const { update } = this.props;
     const ecode = await update({ screen_id: this.state.screen[typeId], id: typeId });
     if (ecode === 0) {
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
 
       const willSetIndex = _.indexOf(this.state.willSetScreenTypeIds, typeId);
       this.state.willSetScreenTypeIds.splice(willSetIndex, 1);
@@ -104,7 +104,7 @@ export default class List extends Component {
 
       this.setState({});
     } else {
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
 
       const settingIndex = _.indexOf(this.state.settingScreenTypeIds, typeId);
       this.state.settingScreenTypeIds.splice(settingIndex, 1);
@@ -142,7 +142,7 @@ export default class List extends Component {
     const { update } = this.props;
     const ecode = await update({ workflow_id: this.state.workflow[typeId], id: typeId });
     if (ecode === 0) {
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
 
       const willSetIndex = _.indexOf(this.state.willSetWorkflowTypeIds, typeId);
       this.state.willSetWorkflowTypeIds.splice(willSetIndex, 1);
@@ -152,7 +152,7 @@ export default class List extends Component {
 
       this.setState({});
     } else {
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
 
       const settingIndex = _.indexOf(this.state.settingWorkflowTypeIds, typeId);
       this.state.settingWorkflowTypeIds.splice(settingIndex, 1);
@@ -231,13 +231,13 @@ export default class List extends Component {
             <span className='table-td-title'>
               { collection[i].name }
               { collection[i].abb && ' (' + collection[i].abb + ')' }
-              { collection[i].default && <span style={ { fontWeight: 'normal' } }> (默认)</span> }
-              { collection[i].type == 'subtask' && <span style={ { fontWeight: 'normal' } }> (子问题)</span> } 
+              { collection[i].default && <span style={ { fontWeight: 'normal' } }> (default)</span> }
+              { collection[i].type == 'subtask' && <span style={ { fontWeight: 'normal' } }> (Child problem)</span> } 
             </span>
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div>
         ),
-        type: ( <span>{ collection[i].type == 'subtask' ? '子问题' : '标准' }</span> ),
+        type: ( <span>{ collection[i].type == 'subtask' ? 'Child problem' : 'standard' }</span> ),
         screen: (
           <div>
           { _.indexOf(willSetScreenTypeIds, collection[i].id) === -1 && _.indexOf(settingScreenTypeIds, collection[i].id) === -1 ?
@@ -265,7 +265,7 @@ export default class List extends Component {
                 options={ screenOptions } 
                 value={ this.state.screen[collection[i].id] || collection[i].screen_id } 
                 onChange={ this.handleScreenSelectChange.bind(this, collection[i].id) } 
-                placeholder='请选择界面'/>
+                placeholder='Please select an interface'/>
               <div className={ _.indexOf(settingScreenTypeIds, collection[i].id) !== -1 ? 'hide' : 'edit-button-group' }>
                 <Button 
                   className='edit-ok-button' 
@@ -309,7 +309,7 @@ export default class List extends Component {
                 options={ workflowOptions } 
                 value={ this.state.workflow[collection[i].id] || collection[i].workflow_id } 
                 onChange={ this.handleWorkflowSelectChange.bind(this, collection[i].id) } 
-                placeholder='请选择工作流'/>
+                placeholder='Please select a workflow'/>
               <div className={ _.indexOf(settingWorkflowTypeIds, collection[i].id) !== -1 ? 'hide' : 'edit-button-group' }>
                 <Button 
                   className='edit-ok-button' 
@@ -328,7 +328,7 @@ export default class List extends Component {
           <img src={ img } style={ { float: 'right' } } className={ _.indexOf(settingWorkflowTypeIds, collection[i].id) !== -1 ? 'loading' : 'hide' }/>
           </div>
         ),
-        status: ( <span>{ collection[i].disabled  ? <Label>无效</Label> : <Label bsStyle='success'>有效</Label> }</span> ), 
+        status: ( <span>{ collection[i].disabled  ? <Label>invalid</Label> : <Label bsStyle='success'>efficient</Label> }</span> ), 
         operation: (
           <div>
             { operateShow && hoverRowId === collection[i].id &&
@@ -340,10 +340,10 @@ export default class List extends Component {
                 title={ node } 
                 id={ `dropdown-basic-${i}` } 
                 onSelect={ this.operateSelect.bind(this) }>
-                <MenuItem eventKey='1'>编辑</MenuItem>
-                { !collection[i].is_used && <MenuItem eventKey='2'>删除</MenuItem> }
-                { !isSysConfig && collection[i].disabled && <MenuItem eventKey='4'>启用</MenuItem> }
-                { !isSysConfig && !collection[i].disabled && <MenuItem eventKey='3'>禁用</MenuItem> }
+                <MenuItem eventKey='1'>edit</MenuItem>
+                { !collection[i].is_used && <MenuItem eventKey='2'>delete</MenuItem> }
+                { !isSysConfig && collection[i].disabled && <MenuItem eventKey='4'>Enable</MenuItem> }
+                { !isSysConfig && !collection[i].disabled && <MenuItem eventKey='3'>Disable</MenuItem> }
               </DropdownButton>
             }
           </div>
@@ -355,7 +355,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。';
+      opts.noDataText = 'No data is displayed yet.';
     }
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -365,10 +365,10 @@ export default class List extends Component {
       <div style={ { marginBottom: '30px' } }>
         <BootstrapTable data={ types } bordered={ false } hover options={ opts } trClassName='tr-middle'>
           <TableHeaderColumn dataField='id' hidden isKey>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='screen'>界面</TableHeaderColumn>
-          <TableHeaderColumn dataField='workflow'>工作流</TableHeaderColumn>
-          <TableHeaderColumn width='100' dataField='status'>状态</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='screen'>interface</TableHeaderColumn>
+          <TableHeaderColumn dataField='workflow'>Workflow</TableHeaderColumn>
+          <TableHeaderColumn width='100' dataField='status'>state</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

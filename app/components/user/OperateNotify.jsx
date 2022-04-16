@@ -26,23 +26,23 @@ export default class OperateNotify extends Component {
     let ecode = 0, msg = '';
     if (operate === 'renew') {
       ecode = await renew(data.id);
-      msg = '密码已重置。'; 
+      msg = 'The password has been reset.'; 
     } else if (operate === 'del') {
       ecode = await del(data.id);
-      msg = '用户已删除。'; 
+      msg = 'The user has been deleted.'; 
     } else if (operate === 'validate') {
       ecode = await invalidate(data.id, 0);
-      msg = '用户已启用。'; 
+      msg = 'The user is enabled.'; 
     } else if (operate === 'invalidate') {
       ecode = await invalidate(data.id, 1);
-      msg = '用户已禁用。'; 
+      msg = 'The user is disabled.'; 
     } else {
       return;
     }
     if (ecode === 0) {
       notify.show(msg, 'success', 2000);    
     } else {
-      notify.show('操作失败。', 'error', 2000);    
+      notify.show('operation failed.', 'error', 2000);    
     }
   }
 
@@ -55,13 +55,13 @@ export default class OperateNotify extends Component {
     const { operate, data } = this.props;
     let operateTitle = '';
     if (operate === 'renew') {
-      operateTitle = '密码重置';
+      operateTitle = 'reset Password';
     } else if (operate === 'del') {
-      operateTitle = '用户删除'
+      operateTitle = 'User delete'
     } else if (operate === 'validate') {
-      operateTitle = '用户启用';
+      operateTitle = 'User is enabled';
     } else if (operate === 'invalidate') {
-      operateTitle = '用户禁用';
+      operateTitle = 'User disabled';
     } else {
       return <div/>;
     }
@@ -73,24 +73,24 @@ export default class OperateNotify extends Component {
         </Modal.Header>
         { operate === 'renew' && 
         <Modal.Body>
-          是否将【{ data.first_name }】该用户密码重置？
+          Will it [{ data.first_name }] This user password reset?
         </Modal.Body> }
         { operate === 'del' && 
         <Modal.Body>
-          用户被删除后，项目中的用户也同时被删除。<br/>
-          是否删除【{ data.first_name }】该用户？
+          After the user is deleted, the user in the project is also deleted at the same time.<br/>
+          delete or not【{ data.first_name }] This user?
         </Modal.Body> }
         { operate === 'validate' &&
         <Modal.Body>
-          是否启用【{ data.first_name }】该用户？
+          Whether to enable【{ data.first_name }] This user?
         </Modal.Body> }
         { operate === 'invalidate' &&
         <Modal.Body>
-          是否禁用【{ data.first_name }】该用户？
+          Is it disabled?{ data.first_name }] This user?
         </Modal.Body> }
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

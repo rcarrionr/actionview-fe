@@ -200,37 +200,37 @@ export default class Sidebar extends Component {
           </div>
           { session.user.permissions && session.user.permissions.sys_admin &&
           <div className='toc-container-body'>
-            <h4 style={ { overflow: 'hidden', textOverflow: 'ellipsis', cursor: 'default' } }>管理员管理面板</h4>
-            <h4 onClick={ toggleShow('adminScheme') }><i className={ this.state.adminSchemeShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />全局方案配置</h4>
+            <h4 style={ { overflow: 'hidden', textOverflow: 'ellipsis', cursor: 'default' } }>Administrator Management Panel</h4>
+            <h4 onClick={ toggleShow('adminScheme') }><i className={ this.state.adminSchemeShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />Global program configuration</h4>
             <ul className={ !this.state.adminSchemeShow && 'hide' }>
-              <li><Link to='/admin/scheme/type' activeClassName='menu-active'>问题类型</Link></li>
-              <li><Link to='/admin/scheme/state' activeClassName='menu-active'>状态</Link></li>
-              <li><Link to='/admin/scheme/workflow' activeClassName='menu-active' id='admin-workflow'>工作流</Link></li>
-              <li><Link to='/admin/scheme/field' activeClassName='menu-active'>字段</Link></li>
-              <li><Link to='/admin/scheme/screen' activeClassName='menu-active'>界面</Link></li>
-              <li><Link to='/admin/scheme/priority' activeClassName='menu-active'>优先级</Link></li>
-              <li><Link to='/admin/scheme/resolution' activeClassName='menu-active'>解决结果</Link></li>
-              <li><Link to='/admin/scheme/role' activeClassName='menu-active'>角色权限</Link></li>
-              <li><Link to='/admin/scheme/events' activeClassName='menu-active'>通知事件</Link></li>
+              <li><Link to='/admin/scheme/type' activeClassName='menu-active'>question type</Link></li>
+              <li><Link to='/admin/scheme/state' activeClassName='menu-active'>state</Link></li>
+              <li><Link to='/admin/scheme/workflow' activeClassName='menu-active' id='admin-workflow'>Workflow</Link></li>
+              <li><Link to='/admin/scheme/field' activeClassName='menu-active'>Field</Link></li>
+              <li><Link to='/admin/scheme/screen' activeClassName='menu-active'>interface</Link></li>
+              <li><Link to='/admin/scheme/priority' activeClassName='menu-active'>priority</Link></li>
+              <li><Link to='/admin/scheme/resolution' activeClassName='menu-active'>Solution</Link></li>
+              <li><Link to='/admin/scheme/role' activeClassName='menu-active'>Role Permissions</Link></li>
+              <li><Link to='/admin/scheme/events' activeClassName='menu-active'>Notice event</Link></li>
             </ul>
-            <h4 onClick={ toggleShow('adminUserManage') }><i className={ this.state.adminUserManageShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />用户管理</h4>
+            <h4 onClick={ toggleShow('adminUserManage') }><i className={ this.state.adminUserManageShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />User Management</h4>
             <ul className={ !this.state.adminUserManageShow && 'hide' }>
-              <li><Link to='/admin/user' activeClassName='menu-active'>用户</Link></li>
-              <li><Link to='/admin/group' activeClassName='menu-active'>用户组</Link></li>
-              <li><Link to='/admin/directory' activeClassName='menu-active'>用户目录</Link></li>
+              <li><Link to='/admin/user' activeClassName='menu-active'>user</Link></li>
+              <li><Link to='/admin/group' activeClassName='menu-active'>user group</Link></li>
+              <li><Link to='/admin/directory' activeClassName='menu-active'>User directory</Link></li>
             </ul>
-            <h4 onClick={ toggleShow('adminProjectManage') }><i className={ this.state.adminProjectManageShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />项目管理</h4>
+            <h4 onClick={ toggleShow('adminProjectManage') }><i className={ this.state.adminProjectManageShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />Project management</h4>
             <ul className={ !this.state.adminProjectManageShow && 'hide' }>
-              <li><Link to='/admin/project' activeClassName='menu-active'>项目</Link></li>
+              <li><Link to='/admin/project' activeClassName='menu-active'>project</Link></li>
             </ul>
-            <h4 onClick={ toggleShow('adminAccessLogs') }><i className={ this.state.adminAccessLogsShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />日志查看</h4>
+            <h4 onClick={ toggleShow('adminAccessLogs') }><i className={ this.state.adminAccessLogsShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />Log View</h4>
             <ul className={ !this.state.adminAccessLogsShow && 'hide' }>
-              <li><Link to='/admin/logs' activeClassName='menu-active'>日志</Link></li>
+              <li><Link to='/admin/logs' activeClassName='menu-active'>Log</Link></li>
             </ul>
-            <h4 onClick={ toggleShow('adminSysSettings') }><i className={ this.state.adminSysSettingsShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />系统配置</h4>
+            <h4 onClick={ toggleShow('adminSysSettings') }><i className={ this.state.adminSysSettingsShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />System Configuration</h4>
             <ul className={ !this.state.adminSysSettingsShow && 'hide' }>
-              <li><Link to='/admin/syssetting' activeClassName='menu-active'>系统配置</Link></li>
-              <li><Link to='/admin/calendar' activeClassName='menu-active'>日历管理</Link></li>
+              <li><Link to='/admin/syssetting' activeClassName='menu-active'>System Configuration</Link></li>
+              <li><Link to='/admin/calendar' activeClassName='menu-active'>Calendar management</Link></li>
             </ul>
           </div> }
         </div>
@@ -247,51 +247,51 @@ export default class Sidebar extends Component {
           { project.item.key ? 
           <div className='toc-container-body'>
             <h4 style={ { overflow: 'hidden', textOverflow: 'ellipsis', cursor: 'default' } } title={ project.item.name }>{ project.item.name || '' }</h4>
-            <h4 onClick={ toggleShow('projectSummary') } ><i className={ this.state.projectSummaryShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />项目概述</h4>
+            <h4 onClick={ toggleShow('projectSummary') } ><i className={ this.state.projectSummaryShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />Project Overview</h4>
             { project.options.permissions && project.options.permissions.length > 0 &&
             <ul className={ !this.state.projectSummaryShow && 'hide' }>
-              <li><Link to={ '/project/' + project.item.key + '/summary' } activeClassName='menu-active' id='summary'>概览</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/issue' } activeClassName='menu-active'>问题</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/kanban' } activeClassName='menu-active' id='kanban'>看板</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/gantt/filter' } activeClassName='menu-active' id='gantt'>甘特图</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/activity' } activeClassName='menu-active'>活动</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/module' } activeClassName='menu-active'>模块</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/version' } activeClassName='menu-active'>版本</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/report' } activeClassName='menu-active' id='report'>统计</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/document' } activeClassName='menu-active' id='document'>文件</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/summary' } activeClassName='menu-active' id='summary'>Overview</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/issue' } activeClassName='menu-active'>question</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/kanban' } activeClassName='menu-active' id='kanban'>signboard</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/gantt/filter' } activeClassName='menu-active' id='gantt'>Gantt chart</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/activity' } activeClassName='menu-active'>Activity</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/module' } activeClassName='menu-active'>Module</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/version' } activeClassName='menu-active'>Version</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/report' } activeClassName='menu-active' id='report'>statistics</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/document' } activeClassName='menu-active' id='document'>document</Link></li>
               <li><Link to={ '/project/' + project.item.key + '/wiki' } activeClassName='menu-active' id='wiki'>Wiki</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/team' } activeClassName='menu-active'>成员</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/team' } activeClassName='menu-active'>member</Link></li>
             </ul> }
-            <h4 onClick={ toggleShow('projectConfig') }><i className={ this.state.projectConfigShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />方案配置</h4>
+            <h4 onClick={ toggleShow('projectConfig') }><i className={ this.state.projectConfigShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />Program configuration</h4>
             { project.options.permissions && project.options.permissions.indexOf('manage_project') !== -1 &&
             <ul className={ !this.state.projectConfigShow && 'hide' }>
-              <li><Link to={ '/project/' + project.item.key + '/config' } activeClassName='menu-active'>概要</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/type' } activeClassName='menu-active'>问题类型</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/state' } activeClassName='menu-active'>状态</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/workflow' } activeClassName='menu-active' id='workflow'>工作流</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/field' } activeClassName='menu-active'>字段</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/screen' } activeClassName='menu-active'>界面</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/priority' } activeClassName='menu-active'>优先级</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/resolution' } activeClassName='menu-active'>解决结果</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/role' } activeClassName='menu-active'>角色权限</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/events' } activeClassName='menu-active'>通知事件</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/config' } activeClassName='menu-active'>overview</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/type' } activeClassName='menu-active'>question type</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/state' } activeClassName='menu-active'>state</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/workflow' } activeClassName='menu-active' id='workflow'>Workflow</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/field' } activeClassName='menu-active'>Field</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/screen' } activeClassName='menu-active'>interface</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/priority' } activeClassName='menu-active'>priority</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/resolution' } activeClassName='menu-active'>Solution</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/role' } activeClassName='menu-active'>Role Permissions</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/events' } activeClassName='menu-active'>Notice event</Link></li>
             </ul> }
             { project.options.permissions && project.options.permissions.indexOf('manage_project') === -1 &&
             <ul className={ !this.state.projectConfigShow && 'hide' }>
-              <li><Link to={ '/project/' + project.item.key + '/config' } activeClassName='menu-active'>概要</Link></li> 
+              <li><Link to={ '/project/' + project.item.key + '/config' } activeClassName='menu-active'>overview</Link></li> 
             </ul> }
             { project.options.permissions && project.options.permissions.indexOf('manage_project') !== -1 &&
-            <h4 onClick={ toggleShow('projectSettings') }><i className={ this.state.projectSettingsShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />项目设置</h4> }
+            <h4 onClick={ toggleShow('projectSettings') }><i className={ this.state.projectSettingsShow ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' } />Project settings</h4> }
             { project.options.permissions && project.options.permissions.indexOf('manage_project') !== -1 &&
             <ul className={ !this.state.projectSettingsShow && 'hide' }>
-              <li><Link to={ '/project/' + project.item.key + '/labels' } activeClassName='menu-active'>标签管理</Link></li>
-              <li><Link to={ '/project/' + project.item.key + '/integrations' } activeClassName='menu-active'>外部用户</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/labels' } activeClassName='menu-active'>Label management</Link></li>
+              <li><Link to={ '/project/' + project.item.key + '/integrations' } activeClassName='menu-active'>External user</Link></li>
               <li><Link to={ '/project/' + project.item.key + '/webhooks' } activeClassName='menu-active'>Webhooks</Link></li>
             </ul> }
             <h4>&nbsp;</h4><h4>&nbsp;</h4>
           </div>
           :
-          <h4 className='toc-container-body'>请选择要查看的项目</h4> } 
+          <h4 className='toc-container-body'>Please select the item you want to view</h4> } 
         </div>
       </div>);
     }

@@ -219,15 +219,15 @@ export default (
   <Route path='/' component={ Layout }>
     <IndexRoute component={ Login }/>
     <Route 
-      onEnter={ ()=> { document.title = '登录' + suffix; } } 
+      onEnter={ ()=> { document.title = 'Log in' + suffix; } } 
       path='/login' component={ Login }/>
     <Route 
       path='/forgot' 
-      onEnter={ ()=> { document.title = '找回密码' + suffix; } } 
+      onEnter={ ()=> { document.title = 'Retrieve password' + suffix; } } 
       component={ Forgot }/>
     <Route 
       path='/resetpwd' 
-      onEnter={ ()=> { document.title = '重置密码' + suffix; } } 
+      onEnter={ ()=> { document.title = 'reset Password' + suffix; } } 
       component={ ResetPwd }/>
     <Route 
       path='/register' 
@@ -235,15 +235,15 @@ export default (
     <Route path='/home' component={ Home }>
       <Route 
         path='/myproject' 
-        onEnter={ ()=> { document.title = '项目中心' + suffix; } } 
+        onEnter={ ()=> { document.title = 'Project center' + suffix; } } 
         getComponent={ ProjectContainer }/>
       <Route 
         path='/mysetting' 
-        onEnter={ ()=> { document.title = '个人设置' + suffix; } } 
+        onEnter={ ()=> { document.title = 'Personal settings' + suffix; } } 
         getComponent={ MysettingContainer }/>
       <Route
         path='/mygroup'
-        onEnter={ ()=> { document.title = '我的群组' + suffix; } }
+        onEnter={ ()=> { document.title = 'My group' + suffix; } }
         getComponent={ GroupContainer }/>
       <Route 
         path='/project/:key' 
@@ -280,31 +280,31 @@ export default (
       </Route>
       <Route 
         path='/admin/project' 
-        onEnter={ ()=> { document.title = '项目列表' + suffix; } } 
+        onEnter={ ()=> { document.title = 'Project list' + suffix; } } 
         getComponent={ ProjectContainer }/>
       <Route 
         path='/admin/user' 
-        onEnter={ ()=> { document.title = '用户' + suffix; } } 
+        onEnter={ ()=> { document.title = 'user' + suffix; } } 
         getComponent={ UserContainer }/>
       <Route 
         path='/admin/group' 
-        onEnter={ ()=> { document.title = '用户组' + suffix; } } 
+        onEnter={ ()=> { document.title = 'user group' + suffix; } } 
         getComponent={ GroupContainer }/>
       <Route 
         path='/admin/directory' 
-        onEnter={ ()=> { document.title = '用户目录' + suffix; } } 
+        onEnter={ ()=> { document.title = 'User directory' + suffix; } } 
         getComponent={ DirectoryContainer }/>
       <Route 
         path='/admin/syssetting' 
-        onEnter={ ()=> { document.title = '系统设置' + suffix; } } 
+        onEnter={ ()=> { document.title = 'System settings' + suffix; } } 
         getComponent={ SyssettingContainer }/>
       <Route 
         path='/admin/logs' 
-        onEnter={ ()=> { document.title = '日志' + suffix; } } 
+        onEnter={ ()=> { document.title = 'Log' + suffix; } } 
         getComponent={ LogsContainer }/>
       <Route
         path='/admin/calendar'
-        onEnter={ ()=> { document.title = '日历管理' + suffix; } }
+        onEnter={ ()=> { document.title = 'Calendar management' + suffix; } }
         getComponent={ CalendarContainer }/>
       <Route 
         path='/admin/scheme' 

@@ -95,7 +95,7 @@ export default class Worklog extends Component {
 
   render() {
     const COLORS = [ '#3b7fc4', '#815b3a', '#8eb021', '#d39c3f', '#654982', '#4a6785', '#f79232', '#f15c75', '#ac707a' ];
-    const sortOptions = [ { value: 'default', label: '默认顺序' }, { value: 'total_asc', label: '总数升序' }, { value: 'total_desc', label: '总数降序' } ];
+    const sortOptions = [ { value: 'default', label: 'Default order' }, { value: 'total_asc', label: 'Total ascending order' }, { value: 'total_desc', label: 'Total number descending' } ];
 
     const { 
       i18n, 
@@ -132,12 +132,12 @@ export default class Worklog extends Component {
     //data = [];
 
     const currentDurations = {
-      '0d': '当天',
-      '0w': '本周',
-      '0m': '当月',
-      '0y': '当前年'
+      '0d': 'On the same day',
+      '0w': 'This week',
+      '0m': 'Month',
+      '0y': 'Current year'
     };
-    const units = { d: '天', w: '周', m: '月', y: '年' };
+    const units = { d: 'sky', w: 'week', m: 'moon', y: 'year' };
 
     let sqlTxt = '';
     if (!optionsLoading) {
@@ -152,9 +152,9 @@ export default class Worklog extends Component {
           const pattern = new RegExp('^(-?)(\\d+)(d|w|m|y)$');
           if (pattern.exec(sections[0])) {
             if (RegExp.$2 == '0') {
-              startCond = '当天';
+              startCond = 'On the same day';
             } else {
-              startCond = RegExp.$2 + units[RegExp.$3] + (RegExp.$1 === '-' ? '前' : '后');
+              startCond = RegExp.$2 + units[RegExp.$3] + (RegExp.$1 === '-' ? 'forward' : 'back');
             }
           }
         } else {
@@ -168,16 +168,16 @@ export default class Worklog extends Component {
             const pattern = new RegExp('^(-?)(\\d+)(d|w|m|y)$');
             if (pattern.exec(sections[1])) {
               if (RegExp.$2 == '0') {
-                endCond = '当天';
+                endCond = 'On the same day';
               } else {
-                endCond = RegExp.$2 + units[RegExp.$3] + (RegExp.$1 === '-' ? '前' : '后');
+                endCond = RegExp.$2 + units[RegExp.$3] + (RegExp.$1 === '-' ? 'forward' : 'back');
               }
             }
           } else {
             endCond = sections[1];
           }
         }
-        sqlTxt = '填报时间: ' + startCond + '~' + endCond;
+        sqlTxt = 'Fill in time: ' + startCond + '~' + endCond;
       }
       const issueSqlTxt = parseQuery(query, options);
       if (sqlTxt && issueSqlTxt) {
@@ -191,15 +191,15 @@ export default class Worklog extends Component {
       <div className='project-report-container'>
         <BackTop />
         <div className='report-title'>
-          人员工作日志报告 
+          Person work log report 
           <Link to={ '/project/' + project.key + '/report' }>
-            <Button bsStyle='link'>返回</Button>
+            <Button bsStyle='link'>return</Button>
           </Link>
         </div>
         <Form horizontal className='report-filter-form'>
           <FormGroup>
             <Col sm={ 1 } componentClass={ ControlLabel }>
-              填报时间
+              Fill in time
             </Col>
             <Col sm={ 6 }>
               <Duration
@@ -212,7 +212,7 @@ export default class Worklog extends Component {
                 bsStyle='link'
                 onClick={ () => { this.setState({ issueFilterShow: !this.state.issueFilterShow }) } }
                 style={ { float: 'right', marginTop: '0px' } }>
-                更多问题过滤 { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
+                More problem filtration { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </Button>
             </Col>
           </FormGroup>
@@ -227,21 +227,21 @@ export default class Worklog extends Component {
         <div className='report-conds-style'>
           { sqlTxt &&
           <div className='cond-bar' style={ { marginTop: '0px', float: 'left' } }>
-            <div className='cond-contents' title={ sqlTxt }><b>检索条件</b>：{ sqlTxt }</div>
-            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='保存当前检索'><i className='fa fa-save'></i></div>
+            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>：{ sqlTxt }</div>
+            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'><i className='fa fa-save'></i></div>
           </div> }
           { data.length > 0 &&
           <ButtonGroup className='report-shape-buttongroup'>
-            <Button title='饼状图' style={ { height: '36px', backgroundColor: this.state.shape == 'pie' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'pie' }) } }>饼状图</Button>
-            <Button title='柱状图' style={ { height: '36px', backgroundColor: this.state.shape == 'bar' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'bar' }) } }>柱状图</Button>
-            <Button title='折线图' style={ { height: '36px', backgroundColor: this.state.shape == 'line' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'line' }) } }>折线图</Button>
+            <Button title='pie chart' style={ { height: '36px', backgroundColor: this.state.shape == 'pie' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'pie' }) } }>pie chart</Button>
+            <Button title='Histogram' style={ { height: '36px', backgroundColor: this.state.shape == 'bar' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'bar' }) } }>Histogram</Button>
+            <Button title='line chart' style={ { height: '36px', backgroundColor: this.state.shape == 'line' && '#eee' } } onClick={ ()=>{ this.setState({ shape: 'line' }) } }>line chart</Button>
           </ButtonGroup> }
           { data.length > 0 &&
           <div className='report-select-sort'>
             <Select
               simpleValue
               clearable={ false }
-              placeholder='选择顺序'
+              placeholder='Select order'
               value={ this.state.sort || 'default' }
               onChange={ (newValue) => { this.setState({ sort: newValue }); } }
               options={ sortOptions }/>
@@ -249,7 +249,7 @@ export default class Worklog extends Component {
           { data.length > 0 &&
           <div style={ { float: 'right', marginRight: '15px' } }>
             <Button onClick={ this.exportWorklog.bind(this) } style={ { height: '36px' } }>
-              <i className='fa fa-download'></i> 导出
+              <i className='fa fa-download'></i> Export
             </Button>
           </div> }
         </div>
@@ -267,10 +267,10 @@ export default class Worklog extends Component {
               <span style={ { fontSize: '160px', color: '#FFC125' } } >
                 <i className='fa fa-warning'></i>
               </span><br/> 
-              <span>抱歉，暂无满足该检索条件的数据。</span>
+              <span>Sorry, there is no data for this search condition.</span>
             </div>
           </div> }
-          { data.length > 0 && <div style={ { marginLeft: '10px', float: 'right' } }>注：图表耗费时间值是以分钟(m)为单位</div> }
+          { data.length > 0 && <div style={ { marginLeft: '10px', float: 'right' } }>Note: The time value of the chart is in minutes(m)Unit</div> }
           { this.state.shape === 'pie' && data.length > 0 &&
           <div className='report-shape-container'>
             <PieChart 
@@ -303,7 +303,7 @@ export default class Worklog extends Component {
               <XAxis dataKey='name' />
               <YAxis />
               <Tooltip formatter={ (value) => { return ttFormat(value, w2m, d2m) } }/>
-              <Bar name='工时' stackId='a' dataKey='value' fill='#3b7fc4'/>
+              <Bar name='Time-hours' stackId='a' dataKey='value' fill='#3b7fc4'/>
             </BarChart>
           </div> }
           { this.state.shape === 'line' && data.length > 0 &&
@@ -317,7 +317,7 @@ export default class Worklog extends Component {
               <YAxis/>
               <CartesianGrid strokeDasharray='3 3'/>
               <Tooltip formatter={ (value) => { return ttFormat(value, w2m, d2m) } }/>
-              <Line name='工时' dataKey='value' stroke='#d04437'/>
+              <Line name='Time-hours' dataKey='value' stroke='#d04437'/>
             </LineChart>
           </div> }
           { data.length > 0 &&
@@ -325,7 +325,7 @@ export default class Worklog extends Component {
             <Table responsive bordered={ true }>
               <thead>
                 <tr>
-                  <th>总计</th>
+                  <th>total</th>
                   { _.map(data, (v, i) => <th key={ i }>{ v.name }</th>) }
                 </tr>
               </thead>
@@ -350,8 +350,8 @@ export default class Worklog extends Component {
         </div> }
         { this.state.worklogListShow &&
         <div id='workloglist' style={ { float: 'left', width: '100%', textAlign: 'center', margin: '15px 0px 30px 0px' } }>
-          <span style={ { fontWeight: '600' } }>{ this.state.showedUser.name || '' } - 工作日志</span>
-          <span title='刷新' onClick={ this.refreshList }><Button bsStyle='link' disabled={ worklogListLoading }><i className='fa fa-refresh'></i></Button></span>
+          <span style={ { fontWeight: '600' } }>{ this.state.showedUser.name || '' } - Work log</span>
+          <span title='Refresh' onClick={ this.refreshList }><Button bsStyle='link' disabled={ worklogListLoading }><i className='fa fa-refresh'></i></Button></span>
           <List
             show
             showedUser={ this.state.showedUser }

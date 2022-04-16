@@ -58,9 +58,9 @@ export default class MonthCard extends Component {
 
   typeText(type) {
     if (type == 'workday') {
-      return '班';
+      return 'class';
     } else if (type == 'holiday') {
-      return '休';
+      return 'stop';
     } else {
       return '';
     }
@@ -93,7 +93,7 @@ export default class MonthCard extends Component {
     } else if (val.lunar) {
       if (val.lunar.target) {
         return val.lunar.target;
-      } else if (val.lunar.day == '初一'){
+      } else if (val.lunar.day == 'First one'){
         return val.lunar.month;
       } else {
         return val.lunar.day;
@@ -114,13 +114,13 @@ export default class MonthCard extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>一</th>
-              <th>二</th>
-              <th>三</th>
-              <th>四</th>
-              <th>五</th>
-              <th className='textdanger'>六</th>
-              <th className='textdanger'>日</th>
+              <th>one</th>
+              <th>two</th>
+              <th>three</th>
+              <th>Four</th>
+              <th>five</th>
+              <th className='textdanger'>six</th>
+              <th className='textdanger'>Day</th>
             </tr>
           </thead>
           <tbody>

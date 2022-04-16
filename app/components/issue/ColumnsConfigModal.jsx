@@ -48,7 +48,7 @@ export default class ColumnsConfigModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -118,7 +118,7 @@ export default class ColumnsConfigModal extends Component {
     return (
       <Modal show onHide={ this.cancel.bind(this) } bsSize='large' backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>显示列配置</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Display column configuration</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           <Form horizontal>
@@ -130,15 +130,15 @@ export default class ColumnsConfigModal extends Component {
                   clearable={ false } 
                   value={ this.state.addFieldIds } 
                   onChange={ this.handleChange.bind(this) } 
-                  placeholder='选择添加字段(可多选)' 
+                  placeholder='Select Add Field(Multiple choice)' 
                   multi/>
                 <Button 
                   style={ { float: 'right', marginTop: '15px' } } 
                   onClick={ this.add.bind(this) } 
-                  disabled={ !enableAdd }>添加至列表 >> 
+                  disabled={ !enableAdd }>Add to list >> 
                 </Button>
                 <div style={ { float: 'right', marginTop: '15px' } }>
-                  注意：<br/>1. 问题列表除前三列（编号、类型和主题）外，其它列支持动态配置。<br/>2. 通过上下拖拽改变列的显示顺序，修改文本框数值(单位：px)调整列的显示宽度。
+                  Notice:<br/>1. The list of questions is in addition to the top three columns (numbered, types, and topics), other columns support dynamic configuration.<br/>2. Modify the value of the text box by dragging the display order of the column by dragging the column up and down(unit:px)Adjust the display width of the column.
                 </div>
               </Col>
               <Col sm={ 6 }>
@@ -157,7 +157,7 @@ export default class ColumnsConfigModal extends Component {
                     );
                   }) 
                   :
-                  <p>显示列表为空。</p>
+                  <p>The display list is empty.</p>
                 }  
               </Col>
             </FormGroup>
@@ -172,10 +172,10 @@ export default class ColumnsConfigModal extends Component {
             checked={ this.state.saveForProject }
             onClick={ () => { this.setState({ saveForProject: !this.state.saveForProject }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            保存作为该项目默认显示列
+            Save as the project default display column
           </Checkbox> }
-          <Button disabled={ loading || (strCards == JSON.stringify(cards) && !this.state.saveForProject) } onClick={ this.save.bind(this) }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>取消</Button>
+          <Button disabled={ loading || (strCards == JSON.stringify(cards) && !this.state.saveForProject) } onClick={ this.save.bind(this) }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

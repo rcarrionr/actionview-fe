@@ -46,14 +46,14 @@ export default class GitCommits extends Component {
         <FormGroup>
           <Col sm={ 12 } className={ indexLoading && 'hide' } style={ { marginTop: '15px', marginBottom: '15px' } }>
             <div>
-              <span className='comments-button' title='刷新' style={ { marginRight: '10px', float: 'right' } } onClick={ () => { indexGitCommits(issue_id, this.state.sort) } }><i className='fa fa-refresh'></i> 刷新</span>
-              <span className='comments-button' title='排序' style={ { marginRight: '10px', float: 'right' } } onClick={ () => { sortGitCommits() } }><i className='fa fa-sort'></i> 排序</span>
+              <span className='comments-button' title='Refresh' style={ { marginRight: '10px', float: 'right' } } onClick={ () => { indexGitCommits(issue_id, this.state.sort) } }><i className='fa fa-refresh'></i> Refresh</span>
+              <span className='comments-button' title='Sort' style={ { marginRight: '10px', float: 'right' } } onClick={ () => { sortGitCommits() } }><i className='fa fa-sort'></i> Sort</span>
               <span style={ { marginRight: '20px', float: 'right' } }>
                 <Checkbox
                   style={ { paddingTop: '0px', minHeight: '18px' } }
                   checked={ this.state.displayTimeFormat == 'absolute' ? true : false }
                   onClick={ this.swapTime.bind(this) }>
-                  显示绝对时间
+                  Show absolute time
                 </Checkbox>
               </span>
             </div>
@@ -61,11 +61,11 @@ export default class GitCommits extends Component {
           <Col sm={ 12 }>
           { indexLoading && <div style={ { width: '100%', textAlign: 'center', marginTop: '15px' } }><img src={ img } className='loading' /></div> }
           { collection.length <= 0 && !indexLoading ?
-            <div style={ { width: '100%', textAlign: 'left', marginTop: '10px', marginLeft: '10px' } }>暂无数据。</div>
+            <div style={ { width: '100%', textAlign: 'left', marginTop: '10px', marginLeft: '10px' } }>No data.</div>
             :
             _.map(collection, (val, i) => {
               const header = ( <div style={ { fontSize: '12px' } }>
-                <span dangerouslySetInnerHTML= { { __html: '<a title="' + (val.author && (val.author.name + '(' + val.author.email + ')')) + '">' + (val.author && val.author.id === currentUser.id ? '我' : val.author.name) + '</a> 提交代码 - ' + (this.state.displayTimeFormat == 'absolute' ? moment.unix(val.committed_at).format('YYYY/MM/DD HH:mm:ss') : getAgoAt(val.committed_at, currentTime)) } } />
+                <span dangerouslySetInnerHTML= { { __html: '<a title="' + (val.author && (val.author.name + '(' + val.author.email + ')')) + '">' + (val.author && val.author.id === currentUser.id ? 'I' : val.author.name) + '</a> Submit code - ' + (this.state.displayTimeFormat == 'absolute' ? moment.unix(val.committed_at).format('YYYY/MM/DD HH:mm:ss') : getAgoAt(val.committed_at, currentTime)) } } />
               </div> ); 
 
               return (

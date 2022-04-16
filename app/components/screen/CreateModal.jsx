@@ -17,7 +17,7 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
 
   return errors;
@@ -64,7 +64,7 @@ export default class CreateModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('新建完成。', 'success', 2000);
+      notify.show('Newly created.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -137,27 +137,27 @@ export default class CreateModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>新建界面</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>New interface</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           <Tabs
             activeKey={ this.state.activeKey }
             onChange={ this.onTabChange.bind(this) } >
-            <TabPane tab='基本' key='1'>
+            <TabPane tab='Basic' key='1'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>界面名</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...name } placeholder='界面名'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Interface name</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...name } placeholder='Interface name'/>
                   { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText'>
-                  <ControlLabel>描述</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...description } placeholder='描述内容'/>
+                  <ControlLabel>describe</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...description } placeholder='Description'/>
                 </FormGroup>
               </div>
             </TabPane>
-            <TabPane tab='字段配置' key='2'>
+            <TabPane tab='Field configuration' key='2'>
               <div style={ { paddingTop: '15px' } }>
                 <Form horizontal>
                   <FormGroup controlId='formControlsText'>
@@ -168,20 +168,20 @@ export default class CreateModal extends Component {
                         clearable={ false } 
                         value={ this.state.addFieldIds } 
                         onChange={ this.handleChange.bind(this) } 
-                        placeholder='选择添加字段(可多选)' 
+                        placeholder='Select Add Field(Multiple choice)' 
                         multi/>
                       <Button 
                         style={ { float: 'right', marginTop: '15px' } } 
                         onClick={ this.add.bind(this) } 
                         disabled={ !enableAdd }>
-                        添加至界面列表 >> 
+                        Add to Interface list >> 
                       </Button>
                       <div style={ { float: 'right', marginTop: '15px' } }>
-                        注意：如果此页面将作为问题的创建或编辑页面，首先应将 "主题" 字段添加到列表，且将其设置为必填字段。
+                        Note: If this page will be created or edited as a problem, you should first "theme" Fields are added to the list and set it to the required field.
                       </div>
                     </Col>
                     <Col sm={ 6 }>
-                      { cards.length > 0 && <div style={ { marginBottom: '8px' } }>通过上下拖拽改变显示顺序。</div> }
+                      { cards.length > 0 && <div style={ { marginBottom: '8px' } }>Change the display order by dragging and drop up and down.</div> }
                       { cards.length > 0 ?
                         cards.map((op, i) => {
                           return (
@@ -194,24 +194,24 @@ export default class CreateModal extends Component {
                           );
                         })
                         :
-                        <p>界面列表为空。</p>
+                        <p>The list of interfaces is empty.</p>
                       }
                     </Col>
                   </FormGroup>
                 </Form>
               </div>
             </TabPane>
-            <TabPane tab='必填字段' key='3'>
+            <TabPane tab='Required field' key='3'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsSelect'>
-                  <ControlLabel>必填字段</ControlLabel>
+                  <ControlLabel>Required field</ControlLabel>
                   <Select 
                     simpleValue 
                     options={ screenFields } 
                     clearable={ false } 
                     value={ required_fields.value } 
                     onChange={ newValue => { required_fields.onChange(newValue) } } 
-                    placeholder='选择必填字段(可多选)' 
+                    placeholder='Select required field(Multiple choice)' 
                     multi/>
                 </FormGroup>
               </div>
@@ -221,8 +221,8 @@ export default class CreateModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -12,51 +12,51 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
   if (!values.host) {
-    errors.host = '必填';
+    errors.host = 'Be required';
   }
   if (!values.port) {
-    errors.port = '必填';
+    errors.port = 'Be required';
   } else if (values.port && !/^[1-9][0-9]*$/.test(values.port)) {
-    errors.port = '必须输入正整数';
+    errors.port = 'Must enter positive integers';
   }
   if (!values.admin_username) {
-    errors.admin_username = '必填';
+    errors.admin_username = 'Be required';
   }
   if (!values.id && !values.admin_password) {
-    errors.admin_password = '必填';
+    errors.admin_password = 'Be required';
   }
   if (!values.base_dn) {
-    errors.base_dn = '必填';
+    errors.base_dn = 'Be required';
   }
   if (!values.user_object_class) {
-    errors.user_object_class = '必填';
+    errors.user_object_class = 'Be required';
   }
   if (!values.user_object_filter) {
-    errors.user_object_filter = '必填';
+    errors.user_object_filter = 'Be required';
   }
   if (!values.user_name_attr) {
-    errors.user_name_attr = '必填';
+    errors.user_name_attr = 'Be required';
   }
   if (!values.user_email_attr) {
-    errors.user_email_attr = '必填';
+    errors.user_email_attr = 'Be required';
   }
   if (!values.group_object_class) {
-    errors.group_object_class = '必填';
+    errors.group_object_class = 'Be required';
   }
   if (!values.group_object_filter) {
-    errors.group_object_filter = '必填';
+    errors.group_object_filter = 'Be required';
   }
   if (!values.group_name_attr) {
-    errors.group_name_attr = '必填';
+    errors.group_name_attr = 'Be required';
   }
   if (!values.groupuser_attr) {
-    errors.groupuser_attr = '必填';
+    errors.groupuser_attr = 'Be required';
   }
   if (!values.usergroup_attr) {
-    errors.usergroup_attr = '必填';
+    errors.usergroup_attr = 'Be required';
   }
   return errors;
 };
@@ -117,13 +117,13 @@ export default class AddLDAPModal extends Component {
       ecode = await edit(values.id, _.omit(values.admin_password ? values : _.omit(values, [ 'admin_password' ]), [ 'id' ]));
       if (ecode === 0){
         close();
-        notify.show('已更新。', 'success', 2000);
+        notify.show('updated.', 'success', 2000);
       }
     } else {
       ecode = await create(_.omit(values, [ 'id' ]));
       if (ecode === 0){
         close();
-        notify.show('已添加。', 'success', 2000);
+        notify.show('added.', 'success', 2000);
       }
     }
     this.setState({ ecode });
@@ -203,7 +203,7 @@ export default class AddLDAPModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ !data.id ? '添加LDAP' : ('编辑LDAP - ' + data.name) }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ !data.id ? 'Add toLDAP' : ('editLDAP - ' + data.name) }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <FormControl type='hidden' { ...id }/>
@@ -211,50 +211,50 @@ export default class AddLDAPModal extends Component {
           <Tabs
             activeKey={ this.state.activeKey }
             onChange={ this.onTabChange.bind(this) } >
-            <TabPane tab='服务器' key='1'>
+            <TabPane tab='server' key='1'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>目录名</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...name } placeholder='目录名'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Directory name</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...name } placeholder='Directory name'/>
                   { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ host.touched && host.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>主机名</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...host } placeholder='主机名'/>
+                  <ControlLabel><span className='txt-impt'>*</span>CPU name</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...host } placeholder='CPU name'/>
                   { host.touched && host.error && <HelpBlock style={ { float: 'right' } }>{ host.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ port.touched && port.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>端口</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...port } placeholder='端口'/>
+                  <ControlLabel><span className='txt-impt'>*</span>port</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...port } placeholder='port'/>
                   { port.touched && port.error && <HelpBlock style={ { float: 'right' } }>{ port.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsSelect'>
-                  <ControlLabel>加密</ControlLabel>
+                  <ControlLabel>encryption</ControlLabel>
                   <Select
                     disabled={ submitting }
                     clearable={ false }
                     searchable={ false }
-                    options={ [ { value: '', label: '无' }, { value: 'tls', label: 'TLS' }, { value: 'ssl', label: 'SSL' } ] }
+                    options={ [ { value: '', label: 'none' }, { value: 'tls', label: 'TLS' }, { value: 'ssl', label: 'SSL' } ] }
                     value={ encryption.value || '' }
                     onChange={ newValue => { encryption.onChange(newValue) } }
-                    placeholder='请选择'/>
+                    placeholder='please choose'/>
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ admin_username.touched && admin_username.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>用户名</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...admin_username } placeholder='用户名(如：cn=admin,dc=actionview,dc=cn)'/>
+                  <ControlLabel><span className='txt-impt'>*</span>username</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...admin_username } placeholder='username(Such as:cn=admin,dc=actionview,dc=cn)'/>
                   { admin_username.touched && admin_username.error && <HelpBlock style={ { float: 'right' } }>{ admin_username.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ !id.value && admin_password.touched && admin_password.error ? 'error' : null }>
                   <ControlLabel>
                     { !id.value ? <span className='txt-impt'>*</span> : <span/> }
-                    密码
+                    password
                     { id.value &&
                     <a style={ { fontWeight: 'normal', fontSize: '12px', cursor: 'pointer', marginLeft: '5px' } }
                       onClick={ (e) => { e.preventDefault(); if (this.state.passwordShow) { admin_password.onChange('') } this.setState({ passwordShow: !this.state.passwordShow }) } }>
-                      { this.state.passwordShow ? '取消' : '设置' }
+                      { this.state.passwordShow ? 'Cancel' : 'set up' }
                     </a> }
                   </ControlLabel>
-                  { this.state.passwordShow && <FormControl disabled={ submitting } type='text' { ...admin_password } placeholder='密码'/> }
+                  { this.state.passwordShow && <FormControl disabled={ submitting } type='text' { ...admin_password } placeholder='password'/> }
                   { !id.value && admin_password.touched && admin_password.error && <HelpBlock style={ { float: 'right' } }>{ admin_password.error }</HelpBlock> }
                 </FormGroup>
               </div>
@@ -263,72 +263,72 @@ export default class AddLDAPModal extends Component {
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsText' validationState={ base_dn.touched && base_dn.error ? 'error' : null }>
                   <ControlLabel><span className='txt-impt'>*</span>Base DN</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...base_dn } placeholder='base DN(如：dc=actionview,dc=cn)'/>
+                  <FormControl disabled={ submitting } type='text' { ...base_dn } placeholder='base DN(Such as:dc=actionview,dc=cn)'/>
                   { base_dn.touched && base_dn.error && <HelpBlock style={ { float: 'right' } }>{ base_dn.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText'>
                   <ControlLabel>Additional User DN</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...additional_user_dn } placeholder='additional user DN(如：ou=dev)'/>
+                  <FormControl disabled={ submitting } type='text' { ...additional_user_dn } placeholder='additional user DN(Such as:ou=dev)'/>
                 </FormGroup>
                 <FormGroup controlId='formControlsText'>
                   <ControlLabel>Additional Group DN</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...additional_group_dn } placeholder='additional group DN(如：ou=dev)'/>
+                  <FormControl disabled={ submitting } type='text' { ...additional_group_dn } placeholder='additional group DN(Such as:ou=dev)'/>
                 </FormGroup>
               </div>
             </TabPane>
-            <TabPane tab='用户' key='3'>
+            <TabPane tab='user' key='3'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsText' validationState={ user_object_class.touched && user_object_class.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>对象类</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...user_object_class } placeholder='对象类'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Object class</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...user_object_class } placeholder='Object class'/>
                   { user_object_class.touched && user_object_class.error && <HelpBlock style={ { float: 'right' } }>{ user_object_class.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ user_object_filter.touched && user_object_filter.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>对象过滤</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...user_object_filter } placeholder='对象过滤'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Object filtering</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...user_object_filter } placeholder='Object filtering'/>
                   { user_object_filter.touched && user_object_filter.error && <HelpBlock style={ { float: 'right' } }>{ user_object_filter.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ user_name_attr.touched && user_name_attr.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>用户名属性</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...user_name_attr } placeholder='用户名属性'/>
+                  <ControlLabel><span className='txt-impt'>*</span>User name properties</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...user_name_attr } placeholder='User name properties'/>
                   { user_name_attr.touched && user_name_attr.error && <HelpBlock style={ { float: 'right' } }>{ user_name_attr.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ user_email_attr.touched && user_email_attr.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>邮箱属性</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...user_email_attr } placeholder='邮箱属性'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Mailbox attribute</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...user_email_attr } placeholder='Mailbox attribute'/>
                   { user_email_attr.touched && user_email_attr.error && <HelpBlock style={ { float: 'right' } }>{ user_email_attr.error }</HelpBlock> }
                 </FormGroup>
               </div>
             </TabPane>
-            <TabPane tab='用户组' key='4'>
+            <TabPane tab='user group' key='4'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsText' validationState={ group_object_class.touched && group_object_class.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>对象类</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...group_object_class } placeholder='对象类'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Object class</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...group_object_class } placeholder='Object class'/>
                   { group_object_class.touched && group_object_class.error && <HelpBlock style={ { float: 'right' } }>{ group_object_class.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ group_object_filter.touched && group_object_filter.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>对象过滤</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...group_object_filter } placeholder='对象过滤'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Object filtering</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...group_object_filter } placeholder='Object filtering'/>
                   { group_object_filter.touched && group_object_filter.error && <HelpBlock style={ { float: 'right' } }>{ group_object_filter.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ group_name_attr.touched && group_name_attr.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>组名属性</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...group_name_attr } placeholder='组名属性'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Group name properties</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...group_name_attr } placeholder='Group name properties'/>
                   { group_name_attr.touched && group_name_attr.error && <HelpBlock style={ { float: 'right' } }>{ group_name_attr.error }</HelpBlock> }
                 </FormGroup>
               </div>
             </TabPane>
-            <TabPane tab='组成员' key='5'>
+            <TabPane tab='Group member' key='5'>
               <div style={ { paddingTop: '15px' } }>
                 <FormGroup controlId='formControlsText' validationState={ groupuser_attr.touched && groupuser_attr.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>组成员属性(组加载成员时使用)</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...groupuser_attr } placeholder='组成员属性'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Group member attribute(Used when adding members)</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...groupuser_attr } placeholder='Group member attribute'/>
                   { groupuser_attr.touched && groupuser_attr.error && <HelpBlock style={ { float: 'right' } }>{ groupuser_attr.error }</HelpBlock> }
                 </FormGroup>
                 <FormGroup controlId='formControlsText' validationState={ usergroup_attr.touched && usergroup_attr.error ? 'error' : null }>
-                  <ControlLabel><span className='txt-impt'>*</span>成员组属性(成员查找组时使用)</ControlLabel>
-                  <FormControl disabled={ submitting } type='text' { ...usergroup_attr } placeholder='成员组属性'/>
+                  <ControlLabel><span className='txt-impt'>*</span>Member group attribute(Members look up in groups)</ControlLabel>
+                  <FormControl disabled={ submitting } type='text' { ...usergroup_attr } placeholder='Member group attribute'/>
                   { usergroup_attr.touched && usergroup_attr.error && <HelpBlock style={ { float: 'right' } }>{ usergroup_attr.error }</HelpBlock> }
                 </FormGroup>
               </div>
@@ -338,8 +338,8 @@ export default class AddLDAPModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

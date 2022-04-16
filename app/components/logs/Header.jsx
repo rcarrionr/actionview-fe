@@ -228,26 +228,26 @@ export default class Header extends Component {
 
   render() {
     const moduleOptions = [
-      { value: 'login', label: '登录' },
-      { value: 'issue', label: '问题' },
-      { value: 'activity', label: '活动' },
-      { value: 'kanban', label: '看板' },
-      { value: 'version', label: '版本' },
-      { value: 'module', label: '模块' },
-      { value: 'document', label: '文档' },
+      { value: 'login', label: 'Log in' },
+      { value: 'issue', label: 'question' },
+      { value: 'activity', label: 'Activity' },
+      { value: 'kanban', label: 'signboard' },
+      { value: 'version', label: 'Version' },
+      { value: 'module', label: 'Module' },
+      { value: 'document', label: 'Documentation' },
       { value: 'wiki', label: 'Wiki' },
-      { value: 'team', label: '成员' },
-      { value: 'type', label: '问题类型' },
-      { value: 'state', label: '状态' },
-      { value: 'workflow', label: '流程' },
-      { value: 'field', label: '字段' },
-      { value: 'screen', label: '界面' },
-      { value: 'prioiry', label: '优先级' },
-      { value: 'resolution', label: '解决结果' },
-      { value: 'role', label: '角色权限' },
-      { value: 'events', label: '通知事件' },
-      { value: 'labels', label: '标签管理' },
-      { value: 'integrations', label: '外部用户' },
+      { value: 'team', label: 'member' },
+      { value: 'type', label: 'question type' },
+      { value: 'state', label: 'state' },
+      { value: 'workflow', label: 'process' },
+      { value: 'field', label: 'Field' },
+      { value: 'screen', label: 'interface' },
+      { value: 'prioiry', label: 'priority' },
+      { value: 'resolution', label: 'Solution' },
+      { value: 'role', label: 'Role Permissions' },
+      { value: 'events', label: 'Notice event' },
+      { value: 'labels', label: 'Label management' },
+      { value: 'integrations', label: 'External user' },
       { value: 'webhooks', label: 'Webhooks' }
     ]; 
 
@@ -271,7 +271,7 @@ export default class Header extends Component {
         horizontal>
         <FormGroup>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            时间 
+            time 
           </Col>
           <Col sm={ 5 }>
             <div style={ { width: '47%', display: 'inline-block', float: 'left' } }>
@@ -281,7 +281,7 @@ export default class Header extends Component {
                 dateFormat={ 'YYYY/MM/DD' }
                 timeFormat={ false }
                 closeOnSelect={ true }
-                inputProps={ { placeholder: '请选择' } }
+                inputProps={ { placeholder: 'please choose' } }
                 value={ this.state.start_time }
                 onChange={ (newValue) => { this.startTimeChange(newValue); } }/>
             </div>
@@ -295,13 +295,13 @@ export default class Header extends Component {
                 dateFormat={ 'YYYY/MM/DD' }
                 timeFormat={ false }
                 closeOnSelect={ true }
-                inputProps={ { placeholder: '请选择' } }
+                inputProps={ { placeholder: 'please choose' } }
                 value={ this.state.end_time }
                 onChange={ (newValue) => { this.endTimeChange(newValue); } }/>
             </div>
           </Col>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            用户
+            user
           </Col>
           <Col sm={ 5 }>
             <Select.Async
@@ -312,13 +312,13 @@ export default class Header extends Component {
               valueKey='id'
               labelKey='nameAndEmail'
               loadOptions={ this.searchUsers }
-              placeholder='输入用户'/>
+              placeholder='Enter user'/>
           </Col>
         </FormGroup>
         { this.state.isExtended &&
         <FormGroup>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            项目
+            project
           </Col>
           <Col sm={ 5 }>
             <Select.Async
@@ -329,26 +329,26 @@ export default class Header extends Component {
               valueKey='key'
               labelKey='name'
               loadOptions={ this.searchProjects }
-              placeholder='输入项目名称或健值'/>
+              placeholder='Enter project name or health'/>
           </Col>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            模块
+            Module
           </Col>
           <Col sm={ 2 }>
             <Select
               simpleValue
-              placeholder='模块'
+              placeholder='Module'
               value={ this.state.module }
               onChange={ this.moduleChange.bind(this) }
               options={ moduleOptions }/>
           </Col>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            方法
+            method
           </Col>
           <Col sm={ 2 }>
             <Select
               simpleValue
-              placeholder='选择方法'
+              placeholder='Method of choosing'
               value={ this.state.method }
               onChange={ this.methodChange.bind(this) }
               options={ methodOptions }/>
@@ -365,10 +365,10 @@ export default class Header extends Component {
               value={ this.state.request_url }
               onKeyDown={ (e) => { if (e.keyCode == '13') { this.refresh(); } } }
               onChange={ (e) => { this.state.request_url = e.target.value; this.setState({ request_url: this.state.request_url }); } }
-              placeholder={ '输入Url' } />
+              placeholder={ 'enterUrl' } />
           </Col>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            来源IP 
+            sourceIP 
           </Col>
           <Col sm={ 2 }>
             <FormControl
@@ -376,15 +376,15 @@ export default class Header extends Component {
               value={ this.state.request_source_ip }
               onKeyDown={ (e) => { if (e.keyCode == '13') { this.refresh(); } } }
               onChange={ (e) => { this.state.request_source_ip = e.target.value; this.setState({ request_source_ip: this.state.request_source_ip }); } }
-              placeholder={ '输入IP地址' } />
+              placeholder={ 'enterIPaddress' } />
           </Col>
           <Col sm={ 1 } componentClass={ ControlLabel }>
-            请求时长
+            Request time
           </Col>
           <Col sm={ 2 }>
             <Select
               simpleValue
-              placeholder='选择请求时长'
+              placeholder='Select the request time'
               value={ this.state.exec_time }
               onChange={ this.execChange.bind(this) }
               options={ execOptions }/>
@@ -393,11 +393,11 @@ export default class Header extends Component {
         <FormGroup style={ { marginBottom: '0px' } }>
           <Col sm={ 12 }>
             <div style={ { float: 'right', marginBottom: '5px', marginTop: '-5px' } }>
-              <Button bsStyle='link' onClick={ this.reset.bind(this) }><i className='fa fa-undo'></i> 重置</Button>
+              <Button bsStyle='link' onClick={ this.reset.bind(this) }><i className='fa fa-undo'></i> Reset</Button>
               { this.state.isExtended ? 
-                <Button bsStyle='link' onClick={ () => { this.setState({ isExtended: false }) } }>收起 <i className='fa fa-angle-double-up'></i></Button>
+                <Button bsStyle='link' onClick={ () => { this.setState({ isExtended: false }) } }>Put away <i className='fa fa-angle-double-up'></i></Button>
                 :
-                <Button bsStyle='link' onClick={ () => { this.setState({ isExtended: true }) } }>更多 <i className='fa fa-angle-double-down'></i></Button> }
+                <Button bsStyle='link' onClick={ () => { this.setState({ isExtended: true }) } }>More <i className='fa fa-angle-double-down'></i></Button> }
             </div>
           </Col>
         </FormGroup>

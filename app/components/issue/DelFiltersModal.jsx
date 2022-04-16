@@ -10,7 +10,7 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.ids) {
-    errors.ids = '必选';
+    errors.ids = 'required';
   }
 
   return errors;
@@ -48,7 +48,7 @@ export default class DelFiltersModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('删除完成。', 'success', 2000);
+      notify.show('Delete is complete.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -73,12 +73,12 @@ export default class DelFiltersModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel.bind(this) } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>过滤器删除</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Filter delete</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel>选择要删除的过滤器</ControlLabel>
+            <ControlLabel>Select the filter to be deleted</ControlLabel>
             <Select 
               simpleValue 
               multi
@@ -87,14 +87,14 @@ export default class DelFiltersModal extends Component {
               clearable={ false } 
               value={ ids.value || null } 
               onChange={ newValue => { ids.onChange(newValue) } } 
-              placeholder='选择过滤器(可多选)'/>
+              placeholder='Select filter(Multiple choice)'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel.bind(this) }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel.bind(this) }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -156,9 +156,9 @@ export default class List extends Component {
     select(id);
     const ecode = await reopen(id);
     if (ecode === 0) {
-      notify.show('已取消归档。', 'success', 2000);    
+      notify.show('The archive has been canceled.', 'success', 2000);    
     } else {
-      notify.show('打开失败。', 'error', 2000);    
+      notify.show('Open failed.', 'error', 2000);    
     }
   }
 
@@ -167,9 +167,9 @@ export default class List extends Component {
     select(id);
     const ecode = await createIndex(id);
     if (ecode === 0) {
-      notify.show('索引已重建。', 'success', 2000);
+      notify.show('The index has been rebuilt.', 'success', 2000);
     } else {
-      notify.show('创建失败。', 'error', 2000);
+      notify.show('Create a failure.', 'error', 2000);
     }
   }
 
@@ -221,12 +221,12 @@ export default class List extends Component {
       this.state.settingPrincipalPids.splice(settingIndex, 1);
 
       this.setState({ willSetPrincipalPids: this.state.willSetPrincipalPids, settingPrincipalPids: this.state.settingPrincipalPids });
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     }else {
       const settingIndex = _.indexOf(this.state.settingPrincipalPids, pid);
       this.state.settingPrincipalPids.splice(settingIndex, 1);
       this.setState({ settingPrincipalPids: this.state.settingPrincipalPids });
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
   }
 
@@ -376,7 +376,7 @@ export default class List extends Component {
                 valueKey='id' 
                 labelKey='nameAndEmail' 
                 loadOptions={ this.searchUsers } 
-                placeholder='请输入用户'/>
+                placeholder='Please enter the user'/>
               <div className={ _.indexOf(settingPrincipalPids, collection[i].id) !== -1 ? 'hide' : '' } style={ { float: 'right' } }>
                 <Button className='edit-ok-button' onClick={ this.setPrincipal.bind(this, collection[i].id) }>
                   <i className='fa fa-check'></i>
@@ -390,7 +390,7 @@ export default class List extends Component {
           <img src={ img } style={ { float: 'right' } } className={ _.indexOf(settingPrincipalPids, collection[i].id) !== -1 ? 'loading' : 'hide' }/>
           </div>
         ),
-        status: collection[i].status == 'active' ? <span className='project-inprogress-label'>活动中</span> : <span className='project-close-label'>已归档</span>,
+        status: collection[i].status == 'active' ? <span className='project-inprogress-label'>In the event</span> : <span className='project-close-label'>Filed</span>,
         operation: (
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading &&
@@ -402,10 +402,10 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='1'>编辑</MenuItem>
-              { collection[i].status == 'active' ? <MenuItem eventKey='2'>归档</MenuItem> : <MenuItem eventKey='3'>取消归档</MenuItem> }
-              <MenuItem eventKey='4'>重建索引</MenuItem>
-              <MenuItem eventKey='5'>删除</MenuItem>
+              <MenuItem eventKey='1'>edit</MenuItem>
+              { collection[i].status == 'active' ? <MenuItem eventKey='2'>Archive</MenuItem> : <MenuItem eventKey='3'>Cancel archive</MenuItem> }
+              <MenuItem eventKey='4'>Reconstruction index</MenuItem>
+              <MenuItem eventKey='5'>delete</MenuItem>
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -417,7 +417,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -442,15 +442,15 @@ export default class List extends Component {
               <Select
                 simpleValue
                 clearable={ false }
-                placeholder='项目状态'
+                placeholder='project status'
                 value={ this.state.status }
                 onChange={ this.statusChange.bind(this) }
-                options={ [{ value: 'all', label: '全部' }, { value: 'active', label: '活动中' }, { value: 'archived', label: '已归档' }] }/>
+                options={ [{ value: 'all', label: 'all' }, { value: 'active', label: 'In the event' }, { value: 'archived', label: 'Filed' }] }/>
             </span>
             <span style={ { float: 'right', width: '22%', marginRight: '10px' } }>
               <Select
                 simpleValue
-                placeholder='责任人'
+                placeholder='Responsible'
                 value={ this.state.principal_id }
                 onChange={ this.principalChange.bind(this) }
                 options={ _.map(options.principals, (v) => { return { value: v.id, label: v.name + '(' + v.email + ')' } } ) }/>
@@ -462,19 +462,19 @@ export default class List extends Component {
                 style={ { height: '36px' } }
                 value={ this.state.name }
                 onChange={ (e) => { this.setState({ name: e.target.value }) } }
-                placeholder={ '项目名、键值查询...' } />
+                placeholder={ 'Project name, key value query...' } />
             </span>
             { this.state.selectedIds.length > 0 &&
             <span style={ { float: 'left', marginRight: '10px' } }>
-              <DropdownButton title='操作' onSelect={ this.multiOperateSelect.bind(this) }>
-                <MenuItem eventKey='archive'>归档</MenuItem>
-                <MenuItem eventKey='reopen'>取消归档</MenuItem>
-                <MenuItem eventKey='create_index'>重建索引</MenuItem>
+              <DropdownButton title='operate' onSelect={ this.multiOperateSelect.bind(this) }>
+                <MenuItem eventKey='archive'>Archive</MenuItem>
+                <MenuItem eventKey='reopen'>Cancel archive</MenuItem>
+                <MenuItem eventKey='create_index'>Reconstruction index</MenuItem>
               </DropdownButton>
             </span> }
             <span style={ { float: 'left', width: '20%' } }>
               <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }>
-                <i className='fa fa-plus'></i>&nbsp;新建项目
+                <i className='fa fa-plus'></i>&nbsp;New Project
               </Button>
             </span>
           </FormGroup>
@@ -482,10 +482,10 @@ export default class List extends Component {
         <div>
           <BootstrapTable data={ projects } bordered={ false } hover options={ opts } trClassName='tr-middle' selectRow={ selectRowProp }>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-            <TableHeaderColumn dataField='key' width='170'>键值</TableHeaderColumn>
-            <TableHeaderColumn dataField='principal' width='320'>责任人</TableHeaderColumn>
-            <TableHeaderColumn dataField='status' width='80'>状态</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+            <TableHeaderColumn dataField='key' width='170'>Key value</TableHeaderColumn>
+            <TableHeaderColumn dataField='principal' width='320'>Responsible</TableHeaderColumn>
+            <TableHeaderColumn dataField='status' width='80'>state</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { this.state.editModalShow && 

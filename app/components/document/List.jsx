@@ -92,15 +92,15 @@ export default class List extends Component {
     const ecode = await favorite(selectedItem.id, !selectedItem.favorited);
     if (ecode === 0) {
       if (selectedItem.favorited) {
-        notify.show('已收藏。', 'success', 2000);
+        notify.show('collected.', 'success', 2000);
       } else {
-        notify.show('已取消收藏。', 'success', 2000);
+        notify.show('Has been canceled.', 'success', 2000);
       }
     } else {
       if (selectedItem.favorited) {
-        notify.show('收藏失败。', 'error', 2000);
+        notify.show('Failure to collect.', 'error', 2000);
       } else {
-        notify.show('取消失败。', 'error', 2000);
+        notify.show('Cancel failed.', 'error', 2000);
       }
     }
   }
@@ -147,7 +147,7 @@ export default class List extends Component {
     if (res.ecode === 0 && res.data) {
       addFile(res.data);
     } else {
-      notify.show('文档上传失败。', 'error', 2000);
+      notify.show('Document upload failed.', 'error', 2000);
     }
   }
 
@@ -205,13 +205,13 @@ export default class List extends Component {
       postUrl: API_BASENAME + '/project/' + project.key + '/document/' + (directory ? (directory + '/') : '') + 'upload'
     };
     const djsConfig = {
-      dictDefaultMessage: '点击或拖拽文件至此',
+      dictDefaultMessage: 'Click or drag and drop files',
       addRemoveLinks: true
     };
     const eventHandlers = {
       init: dz => this.dropzone = dz,
       success: (localfile, response) => { this.uploadSuccess(localfile, response); this.dropzone.removeFile(localfile); }, 
-      error: (localfile) => { notify.show('文档上传失败。', 'error', 2000); this.dropzone.removeFile(localfile); }
+      error: (localfile) => { notify.show('Document upload failed.', 'error', 2000); this.dropzone.removeFile(localfile); }
     }
 
     const node = ( <span><i className='fa fa-cog'></i></span> );
@@ -224,7 +224,7 @@ export default class List extends Component {
         name: (
           <div>
             <span style={ { marginRight: '5px', color: '#FFD300' } }><i className='fa fa-arrow-up'></i></span>
-            <Link to={ '/project/' + project.key + '/document' + (parent.id !== '0' ? ( '/' + parent.id ) : '') }>返回上级</Link>
+            <Link to={ '/project/' + project.key + '/document' + (parent.id !== '0' ? ( '/' + parent.id ) : '') }>Return to the upper level</Link>
           </div> ),
         operation: (<div/>)
       });
@@ -271,7 +271,7 @@ export default class List extends Component {
             <span style={ { marginRight: '5px', color: '#FFD300' } }><i className='fa fa-folder'></i></span>
             <Link to={ '/project/' + project.key + '/document/' + v.id }>{ v.name }</Link>
             { v.favorited &&
-            <span title='点击取消收藏' style={ { float: 'right', color: '#FFD300', cursor: 'pointer' } } onClick={ (e) => { this.favorite(v.id) } }><i className='fa fa-star'></i></span> }
+            <span title='Click to cancel collection' style={ { float: 'right', color: '#FFD300', cursor: 'pointer' } } onClick={ (e) => { this.favorite(v.id) } }><i className='fa fa-star'></i></span> }
           </div> ),
         operation: (
           <div>
@@ -288,11 +288,11 @@ export default class List extends Component {
               id={ `dropdown-basic-${i}` }
               onClick={ this.cancelEditRow }
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='download'>下载</MenuItem>
-              <MenuItem eventKey='favorite'>{ v.favorited ? '取消收藏' : '收藏' }</MenuItem>
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='rename'>重命名</MenuItem> } 
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='move'>移动</MenuItem> }
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='del'>删除</MenuItem> }
+              <MenuItem eventKey='download'>download</MenuItem>
+              <MenuItem eventKey='favorite'>{ v.favorited ? 'Cancel' : 'collect' }</MenuItem>
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='rename'>Heavy naming</MenuItem> } 
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='move'>move</MenuItem> }
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === v.id) ? 'loading' : 'hide' }/>
           </div>)
@@ -338,9 +338,9 @@ export default class List extends Component {
               </a> }
             <span style={ { float: 'right' } }>
               { files[i].parent != directory && 
-              <Link to={ '/project/' + project.key + '/document' + (files[i].parent == '0' ? '' : ('/' + files[i].parent) ) }><span style={ { marginRight: '10px', float: 'left' } }>打开目录</span></Link> }
+              <Link to={ '/project/' + project.key + '/document' + (files[i].parent == '0' ? '' : ('/' + files[i].parent) ) }><span style={ { marginRight: '10px', float: 'left' } }>open Directory</span></Link> }
               { files[i].favorited &&
-              <span title='点击取消收藏' style={ { float: 'left', color: '#FFD300', cursor: 'pointer', marginRight: '10px' } } onClick={ (e) => { this.favorite(files[i].id) } }><i className='fa fa-star'></i></span> }
+              <span title='Click to cancel collection' style={ { float: 'left', color: '#FFD300', cursor: 'pointer', marginRight: '10px' } } onClick={ (e) => { this.favorite(files[i].id) } }><i className='fa fa-star'></i></span> }
               { files[i].uploader &&
               <span style={ { marginRight: '10px', float: 'left' } }>
                 { files[i].uploader.name + '  ' + moment.unix(files[i].uploaded_at).format('YYYY/MM/DD HH:mm') }
@@ -363,11 +363,11 @@ export default class List extends Component {
               id={ `dropdown-basic-${i}` } 
               onClick={ this.cancelEditRow }
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='download'>下载</MenuItem>
-              <MenuItem eventKey='favorite'>{ files[i].favorited ? '取消收藏' : '收藏' }</MenuItem>
-              { options.permissions && (options.permissions.indexOf('manage_project') !== -1 || files[i].uploader.id == user.id) && <MenuItem eventKey='rename'>重命名</MenuItem> }
-              { options.permissions && (options.permissions.indexOf('manage_project') !== -1 || files[i].uploader.id == user.id) && <MenuItem eventKey='move'>移动</MenuItem> }
-              { options.permissions && (options.permissions.indexOf('manage_project') !== -1 || files[i].uploader.id == user.id) && <MenuItem eventKey='del'>删除</MenuItem> }
+              <MenuItem eventKey='download'>download</MenuItem>
+              <MenuItem eventKey='favorite'>{ files[i].favorited ? 'Cancel' : 'collect' }</MenuItem>
+              { options.permissions && (options.permissions.indexOf('manage_project') !== -1 || files[i].uploader.id == user.id) && <MenuItem eventKey='rename'>Heavy naming</MenuItem> }
+              { options.permissions && (options.permissions.indexOf('manage_project') !== -1 || files[i].uploader.id == user.id) && <MenuItem eventKey='move'>move</MenuItem> }
+              { options.permissions && (options.permissions.indexOf('manage_project') !== -1 || files[i].uploader.id == user.id) && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === files[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -379,7 +379,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -390,7 +390,7 @@ export default class List extends Component {
         <BackTop />
         <BootstrapTable data={ rows } bordered={ false } hover options={ opts } trClassName='tr-middle'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
 
@@ -400,7 +400,7 @@ export default class List extends Component {
             nextSrc={  API_BASENAME + '/project/' + project.key + '/document/' + imgFiles[(photoIndex + 1) % imgFiles.length].id + '/download' }
             prevSrc={  API_BASENAME + '/project/' + project.key + '/document/' + imgFiles[(photoIndex + imgFiles.length - 1) % imgFiles.length].id + '/download' }
             imageTitle={ imgFiles[photoIndex].name }
-            imageCaption={ imgFiles[photoIndex].uploader.name + ' 上传于 ' + moment.unix(imgFiles[photoIndex].uploaded_at).format('YYYY/MM/DD HH:mm') }
+            imageCaption={ imgFiles[photoIndex].uploader.name + ' upload to ' + moment.unix(imgFiles[photoIndex].uploaded_at).format('YYYY/MM/DD HH:mm') }
             onCloseRequest={ () => { this.setState({ imgPreviewShow: false }) } }
             onMovePrevRequest={ () => this.setState({ photoIndex: (photoIndex + imgFiles.length - 1) % imgFiles.length }) }
             onMoveNextRequest={ () => this.setState({ photoIndex: (photoIndex + 1) % imgFiles.length }) } /> }
@@ -410,11 +410,11 @@ export default class List extends Component {
             <DropzoneComponent style={ { height: '200px' } } config={ componentConfig } eventHandlers={ eventHandlers } djsConfig={ djsConfig } />
           </div> }
         <div style={ { marginLeft: '5px', marginTop: '15px', marginBottom: '20px' } }>
-          { !indexLoading && collection.length > 0 && <span>共计 文件夹 { _.filter(collection, { d: 1 }).length } 个，文件 { _.reject(collection, { d: 1 }).length } 个。</span> }
+          { !indexLoading && collection.length > 0 && <span>total folder { _.filter(collection, { d: 1 }).length } File { _.reject(collection, { d: 1 }).length } indivual.</span> }
           { collection.length > 1 && _.isEmpty(query) && options.path.length > 1 && 
           <span style={ { marginLeft: '10px' } }>
             <i className='fa fa-download'></i>
-            <a href='#' onClick={ (e) => { e.preventDefault(); this.downloadAll(); } }>下载全部</a>
+            <a href='#' onClick={ (e) => { e.preventDefault(); this.downloadAll(); } }>Download all</a>
           </span> }
         </div>
         { this.state.copyModalShow &&

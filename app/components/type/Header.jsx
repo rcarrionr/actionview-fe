@@ -35,9 +35,9 @@ export default class Header extends Component {
     const { setDefault } = this.props;
     const ecode = await setDefault({ 'defaultValue': defaultValue });
     if (ecode === 0) {
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
     // fix me add tip
     this.setState({ defaultSetShow: false });
@@ -70,14 +70,14 @@ export default class Header extends Component {
       <div>
         <div style={ { marginTop: '5px' } }>
           <Button className='create-btn' onClick={ () => { this.setState({ createModalShow: true }); } }>
-            <i className='fa fa-plus'></i>&nbsp;新建类型
+            <i className='fa fa-plus'></i>&nbsp;New type
           </Button>
           { !indexLoading && 
             <Button className='create-btn' onClick={ () => { this.setState({ sortCardsModalShow: true }); } }>
-              <i className='fa fa-edit'></i>&nbsp;编辑顺序
+              <i className='fa fa-edit'></i>&nbsp;Editing order
             </Button> }
           <div className={ indexLoading ? 'hide' : 'div-default-set' }>
-            <span className='default-set'>默认类型：</span>
+            <span className='default-set'>Default type:</span>
             { this.state.defaultSetShow ? 
               <div className='default-set'>
                 <div className='edit-field-content'>
@@ -97,7 +97,7 @@ export default class Header extends Component {
               </div>
               :
               <span className='default-set editable-field'>
-                <span style={ { paddingRight: '10px' } }>{ collection[defaultIndex] ? collection[defaultIndex].name : '无' }</span>
+                <span style={ { paddingRight: '10px' } }>{ collection[defaultIndex] ? collection[defaultIndex].name : 'none' }</span>
                 <Button className='edit-icon' onClick={ () => { this.setState({ defaultSetShow: true }); } }>
                   <i className='fa fa-pencil'></i>
                 </Button>
@@ -108,9 +108,9 @@ export default class Header extends Component {
         <div className='info-col'>
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'>
-            <span>每一个问题类型都需要绑定自己的界面和工作流。</span>
-            { isSysConfig || <span><br/>只能删除没有应用到项目问题中的类型，如果将某一类型在创建或编辑问题时移除可使用禁用功能。</span> }
-            { isSysConfig || <span><br/>若要创建子任务类型问题，需指定有效的子任务类型的问题类型。</span> }
+            <span>Each problem type needs to be bound to your interface and workflow.</span>
+            { isSysConfig || <span><br/>You can only delete the type where you are not applied to the project problem. If you remove a type to the disabled function when you create or edit the problem.</span> }
+            { isSysConfig || <span><br/>To create subtrans type issues, you need to specify a valid sub-task type problem type.</span> }
           </div>
         </div>
         { this.state.createModalShow && 
@@ -124,7 +124,7 @@ export default class Header extends Component {
         { this.state.sortCardsModalShow && 
           <SortCardsModal 
             show 
-            model='类型'
+            model='type'
             close={ this.sortCardsModalClose } 
             cards={ collection } 
             setSort={ setSort } 

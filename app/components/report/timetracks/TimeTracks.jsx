@@ -122,7 +122,7 @@ export default class TimeTracks extends Component {
 
     let sqlTxt = '';
     if (!optionsLoading) {
-      sqlTxt = '统计范围: ' + (query.scale === 'only' ? '仅包含有初始预估时间的' : '所有问题');
+      sqlTxt = 'Statistics: ' + (query.scale === 'only' ? 'Only include initial estimation time' : 'All questions');
       const issueSqlTxt = parseQuery(query, options);
       if (issueSqlTxt) {
         sqlTxt += ' | ' + issueSqlTxt;
@@ -195,7 +195,7 @@ export default class TimeTracks extends Component {
       timetracks.push({
         id: 'xxx',
         type: '',
-        name: '合计',
+        name: 'total',
         state: '',
         origin: total.origin,
         spend: total.spend,
@@ -208,38 +208,38 @@ export default class TimeTracks extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。';
+      opts.noDataText = 'No data is displayed yet.';
     }
 
     return ( 
       <div className='project-report-container'>
         <BackTop />
         <div className='report-title'>
-          问题时间跟踪报告 
+          Problem time tracking report 
           <Link to={ '/project/' + project.key + '/report' }>
-            <Button bsStyle='link'>返回</Button>
+            <Button bsStyle='link'>return</Button>
           </Link>
         </div>
         <Form horizontal className='report-filter-form'>
           <FormGroup>
             <Col sm={ 1 } componentClass={ ControlLabel }>
-              统计范围
+              Statistics
             </Col>
             <Col sm={ 4 }>
               <Select
                 simpleValue
                 clearable={ false }
-                placeholder='请选择'
+                placeholder='please choose'
                 value={ this.state.scale }
                 onChange={ (newValue) => { this.state.scale = newValue; this.search(); } }
-                options={ [ { value: 'all', label: '所有问题' }, { value: 'only', label: '仅包含有初始预估时间的' } ] }/>
+                options={ [ { value: 'all', label: 'All questions' }, { value: 'only', label: 'Only include initial estimation time' } ] }/>
             </Col>
             <Col sm={ 7 }>
               <Button
                 bsStyle='link'
                 onClick={ () => { this.setState({ issueFilterShow: !this.state.issueFilterShow }) } }
                 style={ { float: 'right', marginTop: '0px' } }>
-                更多问题过滤 { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
+                More problem filtration { this.state.issueFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </Button>
             </Col>
           </FormGroup>
@@ -256,29 +256,29 @@ export default class TimeTracks extends Component {
         <div className='report-conds-style'>
           { sqlTxt &&
           <div className='cond-bar' style={ { marginTop: '0px', float: 'left' } }>
-            <div className='cond-contents' title={ sqlTxt }><b>检索条件</b>：{ sqlTxt }</div>
-            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='保存当前检索'><i className='fa fa-save'></i></div>
+            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>：{ sqlTxt }</div>
+            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'><i className='fa fa-save'></i></div>
           </div> }
         </div>
         { !indexLoading && collection.length > 0 && <Summary options={ options } values={ total }/> }
         <div style={ { marginBottom: '30px' } }>
           { collection.length >= 1000 &&
             <div style={ { color: 'red' } }>
-              <span>注：最多统计满足当前检索条件下的1000条结果。</span>
+              <span>Note: Most statistics meet the current retrieval conditions1000Sign.</span>
             </div> }
           <BootstrapTable selectRow={ selectRowProp } data={ timetracks } bordered={ false } headerStyle={ { backgroundColor: '#fff' } } hover options={ opts }>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='type' width='50'>类型</TableHeaderColumn>
-            <TableHeaderColumn dataField='state' width='100'>状态</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-            <TableHeaderColumn dataField='origin' width='120'>初始预估时间</TableHeaderColumn>
-            <TableHeaderColumn dataField='spend' width='120'>耗费时间</TableHeaderColumn>
-            <TableHeaderColumn dataField='left' width='120'>剩余时间</TableHeaderColumn>
-            <TableHeaderColumn dataField='diff' width='120'>误差</TableHeaderColumn>
+            <TableHeaderColumn dataField='type' width='50'>type</TableHeaderColumn>
+            <TableHeaderColumn dataField='state' width='100'>state</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+            <TableHeaderColumn dataField='origin' width='120'>Initial estimation time</TableHeaderColumn>
+            <TableHeaderColumn dataField='spend' width='120'>waste time</TableHeaderColumn>
+            <TableHeaderColumn dataField='left' width='120'>Time left</TableHeaderColumn>
+            <TableHeaderColumn dataField='diff' width='120'>error</TableHeaderColumn>
           </BootstrapTable>
           { collection.length > 0 &&
           <div>
-            <span>共计 { collection.length } 条</span>
+            <span>total { collection.length } strip</span>
           </div> }
         </div>
         { this.state.saveFilterShow &&

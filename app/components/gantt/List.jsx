@@ -262,7 +262,7 @@ export default class List extends Component {
       sy = sy + container.scrollTop();
       ey = ey + container.scrollTop();
 
-      //绘制连接线条
+      //Draw connection line
       ctx.beginPath();
       ctx.strokeStyle = 'red';
       ctx.moveTo(sx, sy);
@@ -487,9 +487,9 @@ export default class List extends Component {
 
     const ecode = await edit(block.attr('data-id'), { expect_start_time: newStart, expect_complete_time: newEnd });
     if (ecode === 0) {
-      notify.show('已更新。', 'success', 2000);
+      notify.show('updated.', 'success', 2000);
     } else {
-      notify.show('更新失败。', 'error', 2000);
+      notify.show('Update failed.', 'error', 2000);
     }
 
     block.css('top', '0px').css('left', '0px').css('height', blockHeight).css('position', 'relative');
@@ -854,57 +854,57 @@ export default class List extends Component {
       <div>
         <div style={ { marginTop: '10px', height: '25px' } }>
           <span>
-            <span style={ { marginRight: '5px', fontWeight: 600 } }>排序:</span> 
+            <span style={ { marginRight: '5px', fontWeight: 600 } }>Sort:</span> 
             { sortkey== 'start_time_asc' ?
-              <span>开始时间</span>
+              <span>Starting time</span>
               :
               <a href='#' onClick={ (e) => { e.preventDefault(); this.setSort('start_time_asc') } }>
-                开始时间
+                Starting time
               </a> }
             <span className='ganttview-divider'> | </span>
             { sortkey== 'create_time_asc' ?
-              <span>创建时间</span>
+              <span>Create time</span>
               :
               <a href='#' onClick={ (e) => { e.preventDefault(); this.setSort('create_time_asc') } }>
-                创建时间
+                Create time
               </a> }
             <span className='ganttview-divider'> | </span>
             { sortkey== 'title_asc' ?
-              <span>主题</span>
+              <span>theme</span>
               :
               <a href='#' onClick={ (e) => { e.preventDefault(); this.setSort('title_asc') } }>
-                主题 
+                theme 
               </a> }
           </span>
           <span style={ { marginLeft: '15px' } }>
-            <span style={ { marginRight: '5px', fontWeight: 600 } }> 显示:</span>
+            <span style={ { marginRight: '5px', fontWeight: 600 } }> show:</span>
             { mode == 'progress' ?
-              <span>按进度</span>
+              <span>According to progress</span>
               :
-              <a href='#' onClick={ (e) => { e.preventDefault(); this.selectMode('progress'); } }>按进度</a> }
+              <a href='#' onClick={ (e) => { e.preventDefault(); this.selectMode('progress'); } }>According to progress</a> }
             <span className='ganttview-divider'> | </span>
             { mode == 'status' ?
-              <span>按状态</span>
+              <span>Press</span>
               :
-              <a href='#' onClick={ (e) => { e.preventDefault(); this.selectMode('status'); } }>按状态</a> }
+              <a href='#' onClick={ (e) => { e.preventDefault(); this.selectMode('status'); } }>Press</a> }
           </span>
           <a href='#' onClick={ (e) => { e.preventDefault(); this.locateToday(); } }>
             <span style={ { marginLeft: '15px' } }>
-              <i className='fa fa-dot-circle-o'></i> 今天 
+              <i className='fa fa-dot-circle-o'></i> today 
             </span>
           </a>
           <span style={ { float: 'right', marginRight: '5px' } }>
-            <span title='缩小' className={ scaling <= 0.6 || collection.length <= 0 ? 'ganttview-fa-button-disable' : 'ganttview-fa-button' } onClick={ (e) => { this.changeScaling('-') } }>
+            <span title='Narrow' className={ scaling <= 0.6 || collection.length <= 0 ? 'ganttview-fa-button-disable' : 'ganttview-fa-button' } onClick={ (e) => { this.changeScaling('-') } }>
               <i className='fa fa-search-minus'></i>
             </span>
-            <span title='放大' className={ scaling >= 1 || collection.length <= 0 ? 'ganttview-fa-button-disable' : 'ganttview-fa-button' } onClick={ (e) => { this.changeScaling('+') } }>
+            <span title='enlarge' className={ scaling >= 1 || collection.length <= 0 ? 'ganttview-fa-button-disable' : 'ganttview-fa-button' } onClick={ (e) => { this.changeScaling('+') } }>
               <i className='fa fa-search-plus'></i>
             </span>
-            <span className='ganttview-fa-button' title={ isHeaderHidden ? '展示头部' : '隐藏头部' } onClick={ toggleHeader }>
+            <span className='ganttview-fa-button' title={ isHeaderHidden ? 'Show head' : 'Hide the head' } onClick={ toggleHeader }>
               <i className={ isHeaderHidden ? 'fa fa-angle-double-down' : 'fa fa-angle-double-up' }></i>
             </span>
           </span>
-          { options.permissions && (options.permissions.indexOf('edit_issue') !== -1 || options.permissions.indexOf('edit_self_issue') !== -1) && <span className='ganttview-msg-notice'>注：移动或调整任务条将改变任务的开始时间和完成时间，也可通过双击任务条修改。</span> }
+          { options.permissions && (options.permissions.indexOf('edit_issue') !== -1 || options.permissions.indexOf('edit_self_issue') !== -1) && <span className='ganttview-msg-notice'>Note: Move or adjust the task bar will change the start time and completion time of the task, or you can modify it by double-click the task.</span> }
         </div>
         { indexLoading && 
         <div style={ { textAlign: 'center', paddingTop: '50px' } }>
@@ -915,7 +915,7 @@ export default class List extends Component {
           <span style={ { fontSize: '160px', color: '#FFC125' } } >
             <i className='fa fa-warning'></i>
           </span><br/>
-          <span>抱歉，暂无满足该检索条件的数据。</span>
+          <span>Sorry, there is no data for this search condition.</span>
         </div> }
         { !indexLoading && collection.length > 0 &&  
         <div className='ganttview'>

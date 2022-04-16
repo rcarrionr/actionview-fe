@@ -24,13 +24,13 @@ export default class AboutModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>关于</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>about</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { overflow: 'auto' } }>
           <div style={ { margin: '20px 0px', textAlign: 'center' } }><img src={ logo } width={ 150 }/></div>
           <div style={ { textAlign: 'center' } }>
-            <span>当前版本: 1.13.1</span>
-            <a href='https://github.com/lxerxa/actionview/releases' target='_blank'><span style={ { marginLeft: '10px' } }>新版变化</span></a>
+            <span>current version: 1.13.1</span>
+            <a href='https://github.com/lxerxa/actionview/releases' target='_blank'><span style={ { marginLeft: '10px' } }>New version change</span></a>
           </div>
           <div style={ { marginTop: '30px' } }>
             <table style={ { width: '100%' } }>
@@ -57,18 +57,18 @@ export default class AboutModal extends Component {
             </table>
           </div>
           <div style={ { margin: '40px' } }>
-            <span>一个面向中小企业的、开源免费的、简单易用的、类Jira的问题需求跟踪工具。目标是成为企业开源研发工具链中的重要一环。</span>
+            <span>A free, easy to use, easy to use, easy to use for SMEsJiraProblem requirement tracking tool.The goal is an important part of the company's open source research and development tool chain.</span>
           </div>
           <div style={ { margin: '40px', textAlign: 'center' } }>
-            <span>想帮忙吗？<a href='https://github.com/lxerxa/actionview' target='_blank'>欢迎参与！</a></span>
-            <span>有什么问题或建议，<a href='https://github.com/lxerxa/actionview/issues' target='_blank'>欢迎提出！</a></span>
+            <span>Want to help?<a href='https://github.com/lxerxa/actionview' target='_blank'>Welcome!</a></span>
+            <span>What is wrong or suggestions,<a href='https://github.com/lxerxa/actionview/issues' target='_blank'>Welcome!</a></span>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <a href='https://github.com/lxerxa/actionview/blob/master/LICENSE.txt' target='_blank'>
-            <span style={ { float: 'left', marginTop: '5px', marginLeft: '5px' } }>授权信息</span>
+            <span style={ { float: 'left', marginTop: '5px', marginLeft: '5px' } }>Authorization information</span>
           </a>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

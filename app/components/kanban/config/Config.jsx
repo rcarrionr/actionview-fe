@@ -145,20 +145,20 @@ export default class Config extends Component {
       id: 'basic',
       title: (
         <div>
-          <span className='kanban-table-td-title'>基本信息</span>
+          <span className='kanban-table-td-title'>Basic Information</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0, marginBottom: '10px' } }>
-            <li>名称：{ config.name || '-' }</li>
-            <li>类型：{ config.type || '-' }</li>
-            <li>描述：{ config.description || '-' }</li>
+            <li>name:{ config.name || '-' }</li>
+            <li>type:{ config.type || '-' }</li>
+            <li>describe:{ config.description || '-' }</li>
           </ul>
           { isAllowedEdit &&
-          <Button onClick={ () => { this.setState({ editModalShow: true }) } }>编辑</Button> }
+          <Button onClick={ () => { this.setState({ editModalShow: true }) } }>edit</Button> }
           { isAllowedEdit &&
-          <Button style={ { marginLeft: '15px' } } bsStyle='link' onClick={ () => { this.setState({ delNotifyShow: true }) } }>删除</Button> }
+          <Button style={ { marginLeft: '15px' } } bsStyle='link' onClick={ () => { this.setState({ delNotifyShow: true }) } }>delete</Button> }
         </div>
       )
     });
@@ -166,22 +166,22 @@ export default class Config extends Component {
       id: 'query',
       title: (
         <div>
-          <span className='kanban-table-td-title'>全局过滤</span>
-          <span className='table-td-desc'>用来过滤整个看板的问题，默认显示全部。</span>
+          <span className='kanban-table-td-title'>Global filtering</span>
+          <span className='table-td-desc'>Used to filter the entire board, the default is displayed.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           { _.isEmpty(_.omit(config.query, [ 'subtask' ])) ?
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0, marginBottom: '10px' } }>
-            <li>全部</li>
+            <li>all</li>
           </ul>
           :
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0, marginBottom: '10px' } }>
             <li>{ this.condsTxt(config.query) }</li>
           </ul> }
           { isAllowedEdit &&
-          <Button onClick={ () => { this.setState({ globalFilterModalShow: true }) } }>设置</Button> }
+          <Button onClick={ () => { this.setState({ globalFilterModalShow: true }) } }>set up</Button> }
         </div>
       )
     });
@@ -189,15 +189,15 @@ export default class Config extends Component {
       id: 'filters',
       title: (
         <div>
-          <span className='kanban-table-td-title'>快速过滤器</span>
-          <span className='table-td-desc'>可上下拖拽调整过滤器位置</span>
+          <span className='kanban-table-td-title'>Fast filter</span>
+          <span className='table-td-desc'>Drag and drop the filter position up and down</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           { (!config.filters || config.filters.length <= 0) ?
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0 } }>
-            <li>未定义</li>
+            <li>Undefined</li>
           </ul>
           :
           <FilterList
@@ -209,7 +209,7 @@ export default class Config extends Component {
             update={ edit }
             condsTxt={ this.condsTxt } /> }
           { isAllowedEdit &&
-          <Button onClick={ () => { this.setState({ quickFilterModalShow: true, filterNo: -1 }) } }>添加</Button> }
+          <Button onClick={ () => { this.setState({ quickFilterModalShow: true, filterNo: -1 }) } }>Add to</Button> }
         </div>
       )
     });
@@ -217,21 +217,21 @@ export default class Config extends Component {
       id: 'fields',
       title: (
         <div>
-          <span className='kanban-table-td-title'>显示字段</span>
+          <span className='kanban-table-td-title'>Display field</span>
         </div>
       ),  
       contents: (
         <div style={ styles }>
           { _.isEmpty(config.display_fields) ?
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0, marginBottom: '10px' } }>
-            <li>未定义</li>
+            <li>Undefined</li>
           </ul>
           :
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0, marginBottom: '10px' } }>
             <li>{ this.getDisplayFields(config.display_fields || []) }</li>
           </ul> }
           { isAllowedEdit &&
-          <Button onClick={ () => { this.setState({ displayFieldsModalShow: true }) } }>设置</Button> }
+          <Button onClick={ () => { this.setState({ displayFieldsModalShow: true }) } }>set up</Button> }
         </div>
       )
     });
@@ -239,9 +239,9 @@ export default class Config extends Component {
       id: 'columns',
       title: (
         <div style={ { minHeight: '300px' } }>
-          <span className='kanban-table-td-title'>显示列</span>
-          <span className='table-td-desc'>可左右拖拽调整列位置</span>
-          { unUsedStates.length > 0 && <div className='table-td-desc' style={ { marginTop: '10px' } }>以下未分配状态：</div> }
+          <span className='kanban-table-td-title'>Display column</span>
+          <span className='table-td-desc'>Can be dragged or drop the column position</span>
+          { unUsedStates.length > 0 && <div className='table-td-desc' style={ { marginTop: '10px' } }>The following unallocated status:</div> }
           { _.map(unUsedStates, (v, i) => { 
             return <div className='config-column-card' key = { i }> <span className={ 'state-' + v.category + '-label' } >{ v.name }</span></div> }) }
         </div>
@@ -250,7 +250,7 @@ export default class Config extends Component {
         <div style={ { ...styles, marginLeft: '10px' } } className='config-columns'>
           { (!config.columns || config.columns.length <= 0) ?
           <ul className='list-unstyled clearfix' style={ { lineHeight: 2.0 } }>
-            <li>未定义</li>
+            <li>Undefined</li>
           </ul>
           :
           <ColumnList
@@ -262,7 +262,7 @@ export default class Config extends Component {
             update={ edit }
             columns={ config.columns || [] } /> }
           { isAllowedEdit &&
-          <Button style={ { marginLeft: '10px' } } onClick={ () => { this.setState({ columnModalShow: true, columnNo: -1 }) } }>添加</Button> }
+          <Button style={ { marginLeft: '10px' } } onClick={ () => { this.setState({ columnModalShow: true, columnNo: -1 }) } }>Add to</Button> }
         </div>
       )     
     }); 

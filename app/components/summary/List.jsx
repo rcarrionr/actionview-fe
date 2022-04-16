@@ -64,14 +64,14 @@ export default class List extends Component {
         <BackTop />
         <div className='project-summary-header'>
           <span style={ { fontSize: '16px' } }>{ project.name || '-' }</span>
-          <span style={ { marginLeft: '15px' } }>{ project.status == 'active' ? <span className='project-inprogress-label'>活动中</span> : <span className='project-close-label'>已归档</span> }</span>
-          <span className='item-title'>键值：</span><span>{ project.key || '-' }</span>
-          <span className='item-title'>负责人：</span><span>{ project.principal && project.principal.name || '-' }</span>
-          <span className='item-title'>描述：</span><span>{ project.description || '-' }</span>
+          <span style={ { marginLeft: '15px' } }>{ project.status == 'active' ? <span className='project-inprogress-label'>In the event</span> : <span className='project-close-label'>Filed</span> }</span>
+          <span className='item-title'>Key value:</span><span>{ project.key || '-' }</span>
+          <span className='item-title'>principal:</span><span>{ project.principal && project.principal.name || '-' }</span>
+          <span className='item-title'>describe:</span><span>{ project.description || '-' }</span>
           { project.status == 'active' && project.principal && project.principal.id == user.id &&
             <span style={ { float: 'right' } }>
-              <span className='project-summary-button' onClick={ () => { this.setState({ editModalShow: true }); } } title='编辑'><i className='fa fa-edit'></i></span>
-              <span className='project-summary-button' onClick={ () => { this.setState({ archiveNotifyShow: true }); } } title='归档'><i className='fa fa-archive'></i></span>
+              <span className='project-summary-button' onClick={ () => { this.setState({ editModalShow: true }); } } title='edit'><i className='fa fa-edit'></i></span>
+              <span className='project-summary-button' onClick={ () => { this.setState({ archiveNotifyShow: true }); } } title='Archive'><i className='fa fa-archive'></i></span>
             </span> }
         </div>
         { data.filters && data.filters.length > 0 ? 
@@ -89,37 +89,37 @@ export default class List extends Component {
         </div> 
         :
         <div style={ { marginBottom: '20px', padding: '15px', backgroundColor: '#f7f7f7', borderRadius: '4px', borderBottom: '1px solid #ddd' } }>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue' }>全部问题</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?resolution=Unresolved' }>未解决的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?assignee=me&resolution=Unresolved' }>分配给我的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?reporter=me' }>我报告的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?watcher=me' }>我关注的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?created_at=-14d~' }>最近增加的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?updated_at=-14d~' }>最近更新的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?resolved_at=-14d~' }>最近解决的</Link></span>
-          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?closed_at=-14d~' }>最近关闭的</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue' }>All of the problems</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?resolution=Unresolved' }>have not decide</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?assignee=me&resolution=Unresolved' }>Allocated to me</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?reporter=me' }>I report</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?watcher=me' }>I am concerned</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?created_at=-14d~' }>Recently increased</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?updated_at=-14d~' }>Recently updated</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?resolved_at=-14d~' }>Recently solved</Link></span>
+          <span style={ filterStyle }><Link to={ '/project/' + project.key + '/issue?closed_at=-14d~' }>Close-off</Link></span>
         </div> }
         <Panel
           style={ { height: '320px' } }
           header={ 
             <div>
-              <span>{ '问题动态：' + (options.twoWeeksAgo || '') + ' ~ 现在' }</span>
-              <span className='exchange-icon' onClick={ () => this.setState({ pulseShowModel: this.state.pulseShowModel == 'detail' ? 'charts' : 'detail' }) } title='切换'><i className='fa fa-retweet'></i></span>
+              <span>{ 'Problem dynamics:' + (options.twoWeeksAgo || '') + ' ~ Now' }</span>
+              <span className='exchange-icon' onClick={ () => this.setState({ pulseShowModel: this.state.pulseShowModel == 'detail' ? 'charts' : 'detail' }) } title='Switch'><i className='fa fa-retweet'></i></span>
             </div> }>
           { this.state.pulseShowModel == 'detail' &&
           <Table responsive hover>
             <thead>
               <tr>
-                <th>日期</th>
+                <th>date</th>
                 { _.map(data.trend || [], (v, i) => { return (<th key={ i }>{ v.day.substr(5) }</th>) }) }
-                <th>合计</th>
+                <th>total</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
                   <Link to={ '/project/' + project.key + '/issue?created_at=-14d~' }>
-                    新建问题
+                    New problem
                   </Link>
                 </td>
                 { _.map(data.trend || [], (v, i) => <td key={ i }><Link to={ '/project/' + project.key + '/issue?created_at=' + v.day + '~' + v.day }>{ v.new }</Link></td>) }
@@ -132,7 +132,7 @@ export default class List extends Component {
               <tr>
                 <td>
                   <Link to={ '/project/' + project.key + '/issue?resolved_at=-14d~' }>
-                    解决问题
+                    Solve the problem
                   </Link>
                 </td>
                 { _.map(data.trend || [], (v, i) => <td key={ i }><Link to={ '/project/' + project.key + '/issue?resolved_at=' + v.day + '~' + v.day }>{ v.resolved }</Link></td>) }
@@ -145,7 +145,7 @@ export default class List extends Component {
               <tr>
                 <td>
                   <Link to={ '/project/' + project.key + '/issue?closed_at=-14d~' }>
-                    关闭问题
+                    Turn question
                   </Link>
                 </td>
                 { _.map(data.trend || [], (v, i) => <td key={ i }><Link to={ '/project/' + project.key + '/issue?closed_at=' + v.day + '~' + v.day }>{ v.closed }</Link></td>) }
@@ -166,17 +166,17 @@ export default class List extends Component {
               style={ { float: 'right', margin: '5px 10px 0px 0px', height: '30px' } }>
               <div style={ { float: 'left' } }>
                 <label style={ { fontWeight: 400 } }>
-                  <Checkbox value='new' style={ { float: 'left' } }/><span style={ { marginLeft: '2px' } }>新建的</span>
+                  <Checkbox value='new' style={ { float: 'left' } }/><span style={ { marginLeft: '2px' } }>Newly built</span>
                 </label>
               </div>
               <div style={ { float: 'left', marginLeft: '8px' } }>
                 <label style={ { fontWeight: 400 } }>
-                  <Checkbox value='resolve'/><span style={ { marginLeft: '2px' } }>已解决的</span>
+                  <Checkbox value='resolve'/><span style={ { marginLeft: '2px' } }>Resolved</span>
                 </label>
               </div>
               <div style={ { float: 'left', marginLeft: '8px' } }>
                 <label style={ { fontWeight: 400 } }>
-                  <Checkbox value='close'/><span style={ { marginLeft: '2px' } }>已关闭的</span>
+                  <Checkbox value='close'/><span style={ { marginLeft: '2px' } }>Closed</span>
                 </label>
               </div>
             </CheckboxGroup>
@@ -193,34 +193,34 @@ export default class List extends Component {
               <CartesianGrid strokeDasharray='3 3'/>
               <Tooltip/>
               <Legend />
-              { this.state.pulseStatItems.indexOf('new') !== -1 && <Line type='monotone' dataKey='new' name='新建的' stroke='#4572A7' fill='#4572A7'/> }
-              { this.state.pulseStatItems.indexOf('resolve') !== -1 && <Line type='monotone' dataKey='resolved' name='已解决的' stroke='#89A54E' fill='#89A54E'/> }
-              { this.state.pulseStatItems.indexOf('close') !== -1 && <Line type='monotone' dataKey='closed' name='已关闭的' stroke='#AA4643' fill='#AA4643'/> }
+              { this.state.pulseStatItems.indexOf('new') !== -1 && <Line type='monotone' dataKey='new' name='Newly built' stroke='#4572A7' fill='#4572A7'/> }
+              { this.state.pulseStatItems.indexOf('resolve') !== -1 && <Line type='monotone' dataKey='resolved' name='Resolved' stroke='#89A54E' fill='#89A54E'/> }
+              { this.state.pulseStatItems.indexOf('close') !== -1 && <Line type='monotone' dataKey='closed' name='Closed' stroke='#AA4643' fill='#AA4643'/> }
             </LineChart>
           </div> }
         </Panel>
         <Panel 
           header={ 
             <div>
-              <span>未解决问题：按负责人</span>
-              <span className='exchange-icon' onClick={ () => this.setState({ assigneeShowModel: this.state.assigneeShowModel == 'detail' ? 'percentage' : 'detail' }) } title='切换'><i className='fa fa-retweet'></i></span>
+              <span>No problem: according to the person</span>
+              <span className='exchange-icon' onClick={ () => this.setState({ assigneeShowModel: this.state.assigneeShowModel == 'detail' ? 'percentage' : 'detail' }) } title='Switch'><i className='fa fa-retweet'></i></span>
             </div> }>
           { data.assignee_unresolved_issues && !_.isEmpty(data.assignee_unresolved_issues) ?
           <Table responsive hover>
             { this.state.assigneeShowModel == 'detail' && 
             <thead>
               <tr>
-                <th>负责人</th>
-                <th>问题</th>
+                <th>principal</th>
+                <th>question</th>
                 { _.map(options.types || [], (v) => { return (<th key={ v.id }>{ v.name }</th>) }) }
               </tr>
             </thead> }
             { this.state.assigneeShowModel == 'percentage' &&
             <thead>
               <tr>
-                <th>负责人</th>
-                <th>问题</th>
-                <th>百分比</th>
+                <th>principal</th>
+                <th>question</th>
+                <th>percentage</th>
               </tr>
             </thead> }
             { this.state.assigneeShowModel == 'detail' && 
@@ -278,30 +278,30 @@ export default class List extends Component {
             </tbody> }
           </Table>
           :
-          <div>暂无信息</div> }
+          <div>no information</div> }
         </Panel>
         <Panel 
           header={ 
             <div>
-              <span>未解决问题：按优先级</span>
-              <span className='exchange-icon' onClick={ () => this.setState({ priorityShowModel: this.state.priorityShowModel == 'detail' ? 'percentage' : 'detail' }) } title='切换'><i className='fa fa-retweet'></i></span>
+              <span>Unwind problem: press priority</span>
+              <span className='exchange-icon' onClick={ () => this.setState({ priorityShowModel: this.state.priorityShowModel == 'detail' ? 'percentage' : 'detail' }) } title='Switch'><i className='fa fa-retweet'></i></span>
             </div> }>
           { data.priority_unresolved_issues && !_.isEmpty(data.priority_unresolved_issues) ?
           <Table responsive hover>
             { this.state.priorityShowModel == 'detail' &&
             <thead>
               <tr>
-                <th>优先级</th>
-                <th>问题</th>
+                <th>priority</th>
+                <th>question</th>
                 { _.map(options.types || [], (v) => { return (<th key={ v.id }>{ v.name }</th>) }) }
               </tr>
             </thead> }
             { this.state.priorityShowModel == 'percentage' &&
             <thead>
               <tr>
-                <th>优先级</th>
-                <th>问题</th>
-                <th>百分比</th>
+                <th>priority</th>
+                <th>question</th>
+                <th>percentage</th>
               </tr>
             </thead> }
             { this.state.priorityShowModel == 'detail' &&
@@ -315,7 +315,7 @@ export default class List extends Component {
                       { options.priorities[key] }
                     </Link>
                     :
-                    '其他' }
+                    'other' }
                   </td>
                   <td style={ { width: '10%' } }>
                     { options.priorities && options.priorities[key] ?
@@ -348,7 +348,7 @@ export default class List extends Component {
                       { options.priorities[key] }
                     </Link>
                     :
-                    '其他' }
+                    'other' }
                   </td>
                   <td style={ { width: '10%' } }>
                     { options.priorities && options.priorities[key] ?
@@ -374,30 +374,30 @@ export default class List extends Component {
             </tbody> }
           </Table>
           :
-          <div>暂无信息</div> }
+          <div>no information</div> }
         </Panel>
         <Panel
           header={ 
             <div>
-              <span>未解决问题：按模块</span>
-              <span className='exchange-icon' onClick={ () => this.setState({ moduleShowModel: this.state.moduleShowModel == 'detail' ? 'percentage' : 'detail' }) } title='切换'><i className='fa fa-retweet'></i></span>
+              <span>Unwind problem: press module</span>
+              <span className='exchange-icon' onClick={ () => this.setState({ moduleShowModel: this.state.moduleShowModel == 'detail' ? 'percentage' : 'detail' }) } title='Switch'><i className='fa fa-retweet'></i></span>
             </div> }>
           { data.module_unresolved_issues && !_.isEmpty(data.module_unresolved_issues) ?
           <Table responsive hover>
             { this.state.moduleShowModel == 'detail' &&
             <thead>
               <tr>
-                <th>模块</th>
-                <th>问题</th>
+                <th>Module</th>
+                <th>question</th>
                 { _.map(options.types || [], (v) => { return (<th key={ v.id }>{ v.name }</th>) }) }
               </tr>
             </thead> }
             { this.state.moduleShowModel == 'percentage' &&
             <thead>
               <tr>
-                <th>模块</th>
-                <th>问题</th>
-                <th>百分比</th>
+                <th>Module</th>
+                <th>question</th>
+                <th>percentage</th>
               </tr>
             </thead> }
             { this.state.moduleShowModel == 'detail' &&
@@ -411,7 +411,7 @@ export default class List extends Component {
                       { options.modules[key] }
                     </Link>
                     :
-                    '其他' }
+                    'other' }
                   </td>
                   <td style={ { width: '10%' } }>
                     { options.modules && options.modules[key] ?
@@ -444,7 +444,7 @@ export default class List extends Component {
                       { options.modules[key] }
                     </Link>
                     :
-                    '其他' }
+                    'other' }
                   </td>
                   <td style={ { width: '10%' } }>
                     { options.modules && options.modules[key] ?
@@ -470,7 +470,7 @@ export default class List extends Component {
             </tbody> }
           </Table>
           :
-          <div>暂无信息</div> }
+          <div>no information</div> }
         </Panel>
         { this.state.editModalShow &&
           <EditModal

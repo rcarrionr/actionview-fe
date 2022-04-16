@@ -37,11 +37,11 @@ export default class List extends Component {
   classifyPermissions(permissions) {
     const results = [];
     const categories = [
-      { key: 'project', name: '项目' },
-      { key: 'issue', name: '问题' },
-      { key: 'files', name: '附件' },
-      { key: 'comments', name: '评论' },
-      { key: 'worklogs', name: '工作日志' }
+      { key: 'project', name: 'project' },
+      { key: 'issue', name: 'question' },
+      { key: 'files', name: 'appendix' },
+      { key: 'comments', name: 'Comment' },
+      { key: 'worklogs', name: 'Work log' }
     ];
 
     _.forEach(categories, (category) => {
@@ -73,15 +73,15 @@ export default class List extends Component {
       :
       <div style={ { marginTop: '15px', marginBottom: '30px' } }>
         <BackTop />
-        <Panel header='问题类型'>
+        <Panel header='question type'>
           { data.types && data.types.length > 0 ?
           <Table responsive hover>
             <thead>
               <tr>
-                <th>名称</th>
-                <th>类型</th>
-                <th>界面</th>
-                <th>工作流</th>
+                <th>name</th>
+                <th>type</th>
+                <th>interface</th>
+                <th>Workflow</th>
               </tr>
             </thead>
             <tbody>
@@ -91,12 +91,12 @@ export default class List extends Component {
                     <td>
                       <span className='table-td-title-nobold'>
                         { v.name || '' }({ v.abb || '' })
-                        { v.default && <span style={ { fontWeight: 'normal' } }> (默认)</span> }
-                        { v.type == 'subtask' && <span style={ { fontWeight: 'normal' } }> (子问题)</span> }
+                        { v.default && <span style={ { fontWeight: 'normal' } }> (default)</span> }
+                        { v.type == 'subtask' && <span style={ { fontWeight: 'normal' } }> (Child problem)</span> }
                       </span>
                       <span className='table-td-desc'>{ v.description || '' }</span>
                     </td>
-                    <td>{ v.type === 'subtask' ? '子问题' : '标准' }</td>
+                    <td>{ v.type === 'subtask' ? 'Child problem' : 'standard' }</td>
                     <td>
                       <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ screenPreviewModalShow: true, screenSchema: v.screen && v.screen.schema || [], screenName: v.screen && v.screen.name || '' }); } }>
                         { v.screen && v.screen.name || '' }
@@ -113,23 +113,23 @@ export default class List extends Component {
             </tbody>
           </Table>
           :
-          <div>暂无信息</div> }
+          <div>no information</div> }
         </Panel>
-        <Panel header='问题优先级'>
+        <Panel header='Problem priority'>
           { data.priorities && data.priorities.length > 0 ?
           <Table responsive hover>
             <thead>
               <tr>
-                <th>名称</th>
-                <th>图案</th>
-                <th>描述</th>
+                <th>name</th>
+                <th>pattern</th>
+                <th>describe</th>
               </tr>
             </thead>
             <tbody>
               { _.map(data.priorities || [], (v) => {
                 return (
                   <tr>
-                    <td><span className='table-td-title-nobold'>{ v.name || '' }{ v.default && <span style={ { fontWeight: 'normal' } }> (默认)</span> }</span></td>
+                    <td><span className='table-td-title-nobold'>{ v.name || '' }{ v.default && <span style={ { fontWeight: 'normal' } }> (default)</span> }</span></td>
                     <td><div className='circle' style={ { backgroundColor: v.color || '#ccc' } } /></td>
                     <td>{ v.description || '-' }</td>
                   </tr>
@@ -138,15 +138,15 @@ export default class List extends Component {
             </tbody>
           </Table>
           :
-          <div>暂无信息</div> }
+          <div>no information</div> }
         </Panel>
-        <Panel header='项目角色'>
+        <Panel header='Project role'>
           { data.roles && data.roles.length > 0 ?
           <Table responsive hover>
             <thead>
               <tr>
-                <th style={ { width: '300px' } }>名称</th>
-                <th>权限</th>
+                <th style={ { width: '300px' } }>name</th>
+                <th>Authority</th>
               </tr>
             </thead>
             <tbody>
@@ -173,7 +173,7 @@ export default class List extends Component {
             </tbody>
           </Table>
           :
-          <div>暂无信息</div> }
+          <div>no information</div> }
         </Panel>
         { this.state.wfPreviewModalShow &&
           <PreviewModal show

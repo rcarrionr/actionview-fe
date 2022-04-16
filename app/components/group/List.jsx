@@ -264,7 +264,7 @@ export default class List extends Component {
 
     const node = ( <span><i className='fa fa-cog'></i></span> );
 
-    const scopeOptions = { '1': '公开', '2': '私有', '3': '成员可见' };
+    const scopeOptions = { '1': 'public', '2': 'private', '3': 'Member visible' };
 
     const groups = [];
     const groupNum = collection.length;
@@ -276,19 +276,19 @@ export default class List extends Component {
             <span className='table-td-title'>{ collection[i].name || '-' }</span>
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div> ),
-        principal: collection[i].principal && collection[i].principal.name || '系统管理员',
+        principal: collection[i].principal && collection[i].principal.name || 'System administrator',
         count: collection[i].users ? <a href='#' onClick={ (e) => { e.preventDefault(); this.viewUsers(); } }>{ collection[i].users.length }</a> : 0,
-        public_scope: collection[i].public_scope && scopeOptions[collection[i].public_scope] || '公开', 
+        public_scope: collection[i].public_scope && scopeOptions[collection[i].public_scope] || 'public', 
         directory: collection[i].directory && collection[i].directory !== 'self' && _.find(options.directories, { id: collection[i].directory }) ? _.find(options.directories, { id: collection[i].directory }).name : '-',
         operation: (
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading &&
             <DropdownButton pullRight bsStyle='link' style={ { textDecoration: 'blink' ,color: '#000' } } key={ i } title={ node } id={ `dropdown-basic-${i}` } onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='view'>跳至用户列表</MenuItem>
-              { (!collection[i].directory || collection[i].directory === 'self') && <MenuItem eventKey='config'>成员配置</MenuItem> }
-              { (!collection[i].directory || collection[i].directory === 'self') && <MenuItem eventKey='edit'>编辑</MenuItem> }
-              <MenuItem eventKey='copy'>复制</MenuItem>
-              { (!collection[i].directory || collection[i].directory === 'self') && <MenuItem eventKey='del'>删除</MenuItem> }
+              <MenuItem eventKey='view'>Skip to user list</MenuItem>
+              { (!collection[i].directory || collection[i].directory === 'self') && <MenuItem eventKey='config'>Member configuration</MenuItem> }
+              { (!collection[i].directory || collection[i].directory === 'self') && <MenuItem eventKey='edit'>edit</MenuItem> }
+              <MenuItem eventKey='copy'>copy</MenuItem>
+              { (!collection[i].directory || collection[i].directory === 'self') && <MenuItem eventKey='del'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -300,7 +300,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -334,7 +334,7 @@ export default class List extends Component {
             <span style={ { float: 'right', width: '18%' } }>
               <Select
                 simpleValue
-                placeholder='用户目录'
+                placeholder='User directory'
                 value={ this.state.directory }
                 onChange={ this.directoryChange.bind(this) }
                 options={ _.map(options.directories || [], (val) => { return { label: val.name, value: val.id } }) }/>
@@ -342,7 +342,7 @@ export default class List extends Component {
             <span style={ { float: 'right', width: '130px', marginRight: '10px' } }>
               <Select
                 simpleValue
-                placeholder='公开范围'
+                placeholder='Disclosure'
                 value={ this.state.public_scope }
                 onChange={ this.scopeChange.bind(this) }
                 options={ _.map(scopeOptions, (v, k) => { return { value: k, label: v } }) }/>
@@ -354,17 +354,17 @@ export default class List extends Component {
                 style={ { height: '37px' } }
                 value={ this.state.name }
                 onChange={ (e) => { this.setState({ name: e.target.value }) } }
-                placeholder={ '组名查询...' } />
+                placeholder={ 'Group name query...' } />
             </span>
             { this.state.selectedIds.length > 0 &&
             <span style={ { float: 'left', marginRight: '10px' } }>
-              <DropdownButton title='操作' onSelect={ this.multiOperateSelect.bind(this) }>
-                { !multiDelShow && <MenuItem disabled eventKey='null'>无</MenuItem> }
-                { multiDelShow && <MenuItem eventKey='del'>删除</MenuItem> }
+              <DropdownButton title='operate' onSelect={ this.multiOperateSelect.bind(this) }>
+                { !multiDelShow && <MenuItem disabled eventKey='null'>none</MenuItem> }
+                { multiDelShow && <MenuItem eventKey='del'>delete</MenuItem> }
               </DropdownButton>
             </span> }
             <span style={ { float: 'left', marginRight: '20px' } }>
-              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;新建组</Button>
+              <Button onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }><i className='fa fa-plus'></i>&nbsp;New group</Button>
             </span>
           </FormGroup>
         </div>
@@ -373,17 +373,17 @@ export default class List extends Component {
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
             <div className='info-content'>
               <span>
-                从外部用户目录同步过来的用户组，不能对其做任何操作。
+                User groups from the external user directory, cannot do anything.
               </span>
             </div>
           </div>
           <BootstrapTable data={ groups } bordered={ false } hover options={ opts } trClassName='tr-middle' selectRow={ selectRowProp }>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>组名</TableHeaderColumn>
-            <TableHeaderColumn dataField='principal'>负责人</TableHeaderColumn>
-            <TableHeaderColumn dataField='count'>成员个数</TableHeaderColumn>
-            <TableHeaderColumn dataField='public_scope'>公开范围</TableHeaderColumn>
-            <TableHeaderColumn dataField='directory'>目录</TableHeaderColumn>
+            <TableHeaderColumn dataField='name'>group name</TableHeaderColumn>
+            <TableHeaderColumn dataField='principal'>principal</TableHeaderColumn>
+            <TableHeaderColumn dataField='count'>Member number</TableHeaderColumn>
+            <TableHeaderColumn dataField='public_scope'>Disclosure</TableHeaderColumn>
+            <TableHeaderColumn dataField='directory'>content</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { this.state.editModalShow && 

@@ -182,12 +182,12 @@ export default class List extends Component {
         ),
         issues: (
           <ul style={ { marginBottom: '0px', paddingLeft: '0px', listStyle: 'none' } }>
-            <li>所有问题 - <Link to={ '/project/' + collection[i].project_key + '/issue?resolve_version=' + collection[i].id }>{ collection[i].all_cnt || 0 }</Link></li>
-            <li>未解决的 - <Link to={ '/project/' + collection[i].project_key + '/issue?resolution=Unresolved&resolve_version=' + collection[i].id }><span style={ { color: 'red' } }>{ collection[i].unresolved_cnt || 0 }</span></Link></li>
+            <li>All questions - <Link to={ '/project/' + collection[i].project_key + '/issue?resolve_version=' + collection[i].id }>{ collection[i].all_cnt || 0 }</Link></li>
+            <li>have not decide - <Link to={ '/project/' + collection[i].project_key + '/issue?resolution=Unresolved&resolve_version=' + collection[i].id }><span style={ { color: 'red' } }>{ collection[i].unresolved_cnt || 0 }</span></Link></li>
           </ul>
         ),
         status: (
-          <span>{ collection[i].status === 'released' ? <span style={ { color: '#009900' } } title='已发布'><i className='fa fa-check'></i></span> : '未发布' }</span>
+          <span>{ collection[i].status === 'released' ? <span style={ { color: '#009900' } } title='Published'><i className='fa fa-check'></i></span> : 'Unpublished' }</span>
         ),
         operation: (
           options.permissions && options.permissions.indexOf('manage_project') !== -1 ? 
@@ -201,19 +201,19 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='view'>查看</MenuItem>
-              <MenuItem eventKey='edit'>编辑</MenuItem>
-              {/* collection[i].status == 'released' ? <MenuItem eventKey='unrelease'>取消发布</MenuItem> : <MenuItem eventKey='release'>发布</MenuItem> */}
-              { collection[i].status != 'released' && <MenuItem eventKey='release'>发布</MenuItem> }
-              <MenuItem eventKey='del'>删除</MenuItem>
+              <MenuItem eventKey='view'>Check</MenuItem>
+              <MenuItem eventKey='edit'>edit</MenuItem>
+              {/* collection[i].status == 'released' ? <MenuItem eventKey='unrelease'>Cancel release</MenuItem> : <MenuItem eventKey='release'>release</MenuItem> */}
+              { collection[i].status != 'released' && <MenuItem eventKey='release'>release</MenuItem> }
+              <MenuItem eventKey='del'>delete</MenuItem>
               <MenuItem divider/>
-              <MenuItem eventKey='issuelist'>问题列表</MenuItem>
-              <MenuItem eventKey='gantt'>甘特图</MenuItem>
+              <MenuItem eventKey='issuelist'>List of Questions</MenuItem>
+              <MenuItem eventKey='gantt'>Gantt chart</MenuItem>
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
           :
-          <Button bsStyle='link' onClick={ this.view.bind(this, collection[i].id) }>查看</Button>
+          <Button bsStyle='link' onClick={ this.view.bind(this, collection[i].id) }>Check</Button>
         )
       });
     }
@@ -222,7 +222,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。';
+      opts.noDataText = 'No data is displayed yet.';
     }
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -233,12 +233,12 @@ export default class List extends Component {
         <BackTop />
         <BootstrapTable data={ versions } bordered={ false } hover options={ opts } trClassName='tr-top'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='start_time' width='130'>计划开始时间</TableHeaderColumn>
-          <TableHeaderColumn dataField='end_time' width='130'>计划完成时间</TableHeaderColumn>
-          {/*<TableHeaderColumn dataField='released_time' width='130'>发布时间</TableHeaderColumn>*/}
-          <TableHeaderColumn dataField='issues' width='150'>问题完成情况</TableHeaderColumn>
-          <TableHeaderColumn dataField='status' width='100'>状态</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='start_time' width='130'>Plan start time</TableHeaderColumn>
+          <TableHeaderColumn dataField='end_time' width='130'>Plan completion time</TableHeaderColumn>
+          {/*<TableHeaderColumn dataField='released_time' width='130'>release time</TableHeaderColumn>*/}
+          <TableHeaderColumn dataField='issues' width='150'>Problem completion</TableHeaderColumn>
+          <TableHeaderColumn dataField='status' width='100'>state</TableHeaderColumn>
           <TableHeaderColumn width='80' dataField='operation'/>
         </BootstrapTable>
         { !indexLoading && options.total && options.total > 0 ?

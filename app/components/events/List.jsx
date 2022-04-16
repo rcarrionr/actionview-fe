@@ -157,7 +157,7 @@ export default class List extends Component {
         id: collection[i].id,
         name: (
           <div>
-            <span className='table-td-title'>{ collection[i].name }{ isGlobal && <span style={ { fontWeight: 'normal' } }> (全局)</span> }</span>
+            <span className='table-td-title'>{ collection[i].name }{ isGlobal && <span style={ { fontWeight: 'normal' } }> (Global)</span> }</span>
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> } 
           </div>
         ),
@@ -168,39 +168,39 @@ export default class List extends Component {
               _.map(collection[i].notifications, function(v, i) { 
                 let name = '';
                 if (v == 'assignee') {
-                  name = '当前负责人';
+                  name = 'Current person in charge';
                 } else if (v == 'reporter') {
-                  name = '报告者';
+                  name = 'Reporter';
                 } else if (v == 'project_principal') {
-                  name = '项目负责人';
+                  name = 'Project manager';
                 } else if (v == 'module_principal') {
-                  name = '模块负责人';
+                  name = 'Person in charge of the module';
                 } else if (v == 'current_user') {
-                  name = '当前用户';
+                  name = 'Current user';
                 } else if (v == 'watchers') {
-                  name = '所有关注者';
+                  name = 'All paying attention';
                 } else if (v.key == 'user' && v.value && v.value.name) {
-                  name = '单一用户: ' + v.value.name;
+                  name = 'Single user: ' + v.value.name;
                 } else if (v.key == 'role' && v.value) {
                   const role = _.find(options.roles || [], { id: v.value });
                   if (role) {
-                    name = '角色: ' + role.name;
+                    name = 'Role: ' + role.name;
                   } else {
-                    name = '角色: 不明确';
+                    name = 'Role: unclear';
                   }
                 } else if (v.key == 'single_user_field' && v.value) {
                   const role = _.find(options.single_user_fields || [], { id: v.value });
                   if (role) {
-                    name = '单一用户字段: ' + role.name;
+                    name = 'Single user field: ' + role.name;
                   } else {
-                    name = '单一用户字段: 不明确';
+                    name = 'Single user field: unclear';
                   }
                 } else if (v.key == 'multi_user_field' && v.value) {
                   const role = _.find(options.multi_user_fields || [], { id: v.value });
                   if (role) {
-                    name = '多用户字段: ' + role.name;
+                    name = 'Multi-user field: ' + role.name;
                   } else {
-                    name = '多用户字段: 不明确';
+                    name = 'Multi-user field: unclear';
                   }
                 }
                 return (<li key={ i }>{ name }</li>) 
@@ -211,10 +211,10 @@ export default class List extends Component {
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading &&
             <DropdownButton pullRight bsStyle='link' style={ { textDecoration: 'blink' ,color: '#000' } } key={ i } title={ node } id={ `dropdown-basic-${i}` } onSelect={ this.operateSelect.bind(this) }>
-              { !isGlobal && sysEvents.indexOf(collection[i].key || '') === -1 && <MenuItem eventKey='1'>编辑</MenuItem> }
-              <MenuItem eventKey='2'>通知设置</MenuItem>
-              { isGlobal && <MenuItem eventKey='3'>重置通知</MenuItem> }
-              { !isGlobal && sysEvents.indexOf(collection[i].key || '') === -1 && <MenuItem eventKey='4'>删除</MenuItem> }
+              { !isGlobal && sysEvents.indexOf(collection[i].key || '') === -1 && <MenuItem eventKey='1'>edit</MenuItem> }
+              <MenuItem eventKey='2'>Notification setting</MenuItem>
+              { isGlobal && <MenuItem eventKey='3'>Reset notification</MenuItem> }
+              { !isGlobal && sysEvents.indexOf(collection[i].key || '') === -1 && <MenuItem eventKey='4'>delete</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -226,7 +226,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -237,8 +237,8 @@ export default class List extends Component {
         <BackTop />
         <BootstrapTable data={ events } bordered={ false } hover options={ opts } trClassName='tr-top'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='notifications'>通知设置</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='notifications'>Notification setting</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

@@ -132,37 +132,37 @@ export default class Header extends Component {
     return (
       <div>
         <div style={ { paddingTop: '5px' } }>
-          <DropdownButton className='create-btn' id='filters' title='过滤器' onSelect={ this.selectFilter.bind(this) }>
+          <DropdownButton className='create-btn' id='filters' title='filter' onSelect={ this.selectFilter.bind(this) }>
             { options.filters && options.filters.length > 0 ? 
               _.map(options.filters || [], (val) => <MenuItem eventKey={ val.id } key={ val.id }>{ val.name }</MenuItem> ) :
-              <MenuItem disabled>无</MenuItem> }
+              <MenuItem disabled>none</MenuItem> }
             <MenuItem divider/>
-            <MenuItem eventKey='saveFilter'>保存当前检索</MenuItem>
-            <MenuItem eventKey='filterConfig'>过滤器排序</MenuItem>
-            <MenuItem eventKey='filterDel'>过滤器删除</MenuItem>
+            <MenuItem eventKey='saveFilter'>Save the current search</MenuItem>
+            <MenuItem eventKey='filterConfig'>Filter sort</MenuItem>
+            <MenuItem eventKey='filterDel'>Filter delete</MenuItem>
           </DropdownButton>
-          <Button className='create-btn' disabled={ optionsLoading } onClick={ () => { this.setState({ searchShow: !this.state.searchShow }); } }>检索&nbsp;<i className={ this.state.searchShow ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down' }></i></Button>
+          <Button className='create-btn' disabled={ optionsLoading } onClick={ () => { this.setState({ searchShow: !this.state.searchShow }); } }>Retrieve&nbsp;<i className={ this.state.searchShow ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down' }></i></Button>
           { options.permissions && options.permissions.indexOf('create_issue') !== -1 &&
-          <Button className='create-btn' bsStyle='primary' disabled={ standardTypes.length <= 0 || optionsLoading } onClick={ () => { this.setState({ createModalShow: true }); } }><i className='fa fa-plus'></i> 创建</Button> }
+          <Button className='create-btn' bsStyle='primary' disabled={ standardTypes.length <= 0 || optionsLoading } onClick={ () => { this.setState({ createModalShow: true }); } }><i className='fa fa-plus'></i> create</Button> }
           <div style={ { marginTop: '10px', float: 'right' } }>
-            <DropdownButton id='more' pullRight style={ { float: 'right' } } title='更多' onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='refresh'>刷新</MenuItem>
+            <DropdownButton id='more' pullRight style={ { float: 'right' } } title='More' onSelect={ this.operateSelect.bind(this) }>
+              <MenuItem eventKey='refresh'>Refresh</MenuItem>
               <MenuItem divider/>
-              <MenuItem eventKey='gotolist'>跳至问题列表</MenuItem>
+              <MenuItem eventKey='gotolist'>Jump to a list of questions</MenuItem>
             </DropdownButton>
           </div>
           { sqlTxt &&
           <div className='cond-bar'>
             <div className='cond-contents' title={ sqlTxt }>
-              <b>检索条件</b>：{ sqlTxt }
+              <b>Search condition</b>：{ sqlTxt }
             </div>
-            <div className='remove-icon' onClick={ () => { this.setState({ searchShow: !this.state.searchShow }); } } title={ this.state.searchShow ? '收起' : '展开' }>
+            <div className='remove-icon' onClick={ () => { this.setState({ searchShow: !this.state.searchShow }); } } title={ this.state.searchShow ? 'Put away' : 'Unfold' }>
               <i className={ this.state.searchShow ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down' }></i>
             </div>
-            <div className='remove-icon' onClick={ () => { refresh({}); } } title='清空当前检索'>
+            <div className='remove-icon' onClick={ () => { refresh({}); } } title='Clear current search'>
               <i className='fa fa-ban'></i>
             </div>
-            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='保存当前检索'>
+            <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'>
               <i className='fa fa-save'></i>
             </div>
           </div> }

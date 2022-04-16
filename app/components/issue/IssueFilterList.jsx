@@ -115,7 +115,7 @@ export class IssueFilterList extends Component {
                 onBlur={ () => { this.state.values[v.key] != values[v.key] && this.onChange() } }
                 onKeyDown={ (e) => { if (e.keyCode == '13') { this.onChange(); } } }
                 onChange={ (e) => { this.state.values[v.key] = e.target.value; this.setState({ values: this.state.values }); if (textInputChange) { this.onChange(); } } }
-                placeholder={ '输入' + (v.desc || v.name) } />
+                placeholder={ 'enter' + (v.desc || v.name) } />
             </Col>
           </div> );
       } else if ([ 'Select', 'MultiSelect', 'SingleUser', 'MultiUser', 'CheckboxGroup', 'RadioGroup', 'SingleVersion', 'MultiVersion' ].indexOf(v.type) !== -1) {
@@ -131,7 +131,7 @@ export class IssueFilterList extends Component {
                 value={ this.state.values[v.key] || null }
                 onChange={ (newValue) => { this.state.values[v.key] = newValue; this.onChange(); } }
                 options={ _.map(v.optionValues, (val) => { return { label: val.name, value: val.id } }) }
-                placeholder={ '选择' +  v.name }/>
+                placeholder={ 'choose' +  v.name }/>
             </Col>
           </div> );
       } else if ([ 'DatePicker', 'DateTimePicker' ].indexOf(v.type) !== -1) {
@@ -193,39 +193,39 @@ export class IssueFilterList extends Component {
     const { unfolded } = this.state;
 
     const userOptions = _.map(users, (val) => { return { name: val.name + '(' + val.email + ')', id: val.id } });
-    userOptions.unshift({ id: 'me', name: '当前用户' });
+    userOptions.unshift({ id: 'me', name: 'Current user' });
     const labelOptions = _.map(labels, (val) => { return { id: val.name, name: val.name } });
     const sprintOptions = _.map(sprints, (val) => { return { name: val.name, id: val.no + '' } });
 
     const baseFields = [
-      { key: 'title', name: '主题/NO', type: 'Text', desc: '主题关键字或编号' },
-      { key: 'type', name: '类型', type: 'MultiSelect', optionValues: types },
-      { key: 'priority', name: '优先级', type: 'MultiSelect', optionValues: priorities },
-      { key: 'state', name: '状态', type: 'MultiSelect', optionValues: states },
-      { key: 'resolution', name: '解决结果', type: 'MultiSelect', optionValues: resolutions },
-      { key: 'module', name: '模块', type: 'MultiSelect', optionValues: modules },
-      { key: 'resolve_version', name: '解决版本', type: 'MultiSelect', optionValues: versions },
-      { key: 'effect_versions', name: '影响版本', type: 'MultiSelect', optionValues: versions },
-      { key: 'labels', name: '标签', type: 'MultiSelect', optionValues: labelOptions }
+      { key: 'title', name: 'theme/NO', type: 'Text', desc: 'Theme keyword or number' },
+      { key: 'type', name: 'type', type: 'MultiSelect', optionValues: types },
+      { key: 'priority', name: 'priority', type: 'MultiSelect', optionValues: priorities },
+      { key: 'state', name: 'state', type: 'MultiSelect', optionValues: states },
+      { key: 'resolution', name: 'Solution', type: 'MultiSelect', optionValues: resolutions },
+      { key: 'module', name: 'Module', type: 'MultiSelect', optionValues: modules },
+      { key: 'resolve_version', name: 'Solution', type: 'MultiSelect', optionValues: versions },
+      { key: 'effect_versions', name: 'Impact version', type: 'MultiSelect', optionValues: versions },
+      { key: 'labels', name: 'Label', type: 'MultiSelect', optionValues: labelOptions }
     ];
     const baseFilterSections = this.groupFields(_.reject(baseFields, (v) => notShowFields.indexOf(v.key) !== -1 || notShowTypes.indexOf(v.type) !== -1), columns || 3);
 
     const memberFields = [
-      { key: 'reporter', name: '报告者', type: 'MultiSelect', optionValues: userOptions },
-      { key: 'assignee', name: '负责人', type: 'MultiSelect', optionValues: userOptions },
-      { key: 'resolver', name: '解决者', type: 'MultiSelect', optionValues: userOptions },
-      { key: 'closer', name: '关闭者', type: 'MultiSelect', optionValues: userOptions },
-      { key: 'watcher', name: '关注者', type: 'MultiSelect', optionValues: [ { id: 'me', name: '当前用户' } ] }
+      { key: 'reporter', name: 'Reporter', type: 'MultiSelect', optionValues: userOptions },
+      { key: 'assignee', name: 'principal', type: 'MultiSelect', optionValues: userOptions },
+      { key: 'resolver', name: 'Solve', type: 'MultiSelect', optionValues: userOptions },
+      { key: 'closer', name: 'Shuttle', type: 'MultiSelect', optionValues: userOptions },
+      { key: 'watcher', name: 'Followers', type: 'MultiSelect', optionValues: [ { id: 'me', name: 'Current user' } ] }
     ];
     const memberFilterSections = this.groupFields(_.reject(memberFields, (v) => notShowFields.indexOf(v.key) !== -1), columns || 3);
 
     const timeFields = [
-      { key: 'created_at', name: '创建时间', type: 'DateTimePicker' },
-      { key: 'updated_at', name: '更新时间', type: 'DateTimePicker' },
-      { key: 'resolved_at', name: '解决时间', type: 'DateTimePicker' },
-      { key: 'closed_at', name: '关闭时间', type: 'DateTimePicker' },
-      { key: 'expect_start_time', name: '计划开始', type: 'DatePicker' },
-      { key: 'expect_complete_time', name: '计划完成', type: 'DatePicker' }
+      { key: 'created_at', name: 'Create time', type: 'DateTimePicker' },
+      { key: 'updated_at', name: 'Update time', type: 'DateTimePicker' },
+      { key: 'resolved_at', name: 'Resolution time', type: 'DateTimePicker' },
+      { key: 'closed_at', name: 'Closing time', type: 'DateTimePicker' },
+      { key: 'expect_start_time', name: 'Plan to start', type: 'DatePicker' },
+      { key: 'expect_complete_time', name: 'Plan to complete', type: 'DatePicker' }
     ];
     const timeFilterSections = this.groupFields(_.reject(timeFields, (v) => notShowFields.indexOf(v.key) !== -1), 2);
 
@@ -268,7 +268,7 @@ export class IssueFilterList extends Component {
         className={ !visable && 'hide' }>
         <div className='cond-list-container'>
           <div className='cond-list-title'>
-            检索条件：
+            Search condition:
           </div>
           <div className={ condListStyle }>
             { conds.length > 0 ?
@@ -279,24 +279,24 @@ export class IssueFilterList extends Component {
                   <span onClick={ () => { this.removeCond(v.key) } } className='comments-button'><i className='fa fa-close'></i></span>
                 </div>)
               : 
-              '全部' }
+              'all' }
           </div>
           <div className='cond-list-opt'>
             { foldable && 
             <Button bsStyle='link' onClick={ () => { this.setState({ unfolded: !unfolded }) } } style={ { paddingTop: '0px' } }>
-              { unfolded ? '收起' : '展开' } <i className={ unfolded ? 'fa fa-angle-up' : 'fa fa-angle-down' }></i>
+              { unfolded ? 'Put away' : 'Unfold' } <i className={ unfolded ? 'fa fa-angle-up' : 'fa fa-angle-down' }></i>
             </Button> }
             { removable && conds.length > 0 &&
             <Button bsStyle='link' onClick={ () => { this.removeAllConds(searchedFieldKeys) } } style={ { paddingTop: '0px' } }>
-              清空
+              Empty
             </Button> }
             { onSave && conds.length > 0 &&
             <Button bsStyle='link' onClick={ onSave } style={ { paddingTop: '0px' } }>
-              保存
+              keep
             </Button> }
             { onHide &&
             <Button bsStyle='link' onClick={ onHide } style={ { paddingTop: '0px' } }>
-              隐藏 
+              hide 
             </Button> }
           </div>
         </div>
@@ -310,8 +310,8 @@ export class IssueFilterList extends Component {
               <span 
                 className='direct-button' 
                 onClick={ () => this.setState({ baseFilterShow: !this.state.baseFilterShow }) } 
-                title={ this.state.baseFilterShow ? '收缩' : '展开' }>
-                <span style={ { marginRight: '2px' } }>基本字段</span>
+                title={ this.state.baseFilterShow ? 'shrink' : 'Unfold' }>
+                <span style={ { marginRight: '2px' } }>Basic field</span>
                 { _.intersection(_.keys(values), _.map(baseFields, _.iteratee('key'))).length > 0 ? <span>...</span> : <span/> }
                 { this.state.baseFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </span>
@@ -329,8 +329,8 @@ export class IssueFilterList extends Component {
               <span 
                 className='direct-button' 
                 onClick={ () => this.setState({ memberFilterShow: !this.state.memberFilterShow }) } 
-                title={ this.state.memberFilterShow ? '收缩' : '展开' }>
-                <span style={ { marginRight: '2px' } }>人员</span>
+                title={ this.state.memberFilterShow ? 'shrink' : 'Unfold' }>
+                <span style={ { marginRight: '2px' } }>personnel</span>
                 { _.intersection(_.keys(values), _.map(memberFields, _.iteratee('key'))).length > 0 ? <span>...</span> : <span/> }
                 { this.state.memberFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </span>
@@ -348,8 +348,8 @@ export class IssueFilterList extends Component {
               <span 
                 className='direct-button' 
                 onClick={ () => this.setState({ timeFilterShow: !this.state.timeFilterShow }) } 
-                title={ this.state.timeFilterShow ? '收缩' : '展开' }>
-                <span style={ { marginRight: '2px' } }>时间</span>
+                title={ this.state.timeFilterShow ? 'shrink' : 'Unfold' }>
+                <span style={ { marginRight: '2px' } }>time</span>
                 { _.intersection(_.keys(values), _.map(timeFields, _.iteratee('key'))).length > 0 ? <span>...</span> : <span/> }
                 { this.state.timeFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </span>
@@ -367,8 +367,8 @@ export class IssueFilterList extends Component {
               <span 
                 className='direct-button' 
                 onClick={ () => this.setState({ agileFilterShow: !this.state.agileFilterShow }) } 
-                title={ this.state.agileFilterShow ? '收缩' : '展开' }>
-                <span style={ { marginRight: '2px' } }>敏捷迭代</span> 
+                title={ this.state.agileFilterShow ? 'shrink' : 'Unfold' }>
+                <span style={ { marginRight: '2px' } }>Agile iteration</span> 
                 { _.intersection(_.keys(values), _.map(agileFields, _.iteratee('key'))).length > 0 ? <span>...</span> : <span/> }
                 { this.state.agileFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </span>
@@ -386,8 +386,8 @@ export class IssueFilterList extends Component {
               <span
                 className='direct-button'
                 onClick={ () => this.setState({ othersFilterShow: !this.state.othersFilterShow }) }
-                title={ this.state.othersFilterShow ? '收缩' : '展开' }>
-                <span style={ { marginRight: '2px' } }>其它字段</span>
+                title={ this.state.othersFilterShow ? 'shrink' : 'Unfold' }>
+                <span style={ { marginRight: '2px' } }>Other fields</span>
                 { _.intersection(_.keys(values), _.map(othersFields, _.iteratee('key'))).length > 0 ? <span>...</span> : <span/> }
                 { this.state.othersFilterShow ? <i className='fa fa-angle-up'></i> : <i className='fa fa-angle-down'></i> }
               </span>
@@ -418,33 +418,33 @@ function _parseQuery(query, options) {
   const { types=[], states=[], priorities=[], resolutions=[], modules=[], versions=[], epics=[], sprints=[], users=[], fields=[] } = options;
 
   const userOptions = _.map(users, (val) => { return { name: val.name, id: val.id } });
-  userOptions.unshift({ id: 'me', name: '当前用户' });
+  userOptions.unshift({ id: 'me', name: 'Current user' });
 
   const sprintOptions = _.map(sprints, (val) => { return { name: val.name, id: val.no + '' } });
 
   const sections = [
     { key: 'no', name: 'NO', type: 'Text' },
-    { key: 'title', name: '主题/NO', type: 'Text' },
-    { key: 'type', type: 'MultiSelect', name: '类型', optionValues: types },
-    { key: 'priority', type: 'MultiSelect', name: '优先级', optionValues: priorities },
-    { key: 'state', type: 'MultiSelect', name: '状态', optionValues: states },
-    { key: 'resolution', type: 'MultiSelect', name: '解决结果', optionValues: resolutions },
-    { key: 'module', type: 'MultiSelect', name: '模块', optionValues: modules },
-    { key: 'resolve_version', type: 'MultiSelect', name: '解决版本', optionValues: versions  },
-    { key: 'effect_versions', type: 'MultiSelect', name: '影响版本', optionValues: versions },
-    { key: 'labels', name: '标签', type: 'MultiSelect' },
-    { key: 'descriptions', name: '描述', type: 'RichTextEditor' },
-    { key: 'reporter', name : '报告人', type: 'MultiSelect', optionValues: userOptions },
-    { key: 'assignee', name: '负责人', type: 'MultiSelect', optionValues: userOptions },
-    { key: 'watcher', name : '关注者', type: 'MultiSelect', optionValues: userOptions },
-    { key: 'resolver', name : '解决者', type: 'MultiSelect', optionValues: userOptions },
-    { key: 'closer', name : '关闭者', type: 'MultiSelect', optionValues: userOptions },
-    { key: 'created_at', name: '创建时间', type: 'DateTimePicker' },
-    { key: 'updated_at', name : '更新时间', type: 'DateTimePicker' },
-    { key: 'resolved_at', name : '解决时间', type: 'DateTimePicker' },
-    { key: 'closed_at', name : '关闭时间', type: 'DateTimePicker' },
-    { key: 'expect_start_time', name : '期望开始时间', type: 'DatePicker' },
-    { key: 'expect_complete_time', name : '期望完成时间', type: 'DatePicker' },
+    { key: 'title', name: 'theme/NO', type: 'Text' },
+    { key: 'type', type: 'MultiSelect', name: 'type', optionValues: types },
+    { key: 'priority', type: 'MultiSelect', name: 'priority', optionValues: priorities },
+    { key: 'state', type: 'MultiSelect', name: 'state', optionValues: states },
+    { key: 'resolution', type: 'MultiSelect', name: 'Solution', optionValues: resolutions },
+    { key: 'module', type: 'MultiSelect', name: 'Module', optionValues: modules },
+    { key: 'resolve_version', type: 'MultiSelect', name: 'Solution', optionValues: versions  },
+    { key: 'effect_versions', type: 'MultiSelect', name: 'Impact version', optionValues: versions },
+    { key: 'labels', name: 'Label', type: 'MultiSelect' },
+    { key: 'descriptions', name: 'describe', type: 'RichTextEditor' },
+    { key: 'reporter', name : 'reporter', type: 'MultiSelect', optionValues: userOptions },
+    { key: 'assignee', name: 'principal', type: 'MultiSelect', optionValues: userOptions },
+    { key: 'watcher', name : 'Followers', type: 'MultiSelect', optionValues: userOptions },
+    { key: 'resolver', name : 'Solve', type: 'MultiSelect', optionValues: userOptions },
+    { key: 'closer', name : 'Shuttle', type: 'MultiSelect', optionValues: userOptions },
+    { key: 'created_at', name: 'Create time', type: 'DateTimePicker' },
+    { key: 'updated_at', name : 'Update time', type: 'DateTimePicker' },
+    { key: 'resolved_at', name : 'Resolution time', type: 'DateTimePicker' },
+    { key: 'closed_at', name : 'Closing time', type: 'DateTimePicker' },
+    { key: 'expect_start_time', name : 'Expectation start time', type: 'DatePicker' },
+    { key: 'expect_complete_time', name : 'Expectation completion time', type: 'DatePicker' },
     { key: 'epic', type: 'MultiSelect', name: 'Epic', optionValues: epics },
     { key: 'sprints', type: 'Select', name: 'Sprint', optionValues: sprintOptions }
   ];
@@ -461,14 +461,14 @@ function _parseQuery(query, options) {
   });
 
   const currentDurations = {
-    '0d': '当天',
-    '0w': '本周',
-    '0m': '当月',
-    '0y': '当前年'
+    '0d': 'On the same day',
+    '0w': 'This week',
+    '0m': 'Month',
+    '0y': 'Current year'
   };
 
   const queryConds = [];
-  const errorMsg = ' 检索值解析失败，条件无法正常显示。如果当前检索已被保存为过滤器，建议删除，重新保存。';
+  const errorMsg = ' Retrieval value resolution fails, the conditions cannot be displayed normally.If the current retrieval has been saved as a filter, it is recommended to delete and save it again.';
   let index = -1;
 
   for(let i = 0; i < sections.length; i++) {
@@ -486,14 +486,14 @@ function _parseQuery(query, options) {
           } else {
             ecode = -1;
             _.remove(queryNames);
-            queryNames.push('解析失败！');
+            queryNames.push('Resolution failure!');
             break;
           }
         }
         queryConds.push({ key: v.key, kname: v.name, value: queryNames.join(', '), ecode });
       } else if ([ 'DatePicker', 'DateTimePicker' ].indexOf(v.type) !== -1) {
         let cond = '', startCond = '', endCond = '';
-        const timeUnits = { d: '天', w: '周', m: '个月', y: '年' };
+        const timeUnits = { d: 'sky', w: 'week', m: 'Month', y: 'year' };
         const sections = query[v.key].split('~');
         if ([ '0d', '0w', '0m', '0y' ].indexOf(sections[0]) !== -1) {
           startCond = currentDurations[sections[0]];
@@ -501,13 +501,13 @@ function _parseQuery(query, options) {
           const pattern = new RegExp('^(-?)(\\d+)(d|w|m|y)$');
           if (pattern.exec(sections[0])) {
             if (RegExp.$2 == '0') {
-              startCond = '当天';
+              startCond = 'On the same day';
             } else {
-              startCond = RegExp.$2 + timeUnits[RegExp.$3] + (RegExp.$1 === '-' ? '前' : '后');
+              startCond = RegExp.$2 + timeUnits[RegExp.$3] + (RegExp.$1 === '-' ? 'forward' : 'back');
             }
           } else {
             ecode = -1;
-            startCond = '解析失败！';
+            startCond = 'Resolution failure!';
           }
         } else {
           startCond = sections[0];
@@ -520,13 +520,13 @@ function _parseQuery(query, options) {
             const pattern = new RegExp('^(-?)(\\d+)(d|w|m|y)$');
             if (pattern.exec(sections[1])) {
               if (RegExp.$2 == '0') {
-                endCond = '当天';
+                endCond = 'On the same day';
               } else {
-                endCond = RegExp.$2 + timeUnits[RegExp.$3] + (RegExp.$1 === '-' ? '前' : '后');
+                endCond = RegExp.$2 + timeUnits[RegExp.$3] + (RegExp.$1 === '-' ? 'forward' : 'back');
               }
             } else {
               ecode = -1;
-              endCond = '解析失败！';
+              endCond = 'Resolution failure!';
             }
           } else {
             endCond = sections[1];
@@ -577,7 +577,7 @@ function _parseQuery(query, options) {
       } 
     });
     if (orderItems.length > 0) {
-      queryConds.push({ key: 'orderBy', kname: '排序', value: orderItems.join(', '), ecode: 0 });
+      queryConds.push({ key: 'orderBy', kname: 'Sort', value: orderItems.join(', '), ecode: 0 });
     }
   }
 

@@ -92,7 +92,7 @@ class CreateModal extends Component {
           }
         }
         if (v.required && ((data[v.key] !== 0 && !data[v.key]) || (_.isArray(data[v.key]) && data[v.key].length <= 0))) {
-          errors[v.key] = '必填';
+          errors[v.key] = 'Be required';
         }
       });
       _.extend(values, { type: data.type });
@@ -129,7 +129,7 @@ class CreateModal extends Component {
           }
         }
         if (v.required && !v.defaultValue) {
-          errors[v.key] = '必填';
+          errors[v.key] = 'Be required';
         }
       });
     }
@@ -300,9 +300,9 @@ class CreateModal extends Component {
       if (ecode === 0) {
         close();
         if (doAction && action_id) {
-          notify.show('提交完成。', 'success', 2000);
+          notify.show('Submitted.', 'success', 2000);
         } else {
-          notify.show('问题已更新。', 'success', 2000);
+          notify.show('The problem has been updated.', 'success', 2000);
         }
       }
     } else {
@@ -315,7 +315,7 @@ class CreateModal extends Component {
           this.setState({ preCreated: true });
         } else {
           close();
-          notify.show('问题已创建。', 'success', 2000);
+          notify.show('The problem has been created.', 'success', 2000);
         }
       }
     }
@@ -339,7 +339,7 @@ class CreateModal extends Component {
     }
 
     const closeConfirm = !isFromWorkflow && ((data.id && this.getChangedKeys().length > 0) || (!data.id && this.getChangedKeysForOriginal().length > 0));
-    if (closeConfirm && !confirm('确认要关闭该页面？')) {
+    if (closeConfirm && !confirm('Confirm that you want to close this page?')) {
       return;
     }
 
@@ -375,7 +375,7 @@ class CreateModal extends Component {
       }
 
       if (v.required && !values[v.key]) {
-        errors[v.key] = '必填';
+        errors[v.key] = 'Be required';
       }
     });
 
@@ -385,7 +385,7 @@ class CreateModal extends Component {
 
   success(localfile, res) {
     if (res.ecode !== 0) {
-      notify.show('文档上传失败。', 'error', 2000);
+      notify.show('Document upload failed.', 'error', 2000);
       return;
     }
 
@@ -411,7 +411,7 @@ class CreateModal extends Component {
     }
     const curField = _.find(this.state.schema, { key: field });
     if (curField && curField.required && field && this.state.values[field].length <= 0) {
-      this.state.errors[field] = '必传';
+      this.state.errors[field] = 'Essential';
       this.setState({ errors: this.state.errors });
     }
   }
@@ -452,40 +452,40 @@ class CreateModal extends Component {
     }
 
     if (field.required && (!newValue || (_.isArray(newValue) && newValue.length == 0))) {
-      this.state.errors[field.key] = '必填';
+      this.state.errors[field.key] = 'Be required';
       this.setState({ values: this.state.values });
       return;
     }
 
     if ([ 'Text', 'TextArea', 'RichTextEditor' ].indexOf(field.type) !== -1) {
       if (newValue && field.maxLength && _.trim(newValue).length > field.maxLength) {
-        this.state.errors[field.key] = '字数必须在' + field.maxLength + '字之内';
+        this.state.errors[field.key] = 'The number of words must be' + field.maxLength + 'Within the word';
         this.setState({ values: this.state.values });
         return;
       }
     } else if ('Number' == field.type || 'Integer' == field.type) {
       if (newValue || newValue === 0) {
         if (isNaN(newValue) || (field.type === 'Integer' && !/^-?\d+$/.test(newValue))) {
-          this.state.errors[field.key] = '格式有误';
+          this.state.errors[field.key] = 'Format is incorrect';
           this.setState({ values: this.state.values });
           return;
         } 
 
         if ((field.minValue || field.minValue === 0) && (field.maxValue || field.maxValue === 0)) {
           if (parseFloat(newValue) > parseFloat(field.maxValue) || parseFloat(field.minValue) > parseFloat(newValue)) {
-            this.state.errors[field.key] = '输入值必须在' + field.minValue + '~' + field.maxValue + '之间';
+            this.state.errors[field.key] = 'The input value must be' + field.minValue + '~' + field.maxValue + 'between';
             this.setState({ values: this.state.values });
             return;
           } 
         } else if (field.minValue || field.minValue === 0) {
           if (parseFloat(field.minValue) > parseFloat(newValue)) {
-            this.state.errors[field.key] = '输入值必须大于' + field.minValue;
+            this.state.errors[field.key] = 'The input value must be greater than' + field.minValue;
             this.setState({ values: this.state.values });
             return;
           } 
         } else if (field.maxValue || field.maxValue === 0) {
           if (parseFloat(newValue) > parseFloat(field.maxValue)) {
-            this.state.errors[field.key] = '输入值必须小于' + field.maxValue;
+            this.state.errors[field.key] = 'The input value must be less than' + field.maxValue;
             this.setState({ values: this.state.values });
             return;
           }
@@ -493,19 +493,19 @@ class CreateModal extends Component {
       }
     } else if (field.type === 'DatePicker' || field.type === 'DateTimePicker') {
       if (newValue && !moment(newValue).isValid()) {
-        this.state.errors[field.key] = '格式有误';
+        this.state.errors[field.key] = 'Format is incorrect';
         this.setState({ values: this.state.values });
         return;
       }
     } else if (field.type === 'Url') {
       if (newValue && !this.urlTest(newValue)) {
-        this.state.errors[field.key] = '格式有误';
+        this.state.errors[field.key] = 'Format is incorrect';
         this.setState({ values: this.state.values });
         return;
       }
     } else if (field.type === 'TimeTracking') {
       if (newValue && !this.ttTest(newValue)) {
-        this.state.errors[field.key] = '格式有误';
+        this.state.errors[field.key] = 'Format is incorrect';
         this.setState({ values: this.state.values });
         return;
       }
@@ -516,18 +516,18 @@ class CreateModal extends Component {
   }
 
   getPlaceholder(field) {
-    let placeHolder = '输入' + field.name;
+    let placeHolder = 'enter' + field.name;
     if (field.type == 'Text' || field.type == 'TextArea' || field.type == 'RichTextEditor') {
       if (field.maxLength) {
-        placeHolder += '(字数' + field.maxLength + '字之内)';
+        placeHolder += '(Word number' + field.maxLength + 'Within the word)';
       }
     } else if (field.type == 'Number' || field.type == 'Integer') {
       if ((field.minValue || field.minValue === 0) && (field.maxValue || field.maxValue === 0)) {
-        placeHolder = '输入' + field.minValue + '~' + field.maxValue + '之间' + (field.type == 'Integer' ? '整数' : '数值');
+        placeHolder = 'enter' + field.minValue + '~' + field.maxValue + 'between' + (field.type == 'Integer' ? 'Integer' : 'Numerical value');
       } else if (field.minValue || field.minValue === 0) {
-        placeHolder = '输入大于' + field.minValue + (field.type == 'Integer' ? '整数' : '数值');
+        placeHolder = 'Input greater than' + field.minValue + (field.type == 'Integer' ? 'Integer' : 'Numerical value');
       } else if (field.maxValue || field.maxValue === 0) {
-        placeHolder = '输入小于' + field.minValue + (field.type == 'Integer' ? '整数' : '数值');
+        placeHolder = 'Enter less than' + field.minValue + (field.type == 'Integer' ? 'Integer' : 'Numerical value');
       }
     }
     return placeHolder;
@@ -576,14 +576,14 @@ class CreateModal extends Component {
         onHide={ this.handleCancel } 
         bsSize='large'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ data.id ? (isFromWorkflow ? '流程页面' : ('编辑问题' + ' - ' + data.no)) : (isSubtask ? '创建子问题' : '创建问题') }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ data.id ? (isFromWorkflow ? 'Process page' : ('Editing problem' + ' - ' + data.no)) : (isSubtask ? 'Create sub-problem' : 'Create a problem') }</Modal.Title>
         </Modal.Header>
         <Form horizontal>
           <Modal.Body style={ bodyStyles } ref='createModal'>
             { !isFromWorkflow && !isSubtask &&
             <FormGroup>
               <Col sm={ 2 } componentClass={ ControlLabel }>
-                项目名称
+                project name
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px', marginBottom: '6px' } }><span>{ project.name || '-' }</span></div>
@@ -592,7 +592,7 @@ class CreateModal extends Component {
             { !isFromWorkflow && isSubtask &&
             <FormGroup>
               <Col sm={ 2 } componentClass={ ControlLabel }>
-                父任务 
+                Parent task 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px', marginBottom: '6px' } }><span>{ parent.title ? (parent.no + '-' + parent.title) : (data.parent && data.parent.title ? (data.parent.no + '-' + data.parent.title) : '-') }</span></div>
@@ -601,7 +601,7 @@ class CreateModal extends Component {
             { !isFromWorkflow &&
             <FormGroup style={ { height: '68px', borderBottom: '1px solid #ddd' } }>
               <Col sm={ 2 } componentClass={ ControlLabel }>
-                <span className='txt-impt'>*</span>类型
+                <span className='txt-impt'>*</span>type
               </Col>
               <Col sm={ 7 }>
                 <Select 
@@ -612,8 +612,8 @@ class CreateModal extends Component {
                   clearable={ false } 
                   value={ this.state.values['type'] } 
                   onChange={ this.typeChange.bind(this) } 
-                  placeholder='请选择问题类型'/>
-                <div><span style={ { fontSize: '12px' } }>改变问题类型可能造成已填写部分信息的丢失，建议填写信息前先确定问题类型。</span></div>
+                  placeholder='Please select the problem type'/>
+                <div><span style={ { fontSize: '12px' } }>The type of change may result in the loss of some information, it is recommended to determine the problem type before completing the information.</span></div>
               </Col>
             </FormGroup> }
             { _.map(schema, (v, key) => {
@@ -711,7 +711,7 @@ class CreateModal extends Component {
                       clearable={ false }
                       onChange={ newValue => { this.state.values[v.key] = newValue; this.setState({ values: this.state.values, preCreated: false }); } }
                       options={ _.map(options.labels || [], (val) => { return { label: val.name, value: val.name } } ) }
-                      placeholder='选择或输入标签'/>
+                      placeholder='Select or enter labels'/>
                   </Col>
                 </FormGroup> );
               } else if ([ 'Select', 'MultiSelect', 'SingleVersion', 'MultiVersion', 'SingleUser', 'MultiUser' ].indexOf(v.type) !== -1) {
@@ -728,10 +728,10 @@ class CreateModal extends Component {
                       options={ _.map(v.optionValues, (val) => { return { label: val.name, value: val.id } } ) } 
                       onChange={ (newValue) => { this.onChange(newValue, v); } } 
                       className={ this.state.touched[v.key] && this.state.errors[v.key] && 'select-error' }
-                      placeholder={ '选择' + v.name } />
+                      placeholder={ 'choose' + v.name } />
                     { v.key === 'labels' &&
                       <div>
-                        <span style={ { fontSize: '12px' } }>拥有项目管理权限的用户才可创建新的标签。</span>
+                        <span style={ { fontSize: '12px' } }>Users with project management privileges can create new tags.</span>
                       </div> }
                   </Col>
                   <Col sm={ 1 } componentClass={ ControlLabel } style={ { textAlign: 'left' } }>
@@ -786,7 +786,7 @@ class CreateModal extends Component {
                       dateFormat={ 'YYYY/MM/DD' }
                       timeFormat={ v.type === 'DateTimePicker' ?  'HH:mm' : false } 
                       closeOnSelect={ v.type === 'DatePicker' }
-                      inputProps={ { placeholder: '选择' + (v.type === 'DatePicker' ? '日期' : '时间') } }
+                      inputProps={ { placeholder: 'choose' + (v.type === 'DatePicker' ? 'date' : 'time') } }
                       value={ this.state.values[v.key] || '' } 
                       onChange={ newValue => { this.onChange(newValue, v); } }/>
                   </Col>
@@ -800,7 +800,7 @@ class CreateModal extends Component {
                   postUrl: API_BASENAME + '/project/' + project.key + '/file'
                 };
                 const djsConfig = {
-                  dictDefaultMessage: '点击或拖拽文件至此',
+                  dictDefaultMessage: 'Click or drag and drop files',
                   addRemoveLinks: true,
                   paramName: v.key
                 };
@@ -830,7 +830,7 @@ class CreateModal extends Component {
                       value={ this.state.values[v.key] || '' }
                       onChange={ (e) => { this.onChange(e.target.value, v); } }
                       onBlur={ (e) => { this.state.touched[v.key] = true; this.setState({ touched: this.state.touched }); } }
-                      placeholder={ '输入' + v.name } />
+                      placeholder={ 'enter' + v.name } />
                   </Col>
                   <Col sm={ 3 } componentClass={ ControlLabel } style={ { textAlign: 'left' } }>
                     { this.state.touched[v.key] && (this.state.errors[v.key] || '') }
@@ -847,7 +847,7 @@ class CreateModal extends Component {
                       value={ this.state.values[v.key] || '' }
                       onChange={ (e) => { this.onChange(e.target.value, v); } }
                       onBlur={ (e) => { this.state.touched[v.key] = true; this.setState({ touched: this.state.touched }); } }
-                      placeholder={ '例如：3w 4d 12h 30m' } />
+                      placeholder={ 'E.g:3w 4d 12h 30m' } />
                   </Col>
                   <Col sm={ 6 } componentClass={ ControlLabel } style={ { textAlign: 'left' } }>
                     { this.state.touched[v.key] && (this.state.errors[v.key] || '') }
@@ -861,7 +861,7 @@ class CreateModal extends Component {
           { this.state.ecode !== 0 && !loading &&
           <span className='ralign'>{ errMsg[this.state.ecode] }</span> }
           { preCreated &&
-          <span className='ok-ralign'><i className='fa fa-check'></i> 问题已创建</span> }
+          <span className='ok-ralign'><i className='fa fa-check'></i> The problem has been created</span> }
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
           { !data.id &&
           <BootstrapCheckbox
@@ -869,15 +869,15 @@ class CreateModal extends Component {
             checked={ createOther }
             onClick={ () => { this.setState({ createOther: !createOther }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            创建另外一个 
+            Create another one 
           </BootstrapCheckbox> }
           <Button 
             type='submit' 
             disabled={ (data.id && this.getChangedKeys().length <= 0 && isFromWorkflow === false) || _.isEmpty(schema) || !_.isEmpty(this.state.errors) || loading || preCreated } 
             onClick={ this.handleSubmit }>
-            确定
+            Sure
           </Button>
-          <Button bsStyle='link' onClick={ this.handleCancel }>取消</Button>
+          <Button bsStyle='link' onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

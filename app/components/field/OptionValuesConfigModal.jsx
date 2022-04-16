@@ -44,7 +44,7 @@ export default class OptionValuesConfigModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('配置完成。', 'success', 2000);
+      notify.show('The configuration is complete.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -80,7 +80,7 @@ export default class OptionValuesConfigModal extends Component {
         this.state.cards[i].text = this.state.cards[i].old_text;
         this.setState({ cards: this.state.cards });
       } else {
-        notify.show('重置失败，可选值可能重复。', 'error', 2000);
+        notify.show('The reset failed, and the optional value may be repeated.', 'error', 2000);
       }
     }
   }
@@ -152,10 +152,10 @@ export default class OptionValuesConfigModal extends Component {
     return (
       <Modal show onHide={ this.cancel.bind(this) } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '字段可选值配置 - ' + this.props.data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Field optional value configuration - ' + this.props.data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
-          { cards.length > 0 && <div style={ { marginTop: '-6px' } }>通过上下拖拽改变显示顺序。<Button bsStyle='link' onClick={ this.sort.bind(this) }>按字母排序</Button></div> }
+          { cards.length > 0 && <div style={ { marginTop: '-6px' } }>Change the display order by dragging and drop up and down.<Button bsStyle='link' onClick={ this.sort.bind(this) }>Sort by alphabet</Button></div> }
           { cards.length > 0 ?
             cards.map((op, i) => {
               return (
@@ -173,7 +173,7 @@ export default class OptionValuesConfigModal extends Component {
                   del={ this.deleteCard.bind(this, i) }/>
               );
             }) :
-            <div style={ { paddingBottom: '6px' } }>可选值列表为空</div>
+            <div style={ { paddingBottom: '6px' } }>Optional value list is empty</div>
           }
           <Form horizontal>
             <FormGroup controlId='formControlsText' validationState={ this.state.addErr ? 'error' : null }>
@@ -182,12 +182,12 @@ export default class OptionValuesConfigModal extends Component {
                   style={ { marginTop: '5px' } }
                   type='text'
                   ref='addOpt'
-                  placeholder='输入可选值，回车即可添加'
+                  placeholder='Enter an optional value, enter the carriage return to add'
                   onChange={ this.handleChange.bind(this) }
                   onKeyDown={ (e) => { if (e.keyCode == '13') { e.preventDefault(); this.add(); } } }/>
               </Col>
               {/* <Col sm={ 1 }>
-                <Button bsStyle='link' style={ { marginLeft: '-25px' } } onClick={ this.add.bind(this) } disabled={ !enableAdd }>添加</Button>
+                <Button bsStyle='link' style={ { marginLeft: '-25px' } } onClick={ this.add.bind(this) } disabled={ !enableAdd }>Add to</Button>
               </Col> */}
             </FormGroup>
           </Form>
@@ -195,8 +195,8 @@ export default class OptionValuesConfigModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ !_.isEmpty(editingCards) || loading || strCards == JSON.stringify(cards) } onClick={ this.save.bind(this) }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>取消</Button>
+          <Button disabled={ !_.isEmpty(editingCards) || loading || strCards == JSON.stringify(cards) } onClick={ this.save.bind(this) }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

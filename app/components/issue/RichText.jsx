@@ -138,7 +138,7 @@ class RichTextReader extends React.Component {
 
     const { isImgPreviewed } = this.props;
     if (!isImgPreviewed) {
-      notify.show('权限不足。', 'error', 2000);
+      notify.show('Insufficient permissions.', 'error', 2000);
       return;
     }
 
@@ -174,7 +174,7 @@ class RichTextReader extends React.Component {
           <div className='edit-button' onClick={ () => { onEdit && onEdit() } }><i className='fa fa-edit'></i></div> }
         <div
           onClick={ this.previewInlineImg.bind(this) }
-          dangerouslySetInnerHTML={ { __html: html || '<span style="color: #909090">未设置</span>' } } />
+          dangerouslySetInnerHTML={ { __html: html || '<span style="color: #909090">Not set</span>' } } />
         { inlinePreviewShow &&
           <Lightbox
             mainSrc={ imgFiles[photoIndex] }
