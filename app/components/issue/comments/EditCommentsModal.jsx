@@ -163,7 +163,7 @@ export default class EditCommentsModal extends Component {
 
     let title = '';
     if (data.id) {
-      title = 'Editor's comment';
+      title = 'Editor\'s comment';
     } else {
       title = 'Reply comment';
     }

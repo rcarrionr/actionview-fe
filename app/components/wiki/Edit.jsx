@@ -80,7 +80,7 @@ export default class Edit extends Component {
       if (_.isEmpty(data.checkin)) {
         this.state.emsg = 'Others may be editing the documentation and cannot be edited.';
       } else if (data.checkin.user.id !== user.id) {
-        this.state.emsg = data.checkin.user.name + ' Editing this document, you can't edit it.';
+        this.state.emsg = data.checkin.user.name + ' Editing this document, you can\'t edit it.';
       }
       simplemde.value(data.contents || '');
       this.setState({ name: data.name || '', emsg : this.state.emsg });

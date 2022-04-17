@@ -20,7 +20,7 @@ const validate = (values) => {
     errors.email = 'Input format is incorrect';
   }
   if (!values.name) {
-    errors.name = 'Name can't be empty';
+    errors.name = 'Name can\'t be empty';
   }
   if (!values.password) {
     errors.password = 'password can not be blank';

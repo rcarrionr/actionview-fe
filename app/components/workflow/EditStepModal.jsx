@@ -11,7 +11,7 @@ const validate = (values, props) => {
   if (!values.name) {
     errors.name = 'Be required';
   } else if (values.name.indexOf(' ') !== -1 || values.name.indexOf('%') !== -1) {
-    errors.name = 'Step names can't have spaces or%';
+    errors.name = 'Step names can\'t have spaces or%';
   } else if (props.data.name !== values.name && _.findIndex(props.collection || [], { name: values.name }) !== -1) {
     errors.name = 'This step already exists';
   }
