@@ -212,7 +212,7 @@ export default class Container extends Component {
     }
 
     if (this.routerNotifyFlg) {
-      if (confirm('您修改的内容还未保存，确认离开此页面？')) {
+      if (confirm('The content you modified has not been saved and confirmed to leave this page.?')) {
         return true;
       } else {
         return false;

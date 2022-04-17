@@ -56,7 +56,7 @@ export default class Home extends Component {
   async logout() {
     await this.props.sessionActions.destroy();
     if (this.props.session.ecode === 0) {
-      notify.show('已退出系统。', 'success', 2000);
+      notify.show('The system has been exited.', 'success', 2000);
       this.context.router.push({ pathname: '/login' });
     }
   }
@@ -93,7 +93,7 @@ export default class Home extends Component {
 
     if (nextProps.session.invalid === true) {
       if (session.user.id) {
-        notify.show('会话过期，请重新登录。', 'warning', 2000);
+        notify.show('If the session has expired, please log in again.', 'warning', 2000);
       }
       if (pathname) {
         this.context.router.push({ pathname: '/login', query: { request_url: encodeURI(pathname + (!_.isEmpty(query) ? '?' + qs.stringify(query) : '')) } });

@@ -44,7 +44,7 @@ export default class Header extends Component {
             className='create-btn' 
             onClick={ () => { this.setState({ createModalShow: true }); } } 
             disabled={ indexLoading }>
-            <i className='fa fa-plus'></i>&nbsp;新建字段
+            <i className='fa fa-plus'></i>&nbsp;New field
           </Button>
           <span style={ { float: 'right', width: '22%', marginTop: '10px' } }>
             <FormControl
@@ -54,13 +54,13 @@ export default class Header extends Component {
               value={ this.state.skey }
               onChange={ (e) => { this.setState({ skey: e.target.value }) } }
               onKeyDown={ (e) => { if (e.keyCode == '13') { search(e.target.value) } } }
-              placeholder={ '名称、键值查询...' } />
+              placeholder={ 'Name, key value query...' } />
           </span>
         </div>
         <div className='info-col'>
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'> 
-            <span>创建字段时键值必须唯一，且创建后键值不能改变。<br/>只能删除没有应用到界面{ isSysConfig && '（包括各项目自定义界面）' }中的字段。</span>
+            <span>The key value must be unique when creating a field, and the key value cannot be changed.<br/>Can only be deleted without applying to the interface{ isSysConfig && '(Including each project custom interface)' }The field.</span>
           </div>
         </div>
         { this.state.createModalShow && 

@@ -11,13 +11,13 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } else if (props.data.name !== values.name && _.findIndex(props.collection || [], { name: values.name }) !== -1) {
-    errors.name = '该名称已存在';
+    errors.name = 'This name already exists';
   }
 
   if (!values.color) {
-    errors.color = '必填';
+    errors.color = 'Be required';
   }
 
   return errors;
@@ -61,7 +61,7 @@ export default class EditModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('更新完成。', 'success', 2000);
+      notify.show(''update completed.'', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -97,18 +97,18 @@ export default class EditModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton onClick={ this.handlerHideColorPicker.bind(this) } style={ { background: '#f0f0f0', height: '50px' } }>
-          <Modal.Title id='contained-modal-title-la'>{ '编辑优先级 - ' + data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Edit priority - ' + data.name }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body onClick={ this.handlerHideColorPicker.bind(this) }>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
             <FormControl type='hidden' { ...id }/>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='优先级名'/>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Priority name'/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ color.touched && color.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>图案色</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>Pattern color</ControlLabel>
             <Select
               simpleValue
               disabled={ submitting }
@@ -117,18 +117,18 @@ export default class EditModal extends Component {
               searchable={ false }
               value={ color.value }
               onChange={ newValue => { color.onChange(newValue) } }
-              placeholder='请选择背景色'/>
+              placeholder='Please select a background color'/>
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>描述</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...description } placeholder='描述'/>
+            <ControlLabel>describe</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...description } placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer onClick={ this.handlerHideColorPicker.bind(this) }>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

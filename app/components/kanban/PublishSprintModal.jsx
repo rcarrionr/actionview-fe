@@ -13,29 +13,29 @@ const validate = (values, props) => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
 
   if (!values.start_time) {
-    errors.start_time = '必填';
+    errors.start_time = 'Be required';
   } else {
     if (!moment(values.start_time).isValid()) {
-      errors.start_time = '格式错误';
+      errors.start_time = 'wrong format';
     }
   }
 
   if (!values.complete_time) {
-    errors.complete_time = '必填';
+    errors.complete_time = 'Be required';
   } else {
     if (!moment(values.complete_time).isValid()) {
-      errors.complete_time = '格式错误';
+      errors.complete_time = 'wrong format';
     }
   }
 
   if (values.start_time && values.complete_time) {
     if (values.start_time > values.complete_time)
     {
-      errors.start_time = '开始时间要早于结束时间';
+      errors.start_time = 'Before starting time, earlier than the end time';
     }
   }
 
@@ -85,7 +85,7 @@ export default class PublishModal extends Component {
     this.setState({ ecode });
 
     if (ecode === 0) {
-      notify.show('启动完成。', 'success', 2000);
+      notify.show('Start complete.', 'success', 2000);
       close();
     }
   }
@@ -122,23 +122,23 @@ export default class PublishModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>发布 - { sprint.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>release - { sprint.name }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyUp={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body style={ { maxHeight: '580px' } }>
           <FormGroup validationState={ name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
             <FormControl
               disabled={ submitting }
               type='text'
               { ...name }
-              placeholder='名称'/>
+              placeholder='name'/>
             { name.error && 
               <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <div>
             <FormGroup style={ { width: '45%', display: 'inline-block' } } validationState={ start_time.error ? 'error' : null }>
-              <ControlLabel><span className='txt-impt'>*</span>开始时间</ControlLabel>
+              <ControlLabel><span className='txt-impt'>*</span>Starting time</ControlLabel>
               <DateTime 
                 locale='zh-cn' 
                 mode='date' 
@@ -151,7 +151,7 @@ export default class PublishModal extends Component {
                 <HelpBlock style={ { float: 'right' } }>{ start_time.error }</HelpBlock> }
             </FormGroup>
             <FormGroup style={ { width: '45%', display: 'inline-block', float: 'right' } } validationState={ complete_time.error ? 'error' : null }>
-              <ControlLabel><span className='txt-impt'>*</span>结束时间</ControlLabel>
+              <ControlLabel><span className='txt-impt'>*</span>End Time</ControlLabel>
               <DateTime 
                 locale='zh-cn' 
                 mode='date' 
@@ -164,13 +164,13 @@ export default class PublishModal extends Component {
             </FormGroup>
           </div>
           <FormGroup>
-            <ControlLabel>描述</ControlLabel>
+            <ControlLabel>describe</ControlLabel>
             <FormControl 
               disabled={ submitting } 
               componentClass='textarea'
               style={ { height: '200px' } }
               { ...description }
-              placeholder='描述'/>
+              placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
@@ -181,10 +181,10 @@ export default class PublishModal extends Component {
             checked={ this.state.isSendMsg }
             onClick={ () => { this.setState({ isSendMsg: !this.state.isSendMsg }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            通知项目成员
+            Notifying item members
           </Checkbox>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -30,7 +30,7 @@ export default class CompleteNotify extends Component {
 
     if (ecode === 0) {
       close();
-      notify.show('Sprint ' + sprintNo + ' 已置完成。', 'success', 2000);
+      notify.show('Sprint ' + sprintNo + ' It has been set.', 'success', 2000);
     }
   }
 
@@ -46,12 +46,12 @@ export default class CompleteNotify extends Component {
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-la'>
-            完成Sprint
+            FinishSprint
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          { total - completedIssues.length > 0 && '还有 ' + (total - completedIssues.length) + ' 个问题未完成，' }
-          确认要置完成此Sprint? <br/>
+          { total - completedIssues.length > 0 && 'besides ' + (total - completedIssues.length) + ' The problem is not completed.' }
+          Confirm that the setting is completedSprint? <br/>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
@@ -61,10 +61,10 @@ export default class CompleteNotify extends Component {
             checked={ this.state.isSendMsg }
             onClick={ () => { this.setState({ isSendMsg: !this.state.isSendMsg }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            通知项目成员
+            Notifying item members
           </Checkbox>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

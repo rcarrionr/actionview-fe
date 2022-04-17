@@ -8,13 +8,13 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.to) {
-    errors.to = '必填';
+    errors.to = 'Be required';
   } else if (!/^(\w-*\.*)+@(\w+[\w|-]*)+(\.\w+[\w|-]*)*(\.\w{2,})+$/.test(values.to)) {
-    errors.to = '格式有误';
+    errors.to = 'Format is incorrect';
   }
 
   if (!values.subject) {
-    errors.subject = '必填';
+    errors.subject = 'Be required';
   }
   return errors;
 };
@@ -49,7 +49,7 @@ export default class ResetPwdModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('邮件已发送。', 'success', 2000);
+      notify.show('Message has been sent.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -70,30 +70,30 @@ export default class ResetPwdModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>发送测试邮件</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Send test mail</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ to.touched && to.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>收件人</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...to } placeholder='收件人'/>
+            <ControlLabel><span className='txt-impt'>*</span>recipient</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...to } placeholder='recipient'/>
             { to.touched && to.error && <HelpBlock style={ { float: 'right' } }>{ to.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ subject.touched && subject.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>主题</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...subject } placeholder='主题'/>
+            <ControlLabel><span className='txt-impt'>*</span>theme</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...subject } placeholder='theme'/>
             { subject.touched && subject.error && <HelpBlock style={ { float: 'right' } }>{ subject.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsTextarea'>
-            <ControlLabel>内容</ControlLabel>
-            <FormControl style={ { height: '100px' } } disabled={ submitting } componentClass='textarea' { ...contents } placeholder='内容'/>
+            <ControlLabel>content</ControlLabel>
+            <FormControl style={ { height: '100px' } } disabled={ submitting } componentClass='textarea' { ...contents } placeholder='content'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -25,20 +25,20 @@ export default class OperateNotify extends Component {
     let ecode = 0, msg = '';
     if (operate === 'del') {
       ecode = await del(data.id);
-      msg = '目录已删除。'; 
+      msg = 'The directory has been deleted.'; 
     } else if (operate === 'validate') {
       ecode = await invalidate(data.id, 0);
-      msg = '目录已启用。'; 
+      msg = 'The directory is enabled.'; 
     } else if (operate === 'invalidate') {
       ecode = await invalidate(data.id, 1);
-      msg = '目录已禁用。'; 
+      msg = 'The directory is disabled.'; 
     } else {
       return;
     }
     if (ecode === 0) {
       notify.show(msg, 'success', 2000);    
     } else {
-      notify.show('操作失败。', 'error', 2000);    
+      notify.show('operation failed.', 'error', 2000);    
     }
   }
 
@@ -51,11 +51,11 @@ export default class OperateNotify extends Component {
     const { operate, data } = this.props;
     let operateTitle = '';
     if (operate === 'del') {
-      operateTitle = '目录删除'
+      operateTitle = 'Catalog delete'
     } else if (operate === 'validate') {
-      operateTitle = '目录启用';
+      operateTitle = 'Catalog is enabled';
     } else if (operate === 'invalidate') {
-      operateTitle = '目录禁用';
+      operateTitle = 'Directory disabled';
     } else {
       return <div/>;
     }
@@ -67,21 +67,21 @@ export default class OperateNotify extends Component {
         </Modal.Header>
         { operate === 'del' && 
         <Modal.Body>
-          目录被删除后，同步的用户信息也将被删除。<br/>
-          是否删除【{ data.name }】该目录？
+          After the directory is deleted, the synchronized user information will also be deleted.<br/>
+          delete or not[{ data.name }] This directory?
         </Modal.Body> }
         { operate === 'validate' &&
         <Modal.Body>
-          是否启用【{ data.name }】该目录？
+          Whether to enable[{ data.name }] This directory?
         </Modal.Body> }
         { operate === 'invalidate' &&
         <Modal.Body>
-          禁用目录后，用户将不会自动同步，登录认证也将无效。<br/>
-          是否禁用【{ data.name }】该目录？
+          After disabling the directory, the user will not automatically synchronize, and the login authentication will be invalid.<br/>
+          Is it disabled?{ data.name }] This directory?
         </Modal.Body> }
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

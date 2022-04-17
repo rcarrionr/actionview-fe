@@ -27,7 +27,7 @@ export default class ResetColumnsNotify extends Component {
 
     if (ecode === 0) {
       close();
-      notify.show('已重置。', 'success', 2000);
+      notify.show('Reset.', 'success', 2000);
     }
   }
 
@@ -45,10 +45,10 @@ export default class ResetColumnsNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>显示列重置</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Display column reset</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要重置列表显示列？
+          Confirm to reset the list display column?
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
@@ -59,10 +59,10 @@ export default class ResetColumnsNotify extends Component {
             checked={ this.state.deleteFromProject }
             onClick={ () => { this.setState({ deleteFromProject: !this.state.deleteFromProject }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            删除项目默认设置
+            Delete project default settings
           </Checkbox> }
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

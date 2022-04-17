@@ -53,7 +53,7 @@ export default class SetLabelsModal extends Component {
         addLabels(newLabels);
       }
       close();
-      notify.show('已设置。', 'success', 2000);
+      notify.show('Has been set.', 'success', 2000);
     }
 
     this.setState({ ecode: ecode });
@@ -85,12 +85,12 @@ export default class SetLabelsModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '设置标签 - ' + issue.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Set label - ' + issue.no }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>标签</ControlLabel>
+            <ControlLabel>Label</ControlLabel>
             { options.permissions && options.permissions.indexOf('manage_project') !== -1 ?
             <CreatableSelect
               multi
@@ -98,7 +98,7 @@ export default class SetLabelsModal extends Component {
               clearable={ false } 
               onChange={ newValue => { labels.onChange(newValue) } }
               options={ labelOptions }
-              placeholder='选择或输入标签'/>
+              placeholder='Select or enter labels'/>
             : 
             <div>
               <Select 
@@ -109,9 +109,9 @@ export default class SetLabelsModal extends Component {
                 options={ labelOptions } 
                 value={ labels.value } 
                 onChange={ (newValue) => { labels.onChange(newValue) } } 
-                placeholder='选择标签'/>
+                placeholder='Select label'/>
               <div>
-                <span style={ { fontSize: '12px' } }>拥有项目管理权限的用户才可创建新的标签。</span>
+                <span style={ { fontSize: '12px' } }>Users with project management privileges can create new tags.</span>
               </div>
             </div> }
           </FormGroup>
@@ -119,8 +119,8 @@ export default class SetLabelsModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

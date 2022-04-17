@@ -9,7 +9,7 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.send_auth_pwd) {
-    errors.send_auth_pwd = '必填';
+    errors.send_auth_pwd = 'Be required';
   }
   return errors;
 };
@@ -44,7 +44,7 @@ export default class ResetPwdModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('密码已设置。', 'success', 2000);
+      notify.show('The password has been set.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -65,21 +65,21 @@ export default class ResetPwdModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>密码设置</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>password setting</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ send_auth_pwd.touched && send_auth_pwd.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>验证密码</ControlLabel>
-            <FormControl disabled={ submitting } type='password' { ...send_auth_pwd } placeholder='新确认密码'/>
+            <ControlLabel><span className='txt-impt'>*</span>verify password</ControlLabel>
+            <FormControl disabled={ submitting } type='password' { ...send_auth_pwd } placeholder='New confirmation password'/>
             { send_auth_pwd.touched && send_auth_pwd.error && <HelpBlock style={ { float: 'right' } }>{ send_auth_pwd.error }</HelpBlock> }
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

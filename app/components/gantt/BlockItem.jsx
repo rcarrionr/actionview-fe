@@ -49,25 +49,25 @@ export default class BlockItem extends Component {
       <Popover id='popover-trigger-hover' style={ { maxWidth: '350px', padding: '15px 0px' } }>
         <Grid>
           <Row>
-            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>主题</Col>
+            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>theme</Col>
             <Col sm={ 8 }><div style={ { textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' } }>{ issue.no + '-' + issue.title }</div></Col>
           </Row>
           <Row>
-            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>开始时间</Col>
-            <Col sm={ 8 }>{ issue.expect_start_time ? moment.unix(issue.expect_start_time).format('YYYY/MM/DD') : <span style={ { fontStyle: 'italic', color: '#aaa' } }>未指定</span> }</Col>
+            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>Starting time</Col>
+            <Col sm={ 8 }>{ issue.expect_start_time ? moment.unix(issue.expect_start_time).format('YYYY/MM/DD') : <span style={ { fontStyle: 'italic', color: '#aaa' } }>Unexpected</span> }</Col>
           </Row>
           <Row>
-            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>结束时间</Col>
-            <Col sm={ 8 }>{ issue.expect_complete_time ? moment.unix(issue.expect_complete_time).format('YYYY/MM/DD') : <span style={ { fontStyle: 'italic', color: '#aaa' } }>未指定</span> }</Col>
+            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>End Time</Col>
+            <Col sm={ 8 }>{ issue.expect_complete_time ? moment.unix(issue.expect_complete_time).format('YYYY/MM/DD') : <span style={ { fontStyle: 'italic', color: '#aaa' } }>Unexpected</span> }</Col>
           </Row>
           { mode == 'progress' &&
           <Row>
-            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>进度</Col>
+            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>schedule</Col>
             <Col sm={ 8 }>{ issue.progress ? issue.progress + '%' : '0%' }</Col>
           </Row> }
           { mode == 'status' &&
           <Row>
-            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>状态</Col>
+            <Col sm={ 4 } componentClass={ ControlLabel } style={ { textAlign: 'right' } }>state</Col>
             <Col sm={ 8 }>{ _.findIndex(states, { id: issue.state }) != -1 ? <span className={ 'state-' + _.find(states, { id: issue.state }).category + '-label' }>{ _.find(states, { id: issue.state }).name }</span>: '-' }</Col>
           </Row> }
         </Grid>

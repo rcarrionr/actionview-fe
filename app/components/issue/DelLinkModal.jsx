@@ -26,7 +26,7 @@ export default class DelLinkModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('链接已删除。', 'success', 2000);
+      notify.show('The link has been removed.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -43,17 +43,17 @@ export default class DelLinkModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除链接</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete link</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           { data.title }<br/><br/>
-          确认要删除此链接？
+          Confirm that you want to delete this link?
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

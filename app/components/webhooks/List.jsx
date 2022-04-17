@@ -69,9 +69,9 @@ export default class List extends Component {
     if (eventKey == 'test') {
       const ecode = await test(hoverRowId);
       if (ecode === 0) {
-        notify.show('测试成功。', 'success', 2000);
+        notify.show('Test success.', 'success', 2000);
       } else {
-        notify.show('测试失败', 'error', 2000);
+        notify.show('Test failure', 'error', 2000);
       }
     } else {
       this.operateNotify(hoverRowId);
@@ -128,8 +128,8 @@ export default class List extends Component {
             { _.isEmpty(events) ? '-' : _.map(events, function(v, i) { return (<li key={ i }>{ v }</li>) }) }
           </ul>
         ), 
-        ssl: collection[i].ssl == 1 ? '是' : '否',
-        status: collection[i].status == 'disabled' ? <Label>无效</Label> : <Label bsStyle='success'>有效</Label>,
+        ssl: collection[i].ssl == 1 ? 'Yes' : 'no',
+        status: collection[i].status == 'disabled' ? <Label>invalid</Label> : <Label bsStyle='success'>efficient</Label>,
         operation: (
           <div>
           { operateShow && hoverRowId === collection[i].id && !itemLoading &&
@@ -140,8 +140,8 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              { collection[i].status == 'enabled' ? <MenuItem eventKey='disable'>禁用</MenuItem> : <MenuItem eventKey='enable'>启用</MenuItem> }
-              <MenuItem eventKey='del'>删除</MenuItem>
+              { collection[i].status == 'enabled' ? <MenuItem eventKey='disable'>Disable</MenuItem> : <MenuItem eventKey='enable'>Enable</MenuItem> }
+              <MenuItem eventKey='del'>delete</MenuItem>
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -153,7 +153,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed yet.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -166,7 +166,7 @@ export default class List extends Component {
               style={ { float: 'left', marginRight: '20px' } } 
               onClick={ () => { this.setState({ createModalShow: true }); } } 
               disabled={ indexLoading }>
-              <i className='fa fa-plus'></i>&nbsp;新建Webhook
+              <i className='fa fa-plus'></i>&nbsp;New constructionWebhook
             </Button>
           </FormGroup>
         </div>
@@ -174,16 +174,16 @@ export default class List extends Component {
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'>
             <span>
-              请求Header Content-Type为：application/json；Token附加在Header中的X_ACTIONVIEW_TOKEN里。
+              askHeader Content-Typefor:application/json；TokenAppendHeaderMediumX_ACTIONVIEW_TOKENinside.
             </span>
           </div>
         </div>
         <div>
           <BootstrapTable data={ directories } bordered={ false } hover options={ opts } trClassName='tr-top'>
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='request_url'>请求Url</TableHeaderColumn>
-            <TableHeaderColumn dataField='events'>事件</TableHeaderColumn>
-            <TableHeaderColumn dataField='status' width='100'>状态</TableHeaderColumn>
+            <TableHeaderColumn dataField='request_url'>askUrl</TableHeaderColumn>
+            <TableHeaderColumn dataField='events'>event</TableHeaderColumn>
+            <TableHeaderColumn dataField='status' width='100'>state</TableHeaderColumn>
             <TableHeaderColumn width='60' dataField='operation'/>
           </BootstrapTable>
           { this.state.createModalShow && 

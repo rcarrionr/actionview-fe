@@ -25,20 +25,20 @@ export default class OperateNotify extends Component {
     let ecode = 0, msg = '';
     if (operate === 'del') {
       ecode = await del(data.id);
-      msg = '已删除。'; 
+      msg = 'deleted.'; 
     } else if (operate === 'enable') {
       ecode = await update({ id: data.id, status: 'enabled' });
-      msg = '已启用。'; 
+      msg = 'activated.'; 
     } else if (operate === 'disable') {
       ecode = await update({ id: data.id, status: 'disabled' });
-      msg = '已禁用。'; 
+      msg = 'disabled.'; 
     } else {
       return;
     }
     if (ecode === 0) {
       notify.show(msg, 'success', 2000);    
     } else {
-      notify.show('操作失败。', 'error', 2000);    
+      notify.show('operation failed.', 'error', 2000);    
     }
   }
 
@@ -52,11 +52,11 @@ export default class OperateNotify extends Component {
 
     let operateTitle = '';
     if (operate === 'del') {
-      operateTitle = '提醒删除'
+      operateTitle = 'Reminder removal'
     } else if (operate === 'enable') {
-      operateTitle = '提醒启用';
+      operateTitle = 'Reminder';
     } else if (operate === 'disable') {
-      operateTitle = '提醒禁用';
+      operateTitle = 'Reminder';
     } else {
       return <div/>;
     }
@@ -68,19 +68,19 @@ export default class OperateNotify extends Component {
         </Modal.Header>
         { operate === 'del' && 
         <Modal.Body>
-          是否删除【{ data.name }】该提醒？
+          delete or not[{ data.name }]Reminder?
         </Modal.Body> }
         { operate === 'enable' &&
         <Modal.Body>
-          是否启用【{ data.name }】该提醒？
+          Whether to enable[{ data.name }]Reminder?
         </Modal.Body> }
         { operate === 'disable' &&
         <Modal.Body>
-          是否禁用【{ data.name }】该提醒？
+          Is it disabled?[{ data.name }]Reminder?
         </Modal.Body> }
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

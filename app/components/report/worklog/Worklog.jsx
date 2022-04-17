@@ -227,7 +227,7 @@ export default class Worklog extends Component {
         <div className='report-conds-style'>
           { sqlTxt &&
           <div className='cond-bar' style={ { marginTop: '0px', float: 'left' } }>
-            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>：{ sqlTxt }</div>
+            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>:{ sqlTxt }</div>
             <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'><i className='fa fa-save'></i></div>
           </div> }
           { data.length > 0 &&

@@ -88,7 +88,7 @@ export default class Card extends Component {
     return connectDragSource(connectDropTarget(
       <div style={ { opacity } } className='dragcard'>
         <span>{ text }</span>
-        { !!deleteCard && <span className='comments-button' style={ { float: 'right' } } onClick={ deleteCard } title='删除'><i className='fa fa-remove'></i></span> }
+        { !!deleteCard && <span className='comments-button' style={ { float: 'right' } } onClick={ deleteCard } title='delete'><i className='fa fa-remove'></i></span> }
         <span style={ { width: '75px', marginRight: '25px', float: 'right' } }>
           <FormGroup style={ { marginBottom: '0px' } }>
             <FormControl
@@ -96,7 +96,7 @@ export default class Card extends Component {
               type='number'
               value={ width }
               onChange={ (e) => { const v = e.target.value.replace(/[^0-9]/ig, ''); editWidth(index, v) } }
-              placeholder='宽度(px)'/>
+              placeholder='width(px)'/>
           </FormGroup>
         </span>
       </div>

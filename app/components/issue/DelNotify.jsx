@@ -28,7 +28,7 @@ export default class DelNotify extends Component {
     if (ecode === 0) {
       close();
       detailClose && detailClose();
-      notify.show('问题已删除。', 'success', 2000);
+      notify.show('The problem has been deleted.', 'success', 2000);
     }
   }
 
@@ -43,18 +43,18 @@ export default class DelNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除问题 - { data.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete problem - { data.no }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要删除此问题？<br/><br/>
-          如果您完成了这个问题，通常是"解决"或者"关闭"此问题，而不是删除。<br/>
-          如果此问题有子问题也将一并被删除。<br/> 
+          Confirm that you want to delete this problem?<br/><br/>
+          If you have completed this problem, usually"solve"or"closure"This issue is not deleted.<br/>
+          If there is a child problem, it will be deleted.<br/> 
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

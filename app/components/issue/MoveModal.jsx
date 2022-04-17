@@ -11,7 +11,7 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.parent_id) {
-    errors.parent_id = '必填';
+    errors.parent_id = 'Be required';
   }
   return errors;
 };
@@ -49,7 +49,7 @@ export default class MoveModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('移动完成。', 'success', 2000);
+      notify.show('Mobile is complete.', 'success', 2000);
     } else { 
       this.setState({ ecode: ecode });
     }
@@ -93,16 +93,16 @@ export default class MoveModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '移动子问题 - ' + issue.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Moving sub-problem - ' + issue.no }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <div className='info-col' style={ { marginBottom: '15px', marginTop: '5px' } }>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-            <div className='info-content'>仅支持子项目在不同父项目间的移动。</div>
+            <div className='info-content'>Only the sub-project moves between different parent projects.</div>
           </div>
           <FormGroup controlId='formControlsText' validationState={ parent_id.touched && parent_id.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>移动到</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>move to</ControlLabel>
             <Select.Async 
               clearable={ false } 
               disabled={ submitting } 
@@ -112,15 +112,15 @@ export default class MoveModal extends Component {
               valueKey='id' 
               labelKey='name' 
               loadOptions={ this.searchIssue.bind(this) } 
-              placeholder='输入问题号或名称'/>
+              placeholder='Enter the problem number or name'/>
             { parent_id.touched && parent_id.error && <HelpBlock style={ { float: 'right' } }>{ parent_id.error }</HelpBlock> }
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -64,14 +64,14 @@ export default class PreviewModal extends Component {
         dialogClassName='custom-modal-90'
         aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>工作流预览{ name ? (' - ' + name) : '' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Workflow preview{ name ? (' - ' + name) : '' }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { maxHeight: '580px', overflow: 'auto' } }>
           <div className='mermaid' id='chart'/>
         </Modal.Body>
         <Modal.Footer>
-          <span style={ { float: 'left', marginTop: '7px' } }>提示：预览不支持IE</span>
-          <Button onClick={ close }>关闭</Button>
+          <span style={ { float: 'left', marginTop: '7px' } }>hint:Preview does not supportIE</span>
+          <Button onClick={ close }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

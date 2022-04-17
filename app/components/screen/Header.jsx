@@ -30,13 +30,13 @@ export default class Header extends Component {
       <div>
         <div style={ { marginTop: '5px' } }>
           <Button className='create-btn' onClick={ () => { this.setState({ createModalShow: true }); } }>
-            <i className='fa fa-plus'></i>&nbsp;新建界面
+            <i className='fa fa-plus'></i>&nbsp;New interface
           </Button>
         </div>
         <div className='info-col'>
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'>
-            <span>界面是对字段的排列布局和属性定义，是创建问题、编辑问题或执行工作流过程时显示的页面。<br/>如果定义问题的创建或编辑页面，首先应将主题字段添加到页面中，且将其设置为必填字段。<br/>只能删除没有关联到问题类型{ isSysConfig && '（包括各项目自定义问题类型）' }和没有应用到工作流{ isSysConfig && '（包括各项目自定义工作流）' }的界面。</span>
+            <span>The interface is the arrangement layout and attribute definition of the field, is a page displayed when creating a problem, editing a problem, or performing a workflow process.<br/>If you define a problem creation or editing page, you should first add the topic field to the page and set it to the required field.<br/>Can only be deleted without association to problem type{ isSysConfig && '(Including each project custom problem type)' }And not applied to workflow{ isSysConfig && '(Including each project custom workflow)' }Interface.</span>
           </div>
         </div>
         { this.state.createModalShow && 

@@ -10,11 +10,11 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
 
   if (!values.type) {
-    errors.abb = '必填';
+    errors.abb = 'Be required';
   }
 
   return errors;
@@ -58,7 +58,7 @@ export default class EditModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('更新完成。', 'success', 2000);
+      notify.show(''update completed.'', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -81,18 +81,18 @@ export default class EditModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '编辑看板 - ' + data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Edit - ' + data.name }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
             <FormControl type='hidden' { ...id }/>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='看板名'/>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Signboard name'/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel><span className='txt-impt'>*</span>类型</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>type</ControlLabel>
             <Select
               simpleValue 
               disabled={ submitting }
@@ -100,18 +100,18 @@ export default class EditModal extends Component {
               clearable={ false }
               value={ type.value }
               onChange={ newValue => { type.onChange(newValue) } }
-              placeholder='请选择看板类型'/>
+              placeholder='Please select the type of board'/>
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>描述</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...description } placeholder='描述'/>
+            <ControlLabel>describe</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...description } placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -20,9 +20,9 @@ export default class DelNotify extends Component {
     close();
     const ecode = await del(data.id);
     if (ecode === 0) {
-      notify.show('项目已删除。', 'success', 2000);    
+      notify.show('The project has been deleted.', 'success', 2000);    
     } else {
-      notify.show('删除失败。', 'error', 2000);    
+      notify.show('failed to delete.', 'error', 2000);    
     }
   }
 
@@ -37,15 +37,15 @@ export default class DelNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除项目</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete item</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          项目被删除后，相关信息都将被删除，且不可恢复，请慎重。<br/>
-          确认要删除【{ data.name }】该项目？<br/>
+          After the project is deleted, the relevant information will be deleted and cannot be recoverable, please carefully.<br/>
+          Confirm that you want to delete[{ data.name }]this project?<br/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

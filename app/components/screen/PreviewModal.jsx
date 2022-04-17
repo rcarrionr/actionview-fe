@@ -26,18 +26,18 @@ export default class PreviewModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>预览界面{ name ? (' - ' + name) : '' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Preview interface{ name ? (' - ' + name) : '' }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           <ListGroup>
             { _.map(data, (val, key) => 
               <ListGroupItem header={ val.name || '' }>
-              { '键值:' + (val.key || '-') + ' - 类型:' + (_.find(FieldTypes, { value: val.type }) ? _.find(FieldTypes, { value: val.type }).label : '') + (val.required ? ' - 必填' : '') }
+              { 'Key value:' + (val.key || '-') + ' - type:' + (_.find(FieldTypes, { value: val.type }) ? _.find(FieldTypes, { value: val.type }).label : '') + (val.required ? ' - Be required' : '') }
               </ListGroupItem> ) }
           </ListGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

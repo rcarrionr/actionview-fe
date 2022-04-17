@@ -11,26 +11,26 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } else if (props.data.name !== values.name && _.findIndex(props.collection || [], { name: values.name }) !== -1) {
-    errors.name = '该名称已存在';
+    errors.name = 'This name already exists';
   }
 
   if (values.start_time) {
     if (!moment(values.start_time).isValid()) {
-      errors.start_time = '格式错误';
+      errors.start_time = 'wrong format';
     }
   }
 
   if (values.end_time) {
     if (!moment(values.end_time).isValid()) {
-      errors.end_time = '格式错误';
+      errors.end_time = 'wrong format';
     }
   }
 
   if (values.start_time && values.end_time) {
     if (values.start_time > values.end_time) {
-      errors.start_time = '计划开始时间要早于计划完成时间';
+      errors.start_time = 'Plan start time to complete the scheduled completion time';
     }
   }
 
@@ -83,7 +83,7 @@ export default class EditModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('更新完成。', 'success', 2000);
+      notify.show(''update completed.'', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -111,19 +111,19 @@ export default class EditModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '编辑版本 - ' + data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Editing version - ' + data.name }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyUp={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
             <FormControl type='hidden' { ...id }/>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='版本名'/>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Version name'/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <div>
             <FormGroup style={ { width: '45%', display: 'inline-block' } } validationState={ start_time.value && start_time.error ? 'error' : null }>
-              <ControlLabel>计划开始时间</ControlLabel>
+              <ControlLabel>Plan start time</ControlLabel>
               <DateTime 
                 locale='zh-cn' 
                 mode='date' 
@@ -135,7 +135,7 @@ export default class EditModal extends Component {
               { start_time.value && start_time.error && <HelpBlock style={ { float: 'right' } }>{ start_time.error }</HelpBlock> }
             </FormGroup>
             <FormGroup style={ { width: '45%', display: 'inline-block', float: 'right' } } validationState={ end_time.value && end_time.error ? 'error' : null }>
-              <ControlLabel>计划完成时间</ControlLabel>
+              <ControlLabel>Plan completion time</ControlLabel>
               <DateTime 
                 locale='zh-cn' 
                 mode='date' 
@@ -148,20 +148,20 @@ export default class EditModal extends Component {
             </FormGroup>
           </div>
           <FormGroup>
-            <ControlLabel>描述</ControlLabel>
+            <ControlLabel>describe</ControlLabel>
             <FormControl
               disabled={ submitting }
               componentClass='textarea'
               style={ { height: '200px' } }
               { ...description }
-              placeholder='描述'/>
+              placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -32,7 +32,7 @@ export default class ShareLinkModal extends Component {
     return (
       <Modal show onHide={ close } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>分享链接 - { issue.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Share link - { issue.no }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormControl
@@ -42,9 +42,9 @@ export default class ShareLinkModal extends Component {
             value={ this.state.url } />
         </Modal.Body>
         <Modal.Footer>
-          <span style={ { marginRight: '20px', fontSize: '12px' } }>若当前浏览器不支持此复制功能，可手动复制以上链接。</span>
-          <Button onClick={ this.copy.bind(this) }>复制</Button>
-          <Button bsStyle='link' onClick={ close }>关闭</Button>
+          <span style={ { marginRight: '20px', fontSize: '12px' } }>If the current browser does not support this replication function, you can manually copy the above link.</span>
+          <Button onClick={ this.copy.bind(this) }>copy</Button>
+          <Button bsStyle='link' onClick={ close }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

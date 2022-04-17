@@ -25,7 +25,7 @@ export default class SyncNotify extends Component {
     const ecode = await sync(year);
     if (ecode === 0) {
       close();
-      notify.show('同步完成。', 'success', 2000);    
+      notify.show('Synchronous completion.', 'success', 2000);    
     }
     this.setState({ ecode: ecode });
   }
@@ -44,17 +44,17 @@ export default class SyncNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>同步日历 - { year }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Synchronous calendar - { year }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <br/>同步数据来至接口：<a href={ 'https://actionview.cn/actionview/api/holiday/' + year } target='_blank'>{ 'https://actionview.cn/actionview/api/holiday/' + year }</a><br/><br/>
-          同步后，该年度原有设置的日历将会被覆盖，确认要同步吗？<br/><br/>
+          <br/>Synchronous data comes to the interface:<a href={ 'https://actionview.cn/actionview/api/holiday/' + year } target='_blank'>{ 'https://actionview.cn/actionview/api/holiday/' + year }</a><br/><br/>
+          After synchronization, the original set calendar will be overwritten, confirm that you want to synchronize?<br/><br/>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ loadimg } className={ loading ? 'loading' : 'hide' }/>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

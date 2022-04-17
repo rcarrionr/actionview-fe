@@ -43,17 +43,17 @@ export default class MoveIssueNotify extends Component {
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-la'>
-           提示 
+           hint 
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          移动此问题Sprint 范围将受到影响，是否继续移动? <br/>
+          Move this problemSprint The scope will be affected, whether to continue? <br/>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

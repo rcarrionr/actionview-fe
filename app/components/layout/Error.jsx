@@ -25,11 +25,11 @@ class Error extends Component {
       <div style={ { paddingTop: '200px', textAlign: 'center', backgroundColor: '#ccc', height: '100%' } }>
          <h1>404</h1>
          <h3>
-           抱歉，您访问的页面不存在。
+           Sorry, the page you visit does not exist.
          </h3><br/>
          <h4>
            <font color='red' id='num'>3</font>
-           <span>&nbsp;秒钟后，自动跳转至登录页面。</span>
+           <span>&nbsp;After the second, automatically jump to the login page.</span>
         </h4>
       </div>
     );

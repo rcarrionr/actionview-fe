@@ -35,7 +35,7 @@ export default class ViewUsedModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '查看项目应用 - ' + data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'View project application - ' + data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           { loading &&
@@ -45,15 +45,15 @@ export default class ViewUsedModal extends Component {
           { !loading &&
           <div style={ { marginBottom: '10px' } }>
             { projects.length > 0 ?
-            <span>共有应用项目 <strong>{ projects.length }</strong> 个</span>
+            <span>A total of application projects <strong>{ projects.length }</strong> indivual</span>
             :
-            <span>暂无项目应用</span> }
+            <span>No project application</span> }
           </div> }
           { !loading && projects.length > 0 &&
           <Table condensed hover responsive>
             <thead>
               <tr>
-                <th>项目名称</th>
+                <th>project name</th>
               </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@ export default class ViewUsedModal extends Component {
                     { v.status === 'active' ?
                     <span><Link to={ '/project/' + v.key + '/team' }>{ v.name }</Link></span>
                     :
-                    <span>{ v.name }(已关闭)</span> }
+                    <span>{ v.name }(closed)</span> }
                   </td>
                 </tr> ); 
             }) }
@@ -72,7 +72,7 @@ export default class ViewUsedModal extends Component {
           </Table> }
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

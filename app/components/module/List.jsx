@@ -128,13 +128,13 @@ export default class List extends Component {
       this.state.settingPrincipalModuleIds.splice(settingIndex, 1);
 
       this.setState({});
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       const settingIndex = _.indexOf(this.state.settingPrincipalModuleIds, moduleId);
       this.state.settingPrincipalModuleIds.splice(settingIndex, 1);
 
       this.setState({});
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
   }
 
@@ -175,13 +175,13 @@ export default class List extends Component {
       this.state.settingDefaultAssigneeModuleIds.splice(settingIndex, 1);
 
       this.setState({});
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       const settingIndex = _.indexOf(this.state.settingDefaultAssigneeModuleIds, moduleId);
       this.state.settingDefaultAssigneeModuleIds.splice(settingIndex, 1);
 
       this.setState({});
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
   }
 
@@ -220,9 +220,9 @@ export default class List extends Component {
     });
 
     const defaultAssigneeOptions = [ 
-      { value: 'projectPrincipal', label: '项目负责人' }, 
-      { value: 'modulePrincipal', label: '模块负责人' }, 
-      { value: 'none', label: '未分配' } 
+      { value: 'projectPrincipal', label: 'Project manager' }, 
+      { value: 'modulePrincipal', label: 'Person in charge of the module' }, 
+      { value: 'none', label: 'Unallocated' } 
     ];
 
     const modules = [];
@@ -277,7 +277,7 @@ export default class List extends Component {
                 options={ userOptions } 
                 value={ _.isUndefined(this.state.principal[collection[i].id]) ? collection[i].principal.id : this.state.principal[collection[i].id] } 
                 onChange={ this.handlePrincipalSelectChange.bind(this, collection[i].id) } 
-                placeholder='请选择用户'/>
+                placeholder='Please select a user'/>
               <div className={ _.indexOf(settingPrincipalModuleIds, collection[i].id) !== -1 ? 'hide' : 'edit-button-group' }>
                 <Button 
                   className='edit-ok-button' 
@@ -331,7 +331,7 @@ export default class List extends Component {
                 options={ defaultAssigneeOptions } 
                 value={ this.state.defaultAssignee[collection[i].id] || collection[i].defaultAssignee } 
                 onChange={ this.handleDefaultAssigneeSelectChange.bind(this, collection[i].id) } 
-                placeholder='默认负责人(项目负责人)'/>
+                placeholder='Default person in charge(Project manager)'/>
               <div className={ _.indexOf(settingDefaultAssigneeModuleIds, collection[i].id) !== -1 ? 'hide' : 'edit-button-group' }>
                 <Button 
                   className='edit-ok-button' 
@@ -361,11 +361,11 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='1'>编辑</MenuItem> }
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='2'>删除</MenuItem> }
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='1'>edit</MenuItem> }
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='2'>delete</MenuItem> }
               { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem divider/> }
-              <MenuItem eventKey='3'>问题列表</MenuItem>
-              <MenuItem eventKey='4'>甘特图</MenuItem>
+              <MenuItem eventKey='3'>List of Questions</MenuItem>
+              <MenuItem eventKey='4'>Gantt chart</MenuItem>
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -377,7 +377,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。';
+      opts.noDataText = 'No data is displayed.';
     }
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -388,9 +388,9 @@ export default class List extends Component {
         <BackTop />
         <BootstrapTable data={ modules } bordered={ false } hover options={ opts } trClassName='tr-middle'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='principal'>负责人</TableHeaderColumn>
-          <TableHeaderColumn dataField='defaultAssignee'>默认负责人</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='principal'>principal</TableHeaderColumn>
+          <TableHeaderColumn dataField='defaultAssignee'>Default person in charge</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

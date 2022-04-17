@@ -94,7 +94,7 @@ export default class Column extends Component {
 
     const ecode = await setRank({ current: draggedIssue.no, up, down });
     if (ecode !== 0) {
-      notify.show('移动失败。', 'error', 2000);
+      notify.show('Mobile failed.', 'error', 2000);
     }
   }
 
@@ -112,7 +112,7 @@ export default class Column extends Component {
     if (down !== no) {
       const ecode = await setRank({ current: no, up, down });
       if (ecode !== 0) {
-        notify.show('移动失败。', 'error', 2000);
+        notify.show('Mobile failed.', 'error', 2000);
       }
     }
   }
@@ -126,7 +126,7 @@ export default class Column extends Component {
     if (up !== no) {
       const ecode = await setRank({ current: no, up, down });
       if (ecode !== 0) {
-        notify.show('移动失败。', 'error', 2000);
+        notify.show('Mobile failed.', 'error', 2000);
       }
     }
   }

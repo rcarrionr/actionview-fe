@@ -108,7 +108,7 @@ export default class List extends Component {
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div>
         ),
-        status: collection[i].status == 'disabled' ? <Label>无效</Label> : <Label bsStyle='success'>有效</Label>,
+        status: collection[i].status == 'disabled' ? <Label>invalid</Label> : <Label bsStyle='success'>efficient</Label>,
         operation: (
           <div>
           { operateShow && hoverRowId === collection[i].id &&
@@ -120,9 +120,9 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='edit'>编辑</MenuItem>
-              { collection[i].status == 'enabled' ? <MenuItem eventKey='disable'>禁用</MenuItem> : <MenuItem eventKey='enable'>启用</MenuItem> }
-              <MenuItem eventKey='del'>删除</MenuItem>
+              <MenuItem eventKey='edit'>edit</MenuItem>
+              { collection[i].status == 'enabled' ? <MenuItem eventKey='disable'>Disable</MenuItem> : <MenuItem eventKey='enable'>Enable</MenuItem> }
+              <MenuItem eventKey='del'>delete</MenuItem>
             </DropdownButton> }
           </div>
         )
@@ -133,7 +133,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -143,7 +143,7 @@ export default class List extends Component {
       <div style={ { marginBottom: '30px' } }>
         <div style={ { marginTop: '15px' } }>
           <Button onClick={ () => { this.setState({ createModalShow: true }) } }>
-            <i className='fa fa-plus'></i>&nbsp;新建提醒
+            <i className='fa fa-plus'></i>&nbsp;New reminder
           </Button>
         </div>
         <BootstrapTable 
@@ -153,8 +153,8 @@ export default class List extends Component {
           options={ opts } 
           trClassName='tr-middle'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='status'>状态</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='status'>state</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

@@ -91,21 +91,21 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed.'; 
     } 
 
     return (
       <div style={ { marginBottom: '30px' } }>
         <BootstrapTable data={ worklogs } bordered={ false } hover options={ opts }>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='type' width='50'>类型</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='state' width='100'>状态</TableHeaderColumn>
-          <TableHeaderColumn dataField='total_value' width='100'>耗费时间</TableHeaderColumn>
+          <TableHeaderColumn dataField='type' width='50'>type</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='state' width='100'>state</TableHeaderColumn>
+          <TableHeaderColumn dataField='total_value' width='100'>waste time</TableHeaderColumn>
         </BootstrapTable>
         { worklogs.length > 0 &&
         <div style={ { float: 'left' } }>
-          <span>共计 { worklogs.length } 条</span>
+          <span>total { worklogs.length } strip</span>
         </div> }
         { this.state.detailShow &&
         <DetailModal

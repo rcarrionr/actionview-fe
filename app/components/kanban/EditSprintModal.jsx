@@ -11,7 +11,7 @@ const validate = (values, props) => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
 
   return errors;
@@ -51,7 +51,7 @@ export default class EditSprintModal extends Component {
     this.setState({ ecode: ecode });
 
     if (ecode === 0) {
-      notify.show('更新完成。', 'success', 2000);
+      notify.show('update completed.', 'success', 2000);
       close();
     }
   }
@@ -84,34 +84,34 @@ export default class EditSprintModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>编辑 - { data.name || '' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>edit - { data.name || '' }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyUp={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body style={ { maxHeight: '580px' } }>
           <FormGroup>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
             <FormControl type='hidden' { ...no }/>
             <FormControl
               disabled={ submitting }
               type='text'
               { ...name }
-              placeholder='名称'/>
+              placeholder='name'/>
           </FormGroup>
           <FormGroup>
-            <ControlLabel>描述</ControlLabel>
+            <ControlLabel>describe</ControlLabel>
             <FormControl 
               disabled={ submitting } 
               componentClass='textarea'
               style={ { height: '200px' } }
               { ...description }
-              placeholder='描述'/>
+              placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

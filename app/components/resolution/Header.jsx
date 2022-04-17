@@ -33,9 +33,9 @@ export default class Header extends Component {
     const { setDefault } = this.props;
     const ecode = await setDefault({ 'defaultValue': defaultValue });
     if (ecode === 0) {
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
-      notify.show('设置失败。', 'error', 2000);
+      notify.show('Setup failed.', 'error', 2000);
     }
     this.setState({ defaultSetShow: false });
   }
@@ -56,14 +56,14 @@ export default class Header extends Component {
       <div>
         <div style={ { marginTop: '5px' } }>
           <Button className='create-btn' onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }>
-            <i className='fa fa-plus'></i>&nbsp;新建结果
+            <i className='fa fa-plus'></i>&nbsp;New results
           </Button>
           { !indexLoading && 
             <Button className='create-btn' onClick={ () => { this.setState({ sortCardsModalShow: true }); } }>
-              <i className='fa fa-edit'></i>&nbsp;编辑顺序
+              <i className='fa fa-edit'></i>&nbsp;Editing order
             </Button> }
           <div className={ indexLoading ? 'hide' : 'div-default-set' }>
-            <span className='default-set'>默认结果：</span>
+            <span className='default-set'>Default results:</span>
             { this.state.defaultSetShow ? 
               <div className='default-set'>
                 <div className='edit-field-content'>
@@ -79,7 +79,7 @@ export default class Header extends Component {
               </div>
               :
               <span className='default-set editable-field'>
-                <span style={ { paddingRight: '10px' } }>{ collection[defaultIndex] ? collection[defaultIndex].name : '无' }</span>
+                <span style={ { paddingRight: '10px' } }>{ collection[defaultIndex] ? collection[defaultIndex].name : 'none' }</span>
                 <Button className='edit-icon' onClick={ () => { this.setState({ defaultSetShow: true }); } }><i className='fa fa-pencil'></i></Button>
               </span>
             }
@@ -87,7 +87,7 @@ export default class Header extends Component {
         </div>
         <div className='info-col'>
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-          <div className='info-content'>新建问题时如果没有指定解决结果，默认初始值是未解决。<br/>只能删除没有应用到项目问题中的解决结果。</div>
+          <div className='info-content'>If there is no resolution when new issues, the default initial value is not resolved.<br/>Can only delete the resolution result that is not applied to the project problem.</div>
         </div>
         { this.state.createModalShow && 
           <CreateModal 
@@ -99,7 +99,7 @@ export default class Header extends Component {
         { this.state.sortCardsModalShow && 
           <SortCardsModal 
             show 
-            model='解决结果'
+            model='Solution'
             close={ this.sortCardsModalClose } 
             cards={ collection } 
             setSort={ setSort } 

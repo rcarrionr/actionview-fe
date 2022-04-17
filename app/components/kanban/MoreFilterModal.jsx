@@ -53,7 +53,7 @@ export default class MoreFilterModal extends Component {
         aria-labelledby='contained-modal-title-sm' 
         dialogClassName='custom-modal-90'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>附加过滤</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Additional filtering</Modal.Title>
         </Modal.Header>
         <Form horizontal onKeyUp={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body style={ { maxHeight: '580px', overflow: 'auto', paddingBottom: '0px' } }>
@@ -69,8 +69,8 @@ export default class MoreFilterModal extends Component {
             options={ options }/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleSubmit } disabled={ _.isEqual(oldQuery, query) }>确定</Button>
-          <Button bsStyle='link' onClick={ this.handleCancel }>取消</Button>
+          <Button onClick={ this.handleSubmit } disabled={ _.isEqual(oldQuery, query) }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </Form>
       </Modal>

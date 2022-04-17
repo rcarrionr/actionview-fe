@@ -10,18 +10,18 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } else if (_.findIndex(props.collection || [], { name: values.name }) !== -1) {
-    errors.name = '该名称已存在';
+    errors.name = 'This name already exists';
   }
 
   if (values.bgColor) {
     const pattern = new RegExp(/^#[0-9a-fA-F]{6}$/);
     if (!pattern.test(values.bgColor)) {
-      errors.bgColor = '格式错误';
+      errors.bgColor = 'wrong format';
     }
   } else {
-    errors.bgColor = '必选';
+    errors.bgColor = 'required';
   }
   return errors;
 };
@@ -56,7 +56,7 @@ export default class CreateModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('新建完成。', 'success', 2000);
+      notify.show('Newly created.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -82,17 +82,17 @@ export default class CreateModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>创建Epic</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>createEpic</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Epic名称'/>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Epicname'/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ bgColor.touched && bgColor.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>背景色</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>Background color</ControlLabel>
             <Select
               simpleValue
               disabled={ submitting }
@@ -101,14 +101,14 @@ export default class CreateModal extends Component {
               searchable={ false }
               value={ bgColor.value }
               onChange={ newValue => { bgColor.onChange(newValue) } }
-              placeholder='请选择背景色'/>
+              placeholder='Please select a background color'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

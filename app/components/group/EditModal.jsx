@@ -11,7 +11,7 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } 
   return errors;
 };
@@ -49,7 +49,7 @@ export default class EditModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('组信息已更新。', 'success', 2000);
+      notify.show('Group information has been updated.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -91,26 +91,26 @@ export default class EditModal extends Component {
     } = this.props;
 
     const scopeOptions = [
-      { label: '公开（所有人可对其授权）', value: '1' }, 
-      { label: '私有（仅负责人可对其授权）', value: '2' }, 
-      { label: '成员可见（仅组成员和负责人可对其授权）', value: '3' }
+      { label: 'Open (all people can authorize)', value: '1' }, 
+      { label: 'Private (only person in charge can be authorized)', value: '2' }, 
+      { label: 'Members visible (only group members and person in charge can be authorized)', value: '3' }
     ];
 
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>编辑用户组</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Edit user group</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>组名</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>group name</ControlLabel>
             <FormControl type='hidden' { ...id }/>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='组名'/>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='group name'/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup validationState={ principal.touched && principal.error ? 'error' : null }>
-            <ControlLabel>负责人</ControlLabel>
+            <ControlLabel>principal</ControlLabel>
             <Select.Async
               clearable={ true }
               disabled={ submitting }
@@ -120,10 +120,10 @@ export default class EditModal extends Component {
               valueKey='id'
               labelKey='name'
               loadOptions={ this.searchUsers.bind(this) }
-              placeholder='输入负责人(默认是系统管理员)'/>
+              placeholder='Enter the person in charge(By default is the system administrator)'/>
           </FormGroup>
           <FormGroup>
-            <ControlLabel>公开范围</ControlLabel>
+            <ControlLabel>Disclosure</ControlLabel>
             <Select
               disabled={ submitting }
               options={ scopeOptions }
@@ -131,18 +131,18 @@ export default class EditModal extends Component {
               clearable={ false }
               value={ public_scope.value || '1' }
               onChange={ newValue => { public_scope.onChange(newValue) } }
-              placeholder='请选择公开范围'/>
+              placeholder='Please select a public range'/>
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>描述</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...description } placeholder='描述'/>
+            <ControlLabel>describe</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...description } placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -85,7 +85,7 @@ function addChildren(tree, parentid, children) {
 
 function addNode(tree, parentId, node) {
   const parentNode = findNode(tree, parentId);
-  // 目录树还没展开改节点
+  // The directory tree has not yet exposed the change node
   if (parentNode === false || (parentNode.childern && parentNode.childern.length === 0)) {
     return;
   }

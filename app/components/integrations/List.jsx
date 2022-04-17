@@ -76,7 +76,7 @@ export default class List extends Component {
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'>
             <span>
-              External users only support:GitHub、GitLab。
+              External users only support:GitHub, GitLab.
             </span>
             <span>
               <br/>

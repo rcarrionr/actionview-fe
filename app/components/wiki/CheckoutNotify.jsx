@@ -22,9 +22,9 @@ export default class CheckoutNotify extends Component {
     close();
     const ecode = await checkout(data.id);
     if (ecode === 0) {
-      notify.show('已解锁。', 'success', 2000);    
+      notify.show('Unlocked.', 'success', 2000);    
     } else {
-      notify.show('解锁失败。', 'error', 2000);    
+      notify.show('Unlock failed.', 'error', 2000);    
     }
   }
 
@@ -39,17 +39,17 @@ export default class CheckoutNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>文档解锁</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Document unlock</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          { '该文档【' + data.name + '】被 ' + ( data.checkin.user ? data.checkin.user.name : '' ) + ' 于 ' + ( data.checkin.at ? moment.unix(data.checkin.at).format('YYYY/MM/DD HH:mm') : '' ) + ' 锁定。' }
+          { 'This document[' + data.name + ']quilt ' + ( data.checkin.user ? data.checkin.user.name : '' ) + ' At ' + ( data.checkin.at ? moment.unix(data.checkin.at).format('YYYY/MM/DD HH:mm') : '' ) + ' locking.' }
           <br/>
 
-          确认要解锁？<br/>
+          Confirm that you want to unlock?<br/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

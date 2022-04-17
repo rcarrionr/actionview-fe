@@ -27,7 +27,7 @@ export default class DelCommentsModal extends Component {
     this.setState({ ecode: ecode });
     if (ecode === 0) {
       close();
-      notify.show('回复已删除。', 'success', 2000);
+      notify.show('Reply has been deleted.', 'success', 2000);
     }
   }
 
@@ -42,16 +42,16 @@ export default class DelCommentsModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除回复</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete reply</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要删除此回复？
+          Confirm that you want to delete this reply?
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

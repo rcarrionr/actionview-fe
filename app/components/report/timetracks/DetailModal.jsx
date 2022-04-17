@@ -46,7 +46,7 @@ export default class DetailModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } bsSize='large' backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>工作日志 - { issue.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Work log - { issue.no }</Modal.Title>
         </Modal.Header>
         { loading &&
         <Modal.Body style={ { height: '580px', overflow: 'auto' } }>
@@ -57,15 +57,15 @@ export default class DetailModal extends Component {
         { !loading &&
         <Modal.Body style={ { height: '580px', overflow: 'auto' } }>
           <div style={ { marginBottom: '10px' } }>
-            <span>共耗费 <strong>{ ttFormat(_.reduce(data, (sum, v) => { return sum + (v.spend_m || 0) }, 0), w2m, d2m) }</strong> 分钟</span>
-            <span title='刷新'><Button bsStyle='link' onClick={ this.refresh.bind(this) }><i className='fa fa-refresh'></i></Button></span>
+            <span>Consumption <strong>{ ttFormat(_.reduce(data, (sum, v) => { return sum + (v.spend_m || 0) }, 0), w2m, d2m) }</strong> minute</span>
+            <span title='Refresh'><Button bsStyle='link' onClick={ this.refresh.bind(this) }><i className='fa fa-refresh'></i></Button></span>
           </div>
           <Table condensed responsive>
             <thead><tr>
-              <th>人员</th>
-              <th>开始时间</th>
-              <th>耗费时间</th>
-              <th>备注</th>
+              <th>personnel</th>
+              <th>Starting time</th>
+              <th>waste time</th>
+              <th>Remark</th>
             </tr></thead>
             <tbody>
             { _.map(data, (v, key) => {
@@ -80,7 +80,7 @@ export default class DetailModal extends Component {
           </Table>
         </Modal.Body> }
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

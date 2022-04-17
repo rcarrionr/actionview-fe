@@ -13,25 +13,25 @@ const validate = (values, props) => {
 
   if (values.expect_start_time) {
     if (!moment(values.expect_start_time).isValid()) {
-      errors.expect_start_time = '格式错误';
+      errors.expect_start_time = 'wrong format';
     }
   }
   if (values.expect_complete_time) {
     if (!moment(values.expect_complete_time).isValid()) {
-      errors.expect_complete_time = '格式错误';
+      errors.expect_complete_time = 'wrong format';
     }
   }
   if (values.expect_start_time && values.expect_complete_time) {
     if (values.expect_start_time > values.expect_complete_time) {
-      errors.expect_start_time = '开始时间要早于结束时间';
+      errors.expect_start_time = 'Before starting time, earlier than the end time';
     }
   }
 
   if (values.progress) {
     if (isNaN(values.progress)) {
-      errors.progress = '格式错误';
+      errors.progress = 'wrong format';
     } else if (values.progress < 0 || values.progress > 100) {
-      errors.progress = '数值必须在0～100之间';
+      errors.progress = 'Numerical value must be0～100between';
     }
   }
   return errors;
@@ -87,7 +87,7 @@ export default class EditModal extends Component {
     const ecode = await edit(data.id, submitValues);
     if (ecode === 0) {
       this.setState({ ecode: 0 });
-      notify.show('编辑完成。', 'success', 2000);
+      notify.show('Editing is completed.', 'success', 2000);
       close();
     } else {
       this.setState({ ecode: ecode });
@@ -125,13 +125,13 @@ export default class EditModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '周期进度 - ' + data.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Cycle progress - ' + data.no }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <div>
             <FormGroup style={ { width: '47%', display: 'inline-block' } } validationState={ expect_start_time.value && expect_start_time.error ? 'error' : null }>
-              <ControlLabel>计划开始时间</ControlLabel>
+              <ControlLabel>Plan start time</ControlLabel>
               <DateTime 
                 locale='zh-cn' 
                 mode='date' 
@@ -144,7 +144,7 @@ export default class EditModal extends Component {
                 <HelpBlock style={ { float: 'right' } }>{ expect_start_time.error }</HelpBlock> }
             </FormGroup>
             <FormGroup style={ { width: '47%', display: 'inline-block', float: 'right' } } validationState={ expect_complete_time.value && expect_complete_time.error ? 'error' : null }>
-              <ControlLabel>计划完成时间</ControlLabel>
+              <ControlLabel>Plan completion time</ControlLabel>
               <DateTime 
                 locale='zh-cn' 
                 mode='date' 
@@ -157,7 +157,7 @@ export default class EditModal extends Component {
             </FormGroup>
           </div>
           <FormGroup style={ { marginBottom: '0px' } } validationState={ progress.touched && progress.error ? 'error' : null }>
-            <ControlLabel>进度</ControlLabel>
+            <ControlLabel>schedule</ControlLabel>
             <FormControl 
               disabled={ submitting } 
               type='number' 
@@ -165,15 +165,15 @@ export default class EditModal extends Component {
               max='100'
               style={ { width: '80px', display: 'inline-block', marginLeft: '10px' } }
               { ...progress } 
-              placeholder='进度'/> %
+              placeholder='schedule'/> %
             { progress.value && progress.touched && progress.error ? <HelpBlock>{ progress.error }</HelpBlock> : '' }
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

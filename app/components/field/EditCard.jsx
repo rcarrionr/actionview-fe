@@ -126,21 +126,21 @@ export default class Card extends Component {
               onKeyDown={ (e) => { if (e.keyCode == '13') { this.setState({ touched: true }); this.save(); } } }
               onChange={ (e) => { this.setState({ text: e.target.value, touched: false }) } }
               onBlur={ () => { this.setState({ touched: true }); this.save(); } }
-              placeholder='输入可选值'/>
+              placeholder='Enter an optional value'/>
           </FormGroup>
         </div>
         :
-        <span>{ text }{ isEdited ? <span style={ { color: 'red' } }> - 已编辑</span> : '' }</span> }
+        <span>{ text }{ isEdited ? <span style={ { color: 'red' } }> - Edited</span> : '' }</span> }
         { !!del && !this.state.editing && 
-        <span style={ styles } onClick={ del } title='删除' className='rm-icon'>
+        <span style={ styles } onClick={ del } title='delete' className='rm-icon'>
           <i className='fa fa-remove'></i>
         </span> }
         { isEdited && !this.state.editing &&
-        <span style={ styles } onClick={ () => { undo(index) } } title='重置' className='rm-icon'>
+        <span style={ styles } onClick={ () => { undo(index) } } title='Reset' className='rm-icon'>
           <i className='fa fa-undo'></i>
         </span> }
         { !!edit && !this.state.editing && 
-        <span style={ styles } onClick={ this.edit.bind(this) } title='编辑' className='rm-icon'>
+        <span style={ styles } onClick={ this.edit.bind(this) } title='edit' className='rm-icon'>
           <i className='fa fa-edit'></i>
         </span> }
       </div>

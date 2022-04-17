@@ -22,9 +22,9 @@ export default class WorkflowCommentsModal extends Component {
     const ecode = await doAction(data.id, data.entry_id, { action_id, comments: this.state.comments });
     if (ecode === 0) {
       close();
-      notify.show('提交完成。', 'success', 2000);
+      notify.show('Submitted.', 'success', 2000);
     } else {
-      notify.show('提交失败。', 'error', 2000);
+      notify.show('Submission Failed.', 'error', 2000);
     }
   }
 
@@ -37,19 +37,19 @@ export default class WorkflowCommentsModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>流程评论</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Process comment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormControl
             componentClass='textarea'
             style={ { height: '150px' } }
             onChange={ (e) => { this.setState({ comments: e.target.value }) } }
-            placeholder='输入评论'
+            placeholder='Enter a comment'
             value={ this.state.comments } />
         </Modal.Body>
         <Modal.Footer>
-          <Button disabled={ !this.state.comments } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button disabled={ !this.state.comments } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

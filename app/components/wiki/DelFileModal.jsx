@@ -42,17 +42,17 @@ export default class DelFileModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除文档</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete document</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          文档被删除后，将不可恢复。<br/>
-          确认要删除【{ data.name }】该文档？<br/>
+          After the document is deleted, it will not be recoverable.<br/>
+          Confirm that you want to delete[{ data.name }]This document?<br/>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

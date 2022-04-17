@@ -32,15 +32,15 @@ export default class RemoveFromSprintNotify extends Component {
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-la'>
-            移出问题 - { issueNo }
+            Move out - { issueNo }
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要将此问题移出该Sprint? <br/>
+          Confirm that this problem is to be removedSprint? <br/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

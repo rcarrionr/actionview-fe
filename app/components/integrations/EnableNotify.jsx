@@ -22,15 +22,15 @@ export default class EnableNotify extends Component {
     const ecode = await handle({ user: user.key, mode });
     if (ecode === 0) {
       if (mode == 'enable') {
-        notify.show('已启用。', 'success', 2000);
+        notify.show('activated.', 'success', 2000);
       } else if (mode == 'disable') {
-        notify.show('已禁用。', 'success', 2000);
+        notify.show('disabled.', 'success', 2000);
       }
     } else {
       if (mode == 'enable') {
-        notify.show('启用失败。', 'error', 2000);
+        notify.show('Enable failed.', 'error', 2000);
       } else if (mode == 'disable') {
-        notify.show('禁用失败。', 'error', 2000);
+        notify.show('Disable failure.', 'error', 2000);
       }
     }
   }
@@ -46,14 +46,14 @@ export default class EnableNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ mode == 'enable' ? '用户启用' : '用户禁用' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ mode == 'enable' ? 'User is enabled' : 'User disabled' }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要{ mode == 'enable' ? '启用' : '禁用' }【{ user.name }】此用户？
+          Confirm{ mode == 'enable' ? 'Enable' : 'Disable' }[{ user.name }]This user?
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

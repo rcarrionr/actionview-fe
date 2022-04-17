@@ -98,10 +98,10 @@ export default class Container extends Component {
     eleLink.style.display = 'none';
     eleLink.href = API_BASENAME + '/project/' + this.pid + '/report/worklog/export?' + qs.stringify(query || {});
     eleLink.target = '_blank';
-    // 触发点击
+    // Trigger click
     document.body.appendChild(eleLink);
     eleLink.click();
-    // 然后移除
+    // Remove
     document.body.removeChild(eleLink);
   }
 

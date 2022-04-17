@@ -56,7 +56,7 @@ export default class TimeTrackModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -96,12 +96,12 @@ export default class TimeTrackModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>时间追踪</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Time tracking</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>每周有效工作日(天)</ControlLabel>
+            <ControlLabel>Weekly effective working day(sky)</ControlLabel>
             <Select
               disabled={ submitting }
               clearable={ false }
@@ -109,10 +109,10 @@ export default class TimeTrackModal extends Component {
               options={ dayOptions }
               value={ week2day.value }
               onChange={ newValue => { week2day.onChange(newValue) } }
-              placeholder='请选择'/>
+              placeholder='please choose'/>
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>每天有效工作时间(小时)</ControlLabel>
+            <ControlLabel>Effective working hours every day(Hour)</ControlLabel>
             <Select
               disabled={ submitting }
               clearable={ false }
@@ -120,14 +120,14 @@ export default class TimeTrackModal extends Component {
               options={ hourOptions }
               value={ day2hour.value }
               onChange={ newValue => { day2hour.onChange(newValue) } }
-              placeholder='请选择'/>
+              placeholder='please choose'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

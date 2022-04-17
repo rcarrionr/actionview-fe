@@ -27,14 +27,14 @@ export default class VersionViewModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>历史版本</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>historic version</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           <Table hover responsive>
             <thead>
               <tr>
-                <th>版本号</th>
-                <th>详细纪录</th>
+                <th>version number</th>
+                <th>Detailed record</th>
               </tr>
             </thead>
             <tbody>
@@ -47,7 +47,7 @@ export default class VersionViewModal extends Component {
                 </td>
                 <td>
                   <div style={ { float: 'left' } }>
-                    { v.editor && v.editor.name ? v.editor.name : (v.creator && v.creator.name || '') }于 { v.updated_at ? moment.unix(v.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(v.created_at).format('YYYY/MM/DD HH:mm') } { v.version == 1 ? '创建' : '编辑' }。
+                    { v.editor && v.editor.name ? v.editor.name : (v.creator && v.creator.name || '') }At { v.updated_at ? moment.unix(v.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(v.created_at).format('YYYY/MM/DD HH:mm') } { v.version == 1 ? 'create' : 'edit' }.
                   </div>
                 </td>
               </tr>); }) }
@@ -55,7 +55,7 @@ export default class VersionViewModal extends Component {
           </Table>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

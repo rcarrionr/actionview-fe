@@ -28,13 +28,13 @@ export default class DetailModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>请求详情</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Request details</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { maxHeight: '580px', overflow: 'auto' } }>
           <Form horizontal>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                用户
+                user
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -44,7 +44,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                请求Url 
+                askUrl 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '7px' } }>
@@ -54,7 +54,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                方法
+                method
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -64,7 +64,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                来源IP 
+                sourceIP 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -74,7 +74,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                开始时间
+                Starting time
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -84,7 +84,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                结束时间
+                End Time
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -94,7 +94,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                请求时长 
+                Request time 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -135,7 +135,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                返回状态 
+                Return status 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -146,7 +146,7 @@ export default class DetailModal extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -181,7 +181,7 @@ export default class List extends Component {
     } else {
       const ecode = await moveSprintIssue(new_values);
       if (ecode !== 0) {
-        notify.show('移动失败，' + errMsg[ecode], 'error', 2000);  
+        notify.show('Mobile failed,' + errMsg[ecode], 'error', 2000);  
       }
     }
   }
@@ -197,9 +197,9 @@ export default class List extends Component {
       }
       const ecode = await moveSprintIssue({ issue_no: issueNo, src_sprint_no: activeSprint.no, dest_sprint_no }, true);
       if (ecode === 0) {
-        notify.show('已移出。', 'success', 2000);
+        notify.show('It has been removed.', 'success', 2000);
       } else {
-        notify.show('移出失败，' + errMsg[ecode], 'error', 2000);  
+        notify.show('Shift failure,' + errMsg[ecode], 'error', 2000);  
       }
     }
   }
@@ -419,7 +419,7 @@ export default class List extends Component {
           }
         });
       } else if (mode == 'history') {
-        columns = [ { no: 0, name: '未完成' }, { no: 1, name: '已完成' } ]; 
+        columns = [ { no: 0, name: 'undone' }, { no: 1, name: 'completed' } ]; 
         columnIssues[0] = [];
         columnIssues[1] = [];
         if (!_.isEmpty(selectedSprint)) {
@@ -476,18 +476,18 @@ export default class List extends Component {
                 style={ { background: mode == 'issue' && selectedFilter === 'all' ? (v.max && columnIssues[i].length > v.max ? '#d04437' : (v.min && columnIssues[i].length < v.min ? '#f6c342' : '')) : '' } }>
                 <span style={ { fontWeight: 600 } }>
                   { mode == 'backlog' ? (v.no == 0 ? 'Backlog' : v.name) : v.name }
-                </span>（{ columnIssues[i].length }）
+                </span>({ columnIssues[i].length })
                 { mode == 'issue' && v.max && <span className='config-wip'>{ 'Max-' + v.max }</span> }
                 { mode == 'issue' && v.min && <span className='config-wip'>{ 'Min-' + v.min }</span> }
                 { mode == 'issue' && curKanban.type == 'kanban' && i == columns.length - 1 && columnIssues[i].length > 0 && selectedFilter == 'all' && options.permissions && options.permissions.indexOf('manage_project') !== -1 &&
                 <a href='#' style={ { float: 'right' } } 
                   onClick={ (e) => { e.preventDefault(); this.setState({ selectVersionShow: true }); } }>
-                  发布...
+                  release...
                 </a> }
                 { mode == 'issue' && curKanban.type == 'scrum' && i == columns.length - 1 && selectedFilter == 'all' && options.permissions && options.permissions.indexOf('manage_project') !== -1 && _.findIndex(sprints, { status: 'active' }) !== -1 &&
                 <a href='#' style={ { float: 'right' } } 
                   onClick={ (e) => { e.preventDefault(); this.setState({ completeSprintShow: true }); } }>
-                  完成...
+                  Finish...
                 </a> }
                 { mode == 'backlog' && options.permissions && options.permissions.indexOf('manage_project') !== -1 && i != 0 &&
                 <div style={ { float: 'right' } }>
@@ -498,13 +498,13 @@ export default class List extends Component {
                     style={ { padding: '2px 7px' } }
                     onSelect={ this.operateBacklog.bind(this) }
                     pullRight>
-                    <MenuItem disabled={ columnIssues[i].length <= 0 } eventKey={ 'view-' +  v.no }>工作量查看</MenuItem> 
-                    <MenuItem eventKey={ 'edit-' +  v.no }>编辑</MenuItem> 
-                    { v.status == 'waiting' && i == 1 && <MenuItem disabled={ columnIssues[i].length <= 0 } eventKey={ 'publish-' +  v.no }>启动</MenuItem> }
-                    { v.status == 'waiting' && <MenuItem eventKey={ 'delete-' + v.no }>删除</MenuItem> }
+                    <MenuItem disabled={ columnIssues[i].length <= 0 } eventKey={ 'view-' +  v.no }>Workload view</MenuItem> 
+                    <MenuItem eventKey={ 'edit-' +  v.no }>edit</MenuItem> 
+                    { v.status == 'waiting' && i == 1 && <MenuItem disabled={ columnIssues[i].length <= 0 } eventKey={ 'publish-' +  v.no }>start up</MenuItem> }
+                    { v.status == 'waiting' && <MenuItem eventKey={ 'delete-' + v.no }>delete</MenuItem> }
                   </DropdownButton> 
                 </div> }
-                { mode == 'backlog' && v.status == 'active' && <span> - <b>活动中</b></span> }
+                { mode == 'backlog' && v.status == 'active' && <span> - <b>In the event</b></span> }
               </li> ) ) }
             </ul>
           </div>
@@ -567,7 +567,7 @@ export default class List extends Component {
         </div> }
         { !_.isEmpty(curKanban) && !indexLoading && mode == 'issue' && curKanban.type == 'scrum' && _.findIndex(sprints, { status: 'active' }) === -1 && collection.length <= 0 &&
         <div style={ { marginTop: '20px', width: '100%', textAlign: 'center' } }>
-          <span>暂无活动的Sprint</span>
+          <span>Have no activitySprint</span>
         </div> }
         { this.state.detailBarShow &&
           <DetailBar

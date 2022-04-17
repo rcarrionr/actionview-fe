@@ -26,13 +26,13 @@ export default class DetailModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>版本详情</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Version details</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { maxHeight: '580px', overflow: 'auto' } }>
           <Form horizontal>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                名称 
+                name 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -42,7 +42,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                计划开始时间 
+                Plan start time 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -52,7 +52,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                计划完成时间
+                Plan completion time
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -62,7 +62,7 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                发布时间
+                release time
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
@@ -72,17 +72,17 @@ export default class DetailModal extends Component {
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                状态 
+                state 
               </Col>
               <Col sm={ 9 }>
                 <div style={ { marginTop: '7px' } }>
-                  { data.status === 'released' ? '已发布' : '未发布' }
+                  { data.status === 'released' ? 'Published' : 'Unpublished' }
                 </div>
               </Col>
             </FormGroup>
             <FormGroup>
               <Col sm={ 3 } componentClass={ ControlLabel }>
-                描述
+                describe
               </Col>
               <Col sm={ 9 }>
                 <div style={ { whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '7px' } } dangerouslySetInnerHTML={ {  __html: _.escape(data.description || '-').replace(/(\r\n)|(\n)/g, '<br/>') } }/>
@@ -91,7 +91,7 @@ export default class DetailModal extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

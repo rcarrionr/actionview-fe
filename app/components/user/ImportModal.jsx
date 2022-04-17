@@ -32,7 +32,7 @@ export default class ImportModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('导入完成。', 'success', 2000);
+      notify.show('Import completion.', 'success', 2000);
       index();
     } else {
       this.setState({ ecode: ecode });
@@ -61,7 +61,7 @@ export default class ImportModal extends Component {
       postUrl: API_BASENAME + '/tmpfile'
     };
     const djsConfig = {
-      dictDefaultMessage: '点击或拖拽文件至此',
+      dictDefaultMessage: 'Click or drag and drop files',
       addRemoveLinks: true
     };
     const eventHandlers = {
@@ -72,34 +72,34 @@ export default class ImportModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>批量导入</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Batch Import</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormGroup>
             { this.state.fid ?
-            <ControlLabel>文件：{ this.state.fname }</ControlLabel>
+            <ControlLabel>document:{ this.state.fname }</ControlLabel>
             :
-            <ControlLabel>选择导入Excel文件</ControlLabel> }
+            <ControlLabel>Select importExceldocument</ControlLabel> }
             <DropzoneComponent config={ componentConfig } eventHandlers={ eventHandlers } djsConfig={ djsConfig } />
           </FormGroup>
           <FormGroup>
-            <ControlLabel>导入冲突时处理方式</ControlLabel>
+            <ControlLabel>Import conflict processing method</ControlLabel>
             <RadioGroup
               disabled ={ loading }
               name='pattern'
               selectedValue={ this.state.pattern }
               onChange={ (newValue) => { this.setState({ pattern: newValue }) } }>
-              <span><Radio value='1'/> 保持原有用户不变</span>
-              <span style={ { marginLeft: '12px' } }><Radio value='2'/> 覆盖原有用户信息</span>
+              <span><Radio value='1'/> Keep the original user unchanged</span>
+              <span style={ { marginLeft: '12px' } }><Radio value='2'/> Cover the original user information</span>
             </RadioGroup>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          <a href='/template/import_user_tpl.xlsx' style={ { float: 'left', marginTop: '5px', marginLeft: '5px' } } download='import_user_tpl.xlsx'>模版下载</a>
+          <a href='/template/import_user_tpl.xlsx' style={ { float: 'left', marginTop: '5px', marginLeft: '5px' } } download='import_user_tpl.xlsx'>Template download</a>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading || !this.state.fid } onClick={ this.handleSubmit }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ loading || !this.state.fid } onClick={ this.handleSubmit }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

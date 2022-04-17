@@ -35,7 +35,7 @@ export default class MultiOperateNotify extends Component {
     if (operate == 'del') {
       newIds = _.map(_.filter(collection, (v) => (!v.directory || v.directory == 'self') && ids.indexOf(v.id) !== -1), (v) => v.id);
       ecode = await multiDel(newIds);
-      msg = '用户组已删除。'; 
+      msg = 'The user group has been deleted.'; 
     }
 
     if (ecode === 0) {
@@ -61,20 +61,20 @@ export default class MultiOperateNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>批处理用户组 - 用户组删除</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Batch user group - User group delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          用户组被删除后，项目中的用户组也同时被删除。<br/>
-          共选中用户组 <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> 个，
-          其中可被删除用户组 <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && ids.indexOf(v.id) !== -1).length }</span> 个。<br/>
-          是否删除？<br/><br/>
-          注：此操作对从外部用户目录同步过来的用户组无效。
+          After the user group is deleted, the user group in the project is also deleted at the same time.<br/>
+          Collecting user groups <span style={ { fontWeight: 'bold' } }>{ ids.length }</span> indivual,
+          Among them, the user group can be deleted. <span style={ { fontWeight: 'bold', color: 'red' } }>{ _.filter(collection, (v) => (!v.directory || v.directory == 'self') && ids.indexOf(v.id) !== -1).length }</span> indivual.<br/>
+          delete or not?<br/><br/>
+          Note:This operation is invalid for user groups that are synchronized from the external user directory.
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

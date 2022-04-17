@@ -29,12 +29,12 @@ export default class WatcherListModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>关注者列表 - { issue_no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Follower list - { issue_no }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           { watchers.length <= 0 && 
           <div style={ { marginBottom: '10px' } }>
-            <span>暂无关注者</span>
+            <span>No payee</span>
           </div> }
           { watchers.length > 0 &&
           <div className='users-grid-view'>
@@ -49,8 +49,8 @@ export default class WatcherListModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           { watchers.length > 0 &&
-            <span style={ { float: 'left', padding: '5px' } }>共有关注者 <strong>{ watchers.length }</strong> 人</span> }
-          <Button onClick={ this.handleCancel }>关闭</Button>
+            <span style={ { float: 'left', padding: '5px' } }>Allocate attention <strong>{ watchers.length }</strong> people</span> }
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

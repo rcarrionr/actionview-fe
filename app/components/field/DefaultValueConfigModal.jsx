@@ -155,7 +155,7 @@ export default class DefaultValueConfigModal extends Component {
             { ...defaultValue }
             placeholder='please enter' />
          <span style={ { marginLeft: '5px' } }>sky</span>
-         <span style={ { marginLeft: '5px', fontSize: '12px' } }>【Note:0 - Representing the day; empty - Empty defaults]</span>
+         <span style={ { marginLeft: '5px', fontSize: '12px' } }>[Note:0 - Representing the day; empty - Empty defaults]</span>
         </div>);
     } else {
       defaultComponent = ( 

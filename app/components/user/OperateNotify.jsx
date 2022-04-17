@@ -78,11 +78,11 @@ export default class OperateNotify extends Component {
         { operate === 'del' && 
         <Modal.Body>
           After the user is deleted, the user in the project is also deleted at the same time.<br/>
-          delete or not【{ data.first_name }] This user?
+          delete or not[{ data.first_name }] This user?
         </Modal.Body> }
         { operate === 'validate' &&
         <Modal.Body>
-          Whether to enable【{ data.first_name }] This user?
+          Whether to enable[{ data.first_name }] This user?
         </Modal.Body> }
         { operate === 'invalidate' &&
         <Modal.Body>

@@ -132,8 +132,8 @@ export default class List extends Component {
         bgColor: ( <div className='label-label' style={ { backgroundColor: collection[i].bgColor || '#ccc' } } /> ),
         issues: (
           <ul style={ { marginBottom: '0px', paddingLeft: '0px', listStyle: 'none' } }>
-            <li>所有问题 - <Link to={ '/project/' + collection[i].project_key + '/issue?labels=' + collection[i].name }>{ collection[i].all_cnt || 0 }</Link></li>
-            <li>未解决的 - <Link to={ '/project/' + collection[i].project_key + '/issue?resolution=Unresolved&labels=' + collection[i].name }><span style={ { color: 'red' } }>{ collection[i].unresolved_cnt || 0 }</span></Link></li>
+            <li>All questions - <Link to={ '/project/' + collection[i].project_key + '/issue?labels=' + collection[i].name }>{ collection[i].all_cnt || 0 }</Link></li>
+            <li>have not decide - <Link to={ '/project/' + collection[i].project_key + '/issue?resolution=Unresolved&labels=' + collection[i].name }><span style={ { color: 'red' } }>{ collection[i].unresolved_cnt || 0 }</span></Link></li>
           </ul>
         ),
         operation: (
@@ -147,8 +147,8 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              <MenuItem eventKey='1'>编辑</MenuItem>
-              <MenuItem eventKey='2'>删除</MenuItem>
+              <MenuItem eventKey='1'>edit</MenuItem>
+              <MenuItem eventKey='2'>delete</MenuItem>
             </DropdownButton> }
           </div>
         )
@@ -159,7 +159,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -170,7 +170,7 @@ export default class List extends Component {
         <BackTop />
         <div style={ { marginTop: '15px' } }>
           <Button onClick={ () => { this.setState({ createModalShow: true }) } }>
-            <i className='fa fa-plus'></i>&nbsp;新建标签
+            <i className='fa fa-plus'></i>&nbsp;New label
           </Button>
         </div>
         <BootstrapTable 
@@ -180,8 +180,8 @@ export default class List extends Component {
           options={ opts } 
           trClassName='tr-middle'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='issues'>问题完成情况</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='issues'>Problem completion</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

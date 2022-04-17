@@ -266,7 +266,7 @@ export default class Header extends Component {
           { sqlTxt &&
           <div className='cond-bar'>
             <div className='cond-contents' title={ sqlTxt }>
-              <b>Search condition</b>：{ sqlTxt }
+              <b>Search condition</b>:{ sqlTxt }
             </div>
             <div className='remove-icon' onClick={ () => { this.setState({ searchShow: !this.state.searchShow }); } } title={ this.state.searchShow ? 'Put away' : 'Unfold' }>
               <i className={ this.state.searchShow ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down' }></i>

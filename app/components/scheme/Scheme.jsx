@@ -27,13 +27,13 @@ export default class Scheme extends Component {
   }
 
   render() {
-    document.title = '全局配置方案 - ActionView';
+    document.title = 'Global configuration solution - ActionView';
 
     const { session } = this.props;
     if (_.isEmpty(session.user)) {
       return (<div/>);
     } else if (!session.user.permissions || !session.user.permissions.sys_admin) {
-      notify.show('权限不足。', 'warning', 2000);
+      notify.show('Insufficient permissions.', 'warning', 2000);
       return (<div/>);
     }
 

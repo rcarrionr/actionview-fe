@@ -10,15 +10,15 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
 
   if (values.max && !(/(^[1-9]\d*$)/.test(values.max))) {
-    errors.max = '必须输入正整数';
+    errors.max = 'Must enter positive integers';
   }
 
   if (values.min && !(/(^[1-9]\d*$)/.test(values.min))) {
-    errors.min = '必须输入正整数';
+    errors.min = 'Must enter positive integers';
   }
 
   return errors;
@@ -71,7 +71,7 @@ export default class ColumnConfigModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else { 
       this.setState({ ecode: ecode });
     }
@@ -123,18 +123,18 @@ export default class ColumnConfigModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ no >= 0 ? '编辑列' : '添加列' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ no >= 0 ? 'Editorial column' : 'Add column' }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='列名'/ >
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Column name'/ >
             { name.touched && name.error &&
               <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup>
-            <ControlLabel>状态</ControlLabel>
+            <ControlLabel>state</ControlLabel>
             <Select 
               multi
               simpleValue 
@@ -143,29 +143,29 @@ export default class ColumnConfigModal extends Component {
               options={ stateOptions } 
               value={ states.value } 
               onChange={ (newValue) => { states.onChange(newValue) } } 
-              placeholder='选择状态'/>
+              placeholder='Select state'/>
             { stateOptions.length == 0 &&
               <div>
-                <span style={ { fontSize: '12px', color: '#8a6d3b' } }>所有问题状态都已被其他列使用，需从其他列移除某些问题状态或创建新的问题状态供选择。</span>
+                <span style={ { fontSize: '12px', color: '#8a6d3b' } }>All issues have been used by other columns, you need to remove some of the status status from other columns or create new problem status options.</span>
               </div> }
           </FormGroup>
           <FormGroup validationState={ max.touched && max.error ? 'error' : null }>
-            <ControlLabel>最大问题数（Max）</ControlLabel>
+            <ControlLabel>Maximum number of problemsMax)</ControlLabel>
             <FormControl 
               disabled={ submitting } 
               type='text' 
               { ...max } 
-              placeholder='输入正整数'/ >
+              placeholder='Input positive integer'/ >
             { max.touched && max.error &&
               <HelpBlock style={ { float: 'right' } }>{ max.error }</HelpBlock> }
           </FormGroup>
           <FormGroup validationState={ min.touched && min.error ? 'error' : null }>
-            <ControlLabel>最小问题数（Min）</ControlLabel>
+            <ControlLabel>Minimum number of problemsMin)</ControlLabel>
             <FormControl 
               disabled={ submitting } 
               type='text' 
               { ...min } 
-              placeholder='输入正整数'/ >
+              placeholder='Input positive integer'/ >
             { min.touched && min.error &&
               <HelpBlock style={ { float: 'right' } }>{ min.error }</HelpBlock> }
           </FormGroup>
@@ -173,8 +173,8 @@ export default class ColumnConfigModal extends Component {
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

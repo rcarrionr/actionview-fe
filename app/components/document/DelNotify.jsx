@@ -21,9 +21,9 @@ export default class DelNotify extends Component {
     close();
     const ecode = await del(data.id);
     if (ecode === 0) {
-      notify.show((data.d == 1 ? '目录' : '文档') + '已删除。', 'success', 2000);    
+      notify.show((data.d == 1 ? 'content' : 'Documentation') + 'deleted.', 'success', 2000);    
     } else {
-      notify.show(errMsg[ecode] + '，删除失败。', 'error', 2000);    
+      notify.show(errMsg[ecode] + ',failed to delete.', 'error', 2000);    
     }
   }
 
@@ -35,20 +35,20 @@ export default class DelNotify extends Component {
   render() {
     const { data } = this.props;
 
-    const obj = data.d == 1 ? '目录' : '文档';
+    const obj = data.d == 1 ? 'content' : 'Documentation';
 
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除{ obj }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>delete{ obj }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          { obj }被删除后，将不可恢复。<br/>
-          确认要删除【{ data.name }】该{ obj }？<br/>
+          { obj }After being deleted, it will not be recoverable.<br/>
+          Confirm that you want to delete[{ data.name }]Should{ obj }?<br/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

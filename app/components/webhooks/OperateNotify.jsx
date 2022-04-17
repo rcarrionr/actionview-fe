@@ -25,20 +25,20 @@ export default class OperateNotify extends Component {
     let ecode = 0, msg = '';
     if (operate === 'del') {
       ecode = await del(data.id);
-      msg = '已删除。'; 
+      msg = 'deleted.'; 
     } else if (operate === 'enable') {
       ecode = await update(data.id, { status: 'enabled' });
-      msg = '已启用。'; 
+      msg = 'activated.'; 
     } else if (operate === 'disable') {
       ecode = await update(data.id, { status: 'disabled' });
-      msg = '已禁用。'; 
+      msg = 'disabled.'; 
     } else {
       return;
     }
     if (ecode === 0) {
       notify.show(msg, 'success', 2000);    
     } else {
-      notify.show('操作失败。', 'error', 2000);    
+      notify.show('operation failed.', 'error', 2000);    
     }
   }
 
@@ -52,11 +52,11 @@ export default class OperateNotify extends Component {
 
     let operateTitle = '';
     if (operate === 'del') {
-      operateTitle = 'Webhook删除'
+      operateTitle = 'Webhookdelete'
     } else if (operate === 'enable') {
-      operateTitle = 'Webhook启用';
+      operateTitle = 'WebhookEnable';
     } else if (operate === 'disable') {
-      operateTitle = 'Webhook禁用';
+      operateTitle = 'WebhookDisable';
     } else {
       return <div/>;
     }
@@ -68,19 +68,19 @@ export default class OperateNotify extends Component {
         </Modal.Header>
         { operate === 'del' && 
         <Modal.Body>
-          是否删除【{ data.request_url }】该Webhook？
+          delete or not[{ data.request_url }]ShouldWebhook?
         </Modal.Body> }
         { operate === 'enable' &&
         <Modal.Body>
-          是否启用【{ data.request_url }】该Webhook？
+          Whether to enable[{ data.request_url }]ShouldWebhook?
         </Modal.Body> }
         { operate === 'disable' &&
         <Modal.Body>
-          是否禁用【{ data.request_url }】该Webhook？
+          Is it disabled?[{ data.request_url }]ShouldWebhook?
         </Modal.Body> }
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

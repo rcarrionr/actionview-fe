@@ -339,7 +339,7 @@ export default class Header extends Component {
             { !loading && _.isEmpty(curKanban) && kanbans.length <= 0 && 
             <span style={ { fontSize: '14px' } }>
               The project has not been defined by the board.
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 ? <span>Please click <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ createKanbanModalShow: true }); } }>Create a board</a>。</span> : 'Please contact the project administrator to create.' }
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 ? <span>Please click <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ createKanbanModalShow: true }); } }>Create a board</a>.</span> : 'Please contact the project administrator to create.' }
             </span> } 
           </div>
           <div style={ { float: 'right', display: 'inline-block' } }>

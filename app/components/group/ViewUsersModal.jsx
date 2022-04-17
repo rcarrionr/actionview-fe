@@ -30,12 +30,12 @@ export default class UserListModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>成员列表 - { name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Member list - { name }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           { users.length <= 0 &&
           <div style={ { marginBottom: '10px' } }>
-            <span>暂无成员</span>
+            <span>No member</span>
           </div> }
           { users.length > 0 &&
           <div className='users-grid-view'>
@@ -50,8 +50,8 @@ export default class UserListModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           { users.length > 0 &&
-            <span style={ { float: 'left', padding: '5px' } }>共有成员 <strong>{ users.length }</strong> 人</span> }
-          <Button onClick={ this.handleCancel }>关闭</Button>
+            <span style={ { float: 'left', padding: '5px' } }>A total of members <strong>{ users.length }</strong> people</span> }
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -28,7 +28,7 @@ export default class MultiDelNotify extends Component {
     this.setState({ ecode: ecode });
     if (ecode === 0) {
       close();
-      notify.show('问题已删除。', 'success', 2000);
+      notify.show('The problem has been deleted.', 'success', 2000);
       index(query);
     }
   }
@@ -44,18 +44,18 @@ export default class MultiDelNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>批量删除问题</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Batch deletion problem</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          共选择问题 <b>{ issueIds.length }</b> 个，确认要删除这些问题？<br/><br/>
-          如果您完成了这些问题，通常是"解决"或者"关闭"问题，而不是删除。<br/>
-          如果删除，这些问题的子问题也将一并被删除。<br/> 
+          A total of choice <b>{ issueIds.length }</b> I have to delete these problems.?<br/><br/>
+          If you have completed these questions, usually"solve"or"closure"Question, not delete.<br/>
+          If deleted, the child problems of these issues will also be deleted.<br/> 
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

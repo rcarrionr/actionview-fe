@@ -46,7 +46,7 @@ export default class DisplayFieldsConfigModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -108,7 +108,7 @@ export default class DisplayFieldsConfigModal extends Component {
     return (
       <Modal show onHide={ this.cancel.bind(this) } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>显示字段配置</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Display field configuration</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           <Form horizontal>
@@ -120,16 +120,16 @@ export default class DisplayFieldsConfigModal extends Component {
                   clearable={ false } 
                   value={ this.state.addFieldIds } 
                   onChange={ this.handleChange.bind(this) } 
-                  placeholder='选择添加字段(可多选)' 
+                  placeholder='Select Add Field(Multiple choice)' 
                   multi/>
                 <Button 
                   style={ { float: 'right', marginTop: '15px' } } 
                   onClick={ this.add.bind(this) } 
-                  disabled={ !enableAdd }>添加至列表 >> 
+                  disabled={ !enableAdd }>Add to list >> 
                 </Button>
               </Col>
               <Col sm={ 6 }>
-                { cards.length > 0 && <div style={ { marginBottom: '8px' } }>通过上下拖拽改变显示顺序。</div> }
+                { cards.length > 0 && <div style={ { marginBottom: '8px' } }>Change the display order by dragging and drop up and down.</div> }
                 { cards.length > 0 ?
                   cards.map((op, i) => {
                     return (
@@ -143,18 +143,18 @@ export default class DisplayFieldsConfigModal extends Component {
                     );
                   }) 
                   :
-                  <p>显示字段为空。</p>
+                  <p>The display field is empty.</p>
                 }  
               </Col>
             </FormGroup>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button bsStyle='link' style={ { float: 'left' } } disabled={ loading } onClick={ () => { this.setState({ cards: [] }) } }>清空字段</Button>
+          <Button bsStyle='link' style={ { float: 'left' } } disabled={ loading } onClick={ () => { this.setState({ cards: [] }) } }>Empty field</Button>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading || strCards == JSON.stringify(cards) } onClick={ this.save.bind(this) }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>取消</Button>
+          <Button disabled={ loading || strCards == JSON.stringify(cards) } onClick={ this.save.bind(this) }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel.bind(this) }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

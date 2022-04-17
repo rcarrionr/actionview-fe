@@ -11,18 +11,18 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   } 
   if (props.mode == 'admin' && !values.principal) {
-    errors.principal = '必填';
+    errors.principal = 'Be required';
   } 
   if (!values.key) {
-    errors.key = '必填';
+    errors.key = 'Be required';
   } else {
     const Regex = '^\\w+$';
     const re = new RegExp(Regex);
     if (!re.test(values.key)) {
-      errors.key = '需输入英文字符、数字或下划线';
+      errors.key = 'Need to enter English characters, numbers or underscores';
     }
   } 
   return errors;
@@ -34,7 +34,7 @@ const asyncValidate = (values) => {
     const api = new ApiClient;
     const results = await api.request({ url: '/project/checkkey/' + values.key });
     if (results.data && results.data.flag == '2') {
-      reject({ key: '键值已被占用' });
+      reject({ key: 'The key value has been occupied' });
     } else {
       resolve();
     }
@@ -83,7 +83,7 @@ export default class CreateModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('创建完成。', 'success', 2000);
+      notify.show('Create.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -123,19 +123,19 @@ export default class CreateModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>创建项目</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Create a project</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='项目名'/>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Item name'/>
             <FormControl.Feedback/>
             { name.touched && name.error && <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText' validationState={ key.touched && key.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>键值</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...key } placeholder='键值'/>
+            <ControlLabel><span className='txt-impt'>*</span>Key value</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...key } placeholder='Key value'/>
             <FormControl.Feedback>
             { asyncValidating ? <i className='fa fa-spinner fa-spin'></i> : (key.active === false && key.invalid === false ? <span style={ { color : '#3c763d' } }><i className='fa fa-check'></i></span> : '') }
             </FormControl.Feedback>
@@ -143,7 +143,7 @@ export default class CreateModal extends Component {
           </FormGroup>
           { mode == 'admin' &&
           <FormGroup controlId='formControlsText' validationState={ principal.touched && principal.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>责任人</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>Responsible</ControlLabel>
             <Select.Async 
               clearable={ false } 
               disabled={ submitting } 
@@ -153,19 +153,19 @@ export default class CreateModal extends Component {
               valueKey='id' 
               labelKey='name' 
               loadOptions={ this.searchUsers.bind(this) } 
-              placeholder='输入责任人'/>
+              placeholder='Enter responsible person'/>
             { principal.touched && principal.error && <HelpBlock style={ { float: 'right' } }>{ principal.error }</HelpBlock> }
           </FormGroup> }
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>描述</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...description } placeholder='项目描述'/>
+            <ControlLabel>describe</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...description } placeholder='project description'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ key.active === true || asyncValidating || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ key.active === true || asyncValidating || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

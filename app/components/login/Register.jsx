@@ -15,15 +15,15 @@ import * as UserActions from 'redux/actions/UserActions';
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
-    errors.email = '邮箱不能为空';
+    errors.email = 'E-mail can not be empty';
   } else if (!/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(values.email)) {
-    errors.email = '输入格式有误';
+    errors.email = 'Input format is incorrect';
   }
   if (!values.name) {
-    errors.name = '姓名不能为空';
+    errors.name = 'Name can't be empty';
   }
   if (!values.password) {
-    errors.password = '密码不能为空';
+    errors.password = 'password can not be blank';
   }
 
   return errors;
@@ -77,7 +77,7 @@ class Register extends Component {
   async handleSubmit() {
     this.setState({ alertShow: false });
 
-    notify.show('企业用户一般是系统管理员通过后台用户管理模块统一维护，用户注册功能暂不支持。', 'warning', 5000);
+    notify.show('Enterprise users are generally system administrators unified maintenance through the background user management module, and user registration features are not supported.', 'warning', 5000);
     return;
 
     const { values, actions, user } = this.props;
@@ -101,29 +101,29 @@ class Register extends Component {
           { this.state.emailShow ?
           <form onSubmit={ handleSubmit(this.handleSubmit) }>
             <FormGroup controlId='formControlsText' validationState={ email.touched && email.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='text' { ...email } placeholder='邮箱'/>
+              <FormControl disabled={ submitting } type='text' { ...email } placeholder='Mail'/>
               { email.touched && email.error && <HelpBlock style={ { marginLeft: '5px' } }>{ email.error }</HelpBlock> }
             </FormGroup>
             <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='text' { ...name } placeholder='姓名'/>
+              <FormControl disabled={ submitting } type='text' { ...name } placeholder='Name'/>
               { name.touched && name.error && <HelpBlock style={ { marginLeft: '5px' } }>{ name.error }</HelpBlock> }
             </FormGroup>
             <FormGroup controlId='formControlsText' validationState={ password.touched && password.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='password' { ...password } placeholder='密码'/>
+              <FormControl disabled={ submitting } type='password' { ...password } placeholder='password'/>
               { password.touched && password.error && <HelpBlock style={ { marginLeft: '5px' } }>{ password.error }</HelpBlock> }
             </FormGroup>
-            <Button bsStyle='success' disabled={ invalid || submitting } type='submit'>注  册</Button>
+            <Button bsStyle='success' disabled={ invalid || submitting } type='submit'>Note  book</Button>
           </form>
           :
           <div className='reset-pwd-msg'>
-            <span>账号激活链接已发送至邮箱。</span>
+            <span>The account activation link has been sent to the mailbox.</span>
           </div> }
           <div style={ { textAlign: 'center', height: '40px' } }>
             <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-            { this.state.alertShow && !submitting && <div style={ { marginTop: '10px', color: '#a94442' } }>{ this.state.ecode === -10002 ? '此邮箱已被注册。' : '抱歉，注册失败，请重试。' }</div> }
+            { this.state.alertShow && !submitting && <div style={ { marginTop: '10px', color: '#a94442' } }>{ this.state.ecode === -10002 ? 'This mailbox has been registered.' : 'Sorry, registration failed, please try again.' }</div> }
           </div>
           <div className='login-footer'>
-            <Link to='/login'>返回登录</Link>
+            <Link to='/login'>Return to login</Link>
           </div>
         </div>
       </div>

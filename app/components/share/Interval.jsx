@@ -59,7 +59,7 @@ export default class Interval extends Component {
             onBlur={ () => { onBlur && onBlur() } }
             onKeyDown={ (e) => { keyPress(e); } }
             onChange={ (e) => { this.onChange({ min: e.target.value }) } }
-            placeholder={ '输入开始值' }/>
+            placeholder={ 'Input start value' }/>
         </div>
         <div style={ { float: 'left', width: '6%', marginTop: '8px', textAlign: 'center' } }>～</div>
         <div style={ { width: '47%', display: 'inline-block', float: 'right' } }>
@@ -69,7 +69,7 @@ export default class Interval extends Component {
             onBlur={ () => { onBlur && onBlur() } }
             onKeyDown={ (e) => { keyPress(e); } }
             onChange={ (e) => { this.onChange({ max: e.target.value }) } }
-            placeholder={ '输入结束值' }/>
+            placeholder={ 'Enter the end value' }/>
         </div>
       </div>
     )

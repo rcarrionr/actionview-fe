@@ -37,19 +37,19 @@ export default class Header extends Component {
       <div>
         <div style={ { marginTop: '5px' } }>
           <Button className='create-btn' onClick={ () => { this.setState({ createModalShow: true }); } } disabled={ indexLoading }>
-            <i className='fa fa-plus'></i>&nbsp;新建状态
+            <i className='fa fa-plus'></i>&nbsp;New state
           </Button>
           { !indexLoading &&
           <Button
             className='create-btn'
             onClick={ () => { this.setState({ sortCardsModalShow: true }); } }>
-            <i className='fa fa-edit'></i>&nbsp;编辑顺序
+            <i className='fa fa-edit'></i>&nbsp;Editing order
           </Button> }
         </div>
         <div className='info-col'>
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
           <div className='info-content'>
-            <span>状态是指执行工作流过程中问题的状态，定义工作流时和某一步骤绑定。<br/>只能删除没有关联到工作流{ isSysConfig && '（包括各项目自定义工作流）' }和没有应用到项目问题中的状态。</span>
+            <span>The status refers to the status of the problem during the execution of the workflow, and the workflow is defined and bound by one step.<br/>Can only be deleted without related workflow{ isSysConfig && '(Including each project custom workflow)' }And there is no state in the project problem.</span>
           </div>
         </div>
         { this.state.createModalShow && 
@@ -62,7 +62,7 @@ export default class Header extends Component {
         { this.state.sortCardsModalShow &&
           <SortCardsModal
             show
-            model='状态'
+            model='state'
             close={ this.sortCardsModalClose.bind(this) }
             cards={ collection }
             setSort={ setSort }

@@ -27,16 +27,16 @@ export default class OperateNotify extends Component {
     if (operation == 'disable') {
       ecode = await update({ id: data.id, disabled: true });
       if (ecode === 0) {
-        notify.show('禁用成功。', 'success', 2000);
+        notify.show('Disabled success.', 'success', 2000);
       } else {
-        notify.show('禁用失败。', 'error', 2000);
+        notify.show('Disable failure.', 'error', 2000);
       }
     } else if (operation == 'enable') {
       ecode = await update({ id: data.id, disabled: false });
       if (ecode === 0) {
-        notify.show('启用成功。', 'success', 2000);
+        notify.show('Enable success.', 'success', 2000);
       } else {
-        notify.show('启用失败。', 'error', 2000);
+        notify.show('Enable failed.', 'error', 2000);
       }
     }
 
@@ -58,24 +58,24 @@ export default class OperateNotify extends Component {
 
     let opt = '';
     if (operation == 'disable') {
-      opt = '禁用';
+      opt = 'Disable';
     } else if (operation == 'enable') {
-      opt = '启用';
+      opt = 'Enable';
     }
 
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ opt }方案 - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ opt }Program - { data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          确认要{ opt }此方案？
+          Confirm{ opt }This program?
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && 'aaaa' }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

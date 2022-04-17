@@ -119,9 +119,9 @@ export default class List extends Component {
         bgColor: ( <div className='select-color' style={ { backgroundColor: collection[i].bgColor || '#ccc' } } /> ),
         issues: (
           <ul style={ { marginBottom: '0px', paddingLeft: '0px', listStyle: 'none' } }>
-            <li>已完成 - <Link to={ '/project/' + collection[i].project_key + '/issue?' + 'epic=' + collection[i].id + '&state=' + (stateOptions.completed_states || []).join(',') }>{ collection[i].completed || 0 }</Link></li>
-            <li>未完成 - <Link to={ '/project/' + collection[i].project_key + '/issue?' + 'epic=' + collection[i].id + '&state=' + (stateOptions.incompleted_states || []).join(',') }><span style={ { color: 'red' } }>{ collection[i].incompleted || 0 }</span></Link></li>
-            <li>不明确 - { collection[i].inestimable || 0 }</li>
+            <li>completed - <Link to={ '/project/' + collection[i].project_key + '/issue?' + 'epic=' + collection[i].id + '&state=' + (stateOptions.completed_states || []).join(',') }>{ collection[i].completed || 0 }</Link></li>
+            <li>undone - <Link to={ '/project/' + collection[i].project_key + '/issue?' + 'epic=' + collection[i].id + '&state=' + (stateOptions.incompleted_states || []).join(',') }><span style={ { color: 'red' } }>{ collection[i].incompleted || 0 }</span></Link></li>
+            <li>unclear - { collection[i].inestimable || 0 }</li>
           </ul>
         ),
         operation: (
@@ -135,12 +135,12 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='1'>编辑</MenuItem> }
-              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='2'>删除</MenuItem> }
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='1'>edit</MenuItem> }
+              { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem eventKey='2'>delete</MenuItem> }
               { options.permissions && options.permissions.indexOf('manage_project') !== -1 && <MenuItem divider/> }
-              <MenuItem eventKey='3'>问题列表</MenuItem>
-              <MenuItem eventKey='4'>Backlog列表</MenuItem>
-              <MenuItem eventKey='5'>甘特图</MenuItem>
+              <MenuItem eventKey='3'>List of Questions</MenuItem>
+              <MenuItem eventKey='4'>BacklogList</MenuItem>
+              <MenuItem eventKey='5'>Gantt chart</MenuItem>
             </DropdownButton> }
           </div>
         )
@@ -151,7 +151,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -161,7 +161,7 @@ export default class List extends Component {
       <div style={ { marginLeft: '10px', marginTop: '-15px', overflowY: 'auto', height: '100%' } }>
         <div className='info-col'>
           <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-          <div className='info-content'>若Epic信息修改后，创建、编辑问题页面Epic内容没及时更新，请刷新页面。</div>
+          <div className='info-content'>likeEpicAfter the information is modified, create, edit the problem pageEpicThe content is not updated in time, please refresh the page.</div>
         </div>
         <BootstrapTable 
           hover
@@ -171,8 +171,8 @@ export default class List extends Component {
           options={ opts } 
           trClassName='tr-middle'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>名称</TableHeaderColumn>
-          <TableHeaderColumn dataField='issues'>问题完成情况</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>name</TableHeaderColumn>
+          <TableHeaderColumn dataField='issues'>Problem completion</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

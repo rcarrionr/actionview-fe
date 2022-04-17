@@ -145,16 +145,16 @@ export default class Duration extends Component {
     const { value='', onChange } = this.props;
 
     const modeOptions = [
-      { value: 'fixed', label: '固定时间段' }, 
-      { value: 'current_duration', label: '当前时间段' },
-      { value: 'variable_duration', label: '动态时间段' }
+      { value: 'fixed', label: 'Fixed time period' }, 
+      { value: 'current_duration', label: 'Current time period' },
+      { value: 'variable_duration', label: 'Dynamic time period' }
     ];
 
     const currentDurations = [
-      { value: '0d', label: '当天' },
-      { value: '0w', label: '本周' },
-      { value: '0m', label: '当月' },
-      { value: '0y', label: '当前年' }
+      { value: '0d', label: 'On the same day' },
+      { value: '0w', label: 'This week' },
+      { value: '0m', label: 'Month' },
+      { value: '0y', label: 'Current year' }
     ];
 
     return (
@@ -169,7 +169,7 @@ export default class Duration extends Component {
             clearable={ false }
             value={ mode }
             onChange={ (newValue) => { this.setState({ mode: newValue }) } }
-            placeholder='请选择'/>
+            placeholder='please choose'/>
         </div> }
         { this.state.mode === 'current_duration' &&
         <div style={ { width: '140px', display: 'inline-block', float: 'left' } }>
@@ -181,24 +181,24 @@ export default class Duration extends Component {
             clearable={ true }
             value={ current_value || null }
             onChange={ (newValue) => { this.onChange({ current_value: newValue }); } }
-            placeholder='请选择'/>
+            placeholder='please choose'/>
         </div> }
         { mode === 'variable_duration' &&
         <div style={ { float: 'left', marginTop: '9px', paddingRight: '5px', fontSize: '12px' } }>
-          距今
+          Far away
         </div> }
         { mode === 'variable_duration' &&
         <div style={ { width: '20%', display: 'inline-block', float: 'left' } }>
           <FormControl
             type='number'
             value={ this.state.start_value }
-            placeholder='请输入'
+            placeholder='please enter'
             onBlur={ async (e) => { await this.setState({ start_value: isNaN(parseInt(e.target.value)) ? '' : parseInt(e.target.value) }); const curValue = this.getValue(); if (value != curValue) { onChange(curValue) } } }
             onChange={ (e) => { this.setState({ start_value: e.target.value }); } } />
         </div> }
         { mode === 'variable_duration' &&
         <div style={ { float: 'left', marginTop: '9px', paddingLeft: '3px' } }>
-          天
+          sky
         </div> }
         { mode === 'fixed' &&
         <div style={ { width: '34%', display: 'inline-block', float: 'left' } }>
@@ -208,7 +208,7 @@ export default class Duration extends Component {
             dateFormat={ 'YYYY/MM/DD' }
             timeFormat={ false }
             closeOnSelect={ true }
-            inputProps={ { placeholder: '请选择' } }
+            inputProps={ { placeholder: 'please choose' } }
             value={ start_time }
             onChange={ (newValue) => { this.onChange({ start_time: newValue }); } }/>
         </div> }
@@ -218,20 +218,20 @@ export default class Duration extends Component {
 
         { mode === 'variable_duration' &&
         <div style={ { float: 'left', marginTop: '9px', paddingRight: '5px', fontSize: '12px' } }>
-          距今
+          Far away
         </div> }
         { mode === 'variable_duration' &&
         <div style={ { width: '20%', display: 'inline-block', float: 'left' } }>
           <FormControl
             type='number'
             value={ this.state.end_value }
-            placeholder='请输入'
+            placeholder='please enter'
             onBlur={ async (e) => { await this.setState({ end_value: isNaN(parseInt(e.target.value)) ? '' : parseInt(e.target.value) }); const curValue = this.getValue(); if (value != curValue) { onChange(curValue) } } }
             onChange={ (e) => { this.setState({ end_value: e.target.value }); } } />
         </div> }
         { mode === 'variable_duration' &&
         <div style={ { float: 'left', marginTop: '9px', paddingLeft: '3px' } }>
-          天
+          sky
         </div> }
         { mode === 'fixed' &&  
         <div style={ { width: '34%', display: 'inline-block', float: 'left' } }>
@@ -242,7 +242,7 @@ export default class Duration extends Component {
             timeFormat={ false }
             closeOnSelect={ true }
             input={ true }
-            inputProps={ { placeholder: '请选择' } }
+            inputProps={ { placeholder: 'please choose' } }
             value={ end_time }
             onChange={ (newValue) => { this.onChange({ end_time: newValue }); } }/>
         </div> }

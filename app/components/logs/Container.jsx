@@ -62,10 +62,10 @@ export default class Container extends Component {
     eleLink.style.display = 'none';
     eleLink.href = API_BASENAME + '/logs?' + qs.stringify(newQuery || {});
     eleLink.target = '_blank';
-    // 触发点击
+    // Trigger click
     document.body.appendChild(eleLink);
     eleLink.click();
-    // 然后移除
+    // Remove
     document.body.removeChild(eleLink);
   }
 

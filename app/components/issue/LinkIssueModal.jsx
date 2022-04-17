@@ -37,7 +37,7 @@ export default class LinkIssueModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('链接已创建。', 'success', 2000);
+      notify.show('The link has been created.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -98,11 +98,11 @@ export default class LinkIssueModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '链接问题 - ' + issue.no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Link problem - ' + issue.no }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel><span className='txt-impt'>*</span>此问题</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>This issue</ControlLabel>
             <Select 
               simpleValue 
               clearable={ false } 
@@ -111,10 +111,10 @@ export default class LinkIssueModal extends Component {
               options={ relationOptions } 
               value={ this.state.relation } 
               onChange={ (newValue) => { this.setState({ relation: newValue }) } } 
-              placeholder='请选择关系'/>
+              placeholder='Please choose a relationship'/>
           </FormGroup>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel><span className='txt-impt'>*</span>问题</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>question</ControlLabel>
             <Select.Async 
               clearable={ false } 
               disabled={ loading } 
@@ -124,14 +124,14 @@ export default class LinkIssueModal extends Component {
               valueKey='id' 
               labelKey='name' 
               loadOptions={ this.searchIssue.bind(this) } 
-              placeholder='输入问题号或名称'/>
+              placeholder='Enter the problem number or name'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading || !this.state.relation || !this.state.dest } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading || !this.state.relation || !this.state.dest } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

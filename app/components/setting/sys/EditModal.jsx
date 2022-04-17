@@ -10,7 +10,7 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.first_name) {
-    errors.first_name = '必填';
+    errors.first_name = 'Be required';
   }
 
   return errors;
@@ -54,7 +54,7 @@ export default class EditModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('更新完成。', 'success', 2000);
+      notify.show(''update completed.'', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -75,30 +75,30 @@ export default class EditModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>编辑个人资料</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Edit your profile</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ first_name.touched && first_name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>名称</ControlLabel>
+            <ControlLabel><span className='txt-impt'>*</span>name</ControlLabel>
             <FormControl type='hidden' { ...id }/>
-            <FormControl disabled={ submitting } type='text' { ...first_name } placeholder='姓名'/>
+            <FormControl disabled={ submitting } type='text' { ...first_name } placeholder='Name'/>
             { first_name.touched && first_name.error && <HelpBlock style={ { float: 'right' } }>{ first_name.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>部所</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...department } placeholder='所属部所'/>
+            <ControlLabel>Part</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...department } placeholder='Partner'/>
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>职位</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...position } placeholder='职位'/>
+            <ControlLabel>Position</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...position } placeholder='Position'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -44,13 +44,13 @@ export default class SyncModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>用户同步 - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>User synchronization - { data.name }</Modal.Title>
         </Modal.Header>
         { loading &&
         <Modal.Body style={ { height: '240px', overflow: 'auto' } }>
           <div style={ { textAlign: 'center', marginTop: '75px' } }>
             <img src={ img } className='loading'/><br/>
-            正在同步中...
+            Synchronize...
           </div>
         </Modal.Body> }
         { !loading &&
@@ -59,18 +59,18 @@ export default class SyncModal extends Component {
           <br/>
           <table style={ { marginLeft: '20px' } }>
             <tr>
-              <td style={ { height: '35px', textAlign: 'right' } }>同步用户：</td>
-              <td>{ syncInfo.user ? <Label bsStyle='success'>完成</Label> : <Label bsStyle='danger'>失败</Label> }</td>
+              <td style={ { height: '35px', textAlign: 'right' } }>Synchronize users:</td>
+              <td>{ syncInfo.user ? <Label bsStyle='success'>Finish</Label> : <Label bsStyle='danger'>fail</Label> }</td>
             </tr>
             <tr>
-              <td style={ { height: '35px', textAlign: 'right' } }>同步用户组：</td>
-              <td>{ syncInfo.group ? <Label bsStyle='success'>完成</Label> : <Label bsStyle='danger'>失败</Label> }</td>
+              <td style={ { height: '35px', textAlign: 'right' } }>Synchronous user group:</td>
+              <td>{ syncInfo.group ? <Label bsStyle='success'>Finish</Label> : <Label bsStyle='danger'>fail</Label> }</td>
             </tr>
           </table>
         </Modal.Body> }
         <Modal.Footer>
-          <Button disabled={ loading } bsStyle='link' onClick={ this.resync.bind(this) }>重新同步</Button>
-          <Button disabled={ loading } onClick={ this.handleCancel }>关闭</Button>
+          <Button disabled={ loading } bsStyle='link' onClick={ this.resync.bind(this) }>Resynchronize</Button>
+          <Button disabled={ loading } onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

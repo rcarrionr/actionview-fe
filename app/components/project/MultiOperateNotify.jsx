@@ -42,20 +42,20 @@ export default class MultiOperateNotify extends Component {
     let ecode = 0, msg = '';
     if (operate == 'reopen') {
       ecode = await multiReopen(ids);
-      msg = '已取消归档。'; 
+      msg = 'The archive has been canceled.'; 
     } else if (operate == 'archive') {
       ecode = await multiArchive(ids);
-      msg = '项目已归档。'; 
+      msg = 'The project has been archived.'; 
     } else if (operate == 'create_index') {
       ecode = await multiCreateIndex(ids);
-      msg = '索引已创建。'; 
+      msg = 'Index has been created.'; 
     }
     if (ecode === 0) {
       close();
       cancelSelected();
       notify.show(msg, 'success', 2000);    
     } else {
-      notify.show('操作失败。', 'error', 2000);    
+      notify.show('operation failed.', 'error', 2000);    
     }
     this.setState({ ecode: ecode });
   }
@@ -71,21 +71,21 @@ export default class MultiOperateNotify extends Component {
 
   render() {
     const { i18n: { errMsg }, operate, loading } = this.props;
-    const operateTitle = operate === 'reopen' ? '取消归档' : (operate === 'create_index' ? '重新索引' : '归档');
+    const operateTitle = operate === 'reopen' ? 'Cancel archive' : (operate === 'create_index' ? 'Reinterpret' : 'Archive');
 
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>批处理项目 - { operateTitle }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Batch project - { operateTitle }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          { '确认要 ' + operateTitle + ' 选中的项目？' }
+          { 'Confirm ' + operateTitle + ' Selected item?' }
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

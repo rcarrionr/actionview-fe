@@ -29,7 +29,7 @@ export default class DelNotify extends Component {
     const ecode = await del(_.extend({}, { id: data.id }, { operate_flg: this.state.operate_flg, swap_epic: this.state.swapEpic }));
     if (ecode === 0) {
       close();
-      notify.show('删除完成。', 'success', 2000);
+      notify.show('Delete is done.', 'success', 2000);
       index();
     }
     this.setState({ ecode: ecode });
@@ -49,22 +49,22 @@ export default class DelNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除Epic - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>deleteEpic - { data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           { data.is_used ?
           <div className='info-col' style={ { marginTop: '5px' } }>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-            <div className='info-content'>有问题和此Epic关联，请选择以下操作。</div>
+            <div className='info-content'>There is a problem and thisEpicAssociate, select the following.</div>
           </div>
           :
           <div className='info-col' style={ { marginTop: '5px' } }>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-            <div className='info-content'>没有问题和此Epic关联，可放心删除。</div>
+            <div className='info-content'>No problem and thisEpicAssociation, you can delete it.</div>
           </div> }
           { data.is_used && 
           <div style={ { margin: '20px 10px 10px 10px' } }>
-            <div style={ { display: 'inline-block', verticalAlign: 'top' } }>修复问题</div>
+            <div style={ { display: 'inline-block', verticalAlign: 'top' } }>Repair problem</div>
             <div style={ { display: 'inline-block', marginLeft: '20px' } }>
               <FormGroup>
                 <Radio
@@ -72,7 +72,7 @@ export default class DelNotify extends Component {
                   name='swap'
                   onClick={ () => { this.setState({ operate_flg : '1' }) } }
                   checked={ this.state.operate_flg === '1' }>
-                  移动至Epic
+                  Move toEpic
                 </Radio>
                 <div style={ { width: '300px', margin: '5px 5px 10px 18px' } }>
                   <Select
@@ -82,14 +82,14 @@ export default class DelNotify extends Component {
                     options={ _.map(_.reject(epics, { id: data.id } ), (v) => ({ value: v.id, label: v.name }) ) }
                     value={ this.state.swapEpic }
                     onChange={ (newValue) => { this.setState({ swapEpic: newValue }) } }
-                    placeholder='选择Epic'/>
+                    placeholder='chooseEpic'/>
                 </div>
                 <Radio
                   inline
                   name='remove'
                   onClick={ () => { this.setState({ operate_flg : '2' }) } }
                   checked={ this.state.operate_flg === '2' }>
-                  移除Epic
+                  RemoveEpic
                 </Radio>
               </FormGroup>
             </div>
@@ -101,9 +101,9 @@ export default class DelNotify extends Component {
           <Button
             onClick={ this.confirm }
             disabled={ loading || (data.is_used && this.state.operate_flg === '0') || (this.state.operate_flg === '1' && !this.state.swapEpic) }>
-            确定
+            Sure
           </Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

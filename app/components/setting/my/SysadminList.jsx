@@ -60,13 +60,13 @@ export default class List extends Component {
       id: 'avatar',
       title: (
         <div>
-          <span className='table-td-title'>头像</span>
+          <span className='table-td-title'>avatar</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           <img src={ accounts.avatar ? API_BASENAME + '/getavatar?fid=' + accounts.avatar : no_avatar } className='big-avatar'/>
-          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ avatarEditModalShow: true }) } }>设置头像</Button>
+          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ avatarEditModalShow: true }) } }>Set Avatar</Button>
         </div>
       )
     });
@@ -74,7 +74,7 @@ export default class List extends Component {
       id: 'basic',
       title: (
         <div>
-          <span className='table-td-title'>个人资料</span>
+          <span className='table-td-title'>personal information</span>
         </div>
       ),
       contents: (
@@ -89,13 +89,13 @@ export default class List extends Component {
       id: 'password',
       title: (
         <div>
-          <span className='table-td-title'>登录密码</span>
-          <span className='table-td-issue-desc'>修改密码时需要输入当前密码；建议您定期更换密码，确保帐号安全。</span>
+          <span className='table-td-title'>login password</span>
+          <span className='table-td-issue-desc'>You need to enter the current password when you change your password; it is recommended that you regularly replace your password to make sure your account is secure.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
-          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ resetPwdModalShow: true }) } }>修改密码</Button>
+          <Button style={ { marginLeft: '15px' } } onClick={ () => { this.setState({ resetPwdModalShow: true }) } }>change Password</Button>
         </div>
       )
     });
@@ -104,17 +104,17 @@ export default class List extends Component {
       id: 'bindemail',
       title: (
         <div>
-          <span className='table-td-title'>关联邮箱</span>
-          <span className='table-td-issue-desc'>密码找回时重置链接将会发送至该邮箱。</span>
+          <span className='table-td-title'>Related mailbox</span>
+          <span className='table-td-issue-desc'>The reset link will be sent to the mailbox when the password is retrieved.</span>
         </div>
       ),
       contents: (
         <div style={ styles }>
           { accounts.bind_email ?
-          <div>当前绑定邮箱为：{ accounts.bind_email }</div>
+          <div>The current binding mailbox is:{ accounts.bind_email }</div>
           :
-          <div style={ { color: 'red' } }>强烈建议配置该邮箱, 方便密码找回时使用。</div> }
-          <Button style={ { marginLeft: '15px', marginTop: '10px' } } onClick={ () => { this.setState({ bindEmailModalShow: true }) } }>绑定邮箱</Button>
+          <div style={ { color: 'red' } }>Strongly recommended to configure this mailbox, Convenient password to use.</div> }
+          <Button style={ { marginLeft: '15px', marginTop: '10px' } } onClick={ () => { this.setState({ bindEmailModalShow: true }) } }>Binding mailbox</Button>
         </div>
       )
     });
@@ -122,7 +122,7 @@ export default class List extends Component {
     return (
       <div>
         <Nav bsStyle='pills' style={ { marginTop: '10px', float: 'left', lineHeight: '1.0' } } activeKey='account'>
-          <NavItem eventKey='account' href='#'>账号资料</NavItem>
+          <NavItem eventKey='account' href='#'>Account information</NavItem>
         </Nav>
         <BootstrapTable data={ accountItems } bordered={ false } hover trClassName='tr-top'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>

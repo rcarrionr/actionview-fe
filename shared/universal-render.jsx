@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Router, RouterContext, match } from 'react-router';
 
 import ReduxResolver from './redux-resolver';
-import sroutes from '../app/sroutes'; // 临时修改
+import sroutes from '../app/sroutes'; // Temporary modification
 import * as I18nActions from 'redux/actions/I18nActions';
 
 const { BROWSER, NODE_ENV } = process.env;

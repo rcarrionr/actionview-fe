@@ -79,22 +79,22 @@ export default class ViewSprintModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>工作量查看 - { curSprint.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Workload view - { curSprint.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '420px', overflow: 'auto' } }>
           { !_.isEmpty(issuesByAssignee) &&
           <Table hover responsive>
             <thead>
               <tr>
-                <th>负责人</th>
-                <th>问题数</th>
-                <th>故事点数</th>
+                <th>principal</th>
+                <th>Count number</th>
+                <th>Story point</th>
               </tr>
             </thead>
             <tbody>
               { unassignedIssues.issue_count > 0 &&
               <tr>
-                <td>未分配的</td>
+                <td>Unallocated</td>
                 <td>{ unassignedIssues.issue_count }</td>
                 <td>{ unassignedIssues.story_points }</td>
               </tr> }
@@ -114,7 +114,7 @@ export default class ViewSprintModal extends Component {
                 </td>
               </tr>); }) }
               <tr>
-                <td>合计</td>
+                <td>total</td>
                 <td>{ total_issue_count }</td>
                 <td>{ total_story_points }</td>
               </tr>
@@ -122,7 +122,7 @@ export default class ViewSprintModal extends Component {
           </Table> }
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

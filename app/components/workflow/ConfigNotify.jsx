@@ -24,9 +24,9 @@ export default class ConfigNotify extends Component {
     } else {
       const ecode = await save();
       if (ecode === 0) {
-        notify.show('已保存。', 'success', 2000);
+        notify.show('Saved.', 'success', 2000);
       } else {
-        notify.show('保存失败。', 'error', 2000);
+        notify.show('Save failed.', 'error', 2000);
       }
     }
   }
@@ -42,17 +42,17 @@ export default class ConfigNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ cancel ? '配置取消' : '配置保存' }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ cancel ? 'Configuration cancellation' : 'Configuration save' }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <br/>
-          { cancel ? '确认要放弃修改吗？' : '配置可能存在无法到达的结点，确认要继续保存吗？' }
+          { cancel ? 'Confirm to give up the modification??' : 'Configuration may have a node that cannot be reached, confirm that you want to save??' }
           <br/>
           <br/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

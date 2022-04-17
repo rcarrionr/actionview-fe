@@ -36,7 +36,7 @@ export default class EditModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('已更新。', 'success', 2000);
+      notify.show('updated.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -58,14 +58,14 @@ export default class EditModal extends Component {
 
     const ecode = await get(wid);
     if (ecode !== 0) {
-      this.state.emsg = '获取文档信息失败。';
+      this.state.emsg = 'Get document information failed.';
       this.setState({ emsg : this.state.emsg });
     } else {
       const { data, user } = this.props; 
       if (_.isEmpty(data.checkin)) {
-        this.state.emsg = '其他人可能正在编辑该文档，暂不能编辑提交。';
+        this.state.emsg = 'Others may be editing the documentation and cannot be edited.';
       } else if (data.checkin.user.id !== user.id) {
-        this.state.emsg = data.checkin.user.name + ' 正编辑该文档，暂不能编辑提交。';
+        this.state.emsg = data.checkin.user.name + ' Editing this document, you can't edit it.';
       }
       this.setState({ name: data.name || '', emsg : this.state.msg });
       simplemde.value(data.contents || '');
@@ -85,7 +85,7 @@ export default class EditModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } bsSize='large' backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>编辑文档</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Edit document</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { height: '580px', overflow: 'auto', display: !itemLoading ? 'none' : '' } }>
           <div style={ { marginTop: '250px', textAlign: 'center' } }>
@@ -104,7 +104,7 @@ export default class EditModal extends Component {
                 value={ this.state.name } 
                 onChange={ (e) => { this.setState({ name: e.target.value }) } } 
                 onBlur={ (e) => { this.setState({ touched: true }) } }
-                placeholder='请输入标题名'/>
+                placeholder='Please enter the title name'/>
             </InputGroup>
           </FormGroup>
           <FormGroup>
@@ -119,10 +119,10 @@ export default class EditModal extends Component {
             checked={ this.state.isSendMsg }
             onClick={ () => { this.setState({ isSendMsg: !this.state.isSendMsg }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            通知项目成员
+            Notifying item members
           </Checkbox>
-          <Button disabled={ this.state.emsg || loading || !this.state.name } onClick={ this.handleSubmit }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ this.state.emsg || loading || !this.state.name } onClick={ this.handleSubmit }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

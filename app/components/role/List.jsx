@@ -110,11 +110,11 @@ export default class List extends Component {
   classifyPermissions(permissions) {
     const results = [];
     const categories = [ 
-      { key: 'project', name: '项目' }, 
-      { key: 'issue', name: '问题' }, 
-      { key: 'files', name: '附件' }, 
-      { key: 'comments', name: '评论' }, 
-      { key: 'worklogs', name: '工作日志' } 
+      { key: 'project', name: 'project' }, 
+      { key: 'issue', name: 'question' }, 
+      { key: 'files', name: 'appendix' }, 
+      { key: 'comments', name: 'Comment' }, 
+      { key: 'worklogs', name: 'Work log' } 
     ];
 
     _.forEach(categories, (category) => {
@@ -166,7 +166,7 @@ export default class List extends Component {
         name:  (
           <div>
             <span className='table-td-title'>
-              { collection[i].name }{ isGlobal && <span style={ { fontWeight: 'normal' } }> (全局)</span> }
+              { collection[i].name }{ isGlobal && <span style={ { fontWeight: 'normal' } }> (Global)</span> }
             </span>
             { collection[i].description && <span className='table-td-desc'>{ collection[i].description }</span> }
           </div>
@@ -192,11 +192,11 @@ export default class List extends Component {
               title={ node } 
               id={ `dropdown-basic-${i}` } 
               onSelect={ this.operateSelect.bind(this) }>
-              { !isGlobal && <MenuItem eventKey='1'>编辑</MenuItem> }
-              <MenuItem eventKey='5'>配置</MenuItem>
-              { pkey === '$_sys_$' && <MenuItem eventKey='4'>查看项目应用</MenuItem> }
-              { !isGlobal && !collection[i].is_used && <MenuItem eventKey='2'>删除</MenuItem> }
-              { isGlobal && <MenuItem eventKey='3'>重置权限</MenuItem> }
+              { !isGlobal && <MenuItem eventKey='1'>edit</MenuItem> }
+              <MenuItem eventKey='5'>Configure</MenuItem>
+              { pkey === '$_sys_$' && <MenuItem eventKey='4'>View project application</MenuItem> }
+              { !isGlobal && !collection[i].is_used && <MenuItem eventKey='2'>delete</MenuItem> }
+              { isGlobal && <MenuItem eventKey='3'>Reset permissions</MenuItem> }
             </DropdownButton> }
             <img src={ img } className={ (itemLoading && selectedItem.id === collection[i].id) ? 'loading' : 'hide' }/>
           </div>
@@ -208,7 +208,7 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed.'; 
     } 
 
     opts.onRowMouseOver = this.onRowMouseOver.bind(this);
@@ -219,8 +219,8 @@ export default class List extends Component {
         <BackTop />
         <BootstrapTable data={ roles } bordered={ false } hover options={ opts } trClassName='tr-top'>
           <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name' width='300'>角色</TableHeaderColumn>
-          <TableHeaderColumn dataField='permissions'>权限集</TableHeaderColumn>
+          <TableHeaderColumn dataField='name' width='300'>Role</TableHeaderColumn>
+          <TableHeaderColumn dataField='permissions'>Permissions set</TableHeaderColumn>
           <TableHeaderColumn width='60' dataField='operation'/>
         </BootstrapTable>
         { this.state.editModalShow && 

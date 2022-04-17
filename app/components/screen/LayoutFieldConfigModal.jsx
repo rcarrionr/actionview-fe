@@ -58,7 +58,7 @@ export default class LayoutFieldConfigModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('配置完成。', 'success', 2000);
+      notify.show('Configuration is done.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -84,13 +84,13 @@ export default class LayoutFieldConfigModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel.bind(this) } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ '界面字段配置 - ' + this.props.data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ 'Interface field configuration - ' + this.props.data.name }</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormControl type='hidden' { ...id }/>
           <FormGroup controlId='formControlsSelect'>
-            <ControlLabel>必填字段</ControlLabel>
+            <ControlLabel>Required field</ControlLabel>
             <Select 
               simpleValue 
               multi
@@ -98,14 +98,14 @@ export default class LayoutFieldConfigModal extends Component {
               clearable={ false } 
               value={ required_fields.value || null } 
               onChange={ newValue => { required_fields.onChange(newValue) } } 
-              placeholder='选择必填字段(可多选)'/>
+              placeholder='Select required field(Multiple choice)'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ submitting || !dirty } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel.bind(this) }>取消</Button>
+          <Button disabled={ submitting || !dirty } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel.bind(this) }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

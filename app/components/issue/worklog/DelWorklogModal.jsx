@@ -28,7 +28,7 @@ export default class DelWorklogModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('日志已删除。', 'success', 2000);
+      notify.show('The log has been deleted.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -45,17 +45,17 @@ export default class DelWorklogModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除工作日志</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete work log</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          此工作日志添加于 { moment.unix(data.recorded_at).format('YYYY/MM/DD HH:mm') }<br/><br/>
-          确认要删除吗？
+          This work log is added to { moment.unix(data.recorded_at).format('YYYY/MM/DD HH:mm') }<br/><br/>
+          Confirm that you want to delete??
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !loading && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ loading ? 'loading' : 'hide' }/>
-          <Button disabled={ loading } onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>取消</Button>
+          <Button disabled={ loading } onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' disabled={ loading } onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

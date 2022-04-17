@@ -10,9 +10,9 @@ const img = require('../../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.from) {
-    errors.from = '必填';
+    errors.from = 'Be required';
   } else if (!/^(\w-*\.*)+@(\w+[\w|-]*)+(\.\w+[\w|-]*)*(\.\w{2,})+$/.test(values.from)) {
-    errors.from = '格式有误';
+    errors.from = 'Format is incorrect';
   }
   return errors;
 };
@@ -55,7 +55,7 @@ export default class SetSendMailModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('设置完成。', 'success', 2000);
+      notify.show('Set the settings.', 'success', 2000);
     } else {
       this.setState({ ecode: ecode });
     }
@@ -83,25 +83,25 @@ export default class SetSendMailModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>发送邮件设置</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Send email settings</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ from.touched && from.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>发信地址</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...from } placeholder='输入邮箱'/>
+            <ControlLabel><span className='txt-impt'>*</span>Message</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...from } placeholder='Enter mailbox'/>
             { from.touched && from.error && <HelpBlock style={ { float: 'right' } }>{ from.error }</HelpBlock> }
           </FormGroup>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>邮件前缀</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...prefix } placeholder='邮件前缀(默认ActionView)'/>
+            <ControlLabel>Email prefix</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...prefix } placeholder='Email prefix(defaultActionView)'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           <span className='ralign'>{ this.state.ecode !== 0 && !submitting && errMsg[this.state.ecode] }</span>
           <img src={ img } className={ submitting ? 'loading' : 'hide' }/>
-          <Button disabled={ !dirty || submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ !dirty || submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

@@ -12,10 +12,10 @@ const img = require('../../assets/images/loading.gif');
 const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
-    errors.name = '必填';
+    errors.name = 'Be required';
   }
   if (_.findIndex(props.options.versions || [], { name: values.name }) !== -1) {
-    errors.name = '该版本已存在';
+    errors.name = 'This version already exists';
   }
   return errors;
 };
@@ -60,7 +60,7 @@ export default class ReleaseVersionModal extends Component {
     if (ecode === 0) {
       this.setState({ ecode: 0 });
       close();
-      notify.show('已发布。', 'success', 2000);
+      notify.show('Published.', 'success', 2000);
     } else { 
       this.setState({ ecode: ecode });
     }
@@ -83,18 +83,18 @@ export default class ReleaseVersionModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>版本发布</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Version release</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyUp={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText' validationState={ name.touched && name.error ? 'error' : null }>
-            <ControlLabel><span className='txt-impt'>*</span>版本名称</ControlLabel>
-            <FormControl disabled={ submitting } type='text' { ...name } placeholder='版本名称'/ >
+            <ControlLabel><span className='txt-impt'>*</span>Version name</ControlLabel>
+            <FormControl disabled={ submitting } type='text' { ...name } placeholder='Version name'/ >
             { name.touched && name.error &&
               <HelpBlock style={ { float: 'right' } }>{ name.error }</HelpBlock> }
           </FormGroup>
           {/*<FormGroup controlId='formControlsText' validationState={ end_time.value && end_time.error ? 'error' : null }>
-            <ControlLabel>发布时间</ControlLabel>
+            <ControlLabel>release time</ControlLabel>
             <DateTime
               locale='zh-cn'
               mode='date'
@@ -107,13 +107,13 @@ export default class ReleaseVersionModal extends Component {
             { end_time.value && end_time.error && <HelpBlock style={ { float: 'right' } }>{ end_time.error }</HelpBlock> }
           </FormGroup>*/}
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>描述</ControlLabel>
+            <ControlLabel>describe</ControlLabel>
             <FormControl
               disabled={ submitting }
               componentClass='textarea'
               style={ { height: '200px' } }
               { ...description }
-              placeholder='描述'/>
+              placeholder='describe'/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
@@ -124,10 +124,10 @@ export default class ReleaseVersionModal extends Component {
             checked={ this.state.isSendMsg }
             onClick={ () => { this.setState({ isSendMsg: !this.state.isSendMsg }) } }
             style={ { display: 'inline-block', marginRight: '20px', marginLeft: '10px' } }>
-            通知项目成员
+            Notifying item members
           </Checkbox>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' disabled={ submitting } onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>

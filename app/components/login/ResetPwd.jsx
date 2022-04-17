@@ -16,18 +16,18 @@ const validate = (values) => {
   const errors = {};
 
   if (!values.new_password) {
-    errors.new_password = '必填';
+    errors.new_password = 'Be required';
   } else {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^ ]{8,}$/;
     if (!re.test(values.new_password)) {
-      errors.new_password = '密码必须包含字母大小写、数字，至少8位';
+      errors.new_password = 'The password must contain letters, numbers, at least8Position';
     }
   }
   if (!values.new_password2) {
-    errors.new_password2 = '必填';
+    errors.new_password2 = 'Be required';
   }
   if ((values.new_password || values.new_password2) && values.new_password != values.new_password2) {
-    errors.new_password2 = '密码不一致';
+    errors.new_password2 = 'Password is inconsistent';
   }
 
   return errors;
@@ -105,7 +105,7 @@ class ResetPwd extends Component {
       <div className='login-panel'>
         <div className='login-form'>
           <div style={ { textAlign: 'center', marginTop: '15px', fontSize: '19px', marginBottom: '20px' } }>
-            密码重置 
+            reset Password 
           </div>
           { this.state.emailShow ?
           <form onSubmit={ handleSubmit(this.handleSubmit) }>
@@ -113,23 +113,23 @@ class ResetPwd extends Component {
               <FormControl disabled type='type' value={ user.item && user.item.email || '' }/>
             </FormGroup>
             <FormGroup controlId='formControlsPwd' validationState={ new_password.touched && new_password.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='password' { ...new_password } placeholder='新密码'/>
+              <FormControl disabled={ submitting } type='password' { ...new_password } placeholder='new password'/>
               { new_password.touched && new_password.error && <HelpBlock style={ { marginLeft: '5px' } }>{ new_password.error }</HelpBlock> }
             </FormGroup>
             <FormGroup controlId='formControlsPwd2' validationState={ new_password2.touched && new_password2.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='password' { ...new_password2 } placeholder='确认密码'/>
+              <FormControl disabled={ submitting } type='password' { ...new_password2 } placeholder='Confirm Password'/>
               { new_password2.touched && new_password2.error && <HelpBlock style={ { marginLeft: '5px' } }>{ new_password2.error }</HelpBlock> }
             </FormGroup>
-            <Button bsStyle='success' disabled={ invalid || submitting } type='submit'>{ submitting ? '重置中...' : '密码重置' }</Button>
+            <Button bsStyle='success' disabled={ invalid || submitting } type='submit'>{ submitting ? 'Reset...' : 'reset Password' }</Button>
           </form>
           :
           <div className='reset-pwd-msg'>
             <img src={ img } className={ user.loading ? 'loading' : 'hide' }/>
-            { this.state.ecode === 0 && !user.loading && <span>密码已重置，请重新 <Link to='/login'>登录</Link>。</span> }
-            { this.state.ecode !== 0 && !user.loading && errMsg[this.state.ecode] && <span style={ { marginTop: '10px', color: '#a94442' } }>抱歉，{ errMsg[this.state.ecode] }。</span> }
+            { this.state.ecode === 0 && !user.loading && <span>The password has been reset, please re- <Link to='/login'>Log in</Link>.</span> }
+            { this.state.ecode !== 0 && !user.loading && errMsg[this.state.ecode] && <span style={ { marginTop: '10px', color: '#a94442' } }>Feel sorry,{ errMsg[this.state.ecode] }.</span> }
           </div> }
           <div style={ { textAlign: 'center', marginBottom: '25px' } }>
-            { this.state.alertShow && !submitting && errMsg[this.state.ecode] && <div style={ { marginTop: '10px', color: '#a94442' } }>抱歉，{ errMsg[this.state.ecode] }。</div> }
+            { this.state.alertShow && !submitting && errMsg[this.state.ecode] && <div style={ { marginTop: '10px', color: '#a94442' } }>Feel sorry,{ errMsg[this.state.ecode] }.</div> }
           </div>
         </div>
       </div>

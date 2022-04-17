@@ -293,7 +293,7 @@ export default class Trend extends Component {
         <div className='report-conds-style'>
           { query.stat_time && sqlTxt &&
           <div className='cond-bar' style={ { marginTop: '0px', float: 'left' } }>
-            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>：{ sqlTxt }</div>
+            <div className='cond-contents' title={ sqlTxt }><b>Search condition</b>:{ sqlTxt }</div>
             <div className='remove-icon' onClick={ () => { this.setState({ saveFilterShow: true }); } } title='Save the current search'><i className='fa fa-save'></i></div>
           </div> }
           <ButtonGroup className='report-shape-buttongroup'>

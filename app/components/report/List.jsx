@@ -50,7 +50,7 @@ export default class List extends Component {
     let classifiedData = [ 
       <tr>
         <td>
-          The module filter has been deleted, please click<a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ selectedBlock: mode, resetShow: true }) } }>Reset</a>。
+          The module filter has been deleted, please click<a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ selectedBlock: mode, resetShow: true }) } }>Reset</a>.
         </td>
       </tr> 
     ];

@@ -9,8 +9,8 @@ import _ from 'lodash';
 const img = require('../../assets/images/loading.gif');
 
 const series = [
-  { name: '参考值', stroke: '#999', data: [] },
-  { name: '剩余值', stroke: '#d04437', data: [] }
+  { name: 'Reference', stroke: '#999', data: [] },
+  { name: 'Remainder', stroke: '#d04437', data: [] }
 ];
 
 export default class PreviewModal extends Component {
@@ -41,7 +41,7 @@ export default class PreviewModal extends Component {
     const { no, getSprintLog } = this.props;
     const ecode = await getSprintLog(no);
     if (ecode !== 0) {
-      notify.show('获取数据失败。', 'error', 2000);
+      notify.show('Get data failed.', 'error', 2000);
     }
   }
 
@@ -74,7 +74,7 @@ export default class PreviewModal extends Component {
         dialogClassName='custom-modal-90'
         aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton ref='header'>
-          <Modal.Title id='contained-modal-title-la'>燃尽图{ ' - ' + 'Sprint ' + no }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Burn out{ ' - ' + 'Sprint ' + no }</Modal.Title>
         </Modal.Header>
         { loading &&
         <Modal.Body style={ { height: '580px', overflow: 'auto' } }>
@@ -85,13 +85,13 @@ export default class PreviewModal extends Component {
         { !loading &&
         <Modal.Body style={ { height: '580px', overflow: 'auto' } }>
           <ButtonGroup style={ { float: 'right', marginRight: '55px' } }>
-            <Button title='问题数' style={ { backgroundColor: this.state.mode == 'issueCount' && '#eee' } } onClick={ ()=>{ this.setState({ mode: 'issueCount' }) } }>问题数</Button>
-            <Button title='故事点' style={ { backgroundColor: this.state.mode == 'storyPoints' && '#eee' } } onClick={ ()=>{ this.setState({ mode: 'storyPoints' }) } }>故事点数</Button>
+            <Button title='Count number' style={ { backgroundColor: this.state.mode == 'issueCount' && '#eee' } } onClick={ ()=>{ this.setState({ mode: 'issueCount' }) } }>Count number</Button>
+            <Button title='Storypoint' style={ { backgroundColor: this.state.mode == 'storyPoints' && '#eee' } } onClick={ ()=>{ this.setState({ mode: 'storyPoints' }) } }>Story point</Button>
           </ButtonGroup> 
           <CheckboxGroup style={ { float: 'right', marginTop: '8px', marginRight: '10px' } } name='notifications' value={ this.state.display } onChange={ this.diplayChanged.bind(this) }>
             <label style={ { fontWeight: 400 } }>
               <Checkbox value='notWorkingShow'/>
-              <span style={ { marginLeft: '3px' } }>显示非工作日</span>
+              <span style={ { marginLeft: '3px' } }>Display non-working day</span>
             </label>
           </CheckboxGroup>
           <LineChart 
@@ -109,7 +109,7 @@ export default class PreviewModal extends Component {
           </LineChart>
         </Modal.Body> }
         <Modal.Footer>
-          <Button onClick={ this.handleCancel }>关闭</Button>
+          <Button onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -110,8 +110,8 @@ export default class ColumnItemCard extends Component {
           <span className='config-wip'>{ 'Max-' + column.max }</span> }
           { column.min &&
           <span className='config-wip'>{ 'Min-' + column.min }</span> }
-          { isAllowedEdit && !!delColumn && <span style={ styles } onClick={ () => { delColumn(column.no) } } title='删除' className='rm-icon'><i className='fa fa-remove'></i></span> }
-          { isAllowedEdit && !!editColumn && <span style={ styles } onClick={ () => { editColumn(column.no) } } title='编辑' className='edit-icon'><i className='fa fa-edit'></i></span> }
+          { isAllowedEdit && !!delColumn && <span style={ styles } onClick={ () => { delColumn(column.no) } } title='delete' className='rm-icon'><i className='fa fa-remove'></i></span> }
+          { isAllowedEdit && !!editColumn && <span style={ styles } onClick={ () => { editColumn(column.no) } } title='edit' className='edit-icon'><i className='fa fa-edit'></i></span> }
         </div>
         <div>
         { _.map(column.states, (v, i) => 

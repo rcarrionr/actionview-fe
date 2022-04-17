@@ -350,11 +350,11 @@ export default class Preview extends Component {
         </div> }
         { item.id &&
         <div style={ { lineHeight: 2, borderBottom: '1px solid #e6ebf1', paddingLeft: '5px', paddingBottom: '10px', fontSize: '12px' } }>
-          <span>creator:{ item.creator && item.creator.name || '' }，</span>
+          <span>creator:{ item.creator && item.creator.name || '' },</span>
           { isNewestVer ? 
           <span style={ { color: '#707070' } }>This version is the latest version,{ item.editor && item.editor.name ? item.editor.name : (item.creator && item.creator.name || '') }At { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : moment.unix(item.created_at).format('YYYY/MM/DD HH:mm') } edit.</span>
           :
-          <span style={ { color: '#707070' } }>current version - { item.version }，{ item.editor && item.editor.name || '' }At { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : '' } edit.</span> }
+          <span style={ { color: '#707070' } }>current version - { item.version },{ item.editor && item.editor.name || '' }At { item.updated_at ? moment.unix(item.updated_at).format('YYYY/MM/DD HH:mm') : '' } edit.</span> }
 
           { item.versions && item.versions.length > 1 &&
           <span style={ { color: '#707070' } }>common <a href='#' onClick={ (e) => { e.preventDefault(); this.setState({ versionViewShow: true }); } }>{ item.versions.length }</a> Version.</span> }

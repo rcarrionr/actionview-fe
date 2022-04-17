@@ -23,16 +23,16 @@ export default class DelNotify extends Component {
     if (reset) {
       ecode = await reset(data.id);
       if (ecode === 0) {
-        notify.show('重置完成。', 'success', 2000);    
+        notify.show('Reset completion.', 'success', 2000);    
       } else {
-        notify.show('重置失败。', 'error', 2000);    
+        notify.show('Reset failed.', 'error', 2000);    
       }
     } else {
       ecode = await del(data.id);
       if (ecode === 0) {
-        notify.show('删除完成。', 'success', 2000);    
+        notify.show('Delete is done.', 'success', 2000);    
       } else {
-        notify.show('删除失败。', 'error', 2000);    
+        notify.show('failed to delete.', 'error', 2000);    
       }
     }
   }
@@ -48,14 +48,14 @@ export default class DelNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ reset ? '重置' : '删除' }角色 - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ reset ? 'Reset' : 'delete' }Role - { data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          { reset ? '确认要重置此角色的权限？' : '确认要删除此角色？' }
+          { reset ? 'Confirm that the permissions to reset this role?' : 'Confirm that you want to delete this role?' }
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ this.confirm }>确定</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm }>Sure</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

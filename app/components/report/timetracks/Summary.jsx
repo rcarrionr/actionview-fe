@@ -35,7 +35,7 @@ export default class Summary extends Component {
         <Table style={ { marginBottom: '10px' } }>
           <tbody>
             <tr>
-              <td width='10%'><span style={ { fontWeight: 600 } }>完成度</span></td>
+              <td width='10%'><span style={ { fontWeight: 600 } }>Degree of completion</span></td>
               <td width='60%'>
                 <table style={ { width: '100%', marginTop: '3px' } }>
                   <tbody>
@@ -52,11 +52,11 @@ export default class Summary extends Component {
               </td>
               <td width='30%'>
                 <span>{ _.round(progress * 100) + '%' }</span>
-                <span style={ { marginLeft: '10px', fontWeight: 600 } }>{ values.spend } 比 { ttFormat(values.spend_m + values.left_m, w2m, d2m) }</span>
+                <span style={ { marginLeft: '10px', fontWeight: 600 } }>{ values.spend } Compare { ttFormat(values.spend_m + values.left_m, w2m, d2m) }</span>
               </td>
             </tr>
             <tr>
-              <td width='10%'><span style={ { fontWeight: 600 } }>精准度</span></td>
+              <td width='10%'><span style={ { fontWeight: 600 } }>Precision</span></td>
               <td width='60%'>
                 <table style={ { width: '100%', marginTop: '3px' } }>
                   <tbody>
@@ -73,7 +73,7 @@ export default class Summary extends Component {
               </td>
               <td width='30%'>
                 <span>{ _.round(accuracy * 100) + '%' }</span>
-                <span style={ { marginLeft: '10px', fontWeight: 600 } }>{ values.diff_m < 0 ? ttFormat(values.origin_m, w2m, d2m) : ttFormat(values.spend_m + values.left_m, w2m, d2m) } 比 { values.diff_m < 0 ? ttFormat(values.spend_m + values.left_m, w2m, d2m) : ttFormat(values.origin_m, w2m, d2m) }</span>
+                <span style={ { marginLeft: '10px', fontWeight: 600 } }>{ values.diff_m < 0 ? ttFormat(values.origin_m, w2m, d2m) : ttFormat(values.spend_m + values.left_m, w2m, d2m) } Compare { values.diff_m < 0 ? ttFormat(values.spend_m + values.left_m, w2m, d2m) : ttFormat(values.origin_m, w2m, d2m) }</span>
               </td>
             </tr>
           </tbody>

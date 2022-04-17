@@ -28,7 +28,7 @@ export default class DelNotify extends Component {
     const ecode = await del(_.extend({}, { id: data.id }, { operate_flg: this.state.operate_flg, swap_module: this.state.swapModule }));
     if (ecode === 0) {
       close();
-      notify.show('删除完成。', 'success', 2000);
+      notify.show('Delete is done.', 'success', 2000);
     }
     this.setState({ ecode: ecode });
   }
@@ -47,22 +47,22 @@ export default class DelNotify extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>删除模块 - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Delete module - { data.name }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           { data.is_used ?
           <div className='info-col' style={ { marginTop: '5px' } }>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-            <div className='info-content'>有问题和此模块关联，请选择以下操作。</div>
+            <div className='info-content'>If you have any questions and this module, select the following.</div>
           </div>
           :
           <div className='info-col' style={ { marginTop: '5px' } }>
             <div className='info-icon'><i className='fa fa-info-circle'></i></div>
-            <div className='info-content'>没有问题和此模块关联，可放心删除。</div>
+            <div className='info-content'>No problem is associated with this module, you can delete it.</div>
           </div> }
           { data.is_used && 
           <div style={ { margin: '20px 10px 10px 10px' } }>
-            <div style={ { display: 'inline-block', verticalAlign: 'top' } }>修复问题</div>
+            <div style={ { display: 'inline-block', verticalAlign: 'top' } }>Repair problem</div>
             <div style={ { display: 'inline-block', marginLeft: '20px' } }>
               <FormGroup>
                 <Radio
@@ -70,7 +70,7 @@ export default class DelNotify extends Component {
                   name='swap'
                   onClick={ () => { this.setState({ operate_flg : '1' }) } }
                   checked={ this.state.operate_flg === '1' }>
-                  移动至模块
+                  Move to module
                 </Radio>
                 <div style={ { width: '300px', margin: '5px 5px 10px 18px' } }>
                   <Select
@@ -80,14 +80,14 @@ export default class DelNotify extends Component {
                     options={ _.map(_.reject(modules, { id: data.id } ), (v) => ({ value: v.id, label: v.name }) ) }
                     value={ this.state.swapModule }
                     onChange={ (newValue) => { this.setState({ swapModule: newValue }) } }
-                    placeholder='选择模块'/>
+                    placeholder='Select module'/>
                 </div>
                 <Radio
                   inline
                   name='remove'
                   onClick={ () => { this.setState({ operate_flg : '2' }) } }
                   checked={ this.state.operate_flg === '2' }>
-                  移除模块
+                  Remove module
                 </Radio>
               </FormGroup>
             </div>
@@ -99,9 +99,9 @@ export default class DelNotify extends Component {
           <Button
             onClick={ this.confirm }
             disabled={ loading || (data.is_used && this.state.operate_flg === '0') || (this.state.operate_flg === '1' && !this.state.swapModule) }>
-            确定
+            Sure
           </Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

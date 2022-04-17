@@ -58,7 +58,7 @@ export default class ConfigContainer extends Component {
 
   routerWillLeave(nextLocation) {
     if (this.state.isChanged) {
-      if (confirm('您修改了流程配置还未保存，确认离开此页面？')) {
+      if (confirm('You have modified the process configuration has not been saved, confirmed to leave this page.?')) {
         return true; 
       } else {
         return false; 

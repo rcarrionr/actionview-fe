@@ -85,15 +85,15 @@ export default class ConfigModal extends Component {
 
     const special_fields = [
       { key: 'no', name: 'NO' },
-      { key: 'type', name: '类型' },
-      { key: 'state', name: '状态' },
-      { key: 'reporter', name: '报告者' },
-      { key: 'resolver', name: '解决者' },
-      { key: 'closer', name: '关闭者' },
-      { key: 'created_at', name: '创建时间' },
-      { key: 'updated_at', name: '更新时间' },
-      { key: 'resolved_at', name: '解决时间' },
-      { key: 'closed_at', name: '关闭时间' },
+      { key: 'type', name: 'type' },
+      { key: 'state', name: 'state' },
+      { key: 'reporter', name: 'Reporter' },
+      { key: 'resolver', name: 'Solve' },
+      { key: 'closer', name: 'Shuttle' },
+      { key: 'created_at', name: 'Create time' },
+      { key: 'updated_at', name: 'Update time' },
+      { key: 'resolved_at', name: 'Resolution time' },
+      { key: 'closed_at', name: 'Closing time' },
       { key: 'epic', name: 'Epic' },
       { key: 'sprints', name: 'Sprint' }
     ];
@@ -135,10 +135,10 @@ export default class ConfigModal extends Component {
     return (
       <Modal show onHide={ this.cancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>导出列选择</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Export column selection</Modal.Title>
         </Modal.Header>
         <Modal.Body style={ { maxHeight: '580px', overflow: 'auto' } }>
-          <div>请选择以下导出列：</div>
+          <div>Please select the following list:</div>
           <div style={ { padding: '5px 0px 0px 5px' } }>
             <CheckboxGroup name='field' value={ this.state.fields } onChange={ this.fieldsChanged.bind(this) }>
               <ui className='list-unstyled clearfix'>
@@ -158,10 +158,10 @@ export default class ConfigModal extends Component {
               } } 
             }
             style={ { float: 'left', margin: '5px 5px' } }>
-            全部选择
+            All Selection
           </BootstrapCheckbox>
-          <Button onClick={ this.confirm } disabled={ this.state.fields.length <= 0 }>导出</Button>
-          <Button bsStyle='link' onClick={ this.cancel }>取消</Button>
+          <Button onClick={ this.confirm } disabled={ this.state.fields.length <= 0 }>Export</Button>
+          <Button bsStyle='link' onClick={ this.cancel }>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -15,9 +15,9 @@ import * as UserActions from 'redux/actions/UserActions';
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
-    errors.email = '邮箱不能为空';
+    errors.email = 'E-mail can not be empty';
   } else if (!/^(\w-*\.*)+@(\w+[\w|-]*)+(\.\w+[\w|-]*)*(\.\w{2,})+$/.test(values.email)) {
-    errors.email = '输入格式有误';
+    errors.email = 'Input format is incorrect';
   }
   return errors;
 };
@@ -86,30 +86,30 @@ class Forgot extends Component {
       <div className='login-panel'>
         <div className='login-form'>
           <div style={ { textAlign: 'center', marginTop: '15px', fontSize: '19px', marginBottom: '20px' } }>
-            找回密码 
+            Retrieve password 
           </div>
           { this.state.emailShow ?
           <form onSubmit={ handleSubmit(this.handleSubmit) }>
             <FormGroup controlId='formControlsText' validationState={ email.touched && email.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='text' { ...email } placeholder='请输入用户邮箱'/>
+              <FormControl disabled={ submitting } type='text' { ...email } placeholder='Please enter a user mailbox'/>
               { email.touched && email.error && <HelpBlock style={ { marginLeft: '5px' } }>{ email.error }</HelpBlock> }
             </FormGroup>
-            <Button bsStyle='success' disabled={ invalid || submitting } type='submit'>{ submitting ? '正在发送 ...' : '发送重置密码邮件' }</Button>
+            <Button bsStyle='success' disabled={ invalid || submitting } type='submit'>{ submitting ? 'sending ...' : 'Send reset password mail' }</Button>
           </form>
           :
           <div className='reset-pwd-msg'>
-            <span>重置密码链接已发送至邮箱 { user.item && user.item.sendto_email || '' }，有效期24小时。</span>
+            <span>Reset password link has been sent to the mailbox { user.item && user.item.sendto_email || '' }, Valid24Hour.</span>
           </div> }
           <div style={ { textAlign: 'center', marginBottom: '30px' } }>
-            { this.state.alertShow && !submitting && errMsg[this.state.ecode] && <div style={ { marginTop: '10px', color: '#a94442' } }>抱歉，{ errMsg[this.state.ecode] }。</div> }
+            { this.state.alertShow && !submitting && errMsg[this.state.ecode] && <div style={ { marginTop: '10px', color: '#a94442' } }>Feel sorry,{ errMsg[this.state.ecode] }.</div> }
           </div>
           <div style={ { textAlign: 'left', marginLeft: '5px', marginBottom: '25px' } }>
-          1. 系统管理员请输入：admin@action.view，重置密码链接将发送至已配置的关联邮箱。
+          1. System administrator Please enter:admin@action.viewThe reset password link will be sent to the configured associated mailbox.
           <br/>
-          2. 仅限本系统内部维护账号的密码找回，不支持外部同步账号。
+          2. Only the password of the internal maintenance account in this system is retrieved, and the external synchronization account is not supported.
           </div>
           <div className='login-footer'>
-            <Link to='/login'>返回登录</Link>
+            <Link to='/login'>Return to login</Link>
           </div>
         </div>
       </div>

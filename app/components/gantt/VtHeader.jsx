@@ -34,30 +34,30 @@ export default class VtHeader extends Component {
     const header = (
       <div className='ganttview-vtheader-series-header-item'>
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '400px' } }>
-          主题
+          theme
         </div>
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '60px' } }>
           NO
         </div>
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '90px' } }>
-          负责人
+          principal
         </div>
         { mode == 'progress' &&
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '80px' } }>
-          进度
+          schedule
         </div> }
         { mode == 'status' &&
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '80px' } }>
-          状态
+          state
         </div> }
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '90px' } }>
-          开始时间
+          Starting time
         </div>
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '90px' } }>
-          完成时间
+          Complete time
         </div>
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '90px' } }>
-          工期(天)
+          Work period(sky)
         </div>
         <div className='ganttview-vtheader-series-header-item-cell' style={ { width: '50px' } }/>
       </div>

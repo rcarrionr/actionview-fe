@@ -45,13 +45,13 @@ export default class TestModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>目录测试 - { data.name }</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>Catalog test - { data.name }</Modal.Title>
         </Modal.Header>
         { loading &&
         <Modal.Body style={ { height: '240px', overflow: 'auto' } }>
           <div style={ { textAlign: 'center', marginTop: '75px' } }>
             <img src={ img } className='loading'/><br/>
-            正在测试中...
+            testing...
           </div>
         </Modal.Body> }
         { !loading &&
@@ -59,27 +59,27 @@ export default class TestModal extends Component {
           <br/>
           <table style={ { marginLeft: '20px' } }>
             <tr>
-              <td style={ { height: '35px', textAlign: 'right' } }>服务器连接：</td>
-              <td>{ testInfo.server_connect ? <Label bsStyle='success'>成功</Label> : <Label bsStyle='danger'>失败</Label> }</td>
+              <td style={ { height: '35px', textAlign: 'right' } }>Server connection:</td>
+              <td>{ testInfo.server_connect ? <Label bsStyle='success'>success</Label> : <Label bsStyle='danger'>fail</Label> }</td>
             </tr>
             <tr>
-              <td style={ { height: '35px', textAlign: 'right' } }>获取用户：</td>
-              <td>{ testInfo.user_count || 0 } 个</td>
+              <td style={ { height: '35px', textAlign: 'right' } }>Get users:</td>
+              <td>{ testInfo.user_count || 0 } indivual</td>
             </tr>
             <tr>
-              <td style={ { height: '35px', textAlign: 'right' } }>获取用户组：</td>
-              <td>{ testInfo.group_count || 0 } 个</td>
+              <td style={ { height: '35px', textAlign: 'right' } }>Get user groups:</td>
+              <td>{ testInfo.group_count || 0 } indivual</td>
             </tr>
             {/* testInfo.group_count > 0 &&
             <tr>
-              <td style={ { height: '35px', textAlign: 'right' } }>获取用户组成员：</td>
-              <td>{ testInfo.group_membership ? <Label bsStyle='success'>成功</Label> : <Label bsStyle='danger'>失败</Label> }</td>
+              <td style={ { height: '35px', textAlign: 'right' } }>Get user group members:</td>
+              <td>{ testInfo.group_membership ? <Label bsStyle='success'>success</Label> : <Label bsStyle='danger'>fail</Label> }</td>
             </tr> */}
           </table>
         </Modal.Body> }
         <Modal.Footer>
-          <Button disabled={ loading } bsStyle='link' onClick={ this.retest.bind(this) }>重新测试</Button>
-          <Button disabled={ loading } onClick={ this.handleCancel }>关闭</Button>
+          <Button disabled={ loading } bsStyle='link' onClick={ this.retest.bind(this) }>retest</Button>
+          <Button disabled={ loading } onClick={ this.handleCancel }>closure</Button>
         </Modal.Footer>
       </Modal>
     );

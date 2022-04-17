@@ -16,13 +16,13 @@ import * as SessionActions from 'redux/actions/SessionActions';
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
-    errors.email = '账号不能为空';
+    errors.email = 'Account cannot be empty';
   //} else if (!/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(values.email) && !(/^1[34578]\d{9}$/.test(values.email))) {
-  //  errors.email = '输入格式有误';
+  //  errors.email = 'Input format is incorrect';
   }
 
   if (!values.password) {
-    errors.password = '密码不能为空';
+    errors.password = 'password can not be blank';
   }
   return errors;
 };
@@ -119,7 +119,7 @@ class Login extends Component {
     const { session } = this.props;
     if (session.ecode === 0 && session.user && session.user.id) {
       if (!session.user.directory && values.password == 'actionview') {
-        notify.show('登录密码是初始密码，为保证安全请尽快修改。', 'warning', 3000);
+        notify.show('The login password is the initial password, and please modify it as soon as possible.', 'warning', 3000);
       }
       if (query.request_url) {
         let requests = decodeURI(query.request_url).split('?');
@@ -157,29 +157,29 @@ class Login extends Component {
           </div>
           <form onSubmit={ handleSubmit(this.handleSubmit) }>
             <FormGroup controlId='formControlsName' validationState={ email.touched && email.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='text' { ...email } placeholder='用户名/邮箱'/>
+              <FormControl disabled={ submitting } type='text' { ...email } placeholder='username/Mail'/>
               { email.touched && email.error && <HelpBlock style={ { marginLeft: '5px' } }>{ email.error }</HelpBlock> }
             </FormGroup>
             <FormGroup controlId='formControlsPwd' validationState={ password.touched && password.error ? 'error' : null }>
-              <FormControl disabled={ submitting } type='password' { ...password } placeholder='密码'/>
+              <FormControl disabled={ submitting } type='password' { ...password } placeholder='password'/>
               { password.touched && password.error && <HelpBlock style={ { marginLeft: '5px' } }>{ password.error }</HelpBlock> }
             </FormGroup>
-            <Button bsStyle='success' disabled={ submitting } type='submit'>{ submitting ? '登 录 中 ...' : '登 录' }</Button>
+            <Button bsStyle='success' disabled={ submitting } type='submit'>{ submitting ? 'Deck record middle ...' : 'Deck record' }</Button>
             <div style={ { textAlign: 'center', height: '40px' } }>
               { this.state.alertShow && !submitting && 
                 <div style={ { marginTop: '10px', color: '#a94442' } }>
-                  { session.ecode === -10000 && '登录失败，用户名或密码错误。' }   
+                  { session.ecode === -10000 && 'Login failed, username or password error.' }   
                   { session.ecode === -10004 && session.emsg }   
-                  { session.ecode === -10005 && '用户未激活。' }   
-                  { session.ecode === -10006 && '用户已被禁用。' }   
-                  { session.ecode === -99999 && '系统错误。' }
+                  { session.ecode === -10005 && 'The user is not activated.' }   
+                  { session.ecode === -10006 && 'The user has been disabled.' }   
+                  { session.ecode === -99999 && 'system error.' }
                 </div> }
             </div>
             <div className='login-footer'>
-              <span>若非该系统用户，请联系系统管理员创建。</span>
-              <Link to='/forgot' style={ { marginLeft: '5px' } }>忘记密码</Link>
+              <span>If you are not the system user, please contact your system administrator.</span>
+              <Link to='/forgot' style={ { marginLeft: '5px' } }>Forgot password</Link>
               {/*<span className='split'/>
-              <Link to='/register'>用户注册</Link> */}
+              <Link to='/register'>User registration</Link> */}
             </div>
           </form>
         </div>

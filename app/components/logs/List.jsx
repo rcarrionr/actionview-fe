@@ -63,7 +63,7 @@ export default class List extends Component {
         method: collection[i].request_method || '-',
         ip: collection[i].request_source_ip || '-',
         operation: (
-          <Button bsStyle='link' onClick={ this.show.bind(this, collection[i]) }>详情</Button>
+          <Button bsStyle='link' onClick={ this.show.bind(this, collection[i]) }>Detail</Button>
         )
       });
     }
@@ -72,15 +72,15 @@ export default class List extends Component {
     if (indexLoading) {
       opts.noDataText = ( <div><img src={ img } className='loading'/></div> );
     } else {
-      opts.noDataText = '暂无数据显示。'; 
+      opts.noDataText = 'No data is displayed.'; 
     } 
 
     return (
       <div>
         <BackTop />
         <div style={ { padding: '0px 5px', height: '40px' } }>
-          <Button onClick={ this.export.bind(this) } style={ { float: 'right', marginLeft: '10px' } }><i className='fa fa-download'></i> 导出</Button>
-          <Button onClick={ this.refresh.bind(this) } style={ { float: 'right' } }><i className='fa fa-refresh'></i> 刷新</Button>
+          <Button onClick={ this.export.bind(this) } style={ { float: 'right', marginLeft: '10px' } }><i className='fa fa-download'></i> Export</Button>
+          <Button onClick={ this.refresh.bind(this) } style={ { float: 'right' } }><i className='fa fa-refresh'></i> Refresh</Button>
         </div>
         <div>
           <BootstrapTable 
@@ -90,11 +90,11 @@ export default class List extends Component {
             options={ opts } 
             trClassName='tr-middle'> 
             <TableHeaderColumn dataField='id' isKey hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='user' width='120'>用户</TableHeaderColumn>
-            <TableHeaderColumn dataField='method' width='70'>方法</TableHeaderColumn>
+            <TableHeaderColumn dataField='user' width='120'>user</TableHeaderColumn>
+            <TableHeaderColumn dataField='method' width='70'>method</TableHeaderColumn>
             <TableHeaderColumn dataField='url'>Url</TableHeaderColumn>
-            <TableHeaderColumn dataField='at' width='150'>时间</TableHeaderColumn>
-            <TableHeaderColumn dataField='ip' width='130'>来源IP</TableHeaderColumn>
+            <TableHeaderColumn dataField='at' width='150'>time</TableHeaderColumn>
+            <TableHeaderColumn dataField='ip' width='130'>sourceIP</TableHeaderColumn>
             <TableHeaderColumn width='80' dataField='operation'/>
           </BootstrapTable>
         </div>

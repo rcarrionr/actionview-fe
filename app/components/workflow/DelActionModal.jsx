@@ -58,25 +58,25 @@ export default class DelActionModal extends Component {
     return (
       <Modal show onHide={ this.handleCancel } backdrop='static' aria-labelledby='contained-modal-title-sm'>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-la'>{ stepData.name } - 删除动作</Modal.Title>
+          <Modal.Title id='contained-modal-title-la'>{ stepData.name } - Delete action</Modal.Title>
         </Modal.Header>
         <form onSubmit={ handleSubmit(this.handleSubmit) } onKeyDown={ (e) => { if (e.keyCode == 13) { e.preventDefault(); } } }>
         <Modal.Body>
           <FormGroup controlId='formControlsText'>
-            <ControlLabel>工作流动作</ControlLabel>
+            <ControlLabel>Workflow</ControlLabel>
             <Select 
               options={ actionOptions } 
               value={ actions.value } 
               onChange={ newValue => { actions.onChange(newValue) } } 
-              placeholder='请选择要删除动作' 
+              placeholder='Please select the action to delete actions' 
               clearable={ false } 
               searchable={ false } 
               multi/>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button disabled={ submitting || invalid } type='submit'>确定</Button>
-          <Button bsStyle='link' onClick={ this.handleCancel }>取消</Button>
+          <Button disabled={ submitting || invalid } type='submit'>Sure</Button>
+          <Button bsStyle='link' onClick={ this.handleCancel }>Cancel</Button>
         </Modal.Footer>
         </form>
       </Modal>
